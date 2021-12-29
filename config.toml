@@ -2,7 +2,7 @@ theme = "simple-dev-blog"
 taxonomies = [ { name = "tags" } ]
 
 # The URL the site will be built for
-base_url = "https://gel.github.io/gel-studio"
+base_url = "https://gel.github.io/gel-studio/"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
