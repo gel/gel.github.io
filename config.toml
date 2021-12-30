@@ -24,4 +24,8 @@ nav = [
 icon = "iconweb.jpg"
 profile_small = "iconweb.jpg"
 profile_large = "profileweb.jpg"
+footer_about = """
+"""
 
+footer_page = """
+"""
