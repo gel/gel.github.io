@@ -18,7 +18,7 @@ highlight_code = true
 [extra]
 nav = [
   { name = "Blog", path = "/blog/" },
-  { name = "Interviews", path = "/interviews/" }
+  { name = "Interviews Book", path = "/interviews/" }
 ]
 
 icon = "iconweb.jpg"

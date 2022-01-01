@@ -1,3 +1,3 @@
 +++
-redirect_to = "interviews/chapter1"
+redirect_to = "interviews/1-intro"
 +++
