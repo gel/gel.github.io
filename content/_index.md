@@ -1,5 +1,5 @@
 +++
-title = "Gal's Leaky Software Blog"
+title = "Gal's Pragmatic Software Blog"
 +++
 
 ## Gal's Pragmatic Software Blog

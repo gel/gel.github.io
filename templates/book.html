@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 
+{% block title %}
+    {% if page.title %}
+    Gal's Interviews Book - {{ page.title }}
+    {% elif section.title %}
+    Gal's Interviews Book - {{ section.title }}
+    {% else %}
+    {{ config.title }}
+    {% endif %}
+{% endblock title %}
+
 {% block header %}
 {% endblock header %}
 
