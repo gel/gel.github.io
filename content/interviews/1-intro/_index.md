@@ -14,4 +14,4 @@ Unfortunately, interviewing while working is also the most preferable option. It
 - Provide active relevant work examples and data-points.
 
 
-After switching job positions more than 5 times (vertical or lateral career moves) I have finally decided to document the steps and optimize the process for myself and others.
+After switching jobs more than 5 times (vertical or lateral career moves) I have finally decided to document the steps and optimize the process for myself and others.
