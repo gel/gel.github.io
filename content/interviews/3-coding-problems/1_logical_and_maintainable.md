@@ -22,7 +22,7 @@ To perform operation in polish notation we need a stack data-structure (first in
 **Solution**
 
 ```java
-class Solution {
+class ReversePolishNotation {
     private static boolean isNumeric(String token) {
       try {  
         Double.parseDouble(token);  
