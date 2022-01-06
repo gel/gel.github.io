@@ -4,6 +4,7 @@ weight = 2
 +++
 
 - [LRU Cache - Medium - LeetCode 146](#lru-cache-medium-leetcode-146)
+- [Longest Palindromic Substring - Medium - LeetCode 5](#longest-palindromic-substring-medium-leetcode-5)
 
 --- 
 
@@ -142,6 +143,75 @@ class LRUCache {
             final Node newNode = sortedTtlList.addToHead(key);
             cache.put(key, new CacheEntry(value, newNode));
         }
+    }
+}
+```
+
+---
+
+
+
+### Longest Palindromic Substring - Medium - [LeetCode 5](https://leetcode.com/problems/longest-palindromic-substring/)
+
+**Question**
+
+> Given a string s, return the longest palindromic substring in s.
+
+```
+Input: s = "babad"
+Output: "bab"
+Explanation: "aba" is also a valid answer.
+```
+
+**Explanation**
+
+The simplest solution is calling isPalindrome for every substring. Checking palindrome is `O(N)` and all substrings are `O(N^2)` - therefore `O(N^3)`.
+
+This problem can be converted to a dynamic programming problem where `Palindrome(i, j) = Palindrome(i+1, j-1) && s[i] == s[j]` (same for odd and even cases). This will require `O(N^2)` time and `O(N^2)` memory.
+
+There is a simpler way to think about this problem. We can think about a palindrome as a center-based string and then check the palindrome from all of the centers.
+
+**Solution**
+
+```java
+public class LongestPalindrome {
+    private static class PalindromeSequence {
+        public int startIndex;
+        public int length;
+
+        PalindromeSequence() {
+            this.startIndex = 0;
+            this.length = 1;
+        }
+    }
+
+    private void checkAndUpdateLongestPalindrome(String s, int leftIndex, int rightIndex, PalindromeSequence maxPalindrome) {
+        while (leftIndex >= 0 && rightIndex < s.length() && s.charAt(leftIndex) == s.charAt(rightIndex)) {
+            leftIndex -= 1;
+            rightIndex += 1;
+        }
+
+        int existingLength = rightIndex - leftIndex - 1;
+        if (existingLength > maxPalindrome.length) {
+            maxPalindrome.startIndex = leftIndex + 1;
+            maxPalindrome.length = existingLength;
+        }
+    }
+
+    public String longestPalindrome(String s) {
+        PalindromeSequence maxPalindrome = new PalindromeSequence();
+
+        for (int i = 0; i < s.length(); i++) {
+            int rightIndex = i;
+            int leftIndex = i - 1;
+            checkAndUpdateLongestPalindrome(s, leftIndex, rightIndex, maxPalindrome);
+
+            leftIndex = i - 1;
+            rightIndex = i + 1;
+            checkAndUpdateLongestPalindrome(s, leftIndex, rightIndex, maxPalindrome);
+        }
+
+        return s.substring(maxPalindrome.startIndex, maxPalindrome.startIndex + maxPalindrome.length);
     }
 }
 ```
