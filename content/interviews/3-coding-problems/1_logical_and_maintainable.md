@@ -5,7 +5,7 @@ weight = 1
 
 - [Range Sum of BST - Easy - LeetCode 938](#range-sum-of-bst-easy-leetcode-938)
 - [Evaluate Reverse Polish Notation - Easy - LeetCode 150](#evaluate-reverse-polish-notation-easy-leetcode-150)
-
+- [Two Sum - Easy - LeetCode](#two-sum-easy-leetcode)
 --- 
 
 ### Range Sum of BST - Easy - [LeetCode 938](https://leetcode.com/problems/range-sum-of-bst/)
@@ -103,4 +103,45 @@ class ReversePolishNotation {
         return numbers.pop();
     }
 }
+```
+
+---
+
+### Two Sum - Easy - [LeetCode](https://leetcode.com/problems/two-sum/)
+
+**Question**
+
+> Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+**Explanation**
+
+In this question we need to find elem + X = target => X = target - elem;
+
+A common solution is to create a map from number to index (one pass).
+Then leverage it during traversal to check if the element exist (second pass).
+
+Since this problem is a sum of two elements we can do it in a single pass (the second element will have the first one in the data-structre).
+
+
+**Solution**
+
+```java
+public class TwoSum {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> numberToIndex = new HashMap<>();
+        int[] result = new int[2]; // number, index
+        for (int i = 0; i < nums.length; i++) {
+            int needed = target - nums[i];
+            if (numberToIndex.containsKey(needed)) {
+                Integer index = numberToIndex.get(needed);
+                result[0] = i;
+                result[1] = index;
+                return result;
+            }
+
+            numberToIndex.put(nums[i], i);
+        }
+
+        throw new IllegalArgumentException("Invalid input");
+    }
 ```
