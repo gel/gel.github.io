@@ -3,7 +3,47 @@ title = "Logical and Maintainable"
 weight = 1
 +++
 
-### Evaluate Reverse Polish Notation - [LC 150](https://leetcode.com/problems/evaluate-reverse-polish-notation)
+- [Range Sum of BST - Easy - LeetCode 938](#range-sum-of-bst-easy-leetcode-938)
+- [Evaluate Reverse Polish Notation - Easy - LeetCode 150](#evaluate-reverse-polish-notation-easy-leetcode-150)
+
+--- 
+
+### Range Sum of BST - Easy - [LeetCode 938](https://leetcode.com/problems/range-sum-of-bst/)
+
+> Given the root node of a binary search tree and two integers low and high, return the sum of values of all nodes with a value in the inclusive range [low, high].
+
+**Explanation**
+
+Traversal of the tree in any order is fine and make sure you don't traverse the unnecessary parts of the tree. Recrusion or iterative solution are acceptable (make sure you can explain that any recursive solution can be converted to an iterative solution).
+
+**Solution**
+
+```
+class RangeSumBST {
+    public int rangeSumBST(TreeNode root, int low, int high) {
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+        
+        int sum = 0;
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node.val >= low && node.val <= high)
+                sum += node.val;
+            
+            if (node.left != null && node.val >= low)
+                queue.add(node.left);
+            
+            if (node.right != null && node.val <= high)
+                queue.add(node.right);
+        }
+        return sum;
+    }
+}
+```
+
+---
+
+### Evaluate Reverse Polish Notation - Easy - [LeetCode 150](https://leetcode.com/problems/evaluate-reverse-polish-notation/)
 
 **Question**
 

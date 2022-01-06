@@ -3,7 +3,11 @@ title = "Problem Solving"
 weight = 2
 +++
 
-### LRU Cache - [LC 146](https://leetcode.com/problems/lru-cache)
+- [LRU Cache - Medium - LeetCode 146](#lru-cache-medium-leetcode-146)
+
+--- 
+
+### LRU Cache - Medium - [LeetCode 146](https://leetcode.com/problems/lru-cache/)
 
 **Question**
 
