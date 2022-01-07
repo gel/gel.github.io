@@ -5,7 +5,7 @@ weight = 1
 
 - [Range Sum of BST - Easy - LeetCode 938](#range-sum-of-bst-easy-leetcode-938)
 - [Evaluate Reverse Polish Notation - Easy - LeetCode 150](#evaluate-reverse-polish-notation-easy-leetcode-150)
-- [Two Sum - Easy - LeetCode](#two-sum-easy-leetcode)
+- [Two Sum - Easy - LeetCode 1](#two-sum-easy-leetcode-1)
 --- 
 
 ### Range Sum of BST - Easy - [LeetCode 938](https://leetcode.com/problems/range-sum-of-bst/)
@@ -18,7 +18,7 @@ Traversal of the tree in any order is fine and make sure you don't traverse the 
 
 **Solution**
 
-```
+```java
 class RangeSumBST {
     public int rangeSumBST(TreeNode root, int low, int high) {
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
@@ -107,7 +107,7 @@ class ReversePolishNotation {
 
 ---
 
-### Two Sum - Easy - [LeetCode](https://leetcode.com/problems/two-sum/)
+### Two Sum - Easy - [LeetCode 1](https://leetcode.com/problems/two-sum/)
 
 **Question**
 

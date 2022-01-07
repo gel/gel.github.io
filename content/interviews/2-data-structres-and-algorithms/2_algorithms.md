@@ -3,6 +3,15 @@ title = "Algorithms"
 weight = 1
 +++
 
+- [Sorting Algorithms](#sorting-algorithms)
+  -  [Quicksort](#quicksort)
+  -  [Insertion Sort](#insertion-sort)
+  -  [Merge Sort](#merge-sort)
+  -  [Bucket Sort](#bucket-sort)
+  -  [Counting Sort](#counting-sort)
+
+---
+
 ### Sorting Algorithms
 
 | Algorithm | Worst | Average | Best | Space | Notes |
@@ -72,7 +81,7 @@ Simplest sorting algorithm (stable) - `O(N^2)` worst and average case.
     end while
 ```
 
-#### Merge sort
+#### Merge Sort
 
 Very efficient for large data-sets - `O(N*Log(N))` average and worst case.
 
@@ -151,7 +160,7 @@ Example:
 Used to sort numbers according to their base (specific case of bucket sort)
 Runtime: `O(nw)` time, where n is the number of keys, and w is the key length.
 
-#### Counting sort
+#### Counting Sort
 
 ​Used when the keys distribution is low compared to number of elements
 ​Runtime `O(N+K)` runtime. Bucket sort can be used instead (but required dynamic allocation of memory)
