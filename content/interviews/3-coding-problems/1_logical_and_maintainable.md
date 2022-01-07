@@ -6,6 +6,7 @@ weight = 1
 - [Range Sum of BST - Easy - LeetCode 938](#range-sum-of-bst-easy-leetcode-938)
 - [Evaluate Reverse Polish Notation - Easy - LeetCode 150](#evaluate-reverse-polish-notation-easy-leetcode-150)
 - [Two Sum - Easy - LeetCode 1](#two-sum-easy-leetcode-1)
+- [Best Time to Buy and Sell Stock - Easy - LeetCode 121](#best-time-to-buy-and-sell-stock-easy-leetcode-121)
 --- 
 
 ### Range Sum of BST - Easy - [LeetCode 938](https://leetcode.com/problems/range-sum-of-bst/)
@@ -144,4 +145,51 @@ public class TwoSum {
 
         throw new IllegalArgumentException("Invalid input");
     }
+```
+
+---
+
+### Best Time to Buy and Sell Stock- Easy - [LeetCode 121](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+
+**Question**
+
+> You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+> You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+> Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+**Explanation**
+
+We are looking for the largest difference (min / max). Therefore we need to do a simple book keeping and keep track of the current minimum and profit we have. While we traverse the array we update the min if necessary and record the profit if it's bigger than what we have. I wrote my initial solution but there is no need to keep track of the current profit (we can just record max profit when needed).
+
+**Solution**
+
+
+```java
+class BestTimeToSellStock {
+    public int maxProfit(int[] prices) {
+        int size = prices.length;
+        if (size <= 1)
+            return 0;
+        
+        int currentMin = prices[0];
+        int currentProfit = 0;
+        int maxProfit = 0;
+        
+        for (int i = 1; i < size; i++) {
+            if (prices[i] < currentMin) {
+                maxProfit = Math.max(maxProfit, currentProfit);
+                currentProfit = 0;
+                currentMin = prices[i];
+            } else {
+                int candidateProfit = prices[i] - currentMin;
+                currentProfit = Math.max(candidateProfit, currentProfit);
+            }
+        }
+        maxProfit = Math.max(maxProfit, currentProfit);
+        
+        return maxProfit;
+    }
+}
 ```
