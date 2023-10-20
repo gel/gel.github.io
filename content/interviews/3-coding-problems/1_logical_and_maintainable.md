@@ -8,6 +8,8 @@ weight = 1
 - [Two Sum - Easy - LeetCode 1](#two-sum-easy-leetcode-1)
 - [Best Time to Buy and Sell Stock - Easy - LeetCode 121](#best-time-to-buy-and-sell-stock-easy-leetcode-121)
 - [Partitioning Into Minimum Number Of Deci-Binary Numbers - Medium - LeetCode 1689](#partitioning-into-minimum-number-of-deci-binary-numbers-medium-leetcode-1689)
+- [Insert Greatest Common Divisors in Linked List - Medium - LeetCode 2807](#insert-greatest-common-divisors-in-linked-list-medium-leetcode-2807)
+
 --- 
 
 ### Range Sum of BST - Easy - [LeetCode 938](https://leetcode.com/problems/range-sum-of-bst/)
@@ -241,6 +243,84 @@ class MinPartitionsSolutions {
             }
         }
         return max;
+    }
+}
+```
+
+### Insert Greatest Common Divisors in Linked List - Medium - [LeetCode 2807](https://leetcode.com/problems/insert-greatest-common-divisors-in-linked-list/)
+
+**Question**
+
+Given the head of a linked list head, in which each node contains an integer value.
+
+Between every pair of adjacent nodes, insert a new node with a value equal to the greatest common divisor of them.
+
+Return the linked list after insertion.
+
+The greatest common divisor of two numbers is the largest positive integer that evenly divides both numbers.
+
+ 
+
+Example 1:
+
+
+Input: head = [18,6,10,3]
+Output: [18,6,6,2,10,1,3]
+Explanation: The 1st diagram denotes the initial linked list and the 2nd diagram denotes the linked list after inserting the new nodes (nodes in blue are the inserted nodes).
+- We insert the greatest common divisor of 18 and 6 = 6 between the 1st and the 2nd nodes.
+- We insert the greatest common divisor of 6 and 10 = 2 between the 2nd and the 3rd nodes.
+- We insert the greatest common divisor of 10 and 3 = 1 between the 3rd and the 4th nodes.
+There are no more adjacent nodes, so we return the linked list.
+Example 2:
+
+
+Input: head = [7]
+Output: [7]
+Explanation: The 1st diagram denotes the initial linked list and the 2nd diagram denotes the linked list after inserting the new nodes.
+There are no pairs of adjacent nodes, so we return the initial linked list.
+ 
+
+Constraints:
+
+The number of nodes in the list is in the range [1, 5000].
+1 <= Node.val <= 1000
+
+**Explanation**
+
+The idea is to break the solution into two different parts.
+
+1. Implement GCD. The recursive way is the easiest, a side note is that it's usually not recommended to implement recursion but in this case because it is tail recursion the compiler or JVM would be able to optimize it if needed.
+
+2. Add a new node from the GCD value.
+
+**Solution**
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class GreatestCommonDivisorsSolution {
+    public ListNode insertGreatestCommonDivisors(ListNode head) {
+        ListNode curr = head;
+        while (curr != null && curr.next != null) {
+            int newVal = gcd(curr.val, curr.next.val);
+            // insert new node between curr and curr.next with newVal
+            curr.next = new ListNode(newVal, curr.next);
+            curr = curr.next.next;
+        }
+        return head;
+    }
+
+    private int gcd(int a, int b) {
+        if (b == 0) return a;
+        return gcd(b, a % b);
     }
 }
 ```
