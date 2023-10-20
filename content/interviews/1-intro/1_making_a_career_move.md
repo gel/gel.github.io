@@ -1,5 +1,5 @@
 +++
-title = "Making a career move"
+title = "Making a Career Move"
 weight = 1
 +++
 
