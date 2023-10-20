@@ -5,13 +5,12 @@ sort_by = "weight"
 insert_anchor_links = "right"
 +++
 
-Interview skills are very difficult to acquire while working in a regular day-to-day job. Therefore any attempt to be recruited by a different company will usually require massive investment of time and energy.
+Developing effective interview skills presents difficulties for those established in their current roles. Pursuing employment opportunities with other companies commonly necessitates substantial time and effort. However, seeking new positions while still employed offers advantages, including the abilities to:
 
-Unfortunately, interviewing while working is also the most preferable option. It allows you to: 
+- Negotiate improved employment agreements with greater confidence.
 
-- Negotiate a better contract without fear.
-- Have self confidence.
-- Provide active relevant work examples and data-points.
+- Demonstrate self-assurance throughout the process.
 
+- Provide relevant, timely examples and metrics from one's work history.
 
-After switching jobs more than 5 times (vertical or lateral career moves) I have finally decided to document the steps and optimize the process for myself and others.
+With experience transitioning between over five positions (both vertical promotions and lateral moves), I have chosen to record these steps and refine the process to benefit both myself and others.
