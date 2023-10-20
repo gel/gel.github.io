@@ -39,3 +39,12 @@ The book expands on the blog, providing a comprehensive playbook for acing codin
 - Bonus cheat sheets and resources for interview prep
 
 Check out the blog and book today to learn from Gal's years of software engineering interview experience! Your dream tech job awaits.
+
+### Development
+
+```
+zola serve
+```
+
+Open web server to view http://127.0.0.1:1111
+- Server support hot-reloading
