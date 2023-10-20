@@ -7,6 +7,7 @@ weight = 1
 - [Evaluate Reverse Polish Notation - Easy - LeetCode 150](#evaluate-reverse-polish-notation-easy-leetcode-150)
 - [Two Sum - Easy - LeetCode 1](#two-sum-easy-leetcode-1)
 - [Best Time to Buy and Sell Stock - Easy - LeetCode 121](#best-time-to-buy-and-sell-stock-easy-leetcode-121)
+- [Partitioning Into Minimum Number Of Deci-Binary Numbers - Medium - LeetCode 1689](#partitioning-into-minimum-number-of-deci-binary-numbers-medium-leetcode-1689)
 --- 
 
 ### Range Sum of BST - Easy - [LeetCode 938](https://leetcode.com/problems/range-sum-of-bst/)
@@ -149,7 +150,7 @@ public class TwoSum {
 
 ---
 
-### Best Time to Buy and Sell Stock- Easy - [LeetCode 121](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+### Best Time to Buy and Sell Stock - Easy - [LeetCode 121](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
 
 **Question**
 
@@ -164,7 +165,6 @@ public class TwoSum {
 We are looking for the largest difference (min / max). Therefore we need to do a simple book keeping and keep track of the current minimum and profit we have. While we traverse the array we update the min if necessary and record the profit if it's bigger than what we have. I wrote my initial solution but there is no need to keep track of the current profit (we can just record max profit when needed).
 
 **Solution**
-
 
 ```java
 class BestTimeToSellStock {
@@ -190,6 +190,57 @@ class BestTimeToSellStock {
         maxProfit = Math.max(maxProfit, currentProfit);
         
         return maxProfit;
+    }
+}
+```
+
+### Partitioning Into Minimum Number Of Deci-Binary Numbers - Medium - [LeetCode 1689](https://leetcode.com/problems/partitioning-into-minimum-number-of-deci-binary-numbers/)
+
+**Question**
+
+A decimal number is called deci-binary if each of its digits is either 0 or 1 without any leading zeros. For example, 101 and 1100 are deci-binary, while 112 and 3001 are not.
+
+Given a string n that represents a positive decimal integer, return the minimum number of positive deci-binary numbers needed so that they sum up to n.
+
+Example 1:
+
+Input: n = "32"
+Output: 3
+Explanation: 10 + 11 + 11 = 32
+Example 2:
+
+Input: n = "82734"
+Output: 8
+Example 3:
+
+Input: n = "27346209830709182346"
+Output: 9
+ 
+Constraints:
+
+1 <= n.length <= 105
+n consists of only digits.
+n does not contain any leading zeros and represents a positive integer.
+
+
+**Explanation**
+
+This question relies on logic, since we can use only deci-binary numbers (zero or 1 in each digit) it means that in order to build a specific digit k we will need at-least k different deci numbers. Therefore, the answer is the maximum of all digits in n ```max(k)```
+
+**Solution**
+
+
+```java
+class MinPartitionsSolutions {
+    public int minPartitions(String n) {
+        int max = 0;
+        for(int i = 0; i < n.length(); i++){
+            int digit = n.charAt(i) - '0';
+            if (digit > max) {
+                max = digit;
+            }
+        }
+        return max;
     }
 }
 ```
