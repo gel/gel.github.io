@@ -1,5 +1,5 @@
 +++
-title = "Data structures"
+title = "Data Structures"
 weight = 1
 +++
 
