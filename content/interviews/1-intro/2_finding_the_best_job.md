@@ -1,5 +1,5 @@
 +++
-title = "Strategies for Finding an Optimal Job"
+title = "inding an Optimal Job"
 weight = 2
 +++
 

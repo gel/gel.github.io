@@ -1,5 +1,5 @@
 +++
-title = "Strategies for Acing the Interview Process"
+title = "Acing the Interview Process"
 weight = 3
 +++
 
