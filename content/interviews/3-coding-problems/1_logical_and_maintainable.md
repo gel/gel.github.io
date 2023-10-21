@@ -296,6 +296,7 @@ The idea is to break the solution into two different parts.
 **Solution**
 
 ```java
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -305,7 +306,7 @@ The idea is to break the solution into two different parts.
  *     ListNode(int val) { this.val = val; }
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
- */
+ **/
 class GreatestCommonDivisorsSolution {
     public ListNode insertGreatestCommonDivisors(ListNode head) {
         ListNode curr = head;
@@ -323,4 +324,5 @@ class GreatestCommonDivisorsSolution {
         return gcd(b, a % b);
     }
 }
+
 ```
