@@ -220,8 +220,10 @@ Output: 9
  
 Constraints:
 
-1 <= n.length <= 105
+\\( 1 \le n.length \le 105 \\)
+
 n consists of only digits.
+
 n does not contain any leading zeros and represents a positive integer.
 
 
@@ -283,7 +285,7 @@ There are no pairs of adjacent nodes, so we return the initial linked list.
 Constraints:
 
 The number of nodes in the list is in the range [1, 5000].
-1 <= Node.val <= 1000
+\\( 1 \le Node.val \le 1000 \\)
 
 **Explanation**
 
