@@ -1,6 +1,6 @@
 +++
 title = "Algorithms"
-weight = 1
+weight = 2
 +++
 
 - [Sorting Algorithms](#sorting-algorithms)
