@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 
+{% import "book-utils.html" as book_utils %}
+
 {% block title %}
+    {% set current_book_url = book_utils::get_current_book_url() %}
+    {% set current_book_title = book_utils::get_current_book_title(current_book_url=current_book_url) %}
     {% if page.title %}
-    Gal's Interviews Book - {{ page.title }}
+    Gal's {{ current_book_title }}  Book - {{ page.title }}
     {% elif section.title %}
-    Gal's Interviews Book - {{ section.title }}
+    Gal's {{ current_book_title }} Book  - {{ section.title }}
     {% else %}
     {{ config.title }}
     {% endif %}
@@ -36,9 +40,11 @@
                         <a href="/">
                             ← Back to Blog
                         </a>
-                    </li>                    
-                    {% block menu %}                 
-                        {% set index = get_section(path="interviews/_index.md") %}
+                    </li>
+                    {% block menu %}
+                        {% set book_url = book_utils::get_current_book_url() %}
+                        {% set book_section_path = book_utils::get_book_section_path(current_book_url=book_url) %}
+                        {% set index = get_section(path=book_section_path | trim) %}
                         {% for s in index.subsections %}
                             {% set subsection = get_section(path=s) %}
                             <li {% if current_path == subsection.path %}class="active"{% endif %}>

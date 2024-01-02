@@ -1,0 +1,23 @@
+
+{% macro get_current_book_url() %}
+    {% set url_book_split = current_path | split(pat="/") %}
+    {% set url_book = url_book_split | nth(n=1) | trim %}
+    {{ url_book }}
+{% endmacro get_current_book_url %}
+
+{% macro get_current_book_title(current_book_url) %}
+    {% set book_url_clean = current_book_url | trim %} 
+    {% if book_url_clean == "generative-ai" %}
+        {{ "Generative AI" }}
+    {% elif book_url_clean == "interviews" %}
+        {{ "Interviews" }}
+    {% else %}
+        {{ current_book_url }}
+    {% endif %}
+{% endmacro get_current_book_title %}
+
+
+{% macro get_book_section_path(current_book_url) %}
+    {% set book_url_clean = current_book_url | trim %}     
+    {{ book_url_clean ~ "/_index.md" }}
+{% endmacro get_current_book_title %}

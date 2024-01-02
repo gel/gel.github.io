@@ -19,7 +19,8 @@ highlight_code = true
 [extra]
 nav = [
   { name = "Blog", path = "/blog/" },
-  { name = "Interviews Book", path = "/interviews/" }
+  { name = "Interviews Book", path = "/interviews/" },
+  { name = "Generative AI Book", path = "/generative-ai/" }
 ]
 
 icon = "iconweb.jpg"
