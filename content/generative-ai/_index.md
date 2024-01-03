@@ -1,3 +1,3 @@
 +++
-redirect_to = "generative-ai/intro"
+redirect_to = "generative-ai/1-intro"
 +++

@@ -1,9 +1,11 @@
 +++
-title = "Introduction - Embarking on a Journey into the Heart of AI"
-weight = 100
+title = "Generative AI Introduction"
+weight = 1
 sort_by = "weight"
 insert_anchor_links = "right"
 +++
+
+## Embarking on a Journey into the Heart of AI
 
 This book is dedicated to peeling back the layers of one of the most intriguing subjects in the field of artificial intelligence: Generative AI and Large Language Models (LLMs). As we dive deep into the intricacies of these AI marvels, we will uncover insights, share breakthroughs, and discuss the profound implications they have on our world.
 
