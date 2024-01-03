@@ -4,7 +4,6 @@ weight = 1
 +++
 
 
-
 ### [Survey] Instruction Tuning for Large Language Models
 
 Arxiv: [https://arxiv.org/abs/2308.10792](https://arxiv.org/abs/2308.10792) _21 Aug 2023_
@@ -32,7 +31,7 @@ Our approach operates in two distinct fine-tuning steps: (1) one updates a pre-t
 
 ### [Sequential Monte Carlo] Steering of LLMs using Probabilistic Programs
 
-Arxiv: [https://arxiv.org/abs/2306.03081](https://arxiv.org/abs/2306.03081)_ 5 Jun 2023 **MIT**_
+Arxiv: [https://arxiv.org/abs/2306.03081](https://arxiv.org/abs/2306.03081) _5 Jun 2023 **MIT**_
 
 <span style="text-decoration:underline;">Context</span>: Despite significant advances in recent years, it remains unclear if and how large language models (LLMs) can be made reliable and controllable enough to meet the functional requirements of many applications. 
 
