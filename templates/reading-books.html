@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% import "reading-book-preview.html" as reading_book_macros %}
+
+{% block styles%}
+  <link rel="stylesheet" href="{{ get_url(path="main.css") | safe }}">
+  <link rel="stylesheet" href="{{ get_url(path="reading-books.css") | safe }}">
+{% block css %}
+{% endblock css %}
+{% endblock styles %}
+
+{% block posthead %} 
+  {% for post in section.pages %}
+    <link rel="prerender" href="{{ post.permalink }}" />
+  {% endfor %}
+{% endblock posthead %}
+
+{% block content %}
+  {{ section.content | safe }}
+
+  {% for post in section.pages %}
+    {{ reading_book_macros::reading_book_preview(post=post) }}
+  {% endfor %}
+{% endblock content %}

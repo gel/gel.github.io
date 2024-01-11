@@ -2,10 +2,8 @@
 title = "Rich Dad, Poor Dad @ Robert T. Kiyosaki"
 [taxonomies]
 tags = [ "Finance", "Business", "Self-Help" ]
+[extra]
+review_image_path = "https://www.goodreads.com/book/show/69571.Rich_Dad_Poor_Dad"
+book_image_path = "/books/2021-07-30-rich-dad-poor-dad.jpg"
+rating = 4.12
 +++
-
-<a href="https://www.goodreads.com/book/show/69571.Rich_Dad_Poor_Dad">
-    <img src="/books/2021-07-30-rich-dad-poor-dad.jpg" alt="Rich Dad, Poor Dad Book Cover" />
-</a>
-
-Rating: 4.12 ★★★★☆

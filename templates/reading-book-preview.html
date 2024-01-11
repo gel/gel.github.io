@@ -1,0 +1,5 @@
+{% macro reading_book_preview(post) %}
+<a class="reading-book" href="{{ post.permalink }}" target="_blank" rel="noopener nofollow noreferrer" title="{{ post.title }}">
+   <img src="{{ post.extra.book_image_path}}" alt="{{ post.title }}" />
+</a>
+{% endmacro input %}

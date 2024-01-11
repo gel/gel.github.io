@@ -1,6 +1,6 @@
 +++
-template = "blog.html"
-page_template = "blog-post.html"
+template = "reading-books.html"
+page_template = "reading-book.html"
 sort_by = "date"
 +++
 
