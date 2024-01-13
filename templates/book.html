@@ -17,7 +17,11 @@
 {% block header %}
 {% endblock header %}
 
-book
+{% block styles%}
+<link rel="stylesheet" href="{{ get_url(path="book.css") | safe }}">
+{% block css %}      
+{% endblock css %}
+{% endblock styles %}
 
 {% block posthead %} 
 {% block js %}
