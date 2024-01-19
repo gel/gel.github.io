@@ -20,8 +20,8 @@ highlight_code = true
 nav = [
   { name = "Blog", path = "/blog/" },
   { name = "Books", path = "/books/" },
-  { name = "Interviews Book", path = "/interviews/" },
-  { name = "Generative AI Book", path = "/generative-ai/" }
+  { name = "Interviews", path = "/interviews/" },
+  { name = "Gen AI", path = "/generative-ai/" }
 ]
 
 icon = "iconweb.jpg"

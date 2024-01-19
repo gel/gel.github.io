@@ -2,7 +2,7 @@
 title = "Gal's Pragmatic Software Blog"
 +++
 
-## Gal's Pragmatic Software Blog
+## Pragmatic Software Blog
 
 Hey, I am an experienced hands-on senior software engineer involved in all the aspects of the products lifecycle.
 
