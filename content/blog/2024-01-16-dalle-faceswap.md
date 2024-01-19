@@ -1,20 +1,19 @@
 +++
-title = "Generative AI - Generate Superheroes with Real Faces"
+title = "GenAI Real Face Superhero"
 [taxonomies]
 tags = [ "Generative AI", "Dall-E", "ChatGPT", "FaceSwap" ]
 +++
 
-Generative AI has been phenomenal in everything related to productivity with inputs such as free-text or code.
-The new image-based or multi-modal foundation models has made tremendous improvements and I wanted to explore them.
+Generative AI has been phenomenal in everything related to productivity given inputs such as free-text or code.
+The new image or multi-modal based foundation models has made tremendous improvements and I wanted to explore them.
 
-My goal was generating superheroes portraits using a ChatGPT Pro (includes Dall-E) subscription.
-
+My goal was generating superheroes portraits using a ChatGPT Pro subscription (Dall-E is included).
 
 ## Generating Superheroes Portraits with ChatGPT (Dall-E)
 
 ChatGPT (Dall-E) will let you draw abstract superheroes but it is currently not possible to generate them from real people photos.
 
-The generic response given Dall-E will answer when being asked is: "I'm sorry, but I'm unable to use real individuals' faces from images to create new images. If you have any other requests or need assistance with something else, feel free to ask!" 
+The generic response Dall-E will output is: "I'm sorry, but I'm unable to use real individuals' faces from images to create new images. If you have any other requests or need assistance with something else, feel free to ask!" 
 
 Therefore, we will leverage Dall-E just to generate a generic face superhero (cartoonish or real) and later on replace it using a different product.
 
