@@ -1,3 +1,4 @@
+@use "variables";
 .menu {
   height: 100%;
   position: absolute;
@@ -29,7 +30,7 @@
     }
 
     li.active > a {
-      color: #008cff;
+      color: #0053bc;
       text-decoration: none;
     }
 
@@ -43,14 +44,14 @@
   width: 0;
 }
 
-@include max-screen(600px) {
+@include variables.max-screen(600px) {
   .menu {
-    width: calc(100% - 100px);
+    width: 0;
     z-index: 1;
   }
-
+  
   .menu-hidden {
-    width: 0;
+    width: calc(100% - 100px);
     z-index: 0;
   }
 }
