@@ -39,7 +39,7 @@ Output image came exactly as I wanted it to be:
 
 Let's move to the second part of replacing it with the reporter real face.
 
-## Face Swap
+## Face Swap - Simple (picsi.ai)
 
 InsightFace is an open source 2D&3D deep face analysis library with more than 15k stars on github.
 
@@ -63,3 +63,42 @@ The final photos for the superhero are:
 
 <img src="/blog/2024-01-16-dani-kusbaro2.webp" alt="Coriander Man Fixed" width="300" />
 
+
+## Face Swap - Open-source (Offline)
+
+Any library / github project which is wrapping up Insightface is a good option.
+
+I've personally used the [swapseed](https://github.com/KiranPranay/swapseed) to do the replacement on my computer.
+
+This is a sample code to run after installing the dependencies ```pip install -r requirements.txt```
+
+```
+import os
+import matplotlib.pyplot as plt
+import gdown
+import insightface
+from insightface.app import FaceAnalysis
+from insightface.data import get_image as ins_get_image
+from faceswap import swap_n_show, swap_n_show_same_img, swap_face_single,fine_face_swap
+
+app = FaceAnalysis(name='buffalo_l')
+app.prepare(ctx_id=0, det_size=(640, 640))
+
+# Download 'inswapper_128.onnx' file using gdown
+model_url = 'https://drive.google.com/uc?id=1HvZ4MAtzlY74Dk4ASGIS9L6Rg5oZdqvu'
+model_output_path = 'inswapper/inswapper_128.onnx'
+if not os.path.exists(model_output_path):
+    gdown.download(model_url, model_output_path, quiet=False)
+
+swapper = insightface.model_zoo.get_model('inswapper/inswapper_128.onnx', download=False, download_zip=False)
+
+# Load images
+img1_fn = 'input_and_output.png'
+img2_fn = 'face_to_replace_from.jpg'
+
+# Swap faces between two images
+# swap_n_show(img1_fn, img2_fn, app, swapper)
+
+# Add face to an image
+swap_face_single(img1_fn, img2_fn, app, swapper, enhance=True, enhancer='REAL-ESRGAN 2x')
+```
