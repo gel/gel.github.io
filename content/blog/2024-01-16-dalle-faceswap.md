@@ -72,7 +72,7 @@ I've personally used the [swapseed](https://github.com/KiranPranay/swapseed) to 
 
 This is a sample code to run after installing the dependencies ```pip install -r requirements.txt```
 
-```
+```python
 import os
 import matplotlib.pyplot as plt
 import gdown
