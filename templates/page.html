@@ -1,5 +1,7 @@
 {% extends "book.html" %}
 
+{% import "book-utils.html" as book_utils %}
+
 {% block bookcontent %}
     <h1>{{ page.title }}</h1>
     {{ page.content | safe }}
@@ -20,7 +22,9 @@
         <a class="next" href="{{ page.higher.permalink | safe }}">></a>
     {% else %}
         {# No page after, find the link for the following section #}
-        {% set index = get_section(path="_index.md") %}
+        {% set book_url = book_utils::get_current_book_url() %}
+        {% set book_section_path = book_utils::get_book_section_path(current_book_url=book_url) %}
+        {% set index = get_section(path=book_section_path | trim) %}
         {% set found_current = false %}
         {% for s in index.subsections %}
             {% set subsection = get_section(path=s) %}
