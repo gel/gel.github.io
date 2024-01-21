@@ -45,7 +45,7 @@ Therefore we suggest increasing concurrency as a complementary approach to using
 
 Arxiv: [https://arxiv.org/abs/2305.13245](https://arxiv.org/abs/2305.13245) _22 May 2023 **Google**_
 
-![GQA](/generative-ai/2-llm-research/llm_3_gqa2.png)
+![GQA](/generative-ai/2-llm-research/llm_3_gqa.png)
 
 
 ### [Multi-Heads Sharing]Fast Transformer Decoding: One Write-Head is All You Need
