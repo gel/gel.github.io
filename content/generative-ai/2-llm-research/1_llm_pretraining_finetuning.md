@@ -4,21 +4,44 @@ weight = 1
 +++
 
 
-### [Survey] Instruction Tuning for Large Language Models
 
-Arxiv: [https://arxiv.org/abs/2308.10792](https://arxiv.org/abs/2308.10792) _21 Aug 2023_
 
-There are generally two methods for constructing instruction datasets:
+### [Self-Reward] Self Rewarding Language Models
 
-• Data integration from annotated natural language datasets. In this approach,
+Arxiv: [https://arxiv.org/abs/2401.10020](https://arxiv.org/abs/2401.10020) _18 Jan 2024 **Meta**_
 
-(instruction, output) pairs are collected from existing annotated natural language datasets by using templates to transform text-label pairs to (instruction, output) pairs.
+In this work, we study Self-Rewarding Language Models, where the language model itself is used via LLM-as-a-Judge prompting to provide its own rewards during training. We show that during Iterative DPO training that not only does instruction following ability improve, but also the ability to provide high-quality rewards to itself.
 
-Datasets such as Flan (Longpre et al., 2023) and P3 (Sanh et al., 2021).
+![Self-Reward](/generative-ai/2-llm-research/llm_1_self_reward_explain.png)
 
-• Generating outputs using LLMs - (1) manually collected; or (2) expanded based on small handwritten seed instructions using LLMs. Next, the collected instructions are fed to LLMs to obtain outputs. Datasets such as InstructWild (Xue et al., 2023) and Self-Instruct (Wang et al., 2022c) are generated following this approach. For multi-turn conversational IT datasets, we can have large language models self-play different roles (user and AI assistant) to generate message
+Our approach first assumes access to a base pretrained language model, and a small amount of human-annotated seed data. We then build a model that aims to possess two skills simultaneously: 1. Instruction following: given a prompt that describes a user request, the ability to generate a high quality, helpful (and harmless) response. 2. Self-Instruction creation: the ability to generate and evaluate new instruction following examples to add to its own training set.
 
-![Survey](/generative-ai/2-llm-research/llm_1_survey.png)
+While we report the results of both approaches in our experiments, we find that learning from preference pairs gives superior performance, and hence recommend that approach.
+
+![Self-Reward Judge](/generative-ai/2-llm-research/llm_1_self_reward_judge.png)
+
+Iterative Training Our overall procedure trains a series of models M1, . . . , MT where each successive model t uses augmented training data created by the t − 1 th model. We thus define AIFT(Mt) to mean AI Feedback Training data created using model Mt. Model Sequence We thus define the models, and the training data they use as follows: M0 : Base pretrained LLM with no fine-tuning. M1 : Initialized with M0, then fine-tuned on the IFT+EFT seed data using SFT. M2 : Initialized with M1, then trained with AIFT(M1) data using DPO. M3 : Initialized with M2, then trained with AIFT(M2) data using DPO.
+
+![Self-Reward Eval](/generative-ai/2-llm-research/llm_1_self_reward_eval.png)
+
+
+### [In-Context Pretraining] Language Modeling Beyond Document Boundaries
+
+Arxiv: [https://arxiv.org/abs/2310.10638](https://arxiv.org/abs/2310.10638) _30 Nov 2023 **Meta**_
+
+We instead present IN-CONTEXT PRETRAINING, a new approach where language models are pretrained on a sequence of related documents, thereby explicitly encouraging them to read and reason across document boundaries.
+
+IN-CONTEXT PRETRAINING instead reorders the pretraining data by combining several semantically related documents to create a coherent input context, thereby exposing LMs to long relevant contexts and providing pretraining signals beyond document boundaries.
+
+However, this document sorting problem is challenging. LMs are typically trained on billions of
+
+documents and we would like to sort them to maximize document similarity in the input context
+
+windows without repeating any data. We introduce two new approximate algorithms to tackle these challenges.
+
+![In-Context Review](/generative-ai/2-llm-research/llm_1_in_context_overview.png)
+
+Techniques are using embedding models and top-k similarity search and leveraging approximate solutions for the traveling salesman problem - by the means of visiting every document once.
 
 
 ### [DPO] Direct Preference Optimization: Your LM is Secretly a Reward Model
