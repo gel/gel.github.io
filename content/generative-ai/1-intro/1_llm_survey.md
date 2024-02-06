@@ -3,6 +3,10 @@ title = "LLM Survey"
 weight = 1
 +++
 
+- [A Survey of Reshaping the GenAI Research Landscape](#survey-a-survey-of-reshaping-the-genai-research-landscape)
+- [Instruction Tuning for Large Language Models](#survey-instruction-tuning-for-large-language-models)
+
+
 ### [Survey] A Survey of Reshaping the GenAI Research Landscape
 
 Arxiv: [https://arxiv.org/abs/2312.10868](https://arxiv.org/abs/2312.10868) _18 Dec 2023  **IEEE**_
