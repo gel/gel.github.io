@@ -18,7 +18,15 @@
 {% block content %}
   {{ section.content | safe }}
 
-  {% for post in section.pages %}
-    {{ reading_book_macros::reading_book_preview(post=post) }}
+  <h2>Reading Books</h2>
+  {% set subsection = get_section(path="books/reading/_index.md") %}
+  {% for post in subsection.pages %}
+    {{ reading_book_macros::reading_book_preview(post=post, path="reading") }}
+  {% endfor %}
+
+  <h2>Programming Books</h2>
+  {% set subsection = get_section(path="books/programming/_index.md") %}
+  {% for post in subsection.pages %}
+    {{ reading_book_macros::reading_book_preview(post=post, path="programming") }}
   {% endfor %}
 {% endblock content %}

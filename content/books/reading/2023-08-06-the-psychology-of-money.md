@@ -4,6 +4,6 @@ title = "The Psychology of Money @ Morgan Housel"
 tags = [ "Finance", "Psychology", "Economics" ]
 [extra]
 review_image_path = "https://www.goodreads.com/book/show/48667572-the-psychology-of-money"
-book_image_path = "/books/2023-08-06-the-psychology-of-money.jpg"
+book_image_path = "2023-08-06-the-psychology-of-money.jpg"
 rating = 4.35
 +++

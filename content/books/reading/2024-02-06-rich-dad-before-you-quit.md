@@ -4,7 +4,7 @@ title = "Rich Dad's Before You Quit Your Job @ Robert T. Kiyosaki"
 tags = [ "Business", "Finance", "Entrepreneurship" ]
 [extra]
 review_image_path = "https://www.goodreads.com/book/show/42775.Rich_Dad_s_Before_You_Quit_Your_Job"
-book_image_path = "/books/2024-02-06-rich-dad-before-you-quit.jpg"
+book_image_path = "2024-02-06-rich-dad-before-you-quit.jpg"
 rating = 4
 +++
 

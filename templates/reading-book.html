@@ -88,7 +88,7 @@
   <div>
 
   <a href="{{ page.extra.review_image_path }}">
-    <img src="{{ page.extra.book_image_path }}" />
+    <img src=" {{ current_path | split(pat='/') | slice(end=-2) | join(sep='/') }}/{{ page.extra.book_image_path }}" />
   </a>
 
   <p>

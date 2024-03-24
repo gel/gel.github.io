@@ -4,6 +4,6 @@ title = "How to Talk so Little Kids Will Listen: A Survival Guide to Life with C
 tags = [ "Parenting", "Communication", "Self-Help" ]
 [extra]
 review_image_path = "https://www.goodreads.com/book/show/29430788-how-to-talk-so-little-kids-will-listen"
-book_image_path = "/books/2023-06-01-how-to-talk-so-little-kids-will-listen.jpg"
+book_image_path = "2023-06-01-how-to-talk-so-little-kids-will-listen.jpg"
 rating = 3
 +++
