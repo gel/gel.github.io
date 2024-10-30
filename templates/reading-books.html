@@ -29,4 +29,10 @@
   {% for post in subsection.pages %}
     {{ reading_book_macros::reading_book_preview(post=post, path="programming") }}
   {% endfor %}
+
+  <h2>Politics Books</h2>
+  {% set subsection = get_section(path="books/politics/_index.md") %}
+  {% for post in subsection.pages %}
+    {{ reading_book_macros::reading_book_preview(post=post, path="politics") }}
+  {% endfor %}  
 {% endblock content %}
