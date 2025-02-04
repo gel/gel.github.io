@@ -1,7 +1,7 @@
 +++
 title = "Israel or Judea @ Sefi Rachlevsky"
 [taxonomies]
-tags = [ "Politics", "Non-Fiction" ]
+tags = [ "Politics", "History", "Non-Fiction" ]
 [extra]
 review_image_path = "https://www.goodreads.com/book/show/218593504"
 book_image_path = "2024-10-30-israel-or-judea.jpg"
