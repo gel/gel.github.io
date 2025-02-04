@@ -36,10 +36,10 @@
     {{ reading_book_macros::reading_book_preview(post=post, path="health") }}
   {% endfor %}
 
-  <h2>Kids Books</h2>
-  {% set subsection = get_section(path="books/kids/_index.md") %}
+  <h2>Parenting Books</h2>
+  {% set subsection = get_section(path="books/parenting/_index.md") %}
   {% for post in subsection.pages %}
-    {{ reading_book_macros::reading_book_preview(post=post, path="kids") }}
+    {{ reading_book_macros::reading_book_preview(post=post, path="parenting") }}
   {% endfor %}
 
   <h2>Politics Books</h2>
