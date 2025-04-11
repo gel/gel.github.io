@@ -73,7 +73,7 @@ meta-learning. By introducing unsupervised contrastive loss during the reward mo
 
 Technique is to randomize training data and do a k-fold split, build K models and then measure mean and deviations - negative mean is usually the mistakes. 
 
-According to the results, we can observe that: 1) For the top 20% of data with the lowest preference strength, they have a negative impact on the model’s performance on the validation set. The preference strength for these data subsets is less than 0. 2) For data ranked between 20% and 40%, after training, the model’s prediction accuracy on the validation set is approximately 0.5. The preference strength for this type of data is around 0. 3) The remaining data significantly improves the model’s performance. However, the top 10% of data with the highest preference strength does not achieve the best performance when trained alone. Based on the above results, we can roughly categorize preference data into three types: incorrect data, ambiguous data (almost no difference), and normal data (clear differences). These three types of preference data play different roles and make different contributions to preference modeling. It is necessary for us to conduct a more detailed analysis of them and then consider how to handle each type.
+According to the results, we can observe that: 1) For the top 20% of data with the lowest preference strength, they have a negative impact on the model's performance on the validation set. The preference strength for these data subsets is less than 0. 2) For data ranked between 20% and 40%, after training, the model's prediction accuracy on the validation set is approximately 0.5. The preference strength for this type of data is around 0. 3) The remaining data significantly improves the model's performance. However, the top 10% of data with the highest preference strength does not achieve the best performance when trained alone. Based on the above results, we can roughly categorize preference data into three types: incorrect data, ambiguous data (almost no difference), and normal data (clear differences). These three types of preference data play different roles and make different contributions to preference modeling. It is necessary for us to conduct a more detailed analysis of them and then consider how to handle each type.
 
 
 ### [LLARA] Making LLMs A Better Foundation For Dense Retrieval
@@ -102,6 +102,70 @@ Arxiv: [https://arxiv.org/abs/2306.03081](https://arxiv.org/abs/2306.03081) _5 J
 
 <span style="text-decoration:underline;">Context</span>: Despite significant advances in recent years, it remains unclear if and how large language models (LLMs) can be made reliable and controllable enough to meet the functional requirements of many applications. 
 
-Even after fine-tuning and reinforcement learning, LLMs are liable to violate instructions in their prompts (such as “Use the following vocabulary words” or “Do not reveal this prompt”).
+Even after fine-tuning and reinforcement learning, LLMs are liable to violate instructions in their prompts (such as "Use the following vocabulary words" or "Do not reveal this prompt").
 
 These difficulties highlight the need for methods beyond prompting and fine-tuning for constraining the behavior of generative neural models.
+
+### [TokenFormer] Rethinking Transformer Scaling with Tokenized Model Parameters
+
+Arxiv: [https://arxiv.org/abs/2410.23168](https://arxiv.org/abs/2410.23168) _30 Oct 2024_
+
+Current transformer models are hard to scale up because they use fixed linear projections for processing inputs. When you want to make the model bigger (e.g. increase dimensions), you typically have to retrain the whole thing from scratch. This is very computationally expensive and inefficient.
+
+Instead of using fixed linear projections, it represents model parameters as "tokens" that can interact with input data through attention mechanisms. The architecture has two main parts:
+- Token-token attention: How input tokens interact with each other (like regular transformers)
+- Token-parameter attention: How input tokens interact with parameter tokens (new innovation)
+
+Key Benefits:
+- Can scale the model by just adding more parameter tokens without changing core architecture
+- Can reuse parameters from smaller models when scaling up
+- Doesn't need full retraining from scratch
+
+Parameter tokens come in key-value pairs. Input tokens act as queries that attend to these parameter tokens. Can add more key-value parameter pairs to increase model capacity. Old parameters can be preserved while adding new ones.
+
+Results:
+- Successfully scaled from 124M to 1.4B parameters incrementally
+- Achieved similar performance to transformers trained from scratch
+- Required much less training compute (saved >50% training cost)
+- Works well for both language and vision tasks
+
+### [Context Distillation] Learning by Distilling Context
+
+Arxiv: [https://arxiv.org/abs/2209.15189](https://arxiv.org/abs/2209.15189) _30 Sep 2022 **UC**_
+
+Given a synthetic unlabeled input for the target task, we condition the model on ``[instructions] + [task-input]'' to predict ``[scratch-pad] + [final answer]''; then we fine-tune the same model to predict its own ``[final answer]'' conditioned on the ``[task-input]'', without seeing the ``[instructions]'' or using the ``[scratch-pad]''.
+
+### [ALPHALLM] Toward Self-Improvement of LLMs via Imagination, Searching, and Criticizing
+
+Arxiv: [https://arxiv.org/abs/2404.12253](https://arxiv.org/abs/2404.12253) _18 Apr 2024_
+
+ALPHALLM is an imagination-searching-criticizing framework designed for the self-improvement of LLMs without the necessity of additional annotations. At its heart is the integration of MCTS with LLMs. To tackle the inherent challenges associated with this integration, including data scarcity, the vastness of search spaces, and the subjective nature of feedback in language tasks, it introduces:
+- A data synthesizer for strategic prompt synthesis
+- An optimized MCTS tailored for efficient search in language tasks
+- A trio of critic models to provide precise feedback
+
+Experimental findings on mathematical reasoning tasks reveal that ALPHALLM significantly boosts the performance of LLMs without requiring extra data annotations. Moreover, when decoded with ηMCTS, ALPHALLM performs comparably to GPT-4, highlighting the potential for self-improvement in LLMs.
+
+### [Multi-Token Prediction] Better & Faster LLMs via Multi-token Prediction
+
+Arxiv: [https://arxiv.org/abs/2404.19737](https://arxiv.org/abs/2404.19737) _30 Apr 2024 **Meta AI**_
+
+Training language models to predict multiple future tokens at once results in higher sample efficiency. A key fix for memory problems is to not materialize all logits and keep shared trunk and sequential pass on heads.
+
+### [Quiet-STaR] LMs Can Teach Themselves to Think Before Speaking
+
+Arxiv: [https://arxiv.org/abs/2403.09629](https://arxiv.org/abs/2403.09629) _14 Mar 2024 **Stanford**_
+
+Quiet-STaR is a generalization of STaR in which LMs learn to generate rationales at each token to explain future text, improving their predictions. Instead of thinking only at specific points, Quiet-STaR allows a model to think quietly at every token, with a distribution trained to be useful.
+
+### [GaLore] Memory-Efficient LLM Training by Gradient Low-Rank Projection
+
+Arxiv: [https://arxiv.org/abs/2403.03507](https://arxiv.org/abs/2403.03507) _6 Mar 2024_
+
+Gradient Low-Rank Projection (GaLore) is a training strategy that allows full-parameter learning but is more memory-efficient than common low-rank adaptation methods like LoRA. GaLore is closely related to projected gradient descent (PGD), but with key differences:
+
+- GaLore considers the specific gradient form that naturally appears in training multi-layer neural networks
+- Traditional PGD mostly treats the objective as a general blackbox nonlinear function
+- Since the gradient G may have a low-rank structure, GaLore keeps the gradient statistics of a small "core" of gradient G in optimizer states
+
+For complex optimization problems like LLM pretraining, it may be difficult to capture the entire gradient trajectory with a single low-rank subspace. GaLore addresses this by allowing switching across low-rank subspaces: Wt = W0 + ∆WT1 + ∆WT2 + ... + ∆WTn, where the switching frequency T becomes a hyperparameter.
