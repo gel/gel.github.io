@@ -47,4 +47,10 @@
   {% for post in subsection.pages %}
     {{ reading_book_macros::reading_book_preview(post=post, path="history") }}
   {% endfor %}  
+
+  <h2>Fiction Books</h2>
+  {% set subsection = get_section(path="books/fiction/_index.md") %}
+  {% for post in subsection.pages %}
+    {{ reading_book_macros::reading_book_preview(post=post, path="fiction") }}
+  {% endfor %}   
 {% endblock content %}
