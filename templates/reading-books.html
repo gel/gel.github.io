@@ -9,7 +9,7 @@
 {% endblock css %}
 {% endblock styles %}
 
-{% block posthead %} 
+{% block posthead %}
   {% for post in section.pages %}
     <link rel="prerender" href="{{ post.permalink }}" />
   {% endfor %}
@@ -18,10 +18,16 @@
 {% block content %}
   {{ section.content | safe }}
 
-  <h2>Reading Books</h2>
-  {% set subsection = get_section(path="books/reading/_index.md") %}
+  <h2>Personal Development Books</h2>
+  {% set subsection = get_section(path="books/personal-development/_index.md") %}
   {% for post in subsection.pages %}
-    {{ reading_book_macros::reading_book_preview(post=post, path="reading") }}
+    {{ reading_book_macros::reading_book_preview(post=post, path="personal-development") }}
+  {% endfor %}
+
+  <h2>Finance Books</h2>
+  {% set subsection = get_section(path="books/finance/_index.md") %}
+  {% for post in subsection.pages %}
+    {{ reading_book_macros::reading_book_preview(post=post, path="finance") }}
   {% endfor %}
 
   <h2>Programming Books</h2>
@@ -46,11 +52,11 @@
   {% set subsection = get_section(path="books/history/_index.md") %}
   {% for post in subsection.pages %}
     {{ reading_book_macros::reading_book_preview(post=post, path="history") }}
-  {% endfor %}  
+  {% endfor %}
 
   <h2>Fiction Books</h2>
   {% set subsection = get_section(path="books/fiction/_index.md") %}
   {% for post in subsection.pages %}
     {{ reading_book_macros::reading_book_preview(post=post, path="fiction") }}
-  {% endfor %}   
+  {% endfor %}
 {% endblock content %}
