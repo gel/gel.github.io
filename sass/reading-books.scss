@@ -1,4 +1,10 @@
 
 .reading-book {
     border-bottom: 0;
+    
+    img {
+        max-width: 200px;
+        height: auto;
+        display: inline-block;
+    }
 }

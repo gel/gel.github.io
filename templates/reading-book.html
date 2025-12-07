@@ -70,6 +70,11 @@
 {% endblock %}
 
 {% block content %}
+  {% set books_section = get_section(path="books/_index.md") %}
+  <div class="back-button">
+    <a href="{{ books_section.permalink }}">← Back to Books</a>
+  </div>
+
   <div class="post-title">
     <h1>{{ page.title }}</h1>
     <small>

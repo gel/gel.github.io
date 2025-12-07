@@ -18,45 +18,21 @@
 {% block content %}
   {{ section.content | safe }}
 
-  <h2>Personal Development Books</h2>
-  {% set subsection = get_section(path="books/personal-development/_index.md") %}
-  {% for post in subsection.pages %}
-    {{ reading_book_macros::reading_book_preview(post=post, path="personal-development") }}
-  {% endfor %}
+  {{ reading_book_macros::book_category_section(title="Personal Development Books", section_path="books/personal-development/_index.md", slug="personal-development") }}
+  {{ reading_book_macros::book_category_section(title="Finance Books", section_path="books/finance/_index.md", slug="finance") }}
+  {{ reading_book_macros::book_category_section(title="Programming Books", section_path="books/programming/_index.md", slug="programming") }}
+  {{ reading_book_macros::book_category_section(title="Health Books", section_path="books/health/_index.md", slug="health") }}
+  {{ reading_book_macros::book_category_section(title="Parenting Books", section_path="books/parenting/_index.md", slug="parenting") }}
+  {{ reading_book_macros::book_category_section(title="History Books", section_path="books/history/_index.md", slug="history") }}
+  {{ reading_book_macros::book_category_section(title="Fiction Books", section_path="books/fiction/_index.md", slug="fiction") }}
 
-  <h2>Finance Books</h2>
-  {% set subsection = get_section(path="books/finance/_index.md") %}
-  {% for post in subsection.pages %}
-    {{ reading_book_macros::reading_book_preview(post=post, path="finance") }}
-  {% endfor %}
-
-  <h2>Programming Books</h2>
-  {% set subsection = get_section(path="books/programming/_index.md") %}
-  {% for post in subsection.pages %}
-    {{ reading_book_macros::reading_book_preview(post=post, path="programming") }}
-  {% endfor %}
-
-  <h2>Health Books</h2>
-  {% set subsection = get_section(path="books/health/_index.md") %}
-  {% for post in subsection.pages %}
-    {{ reading_book_macros::reading_book_preview(post=post, path="health") }}
-  {% endfor %}
-
-  <h2>Parenting Books</h2>
-  {% set subsection = get_section(path="books/parenting/_index.md") %}
-  {% for post in subsection.pages %}
-    {{ reading_book_macros::reading_book_preview(post=post, path="parenting") }}
-  {% endfor %}
-
-  <h2>History Books</h2>
-  {% set subsection = get_section(path="books/history/_index.md") %}
-  {% for post in subsection.pages %}
-    {{ reading_book_macros::reading_book_preview(post=post, path="history") }}
-  {% endfor %}
-
-  <h2>Fiction Books</h2>
-  {% set subsection = get_section(path="books/fiction/_index.md") %}
-  {% for post in subsection.pages %}
-    {{ reading_book_macros::reading_book_preview(post=post, path="fiction") }}
-  {% endfor %}
+  {% set podcasts_section = get_section(path="podcasts/_index.md") %}
+  {% if podcasts_section.pages | length > 0 %}
+    <h2>Podcasts</h2>
+    {% for post in podcasts_section.pages %}
+      {% if post.extra.podcast_image_path and not post.extra.disabled %}
+        {{ reading_book_macros::podcast_preview(post=post) }}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
 {% endblock content %}

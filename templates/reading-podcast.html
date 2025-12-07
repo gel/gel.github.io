@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block posthead %}
+  {% if page.earlier %}
+    <link rel="prerender" href="{{ page.earlier.permalink }}">
+  {% endif %}
+
+  {% if page.later %}
+    <link rel="prerender" href="{{ page.later.permalink }}">
+  {% endif %}
+
+  {% for tag in page.taxonomies.tags %}
+    <link rel="prerender"  href="{{ get_taxonomy_url(kind="tags", name=tag) }}">
+  {% endfor %}
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": "{{ page.title }}",
+      "description": "{{ page.description }}",
+      "thumbnailUrl": "{{ get_url(path="podcasts/" ~ page.extra.podcast_image_path) | safe }}",
+      "uploadDate": "{{ page.date | date(format="%+") }}",
+      "contentUrl": "{{ page.extra.youtube_url }}"
+    }
+  </script>
+{% endblock %}
+
+{% block content %}
+  {% set books_section = get_section(path="books/_index.md") %}
+  <div class="back-button">
+    <a href="{{ books_section.permalink }}">← Back to Books</a>
+  </div>
+
+  <div class="post-title">
+    <h1>{{ page.title }}</h1>
+    <small>
+      {{ page.date | date(format="%B %d, %Y") }}
+      {% if page.taxonomies.tags %}
+        - 
+        <span class="tags">
+          {% for tag in page.taxonomies.tags %}
+            <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">{{ tag }}</a>
+          {% endfor %}
+        </span>
+      {% endif %}
+    </small>
+  </div>
+
+  <div class="podcast-content">
+    {% if page.extra.podcast_image_path %}
+      <div class="podcast-thumbnail">
+        <img src="{{ current_path | split(pat='/') | slice(end=-1) | join(sep='/') }}/{{ page.extra.podcast_image_path }}" alt="{{ page.title }}" />
+      </div>
+    {% endif %}
+
+    {% if page.extra.youtube_id %}
+      <div class="podcast-video">
+        <iframe 
+          width="560" 
+          height="315" 
+          src="https://www.youtube.com/embed/{{ page.extra.youtube_id }}" 
+          title="{{ page.title }}"
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    {% endif %}
+
+    <div class="podcast-description">
+      {{ page.content | safe }}
+    </div>
+
+    {% if page.extra.youtube_url %}
+      <div class="podcast-link">
+        <a href="{{ page.extra.youtube_url }}" target="_blank" rel="noopener nofollow noreferrer">
+          Watch on YouTube →
+        </a>
+      </div>
+    {% endif %}
+  </div>
+
+  <hr class="footer-rule" />
+
+  {% if config.extra.footer_about %}
+    <div class="footer-about">
+      {{ config.extra.footer_about | markdown | safe }}
+    </div>
+  {% endif %}
+
+  <div class="related-container">
+    {% if page.earlier %}
+      <div class="link">
+        Previous <br />
+        <a href="{{ page.earlier.permalink }}">{{ page.earlier.title }}</a>
+      </div>
+    {% endif %}
+
+    {% if page.later %}
+      <div class="link">
+        Next <br />
+        <a href="{{ page.later.permalink }}">{{ page.later.title }}</a>
+      </div>
+    {% endif %}
+  </div>
+
+{% endblock content %}
+

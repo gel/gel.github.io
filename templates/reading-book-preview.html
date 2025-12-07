@@ -3,3 +3,21 @@
    <img src="{{path}}/{{ post.extra.book_image_path }}" alt="{{ post.title }}" />
 </a>
 {% endmacro input %}
+
+{% macro book_category_section(title, section_path, slug) %}
+  {% set subsection = get_section(path=section_path) %}
+  {% if subsection.pages | length > 0 %}
+    <h2>{{ title }}</h2>
+    {% for post in subsection.pages %}
+      <a class="reading-book" href="{{ post.permalink }}" target="_blank" rel="noopener nofollow noreferrer" title="{{ post.title }}">
+         <img src="{{slug}}/{{ post.extra.book_image_path }}" alt="{{ post.title }}" />
+      </a>
+    {% endfor %}
+  {% endif %}
+{% endmacro book_category_section %}
+
+{% macro podcast_preview(post) %}
+<a class="reading-book" href="{{ post.permalink }}" title="{{ post.title }}">
+   <img src="/podcasts/{{ post.extra.podcast_image_path }}" alt="{{ post.title }}" />
+</a>
+{% endmacro podcast_preview %}
