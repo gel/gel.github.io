@@ -56,6 +56,11 @@
         padding: 0 5px;
       }
     }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
   </style>
 
   <script>
@@ -159,7 +164,7 @@
     </a>
     <nav>
       {% for link in config.extra.nav %}
-      <a href="{{ link.path }}">{{ link.name }}</a>
+      <a href="{{ link.path }}" class="{% if current_path is defined and current_path is starting_with(link.path) and link.path != '/' %}active-nav{% endif %}">{{ link.name }}</a>
       {% endfor %}
       {% if config.extra.dark_mode %}
       <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
