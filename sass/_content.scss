@@ -4,13 +4,13 @@
   width: calc(100% - #{variables.$sidebar-width});
   height: 100%;
   overflow-y: auto;
-  color: #000;
-  background: #fff;
+  color: var(--body-color);
+  background: var(--body-bg);
   padding-bottom: 20px;
   transition: 0.5s;
 
   .zola-anchor {
-    color: #357aba;
+    color: var(--accent-color);
     padding-left: 10px;
     text-decoration: none;
     font-weight: initial;
@@ -26,7 +26,7 @@
 
   &__content {
     a {
-      color: #357aba;
+      color: var(--accent-color);
       text-decoration: none;
 
       &:hover {
@@ -81,7 +81,7 @@
     table {
       margin: 0 auto;
       border-collapse: collapse;
-      border-color: #cccccc;
+      border-color: var(--table-border-bottom);
 
       td {
         padding: 3px 20px;
@@ -92,7 +92,7 @@
         th {
           padding: 6px 13px;
           font-weight: bold;
-          border: 1px solid #ccc;
+          border: 1px solid var(--table-border-bottom);
         }
       }
     }
@@ -180,7 +180,7 @@
     width: 100%;
     left: 0;
   }
-  
+
   .page-without-menu {
     left: calc(100% - 100px);
   }

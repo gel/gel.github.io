@@ -136,10 +136,26 @@
 
     @include menu-icon();
 
-    &:hover {
-      span {
-        background-color: black;
-      }
+    span {
+      background-color: var(--body-color);
+    }
+  }
+
+  .theme-toggle {
+    float: right;
+    height: 50px;
+    font-size: 1.5rem;
+    padding: 0 15px;
+    line-height: 50px;
+    border: none;
+    background: none;
+    color: var(--body-color);
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      background-color: transparent;
+      color: var(--heading-color);
     }
   }
 
@@ -149,12 +165,12 @@
     display: inline-block;
     text-align: center;
     line-height: 50px;
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--body-color);
     cursor: pointer;
     font-size: 2rem;
 
     &:hover {
-      color: black
+      color: var(--heading-color);
     }
   }
 }

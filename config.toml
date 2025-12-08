@@ -34,3 +34,4 @@ footer_page = """
 """
 book_number_chapters = true
 gtag="G-JD979V1BWS"
+dark_mode = true
