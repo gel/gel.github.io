@@ -5,7 +5,7 @@ date = 2024-04-04
 tags = [ "Machine Learning", "SageMaker", "AWS", "Optimization", "Cost Reduction", "Multi-Modal" ]
 +++
 
-A recent AWS Machine Learning blog post co-authored by Eitan Sela, a Generative AI and Machine Learning Specialist at AWS, highlights how Nielsen Sports achieved a remarkable 75% cost reduction in their video analysis workflows. They modernized their system, which runs thousands of different machine learning models, by leveraging Amazon SageMaker multi-model endpoints (MMEs).
+A recent AWS Machine Learning blog post co-authored by Eitan Sela, a Generative AI and Machine Learning Specialist at AWS, highlights how Nielsen Sports achieved a remarkable 75% cost reduction in their video analysis workflows. They modernized their system, which runs thousands of different machine learning models, by leveraging Amazon SageMaker multi-model endpoints (MMEs) powered by the NVIDIA Triton Inference Server.
 
 Nielsen Sports faced the challenge of scaling a massive computer vision system that identifies over 120 million brand impressions monthly across thousands of TV channels. Their legacy architecture suffered from low GPU utilization (30-40%) and a slow, cumbersome process for deploying new models, which could take over a month.
 
