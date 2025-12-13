@@ -5,12 +5,12 @@ description = "A fascinating conversation with DHH about the future of programmi
 [taxonomies]
 tags = ["podcast", "programming", "ai", "productivity"]
 [extra]
-podcast_image_path = "2024-01-15-podcast-episode-1.jpg"
+podcast_image_path = "2024-01-15-dhh-future-programming.jpg"
 youtube_url = "https://www.youtube.com/watch?v=vagyIcmIGOQ"
 youtube_id = "vagyIcmIGOQ"
 +++
 
-This podcast was amazing! 
+This podcast was amazing!
 
 My thinking about DHH is that he is a pioneer of the next revolutions - particularly around self-hosting, cost-savings, and flat-pricing models. He shares a similar enthusiasm for education, innovation, and being tech-savvy that really resonates with me.
 
