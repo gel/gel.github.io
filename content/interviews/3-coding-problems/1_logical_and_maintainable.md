@@ -10,7 +10,7 @@ weight = 1
 - [Partitioning Into Minimum Number Of Deci-Binary Numbers - Medium - LeetCode 1689](#partitioning-into-minimum-number-of-deci-binary-numbers-medium-leetcode-1689)
 - [Insert Greatest Common Divisors in Linked List - Medium - LeetCode 2807](#insert-greatest-common-divisors-in-linked-list-medium-leetcode-2807)
 
---- 
+---
 
 ### Range Sum of BST - Easy - [LeetCode 938](https://leetcode.com/problems/range-sum-of-bst/)
 
@@ -27,16 +27,16 @@ class RangeSumBST {
     public int rangeSumBST(TreeNode root, int low, int high) {
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
         queue.add(root);
-        
+
         int sum = 0;
         while (!queue.isEmpty()) {
             TreeNode node = queue.poll();
             if (node.val >= low && node.val <= high)
                 sum += node.val;
-            
+
             if (node.left != null && node.val >= low)
                 queue.add(node.left);
-            
+
             if (node.right != null && node.val <= high)
                 queue.add(node.right);
         }
@@ -52,30 +52,48 @@ class RangeSumBST {
 **Question**
 
 > Evaluate the value of an arithmetic expression in > Reverse Polish Notation.
-> 
+>
 > Valid operators are +, -, *, and /. Each operand may > be an integer or another expression.
-> 
+>
 > Note that division between two integers should > truncate toward zero.
-> 
+>
 > It is guaranteed that the given RPN expression is > always valid. That means the expression would always > evaluate to a result, and there will not be any > division by zero operation.
 
 **Explanation**
 
 To perform operation in polish notation we need a stack data-structure (first in last out). We will read the tokens until we encounter operation and then perform the calculation.
 
+```mermaid
+graph TD
+    subgraph "RPN Stack State: ['2', '1', '+', '3', '*']"
+        direction BT
+        S1["2"]
+        S2["1"]
+        S3["(2 + 1) = 3"]
+        S4["3"]
+        S5["(3 * 3) = 9"]
+
+        Step1["Push 2"] --> S1
+        Step2["Push 1"] --> S2
+        Step3["Pop 2,1 & Push 3"] --> S3
+        Step4["Push 3"] --> S4
+        Step5["Pop 3,3 & Push 9"] --> S5
+    end
+```
+
 **Solution**
 
 ```java
 class ReversePolishNotation {
     private static boolean isNumeric(String token) {
-      try {  
-        Double.parseDouble(token);  
+      try {
+        Double.parseDouble(token);
         return true;
-      } catch(NumberFormatException e) {  
-        return false;  
+      } catch(NumberFormatException e) {
+        return false;
       }
     }
-    
+
     private static int performCalculation(int left, int right, String operand) {
         if (operand.equals("+")) {
             return left + right;
@@ -90,7 +108,7 @@ class ReversePolishNotation {
             throw new RuntimeException("Unexpected operand");
         }
     }
-    
+
     public int evalRPN(String[] tokens) {
         Stack<Integer> numbers = new Stack<Integer>();
         for (int i = 0; i < tokens.length; i++) {
@@ -174,11 +192,11 @@ class BestTimeToSellStock {
         int size = prices.length;
         if (size <= 1)
             return 0;
-        
+
         int currentMin = prices[0];
         int currentProfit = 0;
         int maxProfit = 0;
-        
+
         for (int i = 1; i < size; i++) {
             if (prices[i] < currentMin) {
                 maxProfit = Math.max(maxProfit, currentProfit);
@@ -190,7 +208,7 @@ class BestTimeToSellStock {
             }
         }
         maxProfit = Math.max(maxProfit, currentProfit);
-        
+
         return maxProfit;
     }
 }
@@ -217,7 +235,7 @@ Example 3:
 
 Input: n = "27346209830709182346"
 Output: 9
- 
+
 Constraints:
 
 \\( 1 \le n.length \le 105 \\)
@@ -261,7 +279,7 @@ Return the linked list after insertion.
 
 The greatest common divisor of two numbers is the largest positive integer that evenly divides both numbers.
 
- 
+
 
 Example 1:
 
@@ -280,7 +298,7 @@ Input: head = [7]
 Output: [7]
 Explanation: The 1st diagram denotes the initial linked list and the 2nd diagram denotes the linked list after inserting the new nodes.
 There are no pairs of adjacent nodes, so we return the initial linked list.
- 
+
 
 Constraints:
 
@@ -294,6 +312,28 @@ The idea is to break the solution into two different parts.
 1. Implement GCD. The recursive way is the easiest, a side note is that it's usually not recommended to implement recursion but in this case because it is tail recursion the compiler or JVM would be able to optimize it if needed.
 
 2. Add a new node from the GCD value.
+
+```mermaid
+graph LR
+    subgraph "Before Insertion"
+        A[18] --> B[6]
+        B --> C[10]
+        C --> D[3]
+    end
+
+    subgraph "After GCD Insertion"
+        A1[18] --> G1((6))
+        G1 --> B1[6]
+        B1 --> G2((2))
+        G2 --> C1[10]
+        C1 --> G3((1))
+        G3 --> D1[3]
+    end
+
+    style G1 fill:#bbf,stroke:#333
+    style G2 fill:#bbf,stroke:#333
+    style G3 fill:#bbf,stroke:#333
+```
 
 **Solution**
 

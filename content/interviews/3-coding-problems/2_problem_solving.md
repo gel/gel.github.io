@@ -6,7 +6,7 @@ weight = 2
 - [LRU Cache - Medium - LeetCode 146](#lru-cache-medium-leetcode-146)
 - [Longest Palindromic Substring - Medium - LeetCode 5](#longest-palindromic-substring-medium-leetcode-5)
 
---- 
+---
 
 ### LRU Cache - Medium - [LeetCode 146](https://leetcode.com/problems/lru-cache/)
 
@@ -27,7 +27,33 @@ LRU cache is a challenging problem, the problem is mostly focused on how to stor
 
 In this problem it is possible to do a constant time when choosing a doubly linked list which allows to add to head and evicti from tail. It also possible to perform modification in constant (move to HEAD).
 
-This is a java implemention of DoublyLinkedList and the LRU Cache. 
+This is a java implemention of DoublyLinkedList and the LRU Cache.
+
+```mermaid
+graph TD
+    subgraph "LRU Cache Structure"
+        Map["HashMap&lt;Integer, Node&gt;"]
+        DLL["Doubly Linked List"]
+    end
+
+    Map -- "Points to" --> DLL
+
+    subgraph DLL
+        Head["Head (Most Recently Used)"]
+        Tail["Tail (Least Recently Used)"]
+        N1[Node 1]
+        N2[Node 2]
+        N3[Node 3]
+
+        Head --> N1
+        N1 <--> N2
+        N2 <--> N3
+        N3 --> Tail
+    end
+
+    style Head fill:#f9f,stroke:#333,stroke-width:2px
+    style Tail fill:#ff9,stroke:#333,stroke-width:2px
+```
 
 **Solution**
 

@@ -8,8 +8,6 @@
 
   <style>
     :root {
-      --accent-color: {{ config.extra.accent }};
-      --accent-color-light: {{ config.extra.accent_light }};
       --accent-overlay-color: #fff;
       --body-bg: #fff;
       --body-color: #000;
@@ -46,12 +44,14 @@
     }
 
     @media (max-width: 600px) {
-      header nav > a:not(:last-child) {
+      header nav>a:not(:last-child) {
         margin-right: 0.6rem;
       }
+
       header a.profile-icon {
         display: none;
       }
+
       .theme-toggle {
         padding: 0 5px;
       }
@@ -65,10 +65,15 @@
 
   <script>
     (function () {
-      const localTheme = localStorage.getItem('theme');
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       const theme = localTheme || systemTheme;
-      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '{{ config.extra.accent }}');
+      root.style.setProperty('--accent-color-light', '{{ config.extra.accent_light }}');
     })();
   </script>
 
@@ -88,8 +93,8 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', '{{ config.extra.gtag }}');
+    gtag("js", new Date());
+    gtag("config", "{{ config.extra.gtag }}");
   </script>
   {% endif %}
 
@@ -149,11 +154,46 @@
 
   {% block head %}{% endblock head %}
   {% block styles %}
-  <link rel="stylesheet" href="{{ get_url(path="main.css") | safe }}">
-  <link rel="stylesheet" href="{{ get_url(path="animations.css") | safe }}">
+  {% set css_path = "main.css" %}
+  {% set animations_path = "animations.css" %}
+  <link rel="stylesheet" href="{{ get_url(path=css_path) | safe }}">
+  <link rel="stylesheet" href="{{ get_url(path=animations_path) | safe }}">
   {% endblock styles %}
   {% block posthead %}{% endblock posthead %}
-  <script src="{{ get_url(path="animations.js") | safe }}" defer></script>
+  {% set anim_js_path = "animations.js" %}
+  <script src="{{ get_url(path=anim_js_path) | safe }}" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    const theme = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: theme,
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function renderMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.textContent = block.textContent;
+        pre.replaceWith(div);
+      }
+      if (codeBlocks.length > 0) {
+        await mermaid.run();
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderMermaid);
+
+    window.addEventListener("themeChanged", async (e) => {
+      const newTheme = e.detail.theme === "dark" ? "dark" : "default";
+      mermaid.initialize({ theme: newTheme });
+    });
+  </script>
 </head>
 
 <body>
@@ -164,7 +204,9 @@
     </a>
     <nav>
       {% for link in config.extra.nav %}
-      <a href="{{ link.path }}" class="{% if current_path is defined and current_path is starting_with(link.path) and link.path != '/' %}active-nav{% endif %}">{{ link.name }}</a>
+      <a href="{{ link.path }}"
+        class="{% if current_path is defined and current_path is starting_with(link.path) and link.path != '/' %}active-nav{% endif %}">{{
+        link.name }}</a>
       {% endfor %}
       {% if config.extra.dark_mode %}
       <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
@@ -187,30 +229,33 @@
   </footer>
   <script>
     function toggleTheme() {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
 
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
       updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
     }
 
     function updateIcons(theme) {
-      const lightIcons = document.querySelectorAll('.theme-icon-light');
-      const darkIcons = document.querySelectorAll('.theme-icon-dark');
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
 
-      if (theme === 'dark') {
-        lightIcons.forEach(icon => icon.style.display = 'none');
-        darkIcons.forEach(icon => icon.style.display = 'inline');
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline");
       } else {
-        lightIcons.forEach(icon => icon.style.display = 'inline');
-        darkIcons.forEach(icon => icon.style.display = 'none');
+        lightIcons.forEach(icon => icon.style.display = "inline");
+        darkIcons.forEach(icon => icon.style.display = "none");
       }
     }
 
     // Initial icon setup
-    document.addEventListener('DOMContentLoaded', () => {
-      updateIcons(document.documentElement.getAttribute('data-theme'));
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
     });
   </script>
 </body>
