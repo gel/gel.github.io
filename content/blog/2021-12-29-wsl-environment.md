@@ -4,6 +4,8 @@ title = "Unified Development Environment"
 tags = [ "environment", "wsl", "linux", "windows" ]
 +++
 
+> **Update 2022-01-29:** My experience with WSL2 has been a total catastrophe. I've since moved to a dual-boot setup. The performance was terribly slow, especially with the horrendous support for NTFS. On top of that, it consumes at least 10GB of disk space even when idle. I cannot recommend it.
+
 After many years of waiting patiently there is finally a reasonable way to have a unified development environment from windows named [WSL](https://docs.microsoft.com/en-us/windows/wsl/) version 2. This finally enables us developers to run a full linux environment natively in windows without virtual machine or dual-boot. Learn about the details that made it functioning.
 
 ## Native Terminal
