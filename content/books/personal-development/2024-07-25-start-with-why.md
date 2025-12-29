@@ -1,11 +1,14 @@
 +++
-title = "Book Review: Start with Why by Simon Sinek"
-date = 2024-07-25
+title = "Start with Why: How Great Leaders Inspire Everyone to Take Action @ Simon Sinek"
 [taxonomies]
-tags = [ "Book Review", "Leadership", "Business", "Inspiration" ]
+tags = [ "Leadership", "Business" ]
+[extra]
+review_image_path = "https://www.goodreads.com/book/show/7108725-start-with-why"
+book_image_path = "2024-07-25-start-with-why.jpg"
+rating = 4
 +++
 
-I recently finished reading Simon Sinek's "Start with Why: How Great Leaders Inspire Everyone to Take Action," and it has fundamentally shifted my perspective on leadership and purpose. I'd rate it a solid 4 out of 5.
+I recently finished reading Simon Sinek's "Start with Why: How Great Leaders Inspire Everyone to Take Action," and it has fundamentally shifted my perspective on leadership and purpose.
 
 Sinek's central argument is that the most influential leaders and organizations think, act, and communicate in the exact opposite way from everyone else. They start with *why*. He introduces a simple but powerful concept called "The Golden Circle," which has three layers:
 
