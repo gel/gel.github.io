@@ -25,6 +25,10 @@ Below is the list of selected research papers that have significantly contribute
 
 ### LLM Agents
 
+- [SICA] A Self-Improving Coding Agent
+
+- [AutoGen] Enabling Next-Gen LLM Applications via Multi-Agent Chat
+
 - [RetroFormer] Retrospective LL Agents with Policy Gradient Optimization
 
 ### LLM Optimization
@@ -50,7 +54,7 @@ Below is the list of selected research papers that have significantly contribute
 
 ### LLM Prompting
 
-- [MedPrompt] Can Generalist Foundation Models Outcompete Special-Purpose Tuning? 
+- [MedPrompt] Can Generalist Foundation Models Outcompete Special-Purpose Tuning?
 
 - [URIAL] The Unlocking Spell on Base LLMs: Rethinking Alignment via In-Context Learning
 

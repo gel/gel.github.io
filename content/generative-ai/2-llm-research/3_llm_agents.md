@@ -3,6 +3,39 @@ title = "LLM Agents"
 weight = 3
 +++
 
+### [SICA] A Self-Improving Coding Agent
+
+Arxiv: [https://arxiv.org/abs/2504.15228](https://arxiv.org/abs/2504.15228) _14 Apr 2024_
+
+The Self-Improving Coding Agent (SICA) is a framework where an agent autonomously edits its own Python codebase to improve performance on benchmarks. Similar to AlphaDev's search for optimal primitives, SICA uses empirical evaluation to evolve its tools and reasoning capabilities without human intervention or gradient-based learning.
+
+The core loop involves benchmarking the current agent (e.g., on SWE-Bench), archiving results, and selecting the best-performing version to act as a **meta-agent**.
+
+```mermaid
+graph TD
+    Bench[Benchmark Agent] --> Archive[(Archive Results)]
+    Archive --> Select[Select Best as Meta-Agent]
+    Select --> Analyze{Analyze Traces}
+    Analyze --> Identify[Identify Failures & Tools]
+    Identify --> SubAgents[Invoke Sub-Agents]
+    SubAgents --> Refactor[Edit agent_code/]
+    Refactor --> Overseer{Overseer Safety}
+    Overseer --> |Pass| Updated[Updated Agent]
+    Overseer --> |Fail| SubAgents
+    Updated --> Bench
+```
+
+**How Improvement Happens:**
+After running benchmarks, the meta-agent analyzes the execution traces, identifying specific successes and failures. It doesn't just "guess" updates; it:
+1.  **Analyzes Traces**: Investigates where the agent got stuck or failed.
+2.  **Identifies Improvements**: Pinpoints needed tools, like smarter AST-based symbol locators or diff minimizers.
+3.  **Invokes Sub-Agents**: Calls specialized agents (e.g., software developer, archive explorer) to propose, implement, test, and verify code changes in its own `agent_code/` directory.
+
+**Safety and Continuity:**
+To prevent the agent from getting stuck in infinite loops or unproductive paths, SICA employs an **overseer component**. This trick ensures the agent remains on track and within safety boundaries while iteratively refactoring its own logic.
+
+Results show significant performance gains, jumping from 17% to 53% on SWE-Bench Verified subsets, demonstrating the power of autonomous, reflection-driven code updates.
+
 ### [AutoGen] Enabling Next-Gen LLM Applications via Multi-Agent Chat
 
 Arxiv: [https://arxiv.org/abs/2308.08155](https://arxiv.org/abs/2308.08155) _3 Oct 2023 **Microsoft**_
@@ -47,5 +80,3 @@ Key Components:
 ![RetroFormer Table](/generative-ai/2-llm-research/llm_2_retroformer_table.png)
 
 ![RetroFormer Agent](/generative-ai/2-llm-research/llm_2_retroformer_agent.png)
-
-
