@@ -1,6 +1,6 @@
 +++
 title = "LLM Benchmarks & Evaluations"
-weight = 5
+weight = 6
 +++
 
 ### [JudgeBench] A Benchmark for Evaluating LLM-based Judges

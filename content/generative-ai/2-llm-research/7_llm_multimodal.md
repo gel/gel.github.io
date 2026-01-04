@@ -1,6 +1,6 @@
 +++
 title = "LLM Multi-Modal"
-weight = 6
+weight = 7
 +++
 
 ### Training Diffusion Models with RL

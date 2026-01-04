@@ -1,6 +1,6 @@
 +++
 title = "LLM Security & Safety"
-weight = 8
+weight = 9
 +++
 
 ### [Instruction Hierarchy] Training LLMs to Prioritize Privileged Instructions

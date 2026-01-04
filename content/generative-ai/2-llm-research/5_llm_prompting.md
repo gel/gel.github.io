@@ -1,6 +1,6 @@
 +++
 title = "LLM Prompting"
-weight = 4
+weight = 5
 +++
 
 ## LLM Prompting - In-Context-Learning

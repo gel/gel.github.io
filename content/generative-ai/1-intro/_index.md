@@ -17,8 +17,6 @@ In this book, I will look at the technical foundations of these AI systems, thei
 
 ## A Preview of the Journey Ahead ##
 
-- Compilation of the most interesting and significant findings from my exploration into Generative AI and LLMs
-
 - Deep Dives into AI Mechanics: Understanding the algorithms, neural networks, and data that power generative AI and LLMs.
 
 - Creative Showcases: Highlighting the most impressive and thought-provoking outputs of generative AI.

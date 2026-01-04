@@ -1,6 +1,6 @@
 +++
 title = "LLM Architecture"
-weight = 9
+weight = 10
 +++
 
 ### [ModernBERT] Modern Bidirectional Encoder

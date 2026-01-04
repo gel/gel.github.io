@@ -1,6 +1,6 @@
 +++
 title = "LLM Optimization"
-weight = 3
+weight = 4
 +++
 
 ### [Mixture-of-Depths] Dynamically allocating compute in transformer-based LMs

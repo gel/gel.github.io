@@ -1,6 +1,6 @@
 +++
 title = "LLM Agents"
-weight = 2
+weight = 3
 +++
 
 ### [AutoGen] Enabling Next-Gen LLM Applications via Multi-Agent Chat
