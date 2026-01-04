@@ -6,6 +6,7 @@ tags = [ "Leadership", "Business" ]
 review_image_path = "https://www.goodreads.com/book/show/7108725-start-with-why"
 book_image_path = "2024-07-25-start-with-why.jpg"
 rating = 4
+highres = true
 +++
 
 I recently finished reading Simon Sinek's "Start with Why: How Great Leaders Inspire Everyone to Take Action," and it has fundamentally shifted my perspective on leadership and purpose.

@@ -119,3 +119,15 @@ h2 {
     }
   }
 }
+
+.book-review-image {
+  height: 150px;
+  width: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 1.5rem 0;
+
+  &.highres {
+    height: 400px;
+  }
+}

@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 
+
+{% block styles %}
+<link rel="stylesheet" href="{{ get_url(path='main.css') | safe }}">
+<link rel="stylesheet" href="{{ get_url(path='animations.css') | safe }}">
+<link rel="stylesheet" href="{{ get_url(path='reading-books.css') | safe }}">
+{% endblock styles %}
+
+
 {% block posthead %}
 {% if page.earlier %}
 <link rel="prerender" href="{{ page.earlier.permalink }}">
@@ -93,7 +101,7 @@
 <div>
 
   <a href="{{ page.extra.review_image_path }}">
-    <img class="book-review-image"
+    <img class="book-review-image {% if page.extra.highres %}highres{% endif %}"
       src="{{ current_path | split(pat='/') | slice(end=-2) | join(sep='/') }}/{{ page.extra.book_image_path }}" />
   </a>
 
