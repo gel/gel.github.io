@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+    }
+
+    [data-theme="dark"] img {
+      opacity: .75;
+      transition: opacity .5s ease-in-out;
+    }
+
+    [data-theme="dark"] img:hover {
+      opacity: 1;
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 10px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      header nav>a:not(:last-child) {
+        margin-right: 0.6rem;
+      }
+
+      header a.profile-icon {
+        display: none;
+      }
+
+      .theme-toggle {
+        padding: 0 5px;
+      }
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#05a081');
+      root.style.setProperty('--accent-color-light', '#82d0c0');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#05a081" />
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.fe16e0bb11047769.jpg" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.605594d8be6a111f.jpg" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.3d1b2eeabf8eca47.jpg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.b6439cbc27d70267.jpg" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.e69fb5473e9ea744.jpg" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d03b11f47410640c.jpg" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d847062c67ed9f5e.jpg" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+
+  
+
+  
+
+  
+  
+  <meta name="description" content="" />
+  <meta name="twitter:description" content="">
+  
+  
+
+  
+  <meta name="twitter:title" content="LLM Architecture">
+  
+
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" />
+
+  <title>
+    
+
+
+
+Gal's 
+     
+    
+        Generative AI
+    
+ Book - LLM Architecture
+
+
+  </title>
+
+  
+  
+<link rel="stylesheet" href="https://gel.github.io/book.css">
+
+
+
+  
+
+
+
+
+
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    const theme = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: theme,
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function renderMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.textContent = block.textContent;
+        pre.replaceWith(div);
+      }
+      if (codeBlocks.length > 0) {
+        await mermaid.run();
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderMermaid);
+
+    window.addEventListener("themeChanged", async (e) => {
+      const newTheme = e.detail.theme === "dark" ? "dark" : "default";
+      mermaid.initialize({ theme: newTheme });
+    });
+  </script>
+</head>
+
+<body>
+  
+
+  <main>
+    
+<div class="menu">
+  
+  
+  <nav role="navigation">
+    <ul>
+      <li>
+        <a href="/">
+          ← Back to Blog
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        
+        <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;1-intro&#x2F;">
+          <strong>1.</strong>
+          Generative AI Foundations
+        </a>
+        
+      </li>
+      
+      
+      <li >
+        
+        <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-llm-research&#x2F;">
+          <strong>2.</strong>
+          LLM Research
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-llm-research&#x2F;1-llm-survey&#x2F;">
+              <strong>2.1.</strong>
+              LLM Survey
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-llm-research&#x2F;2-llm-pretraining-finetuning&#x2F;">
+              <strong>2.2.</strong>
+              LLM Pretraining &amp; Fine-tuning
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-llm-research&#x2F;3-llm-agents&#x2F;">
+              <strong>2.3.</strong>
+              LLM Agents
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-llm-research&#x2F;4-llm-optimization&#x2F;">
+              <strong>2.4.</strong>
+              LLM Optimization
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-llm-research&#x2F;5-llm-prompting&#x2F;">
+              <strong>2.5.</strong>
+              LLM Prompting
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-llm-research&#x2F;6-llm-benchmarks&#x2F;">
+              <strong>2.6.</strong>
+              LLM Benchmarks &amp; Evaluations
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-llm-research&#x2F;7-llm-multimodal&#x2F;">
+              <strong>2.7.</strong>
+              LLM Multi-Modal
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-llm-research&#x2F;8-llm-models&#x2F;">
+              <strong>2.8.</strong>
+              LLM Models
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-llm-research&#x2F;9-llm-security&#x2F;">
+              <strong>2.9.</strong>
+              LLM Security &amp; Safety
+            </a>
+          </li>
+          
+          <li class="active" >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-llm-research&#x2F;10-llm-architecture&#x2F;">
+              <strong>2.10.</strong>
+              LLM Architecture
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      <li >
+        
+        <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;3-llm-implementation&#x2F;">
+          <strong>3.</strong>
+          LLM Implementation
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;3-llm-implementation&#x2F;1-datasets&#x2F;">
+              <strong>3.1.</strong>
+              Datasets
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;3-llm-implementation&#x2F;2-llms&#x2F;">
+              <strong>3.2.</strong>
+              Large-Language-Models
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+    </ul>
+  </nav>
+  
+  
+</div>
+
+<div class="page">
+  <div class="page__header">
+    <div class="menu-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    
+    <span class="search-icon">🔎</span>
+    
+    
+    <button class="theme-toggle book-theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+      <span class="theme-icon-light">☀️</span>
+      <span class="theme-icon-dark" style="display:none">🌙</span>
+    </button>
+    
+  </div>
+
+  <div class="page__content">
+    
+    <div class="search-container">
+      <input id="search" type="search" placeholder="Search..">
+      <div class="search-results">
+        <div class="search-results__header"></div>
+        <ul class="search-results__items"></ul>
+      </div>
+    </div>
+    
+    <div class="book-content">
+      
+    <h1>LLM Architecture</h1>
+    <h3 id="modernbert-modern-bidirectional-encoder">[ModernBERT] Modern Bidirectional Encoder<a class="zola-anchor" href="#modernbert-modern-bidirectional-encoder" aria-label="Anchor link for: modernbert-modern-bidirectional-encoder">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2412.13663">https://arxiv.org/abs/2412.13663</a> <em>18 Dec 2024</em></p>
+<p>The paper introduces ModernBERT, a new family of encoder-only transformer models that brings modern optimizations to BERT-style architectures.</p>
+<p>Key Features:</p>
+<ol>
+<li>
+<p>Architectural Improvements:</p>
+<ul>
+<li>Uses GeGLU activation</li>
+<li>RoPE positional embeddings</li>
+<li>Alternating local-global attention</li>
+<li>Native 8192 sequence length</li>
+<li>Optimized for efficient inference on common GPUs</li>
+<li>Full model unpadding for better efficiency</li>
+</ul>
+</li>
+<li>
+<p>Training:</p>
+<ul>
+<li>Trained on 2 trillion tokens</li>
+<li>Includes code data in training mixture</li>
+<li>Uses modern BPE tokenizer with 50,368 vocabulary size</li>
+</ul>
+</li>
+<li>
+<p>Unique Advantages:</p>
+<ul>
+<li>Successfully combines modern LLM architecture improvements with encoder-only models</li>
+<li>Achieves better performance while maintaining high efficiency</li>
+<li>Represents first major Pareto improvement over older encoders like BERT</li>
+<li>Code-Aware Design: Uses a code-aware tokenizer that can properly handle programming syntax</li>
+<li>The code training makes ModernBERT uniquely suited for code-related tasks while maintaining strong performance on traditional NLP tasks</li>
+</ul>
+</li>
+</ol>
+<p>Limitations:</p>
+<ul>
+<li>MLM-only objective (Masked Language Modeling)</li>
+<li>Not trained with RTD (Replaced Token Detection) which might hurt classification results</li>
+</ul>
+<h3 id="gliner-generalist-model-for-ner-using-bidirectional-transformer">[GLiNER] Generalist Model for NER using Bidirectional Transformer<a class="zola-anchor" href="#gliner-generalist-model-for-ner-using-bidirectional-transformer" aria-label="Anchor link for: gliner-generalist-model-for-ner-using-bidirectional-transformer">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2311.08526">https://arxiv.org/abs/2311.08526</a> <em>14 Nov 2023</em></p>
+<p>Key Points:</p>
+<p>Problem &amp; Solution:</p>
+<ul>
+<li>Traditional NER models are limited to predefined entity types</li>
+<li>GLiNER introduces a compact model that can identify any type of entity</li>
+<li>Uses bidirectional transformer encoder for parallel entity extraction</li>
+</ul>
+<p>Architecture:</p>
+<ul>
+<li>Uses bidirectional transformer (like BERT/DeBERTa) as backbone</li>
+<li>Components:
+<ol>
+<li>Pre-trained textual encoder</li>
+<li>Span representation module</li>
+<li>Entity representation module</li>
+</ol>
+</li>
+<li>Treats NER as matching entity types with text spans in latent space</li>
+</ul>
+<p>Performance:</p>
+<ul>
+<li>Parallel entity extraction vs sequential generation in LLMs</li>
+<li>Compact design (50M-300M parameters) vs billions in LLMs</li>
+<li>Effective negative entity sampling during training</li>
+<li>Entity type dropping as regularization technique</li>
+</ul>
+<p>Limitations:</p>
+<ul>
+<li>Lower performance on informal text (e.g., tweets)</li>
+<li>Reduced effectiveness on non-Latin scripts</li>
+<li>Room for improvement in low-resource languages</li>
+</ul>
+<h3 id="set-fit-sentence-transformer-fine-tuning">[Set-Fit] Sentence Transformer Fine-tuning<a class="zola-anchor" href="#set-fit-sentence-transformer-fine-tuning" aria-label="Anchor link for: set-fit-sentence-transformer-fine-tuning">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2209.11055">https://arxiv.org/abs/2209.11055</a> <em>22 Sep 2022</em></p>
+<p>SetFit is a two-stage framework for few-shot learning:</p>
+<ol>
+<li>
+<p>Siamese Fine-tuning Stage:</p>
+<ul>
+<li>Takes pairs of text (positive/negative)</li>
+<li>Fine-tunes Sentence Transformer in contrastive manner</li>
+<li>Creates better text embeddings for target task</li>
+</ul>
+</li>
+<li>
+<p>Classification Stage:</p>
+<ul>
+<li>Uses fine-tuned embeddings from Stage 1</li>
+<li>Trains simple classifier (logistic regression) on these embeddings</li>
+<li>Produces final classification output</li>
+</ul>
+</li>
+</ol>
+<p>Advantages:</p>
+<ul>
+<li>No prompts or verbalizers needed</li>
+<li>Much smaller parameter count than PEFT/PET</li>
+<li>Faster training time</li>
+<li>Works well in multilingual settings</li>
+<li>Comparable accuracy to larger models </li>
+</ul>
+
+
+    </div>
+  </div>
+
+  <div class="prev-link">
+    
+    
+        
+        
+        <a class="previous" href="https://gel.github.io/generative-ai/2-llm-research/"><</a>
+    
+
+  </div>
+
+  <div class="next-link">
+    
+    
+        
+        
+        
+        
+        
+        
+            
+            
+            
+        
+            
+            
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                <a class="next" href="https://gel.github.io/generative-ai/3-llm-implementation/">></a>
+                
+                
+            
+            
+                
+            
+                
+            
+        
+    
+
+  </div>
+</div>
+
+
+
+<script type="text/javascript" src="https://gel.github.io/elasticlunr.min.js"></script>
+<script type="text/javascript" src="https://gel.github.io/search_index.en.js"></script>
+
+<script type="text/javascript" src="https://gel.github.io/book.js"></script>
+<script async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>
