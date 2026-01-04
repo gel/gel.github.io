@@ -1,4 +1,13 @@
 @use "variables";
+
+.book-review-image {
+  height: 400px;
+  width: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 1.5rem 0;
+}
+
 .page {
   position: absolute;
   width: calc(100% - #{variables.$sidebar-width});
@@ -112,7 +121,8 @@
     }
   }
 
-  .previous, .next {
+  .previous,
+  .next {
     position: fixed;
     display: flex;
     top: 50px;
@@ -146,7 +156,9 @@
   }
 
   @include variables.max-screen(1250px) {
-    .previous, .next {
+
+    .previous,
+    .next {
       position: static;
       top: auto;
       display: inline-block;
@@ -225,7 +237,9 @@
 }
 
 .search-mode {
-  .prev-link, .next-link {
+
+  .prev-link,
+  .next-link {
     display: none;
   }
 }
