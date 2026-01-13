@@ -7,7 +7,7 @@ weight = 5
 
 ### [LLMLingua] Compressing Prompts for Accelerated Inference of LLMs
 
-Arxiv: [https://arxiv.org/abs/2310.05736](https://arxiv.org/abs/2310.05736) _6 Dec 2023 **Microsoft**_
+Arxiv: [https://arxiv.org/abs/2310.05736](https://arxiv.org/abs/2310.05736) _Oct 2023 **Microsoft**_
 
 Key Components:
 1. Budget Controller
@@ -39,7 +39,7 @@ Key Features:
 
 ### [COT] Chain-of-Thought Prompting Elicits Reasoning in LLMs
 
-Arxiv: [https://arxiv.org/abs/2201.11903](https://arxiv.org/abs/2201.11903) _10 Jan 2023_
+Arxiv: [https://arxiv.org/abs/2201.11903](https://arxiv.org/abs/2201.11903) _Jan 2022_
 
 Limitations:
 - No guarantee of correct reasoning paths
@@ -73,7 +73,7 @@ Process:
 
 ### [Text2SQL Prompting] Enhancing Few-shot Text2SQL Capabilities of LLM
 
-Arxiv: [https://arxiv.org/abs/2311.16452](https://arxiv.org/abs/2311.16452) _21 May 2023 **Yale**_
+Arxiv: [https://arxiv.org/abs/2311.16452](https://arxiv.org/abs/2311.16452) _Nov 2023 **Yale**_
 
 Key Findings:
 - Dual emphasis on diversity and similarity in examples

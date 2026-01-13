@@ -27,7 +27,7 @@ Iterative Training Our overall procedure trains a series of models M1, . . . , M
 
 ### [In-Context Pretraining] Language Modeling Beyond Document Boundaries
 
-Arxiv: [https://arxiv.org/abs/2310.10638](https://arxiv.org/abs/2310.10638) _30 Nov 2023 **Meta**_
+Arxiv: [https://arxiv.org/abs/2310.10638](https://arxiv.org/abs/2310.10638) _Oct 2023 **Meta**_
 
 We instead present IN-CONTEXT PRETRAINING, a new approach where language models are pretrained on a sequence of related documents, thereby explicitly encouraging them to read and reason across document boundaries.
 
@@ -46,7 +46,7 @@ Techniques are using embedding models and top-k similarity search and leveraging
 
 ### [DPO] Direct Preference Optimization: Your LM is Secretly a Reward Model
 
-Arxiv: [https://arxiv.org/abs/2305.18290](https://arxiv.org/abs/2305.18290) _13 Dec 2023 **Stanford**_
+Arxiv: [https://arxiv.org/abs/2305.18290](https://arxiv.org/abs/2305.18290) _May 2023 **Stanford**_
 
 In this paper we introduce a new parameterization of the reward model in RLHF that enables extraction of the corresponding optimal policy in closed form, allowing us to solve the standard RLHF problem with only a simple classification loss. The resulting algorithm, which we call Direct Preference Optimization (DPO), is stable, performant, and computationally lightweight,
 

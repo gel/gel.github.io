@@ -5,7 +5,7 @@ weight = 1
 
 ### [SICA] A Self-Improving Coding Agent
 
-Arxiv: [https://arxiv.org/abs/2504.15228](https://arxiv.org/abs/2504.15228) _14 Apr 2024_
+Arxiv: [https://arxiv.org/abs/2504.15228](https://arxiv.org/abs/2504.15228) _Apr 2025_
 
 The Self-Improving Coding Agent (SICA) is a framework where an agent autonomously edits its own Python codebase to improve performance on benchmarks. Similar to AlphaDev's search for optimal primitives, SICA uses empirical evaluation to evolve its tools and reasoning capabilities without human intervention or gradient-based learning.
 
@@ -38,7 +38,7 @@ Results show significant performance gains, jumping from 17% to 53% on SWE-Bench
 
 ### [AutoGen] Enabling Next-Gen LLM Applications via Multi-Agent Chat
 
-Arxiv: [https://arxiv.org/abs/2308.08155](https://arxiv.org/abs/2308.08155) _3 Oct 2023 **Microsoft**_
+Arxiv: [https://arxiv.org/abs/2308.08155](https://arxiv.org/abs/2308.08155) _Aug 2023 **Microsoft**_
 
 AutoGen is an open-source framework that allows developers to build LLM applications via multiple agents that can converse with each other to accomplish tasks. The framework enables:
 
