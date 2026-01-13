@@ -1,5 +1,5 @@
 +++
-title = "LLM Multi-Modal"
+title = "GenAI Multi-Modal"
 weight = 7
 +++
 

@@ -1,5 +1,5 @@
 +++
-title = "LLM Architecture"
+title = "GenAI Architecture"
 weight = 10
 +++
 

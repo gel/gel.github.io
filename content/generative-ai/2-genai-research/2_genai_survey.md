@@ -1,6 +1,6 @@
 +++
-title = "LLM Survey"
-weight = 1
+title = "GenAI Survey"
+weight = 2
 +++
 
 - [A Survey of Reshaping the GenAI Research Landscape](#survey-a-survey-of-reshaping-the-genai-research-landscape)
@@ -27,4 +27,4 @@ Datasets such as Flan (Longpre et al., 2023) and P3 (Sanh et al., 2021).
 
 • Generating outputs using LLMs - (1) manually collected; or (2) expanded based on small handwritten seed instructions using LLMs. Next, the collected instructions are fed to LLMs to obtain outputs. Datasets such as InstructWild (Xue et al., 2023) and Self-Instruct (Wang et al., 2022c) are generated following this approach. For multi-turn conversational IT datasets, we can have large language models self-play different roles (user and AI assistant) to generate message
 
-![Survey](/generative-ai/2-llm-research/llm_1_survey.png)
+![Survey](/generative-ai/2-genai-research/llm_1_survey.png)

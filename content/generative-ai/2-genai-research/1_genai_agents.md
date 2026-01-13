@@ -1,6 +1,6 @@
 +++
-title = "LLM Agents"
-weight = 3
+title = "Agents"
+weight = 1
 +++
 
 ### [SICA] A Self-Improving Coding Agent
@@ -77,6 +77,6 @@ Key Components:
 3. Credit Assignment: Analyzes the impact of actions on future rewards
 4. Multi-Environment Learning: Adapts to various tasks and environments
 
-![RetroFormer Table](/generative-ai/2-llm-research/llm_2_retroformer_table.png)
+![RetroFormer Table](/generative-ai/2-genai-research/llm_2_retroformer_table.png)
 
-![RetroFormer Agent](/generative-ai/2-llm-research/llm_2_retroformer_agent.png)
+![RetroFormer Agent](/generative-ai/2-genai-research/llm_2_retroformer_agent.png)

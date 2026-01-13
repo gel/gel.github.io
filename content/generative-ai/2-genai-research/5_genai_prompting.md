@@ -1,5 +1,5 @@
 +++
-title = "LLM Prompting"
+title = "GenAI Prompting"
 weight = 5
 +++
 

@@ -1,5 +1,5 @@
 +++
-title = "LLM Benchmarks & Evaluations"
+title = "GenAI Benchmarks & Evaluations"
 weight = 6
 +++
 
@@ -49,4 +49,4 @@ Arxiv: [https://arxiv.org/abs/2307.06908](https://arxiv.org/abs/2307.06908) _13 
 
 The key idea is automatically perturbing factual statements taken from the corpus to create a constant number of false variations (hereafter, 3) for each true statement. The LM's FACTOR accuracy on our benchmark is defined as the percentage of examples for which it assigns higher likelihood to the factual completion than to any of the false variations.
 
-![Chain-of-Verification](/generative-ai/2-llm-research/llm_5_benchmark.png)
+![Chain-of-Verification](/generative-ai/2-genai-research/llm_5_benchmark.png)

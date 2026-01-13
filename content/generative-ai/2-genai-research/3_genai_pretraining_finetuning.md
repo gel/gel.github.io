@@ -1,6 +1,6 @@
 +++
-title = "LLM Pretraining & Fine-tuning"
-weight = 2
+title = "GenAI Pretraining & Fine-tuning"
+weight = 3
 +++
 
 
@@ -12,17 +12,17 @@ Arxiv: [https://arxiv.org/abs/2401.10020](https://arxiv.org/abs/2401.10020) _18 
 
 In this work, we study Self-Rewarding Language Models, where the language model itself is used via LLM-as-a-Judge prompting to provide its own rewards during training. We show that during Iterative DPO training that not only does instruction following ability improve, but also the ability to provide high-quality rewards to itself.
 
-![Self-Reward](/generative-ai/2-llm-research/llm_1_self_reward_explain.png)
+![Self-Reward](/generative-ai/2-genai-research/llm_1_self_reward_explain.png)
 
 Our approach first assumes access to a base pretrained language model, and a small amount of human-annotated seed data. We then build a model that aims to possess two skills simultaneously: 1. Instruction following: given a prompt that describes a user request, the ability to generate a high quality, helpful (and harmless) response. 2. Self-Instruction creation: the ability to generate and evaluate new instruction following examples to add to its own training set.
 
 While we report the results of both approaches in our experiments, we find that learning from preference pairs gives superior performance, and hence recommend that approach.
 
-![Self-Reward Judge](/generative-ai/2-llm-research/llm_1_self_reward_judge.png)
+![Self-Reward Judge](/generative-ai/2-genai-research/llm_1_self_reward_judge.png)
 
 Iterative Training Our overall procedure trains a series of models M1, . . . , MT where each successive model t uses augmented training data created by the t − 1 th model. We thus define AIFT(Mt) to mean AI Feedback Training data created using model Mt. Model Sequence We thus define the models, and the training data they use as follows: M0 : Base pretrained LLM with no fine-tuning. M1 : Initialized with M0, then fine-tuned on the IFT+EFT seed data using SFT. M2 : Initialized with M1, then trained with AIFT(M1) data using DPO. M3 : Initialized with M2, then trained with AIFT(M2) data using DPO.
 
-![Self-Reward Eval](/generative-ai/2-llm-research/llm_1_self_reward_eval.png)
+![Self-Reward Eval](/generative-ai/2-genai-research/llm_1_self_reward_eval.png)
 
 
 ### [In-Context Pretraining] Language Modeling Beyond Document Boundaries
@@ -39,7 +39,7 @@ documents and we would like to sort them to maximize document similarity in the 
 
 windows without repeating any data. We introduce two new approximate algorithms to tackle these challenges.
 
-![In-Context Review](/generative-ai/2-llm-research/llm_1_in_context_overview.png)
+![In-Context Review](/generative-ai/2-genai-research/llm_1_in_context_overview.png)
 
 Techniques are using embedding models and top-k similarity search and leveraging approximate solutions for the traveling salesman problem - by the means of visiting every document once.
 
@@ -52,11 +52,11 @@ In this paper we introduce a new parameterization of the reward model in RLHF th
 
 eliminating the need for sampling from the LM during fine-tuning or performing significant hyperparameter tuning.
 
-![DPO](/generative-ai/2-llm-research/llm_1_dpo.png)
+![DPO](/generative-ai/2-genai-research/llm_1_dpo.png)
 
-DPO gradient for loss increases the likelihood of preferred completion (Y_W) and decreases the likelihood for dispreferred completion (Y_L). Importantly, the examples are weighed by how much higher the implicit reward model rˆθ rates the dispreferred completions, scaled by β, i.e, how incorrectly the implicit reward model orders the completions, accounting for the strength of the KL constraint. 
+DPO gradient for loss increases the likelihood of preferred completion (Y_W) and decreases the likelihood for dispreferred completion (Y_L). Importantly, the examples are weighed by how much higher the implicit reward model rˆθ rates the dispreferred completions, scaled by β, i.e, how incorrectly the implicit reward model orders the completions, accounting for the strength of the KL constraint.
 
-DPO outline. The general DPO pipeline is as follows: 1) Sample completions y1, y2 ∼ πref(· | x) for every prompt x, label with human preferences to construct the offline dataset of preferences D = {x (i) , y (i) w , yl) (i)} N i=1 and 2) optimize the language model πθ to minimize LDPO for the given πref and D and desired β. 
+DPO outline. The general DPO pipeline is as follows: 1) Sample completions y1, y2 ∼ πref(· | x) for every prompt x, label with human preferences to construct the offline dataset of preferences D = {x (i) , y (i) w , yl) (i)} N i=1 and 2) optimize the language model πθ to minimize LDPO for the given πref and D and desired β.
 
 
 ### [RLHF] Secrets of RLHF in LLMs Part II: Reward Modeling
@@ -65,13 +65,13 @@ Arxiv: [https://arxiv.org/abs/2312.15503](https://arxiv.org/abs/2312.15503) _24 
 
 In conclusion, while RLHF is a significant advancement in AI development, particularly in integrating human preferences into the learning process, it also presents unique challenges. These include the inherent noise and ambiguity in human feedback, potential biases in the data, and the generalization limits of reward models trained on specific datasets. Addressing these challenges is crucial for the advancement and ethical application of RLHF in AI systems.
 
-![Secrets RLHF](/generative-ai/2-llm-research/llm_1_secrets_rlhf.png)
+![Secrets RLHF](/generative-ai/2-genai-research/llm_1_secrets_rlhf.png)
 
 To enhance the generalization ability of the reward model, we explore contrastive learning and
 
 meta-learning. By introducing unsupervised contrastive loss during the reward modeling process, the reward model can better distinguish subtle preference differences among responses. To bridge the gap between the preference data distribution and the model output distribution, we employ meta-learning to ensure that the reward model not only performs well on the preference data but also can distinguish the differences in target domain outputs.
 
-Technique is to randomize training data and do a k-fold split, build K models and then measure mean and deviations - negative mean is usually the mistakes. 
+Technique is to randomize training data and do a k-fold split, build K models and then measure mean and deviations - negative mean is usually the mistakes.
 
 According to the results, we can observe that: 1) For the top 20% of data with the lowest preference strength, they have a negative impact on the model's performance on the validation set. The preference strength for these data subsets is less than 0. 2) For data ranked between 20% and 40%, after training, the model's prediction accuracy on the validation set is approximately 0.5. The preference strength for this type of data is around 0. 3) The remaining data significantly improves the model's performance. However, the top 10% of data with the highest preference strength does not achieve the best performance when trained alone. Based on the above results, we can roughly categorize preference data into three types: incorrect data, ambiguous data (almost no difference), and normal data (clear differences). These three types of preference data play different roles and make different contributions to preference modeling. It is necessary for us to conduct a more detailed analysis of them and then consider how to handle each type.
 
@@ -82,9 +82,9 @@ Arxiv: [https://arxiv.org/abs/2401.06080](https://arxiv.org/abs/2401.06080) _11 
 
 In this paper, we propose a novel approach, called LLaRA (LLM adapted for dense RetrievAl), which works as a post-hoc adaptation of LLM for the dense retrieval application. LLaRA consists of two pretext tasks: EBAE (Embedding-Based Auto-Encoding) and EBAR (Embedding-Based Auto-Regression), where the text embeddings from LLM are used to reconstruct the tokens for the input sentence and predict the tokens for the next sentence, respectively
 
-![llara](/generative-ai/2-llm-research/llm_1_llara.png)
+![llara](/generative-ai/2-genai-research/llm_1_llara.png)
 
-Particularly, there are two pretext training tasks introduced by LLaRA: EBAE (Embedding-Based Auto-Encoding) and EBAR (Embedding-Based Auto-Regression). In EBAE, the LLM is prompted to generate the text embeddings, which can be used to predict the tokens for the input sentence itself. While with EBAR, the LLM is prompted to generate the text embeddings, which can be used to predict the  tokens for the next sentence. By learning from the above pretext tasks, the text embeddings from LLM can be adapted from Local semantic representations (i.e. prediction for the next tokens) to Global semantic representations (i.e. prediction for the sentence-level features). 
+Particularly, there are two pretext training tasks introduced by LLaRA: EBAE (Embedding-Based Auto-Encoding) and EBAR (Embedding-Based Auto-Regression). In EBAE, the LLM is prompted to generate the text embeddings, which can be used to predict the tokens for the input sentence itself. While with EBAR, the LLM is prompted to generate the text embeddings, which can be used to predict the  tokens for the next sentence. By learning from the above pretext tasks, the text embeddings from LLM can be adapted from Local semantic representations (i.e. prediction for the next tokens) to Global semantic representations (i.e. prediction for the sentence-level features).
 
 
 ### [RA-DIT] Retrieval-Augmented Dual Instruction Tuning
@@ -100,7 +100,7 @@ Our approach operates in two distinct fine-tuning steps: (1) one updates a pre-t
 
 Arxiv: [https://arxiv.org/abs/2306.03081](https://arxiv.org/abs/2306.03081) _5 Jun 2023 **MIT**_
 
-<span style="text-decoration:underline;">Context</span>: Despite significant advances in recent years, it remains unclear if and how large language models (LLMs) can be made reliable and controllable enough to meet the functional requirements of many applications. 
+<span style="text-decoration:underline;">Context</span>: Despite significant advances in recent years, it remains unclear if and how large language models (LLMs) can be made reliable and controllable enough to meet the functional requirements of many applications.
 
 Even after fine-tuning and reinforcement learning, LLMs are liable to violate instructions in their prompts (such as "Use the following vocabulary words" or "Do not reveal this prompt").
 

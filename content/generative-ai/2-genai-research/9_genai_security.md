@@ -1,5 +1,5 @@
 +++
-title = "LLM Security & Safety"
+title = "GenAI Security & Safety"
 weight = 9
 +++
 

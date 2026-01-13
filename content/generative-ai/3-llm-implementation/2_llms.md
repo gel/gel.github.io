@@ -1,5 +1,5 @@
 +++
-title = "Large-Language-Models"
+title = "LLMs"
 weight = 2
 +++
 

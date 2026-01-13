@@ -1,5 +1,5 @@
 +++
-title = "LLM Optimization"
+title = "GenAI Optimization"
 weight = 4
 +++
 
