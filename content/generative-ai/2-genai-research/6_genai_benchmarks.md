@@ -7,6 +7,20 @@ weight = 6
 
 Arxiv: [https://arxiv.org/abs/2410.12784](https://arxiv.org/abs/2410.12784) _16 Oct 2024_
 
+```mermaid
+flowchart TD
+    subgraph Principles["Judge Evaluation Hierarchy"]
+        P1["📝 Follow Instructions"] --> P2["✅ Factual/Logical Correctness"]
+        P2 --> P3["🎨 Style Preferences"]
+    end
+
+    Responses[Response Pairs] --> Judge{LLM Judge}
+    Judge --> |Evaluate| Score[Preference Score]
+    Score --> Benchmark{Compare to\nGround Truth}
+
+    style P2 fill:#c8e6c9
+```
+
 The key problem: Evaluating the reliability of LLM-based judges
 The motivation: As LLMs get more advanced, we need better ways to evaluate them
 The main contribution: JudgeBench, a new benchmark focused on factual/logical correctness
@@ -24,6 +38,22 @@ Is verifying a problem's solution easier than solving the problem itself? Intuit
 
 Arxiv: [https://arxiv.org/abs/2405.01535](https://arxiv.org/abs/2405.01535) _2 May 2024_
 
+```mermaid
+flowchart LR
+    subgraph Training["Training Approaches"]
+        Single["Single-Format\nTraining"]
+        Joint["Joint\nTraining"]
+        Merge["Weight\nMerging"]
+    end
+
+    Base[Base Model] --> Training
+    Training --> Eval{Prometheus 2}
+    Eval --> DA["Direct\nAssessment"]
+    Eval --> PR["Pairwise\nRanking"]
+
+    style Eval fill:#e1f5fe
+```
+
 We introduce PROMETHEUS 2 (7B & 8x7B), state-of-the-art open evaluator LMs that score high correlations with both human evaluators and proprietary LM-based judges on both direct assessment and pairwise ranking.
 
 Training Approaches:
@@ -35,17 +65,72 @@ Training Approaches:
 
 Arxiv: [https://arxiv.org/abs/2403.15796](https://arxiv.org/abs/2403.15796) _30 Mar 2024 **Zhipu AI**_
 
+```mermaid
+flowchart LR
+    subgraph Old["Traditional View"]
+        Size[Model Size] --> Perf1[Performance]
+        Compute[Training Compute] --> Perf1
+    end
+
+    subgraph New["Loss Perspective"]
+        Loss[Pre-training Loss] --> |Below Threshold| Emerge["✨ Emergent\nAbilities"]
+        Loss --> |Above Threshold| Random["Random\nGuessing"]
+    end
+
+    style New fill:#fff3e0
+    style Emerge fill:#c8e6c9
+```
+
 Our paper proposes a new definition of emergent abilities of language models from the perspective of pre-training loss. Empirical results show that the pre-training loss is a better metric to represent the scaling effect of language models than model size or training compute. The performance of emergent abilities exhibits emergent increase when the pre-training loss falls below a certain threshold, even when evaluated with continuous metrics.
 
 ### [PoLL] Replacing Judges with Juries: Evaluating with a Panel of Models
 
 Arxiv: [https://arxiv.org/abs/2404.18796](https://arxiv.org/abs/2404.18796) _29 Apr 2024 **Cohere**_
 
+```mermaid
+flowchart LR
+    subgraph Single["Single Judge (GPT-4)"]
+        Response --> GPT4{GPT-4}
+        GPT4 --> Score1[Score]
+    end
+
+    subgraph Panel["Panel of LLMs (PoLL)"]
+        Response2[Response] --> M1[Model A]
+        Response2 --> M2[Model B]
+        Response2 --> M3[Model C]
+        M1 --> Agg((Σ))
+        M2 --> Agg
+        M3 --> Agg
+        Agg --> Score2["Aggregated\nScore"]
+    end
+
+    style Panel fill:#e8f5e9
+```
+
 Evaluations most commonly use a single large model like GPT4. While this method has grown in popularity, it is costly, has been shown to introduce intramodal bias, and in this work, we find that very large models are often unnecessary. We propose instead to evaluate models using a Panel of LLm evaluators (PoLL).
 
 ### [Benchmark] Generating Benchmarks for Factuality Evaluation of Language Models
 
 Arxiv: [https://arxiv.org/abs/2307.06908](https://arxiv.org/abs/2307.06908) _13 Jul 2023 **AI21 Labs**_
+
+```mermaid
+flowchart TD
+    Corpus[Factual Corpus] --> Extract[Extract Facts]
+    Extract --> True["✅ True Statement"]
+    True --> Perturb[Perturb]
+    Perturb --> F1["❌ False 1"]
+    Perturb --> F2["❌ False 2"]
+    Perturb --> F3["❌ False 3"]
+
+    True --> Eval{LLM\nAssigns\nLikelihood}
+    F1 --> Eval
+    F2 --> Eval
+    F3 --> Eval
+    Eval --> |True > All False?| Score[FACTOR Score]
+
+    style True fill:#c8e6c9
+    style Score fill:#FFD700
+```
 
 The key idea is automatically perturbing factual statements taken from the corpus to create a constant number of false variations (hereafter, 3) for each true statement. The LM's FACTOR accuracy on our benchmark is defined as the percentage of examples for which it assigns higher likelihood to the factual completion than to any of the false variations.
 

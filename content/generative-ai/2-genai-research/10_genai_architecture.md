@@ -38,6 +38,19 @@ Limitations:
 
 Arxiv: [https://arxiv.org/abs/2311.08526](https://arxiv.org/abs/2311.08526) _14 Nov 2023_
 
+```mermaid
+flowchart LR
+    Text[Input Text] --> Enc[Bidirectional\nEncoder]
+    Types["Entity Types\n(any types)"] --> Enc
+    Enc --> Spans[Span\nRepresentations]
+    Enc --> Entities[Entity\nRepresentations]
+    Spans --> Match{Match in\nLatent Space}
+    Entities --> Match
+    Match --> NER["Named Entities\n(Parallel Extraction)"]
+
+    style NER fill:#c8e6c9
+```
+
 Key Points:
 
 Problem & Solution:
@@ -68,6 +81,23 @@ Limitations:
 
 Arxiv: [https://arxiv.org/abs/2209.11055](https://arxiv.org/abs/2209.11055) _22 Sep 2022_
 
+```mermaid
+flowchart LR
+    subgraph Stage1["Stage 1: Siamese Fine-tuning"]
+        Pairs["Text Pairs\n(+/-)"]
+        Pairs --> ST[Sentence\nTransformer]
+        ST --> Emb[Better\nEmbeddings]
+    end
+
+    subgraph Stage2["Stage 2: Classification"]
+        Emb --> LR[Logistic\nRegression]
+        LR --> Class[Classification]
+    end
+
+    style Stage1 fill:#e1f5fe
+    style Stage2 fill:#fff3e0
+```
+
 SetFit is a two-stage framework for few-shot learning:
 
 1. Siamese Fine-tuning Stage:
@@ -85,4 +115,4 @@ Advantages:
 - Much smaller parameter count than PEFT/PET
 - Faster training time
 - Works well in multilingual settings
-- Comparable accuracy to larger models 
+- Comparable accuracy to larger models

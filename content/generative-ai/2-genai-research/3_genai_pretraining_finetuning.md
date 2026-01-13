@@ -48,6 +48,22 @@ Techniques are using embedding models and top-k similarity search and leveraging
 
 Arxiv: [https://arxiv.org/abs/2305.18290](https://arxiv.org/abs/2305.18290) _May 2023 **Stanford**_
 
+```mermaid
+flowchart LR
+    subgraph RLHF["Traditional RLHF"]
+        Data1[Preference Data] --> RM[Train Reward Model]
+        RM --> RL[RL Fine-tuning]
+        RL --> Model1[Aligned Model]
+    end
+
+    subgraph DPO["Direct Preference Optimization"]
+        Data2[Preference Data] --> Loss["Classification Loss\n(Binary Cross-Entropy)"]
+        Loss --> Model2[Aligned Model]
+    end
+
+    style DPO fill:#e8f5e9
+```
+
 In this paper we introduce a new parameterization of the reward model in RLHF that enables extraction of the corresponding optimal policy in closed form, allowing us to solve the standard RLHF problem with only a simple classification loss. The resulting algorithm, which we call Direct Preference Optimization (DPO), is stable, performant, and computationally lightweight,
 
 eliminating the need for sampling from the LM during fine-tuning or performing significant hyperparameter tuning.
@@ -91,6 +107,23 @@ Particularly, there are two pretext training tasks introduced by LLaRA: EBAE (Em
 
 Arxiv: [https://arxiv.org/abs/2310.01352](https://arxiv.org/abs/2310.01352) _2 Oct 2023 **META**_
 
+```mermaid
+flowchart TD
+    subgraph Step1["Step 1: LM Fine-tuning"]
+        LM[Pre-trained LM] --> FT1[Fine-tune to use\nretrieved context]
+    end
+
+    subgraph Step2["Step 2: Retriever Fine-tuning"]
+        Ret[Retriever] --> FT2[Update to return\nLM-preferred results]
+    end
+
+    FT1 <--> FT2
+    FT1 --> RALM[Retrieval-Augmented LM]
+    FT2 --> RALM
+
+    style RALM fill:#FFD700
+```
+
 Retrieval-augmented language models (RALMs) improve performance by accessing long-tail and up-to-date knowledge from external data stores, but are challenging to build. Existing approaches require either expensive retrieval-specific modifications to LM pre-training or use post-hoc integration of the data store that leads to suboptimal performance
 
 Our approach operates in two distinct fine-tuning steps: (1) one updates a pre-trained LM to better use retrieved information, while (2) the other updates the retriever to return more relevant results, as preferred by the LM
@@ -109,6 +142,24 @@ These difficulties highlight the need for methods beyond prompting and fine-tuni
 ### [TokenFormer] Rethinking Transformer Scaling with Tokenized Model Parameters
 
 Arxiv: [https://arxiv.org/abs/2410.23168](https://arxiv.org/abs/2410.23168) _30 Oct 2024_
+
+```mermaid
+flowchart TD
+    subgraph Traditional["Traditional Transformer"]
+        In1[Input Tokens] --> Proj[Fixed Linear Projections]
+        Proj --> Out1[Output]
+    end
+
+    subgraph TokenFormer["TokenFormer"]
+        In2[Input Tokens] --> TTA[Token-Token\nAttention]
+        Params[Parameter Tokens] --> TPA[Token-Parameter\nAttention]
+        In2 --> TPA
+        TTA --> Out2[Output]
+        TPA --> Out2
+    end
+
+    style TokenFormer fill:#e1f5fe
+```
 
 Current transformer models are hard to scale up because they use fixed linear projections for processing inputs. When you want to make the model bigger (e.g. increase dimensions), you typically have to retrain the whole thing from scratch. This is very computationally expensive and inefficient.
 
@@ -139,6 +190,16 @@ Given a synthetic unlabeled input for the target task, we condition the model on
 
 Arxiv: [https://arxiv.org/abs/2404.12253](https://arxiv.org/abs/2404.12253) _18 Apr 2024_
 
+```mermaid
+flowchart LR
+    Imagine["🎯 Imagination\n(Data Synthesizer)"] --> Search["🔍 Search\n(Optimized MCTS)"]
+    Search --> Critic["📝 Criticize\n(Trio of Critics)"]
+    Critic --> |Feedback| Search
+    Search --> Output["Improved\nLLM Output"]
+
+    style Output fill:#90EE90
+```
+
 ALPHALLM is an imagination-searching-criticizing framework designed for the self-improvement of LLMs without the necessity of additional annotations. At its heart is the integration of MCTS with LLMs. To tackle the inherent challenges associated with this integration, including data scarcity, the vastness of search spaces, and the subjective nature of feedback in language tasks, it introduces:
 - A data synthesizer for strategic prompt synthesis
 - An optimized MCTS tailored for efficient search in language tasks
@@ -149,6 +210,27 @@ Experimental findings on mathematical reasoning tasks reveal that ALPHALLM signi
 ### [Multi-Token Prediction] Better & Faster LLMs via Multi-token Prediction
 
 Arxiv: [https://arxiv.org/abs/2404.19737](https://arxiv.org/abs/2404.19737) _30 Apr 2024 **Meta AI**_
+
+```mermaid
+flowchart LR
+    subgraph Standard["Standard (1 token)"]
+        H1[Hidden State] --> Head1[Head]
+        Head1 --> T1["Token t+1"]
+    end
+
+    subgraph Multi["Multi-Token (n tokens)"]
+        H2[Shared Trunk] --> Head2a[Head 1]
+        H2 --> Head2b[Head 2]
+        H2 --> Head2c[Head 3]
+        H2 --> Head2d[Head 4]
+        Head2a --> T2a["t+1"]
+        Head2b --> T2b["t+2"]
+        Head2c --> T2c["t+3"]
+        Head2d --> T2d["t+4"]
+    end
+
+    style Multi fill:#fff3e0
+```
 
 Training language models to predict multiple future tokens at once results in higher sample efficiency. A key fix for memory problems is to not materialize all logits and keep shared trunk and sequential pass on heads.
 
@@ -161,6 +243,22 @@ Quiet-STaR is a generalization of STaR in which LMs learn to generate rationales
 ### [GaLore] Memory-Efficient LLM Training by Gradient Low-Rank Projection
 
 Arxiv: [https://arxiv.org/abs/2403.03507](https://arxiv.org/abs/2403.03507) _6 Mar 2024_
+
+```mermaid
+flowchart LR
+    subgraph LoRA["LoRA"]
+        W1[Frozen Weights] --> Plus1((+))
+        LR1[Low-Rank\nAdapters] --> Plus1
+    end
+
+    subgraph GaLore["GaLore"]
+        G[Gradient G] --> Proj[Project to\nLow-Rank]
+        Proj --> Opt[Optimizer\n(small core)]
+        Opt --> Update[Full Weight\nUpdate]
+    end
+
+    style GaLore fill:#e8f5e9
+```
 
 Gradient Low-Rank Projection (GaLore) is a training strategy that allows full-parameter learning but is more memory-efficient than common low-rank adaptation methods like LoRA. GaLore is closely related to projected gradient descent (PGD), but with key differences:
 

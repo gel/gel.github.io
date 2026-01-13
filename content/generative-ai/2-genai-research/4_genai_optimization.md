@@ -7,6 +7,18 @@ weight = 4
 
 Arxiv: [https://arxiv.org/abs/2404.02258](https://arxiv.org/abs/2404.02258) _2 Apr 2024 **DeepMind**_
 
+```mermaid
+flowchart TD
+    Input[Input Tokens] --> Router{Router}
+    Router --> |Selected| Compute["Full Computation\n(Transformer Block)"]
+    Router --> |Skipped| Skip["Skip\n(Residual Only)"]
+    Compute --> Output[Output]
+    Skip --> Output
+
+    style Skip fill:#ffcdd2
+    style Compute fill:#c8e6c9
+```
+
 The benefit of the approach is the ability to set a compute budget and then based on it enforce limits - for example: enforce how many tokens can participate in block computations. Therefore, in order to avoid performance degradation the challenge becomes how to choose the right tokens for processing.
 
 ### [Offload-MoE] Fast Inference of MoE Language Models with Offloading
@@ -49,6 +61,20 @@ We investigated existing approaches to relative position encoding and found they
 
 Arxiv: [https://arxiv.org/abs/2211.17192](https://arxiv.org/abs/2211.17192) _30 Nov 2022 **Google**_
 
+```mermaid
+flowchart LR
+    subgraph Draft["Draft Model (Small)"]
+        D1["t1"] --> D2["t2"] --> D3["t3"] --> D4["t4"]
+    end
+
+    D4 --> Verify{"Target Model\n(Large)"}
+    Verify --> |Accept| Out["Output: t1,t2,t3,t4"]
+    Verify --> |Reject t3,t4| Redo["Redo from t3"]
+
+    style Draft fill:#fff3e0
+    style Out fill:#c8e6c9
+```
+
 Key Observations:
 - Some inference steps are "harder" and some are "easier"
 - Inference from large models is often bottlenecked on memory bandwidth and communication
@@ -71,6 +97,29 @@ Arxiv: [https://arxiv.org/abs/2305.13245](https://arxiv.org/abs/2305.13245) _22 
 
 Arxiv: [https://arxiv.org/abs/1911.02150](https://arxiv.org/abs/1911.02150) _6 Nov 2019 **Google**_
 
+```mermaid
+flowchart TD
+    subgraph MHA["Multi-Head Attention"]
+        Q1[Q] --> H1[Head 1]
+        K1[K1] --> H1
+        V1[V1] --> H1
+        Q2[Q] --> H2[Head 2]
+        K2[K2] --> H2
+        V2[V2] --> H2
+    end
+
+    subgraph MQA["Multi-Query Attention"]
+        Q3[Q] --> H3[Head 1]
+        Q4[Q] --> H4[Head 2]
+        KS[K Shared] --> H3
+        KS --> H4
+        VS[V Shared] --> H3
+        VS --> H4
+    end
+
+    style MQA fill:#e8f5e9
+```
+
 Multi-head attention layers are a powerful alternative to RNNs for moving information across and between sequences. While training is generally fast and simple due to parallelizability, incremental inference is often slow due to memory-bandwidth costs of loading large "keys" and "values" tensors.
 
 Solution: Multi-query attention
@@ -82,6 +131,21 @@ Solution: Multi-query attention
 ### [MoE] Outrageously Large NN: The Sparsely-Gated MoE Layer
 
 Arxiv: [https://arxiv.org/abs/1701.06538](https://arxiv.org/abs/1701.06538) _23 Jan 2017 **Google**_
+
+```mermaid
+flowchart LR
+    Input[Input] --> Gate{Gating\nNetwork}
+    Gate --> |w1| E1[Expert 1]
+    Gate --> |w2| E2[Expert 2]
+    Gate --> |0| E3[Expert 3...]
+    Gate --> |0| EN[Expert N]
+    E1 --> Combine((Σ))
+    E2 --> Combine
+    Combine --> Output[Output]
+
+    style E3 fill:#eeeeee
+    style EN fill:#eeeeee
+```
 
 Key Points:
 - Neural network capacity is limited by number of parameters

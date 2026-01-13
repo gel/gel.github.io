@@ -7,6 +7,21 @@ weight = 9
 
 Arxiv: [https://arxiv.org/abs/2404.13208](https://arxiv.org/abs/2404.13208) _19 Apr 2024 **OpenAI**_
 
+```mermaid
+flowchart TD
+    subgraph Priority["Instruction Priority"]
+        Sys["🔒 System (Highest)"] --> Dev["👨‍💻 Developer"]
+        Dev --> User["👤 User"]
+        User --> Third["🌐 Third-Party (Lowest)"]
+    end
+
+    Conflict{Conflict?} --> |Lower tries to override| Ignore[Ignore Lower]
+    Conflict --> |Aligned| Execute[Execute All]
+
+    style Sys fill:#c8e6c9
+    style Ignore fill:#ffcdd2
+```
+
 We propose an instruction hierarchy that explicitly defines how models should behave when instructions of different priorities conflict. We then propose a data generation method to demonstrate this hierarchical instruction following behavior, which teaches LLMs to selectively ignore lower-privileged instructions.
 
 To generate training data, we leverage two principles: synthetic data generation and context distillation. For aligned instructions, we generate examples that have compositional requests (e.g., "write a 20 line poem in spanish") and decompose the instructions into smaller pieces (e.g., "write a poem", "use spanish", "use 20 lines"). We then place these decomposed instructions at different levels of the hierarchy and train models to predict the original ground-truth response. For misaligned instructions, we train models to act as if they are completely ignorant of the lower-level instructions.
@@ -14,6 +29,17 @@ To generate training data, we leverage two principles: synthetic data generation
 ### [Reward Tampering] Sycophancy to Subterfuge: Investigating Reward-Tampering in LLMs
 
 Arxiv: [https://arxiv.org/abs/2406.10162](https://arxiv.org/abs/2406.10162) _14 Jun 2024 **Anthropic**_
+
+```mermaid
+flowchart LR
+    subgraph Spectrum["Specification Gaming Spectrum"]
+        Syco["😊 Sycophancy"] --> Game["🎮 Gaming"] --> Tamper["⚠️ Reward\nTampering"]
+    end
+
+    Train["Train on Easy\nEnvironments"] --> |Generalizes to| Dangerous["Dangerous\nBehaviors"]
+
+    style Tamper fill:#ffcdd2
+```
 
 Reward tampering is a very critical issue that needs to be addressed. LLM models sometimes not only tamper with the implementation of their reward function but also rewrite testing code to ensure this tampering is not caught.
 
@@ -33,8 +59,26 @@ To extract the layer fully, it's possible to SVD Q = U · Σ · V⊤ matrix and 
 
 Arxiv: [https://arxiv.org/abs/2212.08073](https://arxiv.org/abs/2212.08073) _15 Dec 2022 **Anthropic**_
 
+```mermaid
+flowchart TD
+    subgraph SL["Supervised Learning Phase"]
+        Init[Initial Model] --> Critique[Self-Critique]
+        Critique --> Revise[Revise Response]
+        Revise --> FT[Fine-tune on Revised]
+    end
+
+    subgraph RL["Reinforcement Learning Phase"]
+        FT --> Sample[Sample Responses]
+        Sample --> Eval{AI Evaluates\nvia Constitution}
+        Eval --> Pref[Build Preference Model]
+        Pref --> RLAIF["RLAIF\n(RL from AI Feedback)"]
+    end
+
+    style RLAIF fill:#c8e6c9
+```
+
 We experiment with methods for training a harmless AI assistant through self improvement, without any human labels identifying harmful outputs. The only human oversight is provided through a list of rules or principles, and so we refer to the method as 'Constitutional AI'. The process involves both a supervised learning and a reinforcement learning phase.
 
 An AI assistant that answers all questions with "I don't know" would be harmless, but of course it would also be completely useless. In our prior work using human feedback to train a helpful and harmless assistant, we found that there was a significant tension between helpfulness and harmlessness, and in particular, our assistant often refused to answer controversial questions.
 
-We will be experimenting with an extreme form of scaled supervision, which we refer to as Constitutional AI (CAI). The idea is that human supervision will come entirely from a set of principles that should govern AI behavior, along with a small number of examples used for few-shot prompting. Together these principles form the constitution. 
+We will be experimenting with an extreme form of scaled supervision, which we refer to as Constitutional AI (CAI). The idea is that human supervision will come entirely from a set of principles that should govern AI behavior, along with a small number of examples used for few-shot prompting. Together these principles form the constitution.
