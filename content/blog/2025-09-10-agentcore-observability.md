@@ -9,7 +9,7 @@ I'm excited to share another collaboration with AWS on a recent blog post: [Buil
 
 A key challenge when building and scaling AI agents is the complexity of setting up and managing the underlying infrastructure for observability. Traditionally, this has been a heavy lift for developers, requiring them to configure and maintain separate systems for monitoring, logging, and tracing. This often becomes an afterthought, which is a mistake when building systems that need to be trustworthy and transparent.
 
-The post introduces Amazon Bedrock AgentCore Observability, a solution designed to address this very problem. It provides a comprehensive, out-of-the-box monitoring solution that works across different agent frameworks and foundation models. This is a significant step forward because it abstracts away the need for developers to build and manage complex observability infrastructure themselves.
+The post introduces Amazon Bedrock AgentCore Observability, a solution designed to address this very problem. It provides a ready-to-use monitoring solution that works across different agent frameworks and foundation models. This is a significant step forward because it abstracts away the need for developers to build and manage complex observability infrastructure themselves.
 
 With AgentCore Observability, you get:
 

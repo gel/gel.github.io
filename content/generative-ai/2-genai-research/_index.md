@@ -7,7 +7,7 @@ insert_anchor_links = "right"
 
 ## A Curated Collection of Generative AI Research & Tools
 
-Welcome to a comprehensive resource for Generative AI—from practical development tools to cutting-edge research papers. This section covers:
+Welcome to a resource for Generative AI: from practical development tools to cutting-edge research papers. This section covers:
 
 - **GenAI Agents Environment**: CLI agents, AI editors, MCP servers, and tools for your development workflow
 - **Agents**: Research on autonomous AI agents and multi-agent systems

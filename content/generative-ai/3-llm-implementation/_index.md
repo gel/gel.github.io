@@ -9,7 +9,7 @@ In this section we will explore both datasets and LLMs implementation and exampl
 
 ## Datasets and Fine-Tuning: The Building Blocks of Instruction-Tuned Large Language Models
 
-Welcome to the comprehensive guide on the datasets and fine-tuning processes that are pivotal in crafting instruction-tuned Large Language Models (LLMs). This section serves as an essential resource for researchers, practitioners, and AI enthusiasts who are delving into the specifics of instruction tuning and its applications in LLMs.
+Welcome to the guide on datasets and fine-tuning processes for instruction-tuned Large Language Models (LLMs). This section is a resource for understanding instruction tuning and its applications.
 
 We will explore a variety of datasets specifically curated to train and evaluate instruction-tuned models, outline the methods and practices that have defined the field, and showcase domain-specific applications that bring out the versatility of these AI powerhouses.
 

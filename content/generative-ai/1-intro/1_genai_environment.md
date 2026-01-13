@@ -5,7 +5,7 @@ weight = 1
 
 *Last updated: January 2026*
 
-A comprehensive guide to the modern GenAI development ecosystem—CLI agents, AI-powered editors, MCP servers, and specialized tools for research and creation.
+A guide to the modern GenAI development ecosystem: CLI agents, AI-powered editors, MCP servers, and specialized tools for research and creation.
 
 ---
 
@@ -15,7 +15,7 @@ Command-line AI coding agents that integrate directly into your terminal workflo
 
 | Agent | Provider | Free Tier | Paid Plans | Best For |
 |-------|----------|-----------|------------|----------|
-| **Claude Code** | Anthropic | ❌ None | Pro $20/mo, Max $100-200/mo | Went viral—full-featured coding agent |
+| **Claude Code** | Anthropic | ❌ None | Pro $20/mo, Max $100-200/mo | The viral, full-featured coding agent |
 | **Gemini CLI** | Google | ✅ **1M tokens/min**, 1.5k req/day | Flash $0.10/M, Pro $1.25/M (higher limits with AI Pro) | Best free tier value |
 | **OpenAI Codex** | OpenAI | ❌ None | Plus $20/mo, Pro $200/mo | ChatGPT ecosystem integration |
 | **Kiro CLI (Q-CLI)** | AWS | ✅ 50 vibe requests/mo | Pro $20/mo, Power $200/mo | Spec-driven workflows |
@@ -23,9 +23,9 @@ Command-line AI coding agents that integrate directly into your terminal workflo
 
 ### Recommendation
 
-> **Best Free Experience:** Switch between **Gemini CLI** and **OpenCode** depending on workload—Gemini for the generous free tier, OpenCode for control.
+> **Best Free Experience:** Switch between **Gemini CLI** and **OpenCode** depending on workload. Gemini for the generous free tier, OpenCode for control.
 >
-> **Best Paid Experience:** **Claude Code** with Pro ($20/mo)—went viral for a reason.
+> **Best Paid Experience:** **Claude Code** with Pro ($20/mo).
 
 ---
 
@@ -42,7 +42,7 @@ Modern editors with deep AI integration for autocomplete, chat, and agentic codi
 
 ### Recommendation
 
-> **Top Pick:** **Antigravity**—generous free tokens and excellent agentic workflow support.
+> **Top Pick:** **Antigravity**. Generous free tokens and excellent agentic workflow support.
 >
 > **Alternative:** **Cursor** Pro at $20/mo with flexible credit pool for model choice.
 
@@ -50,7 +50,7 @@ Modern editors with deep AI integration for autocomplete, chat, and agentic codi
 
 ## 🔌 Recommended MCP Servers
 
-Model Context Protocol (MCP) servers extend your AI agents with external capabilities. A key benefit: **same MCP config works across all environments**—switch agents/editors without reconfiguring.
+Model Context Protocol (MCP) servers extend your AI agents with external capabilities. A key benefit: **same MCP config works across all environments**. You can switch agents/editors without reconfiguring.
 
 | MCP Server | Purpose | Link |
 |------------|---------|------|
@@ -89,4 +89,4 @@ Model Context Protocol (MCP) servers extend your AI agents with external capabil
 
 ## My Personal Setup
 
-I choose tools based on **ROI** and continuously compare across options. Key principle: don't get locked into one tool—keep evaluating as the space evolves rapidly.
+I choose tools based on **ROI** and continuously compare across options. Key principle: don't get locked into one tool. Keep evaluating as the space evolves rapidly.

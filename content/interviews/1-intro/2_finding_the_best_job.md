@@ -15,7 +15,7 @@ To discover appealing roles, first ensure you have sufficient options to evaluat
 
 - Scanning your existing professional connections and employer to identify where people in your field are getting hired.
 
-- Researching the job market comprehensively to understand salary ranges, in-demand skills, company cultures, etc. This provides helpful context.
+- Researching the job market thoroughly to understand salary ranges, in-demand skills, company cultures, etc. This provides helpful context.
 
 - Customizing your resume and cover letters to align with each potential job's requirements.
 
