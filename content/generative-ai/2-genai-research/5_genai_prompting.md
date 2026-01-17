@@ -53,9 +53,9 @@ flowchart TD
     T1a --> |Search| Sol1["Solution ★"]
     T2b --> Sol2[Solution]
 
-    style T1a fill:#90EE90
-    style T2b fill:#90EE90
-    style Sol1 fill:#FFD700
+    style T1a fill:#90EE90,color:#000
+    style T2b fill:#90EE90,color:#000
+    style Sol1 fill:#FFD700,color:#000
 ```
 
 Key Features:
@@ -84,7 +84,7 @@ flowchart LR
         S3 --> A2[Answer]
     end
 
-    style COT fill:#e1f5fe
+    style COT fill:#e1f5fe,color:#000
 ```
 
 Limitations:
@@ -111,8 +111,8 @@ flowchart TD
 
     Implement --> Instance
 
-    style Stage1 fill:#fff3e0
-    style Stage2 fill:#e8f5e9
+    style Stage1 fill:#fff3e0,color:#000
+    style Stage2 fill:#e8f5e9,color:#000
 ```
 
 Two-Stage Process:
@@ -136,7 +136,7 @@ flowchart TD
     Improve --> Gen
     Eval --> |No improvement| End[Final Optimized Prompt]
 
-    style End fill:#90EE90
+    style End fill:#90EE90,color:#000
 ```
 
 Process:
@@ -169,7 +169,7 @@ flowchart LR
     Shuffle --> Verify[Label\nVerification]
     Verify --> A["Answer\n(90%+ accuracy)"]
 
-    style A fill:#FFD700
+    style A fill:#FFD700,color:#000
 ```
 
 Key Features:
@@ -195,7 +195,7 @@ flowchart LR
         ICL --> Aligned2[Aligned LLM]
     end
 
-    style URIAL fill:#e8f5e9
+    style URIAL fill:#e8f5e9,color:#000
 ```
 
 Key Points:
@@ -222,7 +222,7 @@ flowchart TD
     A2 --> Final
     A3 --> Final
 
-    style Final fill:#90EE90
+    style Final fill:#90EE90,color:#000
 ```
 
 Process:

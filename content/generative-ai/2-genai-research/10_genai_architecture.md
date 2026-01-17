@@ -48,7 +48,7 @@ flowchart LR
     Entities --> Match
     Match --> NER["Named Entities\n(Parallel Extraction)"]
 
-    style NER fill:#c8e6c9
+    style NER fill:#c8e6c9,color:#000
 ```
 
 Key Points:
@@ -94,8 +94,8 @@ flowchart LR
         LR --> Class[Classification]
     end
 
-    style Stage1 fill:#e1f5fe
-    style Stage2 fill:#fff3e0
+    style Stage1 fill:#e1f5fe,color:#000
+    style Stage2 fill:#fff3e0,color:#000
 ```
 
 SetFit is a two-stage framework for few-shot learning:

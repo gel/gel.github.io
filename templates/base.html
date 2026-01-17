@@ -161,33 +161,53 @@
   <script type="module">
     import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
 
-    const theme = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
     mermaid.initialize({
       startOnLoad: false,
-      theme: theme,
+      theme: getTheme(),
       securityLevel: "loose",
       fontFamily: "inherit"
     });
 
-    async function renderMermaid() {
+    async function initMermaid() {
       const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
       for (const block of codeBlocks) {
         const pre = block.parentElement;
+        const code = block.textContent;
         const div = document.createElement("div");
         div.className = "mermaid";
-        div.textContent = block.textContent;
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
         pre.replaceWith(div);
       }
-      if (codeBlocks.length > 0) {
-        await mermaid.run();
-      }
+      await renderMermaid();
     }
 
-    document.addEventListener("DOMContentLoaded", renderMermaid);
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
 
-    window.addEventListener("themeChanged", async (e) => {
-      const newTheme = e.detail.theme === "dark" ? "dark" : "default";
-      mermaid.initialize({ theme: newTheme });
+      const currentTheme = getTheme();
+      mermaid.initialize({ theme: currentTheme });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
     });
   </script>
 </head>

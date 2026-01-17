@@ -330,9 +330,9 @@ graph LR
         G3 --> D1[3]
     end
 
-    style G1 fill:#bbf,stroke:#333
-    style G2 fill:#bbf,stroke:#333
-    style G3 fill:#bbf,stroke:#333
+    style G1 fill:#bbf,stroke:#333,color:#000
+    style G2 fill:#bbf,stroke:#333,color:#000
+    style G3 fill:#bbf,stroke:#333,color:#000
 ```
 
 **Solution**

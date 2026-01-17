@@ -71,3 +71,36 @@ Context is your most scarce resource. Treating it inefficiently leads to "lost i
 *   **Context Compaction is Critical:** Never dump entire raw files if you only need signatures. Use tools that "compact" code (stripping implementations, keeping interfaces) before adding to context.
 *   **Token Awareness:** Always track your `Used` vs `Remaining` tokens for every interaction. If you are 80% full, performance degrades.
 *   **Semantic Search over Grep:** Don't let agents blindly `grep`. Use tools with **LSP (Language Server Protocol)** awareness or **Semantic Search** (like Cursor's codebase indexing). Agents need to follow "Go to Definition" and "Find References" chains to understand code, just like you do.
+
+---
+
+## 🔁 Trick 4: The "Ralph Wiggum" Loop
+
+Named after the Simpsons character known for persistence (and occasionally accidental genius), the **Ralph Wiggum Loop** is a brute-force yet highly effective technique for autonomous agents.
+
+### The Context
+Currently, many LLM providers offer "Unlimited" or high-tier plans where they are effectively subsidizing the compute costs (burning money) to gain market share. This creates an opportunity to trade *compute time* for *human time*.
+
+### The Trick
+Instead of asking for a feature once and hoping it works, you set up a loop where the agent:
+1.  Attempts to implement a feature.
+2.  Runs a **strict verification suite** (tests, types, linting).
+3.  If it fails, it reads the errors, adjusts, and tries again.
+4.  It repeats this loop until success or a timeout.
+
+This turns "probabilistic" generation into "deterministic" output, provided your verification specification (your tests) is solid.
+
+```mermaid
+graph TD
+    A["Start: Feature Request"] --> B["Agent Implements Feature"]
+    B --> C{"Run Verification<br/>(Tests/Lint/Build)"}
+    C -->|Fail| D["Analyze Errors"]
+    D --> B
+    C -->|Pass| E["Success: Commit & Exit"]
+    C -->|Timeout/Max Retries| F["Failure: Request Human Help"]
+    style B fill:#f9f,stroke:#333,stroke-width:2px,color:#000
+    style C fill:#bbf,stroke:#333,stroke-width:2px,color:#000
+```
+
+### Real-world Example
+I was able to build a live coding WebLLM feature using this technique.

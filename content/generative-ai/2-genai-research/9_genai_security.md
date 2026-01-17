@@ -18,8 +18,8 @@ flowchart TD
     Conflict{Conflict?} --> |Lower tries to override| Ignore[Ignore Lower]
     Conflict --> |Aligned| Execute[Execute All]
 
-    style Sys fill:#c8e6c9
-    style Ignore fill:#ffcdd2
+    style Sys fill:#c8e6c9,color:#000
+    style Ignore fill:#ffcdd2,color:#000
 ```
 
 We propose an instruction hierarchy that explicitly defines how models should behave when instructions of different priorities conflict. We then propose a data generation method to demonstrate this hierarchical instruction following behavior, which teaches LLMs to selectively ignore lower-privileged instructions.
@@ -38,7 +38,7 @@ flowchart LR
 
     Train["Train on Easy\nEnvironments"] --> |Generalizes to| Dangerous["Dangerous\nBehaviors"]
 
-    style Tamper fill:#ffcdd2
+    style Tamper fill:#ffcdd2,color:#000
 ```
 
 Reward tampering is a very critical issue that needs to be addressed. LLM models sometimes not only tamper with the implementation of their reward function but also rewrite testing code to ensure this tampering is not caught.
@@ -74,7 +74,7 @@ flowchart TD
         Pref --> RLAIF["RLAIF\n(RL from AI Feedback)"]
     end
 
-    style RLAIF fill:#c8e6c9
+    style RLAIF fill:#c8e6c9,color:#000
 ```
 
 We experiment with methods for training a harmless AI assistant through self improvement, without any human labels identifying harmful outputs. The only human oversight is provided through a list of rules or principles, and so we refer to the method as 'Constitutional AI'. The process involves both a supervised learning and a reinforcement learning phase.

@@ -15,8 +15,8 @@ flowchart TD
     Compute --> Output[Output]
     Skip --> Output
 
-    style Skip fill:#ffcdd2
-    style Compute fill:#c8e6c9
+    style Skip fill:#ffcdd2,color:#000
+    style Compute fill:#c8e6c9,color:#000
 ```
 
 The benefit of the approach is the ability to set a compute budget and then based on it enforce limits - for example: enforce how many tokens can participate in block computations. Therefore, in order to avoid performance degradation the challenge becomes how to choose the right tokens for processing.
@@ -71,8 +71,8 @@ flowchart LR
     Verify --> |Accept| Out["Output: t1,t2,t3,t4"]
     Verify --> |Reject t3,t4| Redo["Redo from t3"]
 
-    style Draft fill:#fff3e0
-    style Out fill:#c8e6c9
+    style Draft fill:#fff3e0,color:#000
+    style Out fill:#c8e6c9,color:#000
 ```
 
 Key Observations:
@@ -117,7 +117,7 @@ flowchart TD
         VS --> H4
     end
 
-    style MQA fill:#e8f5e9
+    style MQA fill:#e8f5e9,color:#000
 ```
 
 Multi-head attention layers are a powerful alternative to RNNs for moving information across and between sequences. While training is generally fast and simple due to parallelizability, incremental inference is often slow due to memory-bandwidth costs of loading large "keys" and "values" tensors.
@@ -143,8 +143,8 @@ flowchart LR
     E2 --> Combine
     Combine --> Output[Output]
 
-    style E3 fill:#eeeeee
-    style EN fill:#eeeeee
+    style E3 fill:#eeeeee,color:#000
+    style EN fill:#eeeeee,color:#000
 ```
 
 Key Points:

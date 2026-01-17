@@ -18,7 +18,7 @@ flowchart TD
     Judge --> |Evaluate| Score[Preference Score]
     Score --> Benchmark{Compare to\nGround Truth}
 
-    style P2 fill:#c8e6c9
+    style P2 fill:#c8e6c9,color:#000
 ```
 
 The key problem: Evaluating the reliability of LLM-based judges
@@ -51,7 +51,7 @@ flowchart LR
     Eval --> DA["Direct\nAssessment"]
     Eval --> PR["Pairwise\nRanking"]
 
-    style Eval fill:#e1f5fe
+    style Eval fill:#e1f5fe,color:#000
 ```
 
 We introduce PROMETHEUS 2 (7B & 8x7B), state-of-the-art open evaluator LMs that score high correlations with both human evaluators and proprietary LM-based judges on both direct assessment and pairwise ranking.
@@ -77,8 +77,8 @@ flowchart LR
         Loss --> |Above Threshold| Random["Random\nGuessing"]
     end
 
-    style New fill:#fff3e0
-    style Emerge fill:#c8e6c9
+    style New fill:#fff3e0,color:#000
+    style Emerge fill:#c8e6c9,color:#000
 ```
 
 Our paper proposes a new definition of emergent abilities of language models from the perspective of pre-training loss. Empirical results show that the pre-training loss is a better metric to represent the scaling effect of language models than model size or training compute. The performance of emergent abilities exhibits emergent increase when the pre-training loss falls below a certain threshold, even when evaluated with continuous metrics.
@@ -104,7 +104,7 @@ flowchart LR
         Agg --> Score2["Aggregated\nScore"]
     end
 
-    style Panel fill:#e8f5e9
+    style Panel fill:#e8f5e9,color:#000
 ```
 
 Evaluations most commonly use a single large model like GPT4. While this method has grown in popularity, it is costly, has been shown to introduce intramodal bias, and in this work, we find that very large models are often unnecessary. We propose instead to evaluate models using a Panel of LLm evaluators (PoLL).
@@ -128,8 +128,8 @@ flowchart TD
     F3 --> Eval
     Eval --> |True > All False?| Score[FACTOR Score]
 
-    style True fill:#c8e6c9
-    style Score fill:#FFD700
+    style True fill:#c8e6c9,color:#000
+    style Score fill:#FFD700,color:#000
 ```
 
 The key idea is automatically perturbing factual statements taken from the corpus to create a constant number of false variations (hereafter, 3) for each true statement. The LM's FACTOR accuracy on our benchmark is defined as the percentage of examples for which it assigns higher likelihood to the factual completion than to any of the false variations.

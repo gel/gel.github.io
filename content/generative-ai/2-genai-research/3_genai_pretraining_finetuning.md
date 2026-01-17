@@ -61,7 +61,7 @@ flowchart LR
         Loss --> Model2[Aligned Model]
     end
 
-    style DPO fill:#e8f5e9
+    style DPO fill:#e8f5e9,color:#000
 ```
 
 In this paper we introduce a new parameterization of the reward model in RLHF that enables extraction of the corresponding optimal policy in closed form, allowing us to solve the standard RLHF problem with only a simple classification loss. The resulting algorithm, which we call Direct Preference Optimization (DPO), is stable, performant, and computationally lightweight,
@@ -121,7 +121,7 @@ flowchart TD
     FT1 --> RALM[Retrieval-Augmented LM]
     FT2 --> RALM
 
-    style RALM fill:#FFD700
+    style RALM fill:#FFD700,color:#000
 ```
 
 Retrieval-augmented language models (RALMs) improve performance by accessing long-tail and up-to-date knowledge from external data stores, but are challenging to build. Existing approaches require either expensive retrieval-specific modifications to LM pre-training or use post-hoc integration of the data store that leads to suboptimal performance
@@ -158,7 +158,7 @@ flowchart TD
         TPA --> Out2
     end
 
-    style TokenFormer fill:#e1f5fe
+    style TokenFormer fill:#e1f5fe,color:#000
 ```
 
 Current transformer models are hard to scale up because they use fixed linear projections for processing inputs. When you want to make the model bigger (e.g. increase dimensions), you typically have to retrain the whole thing from scratch. This is very computationally expensive and inefficient.
@@ -197,7 +197,7 @@ flowchart LR
     Critic --> |Feedback| Search
     Search --> Output["Improved\nLLM Output"]
 
-    style Output fill:#90EE90
+    style Output fill:#90EE90,color:#000
 ```
 
 ALPHALLM is an imagination-searching-criticizing framework designed for the self-improvement of LLMs without the necessity of additional annotations. At its heart is the integration of MCTS with LLMs. To tackle the inherent challenges associated with this integration, including data scarcity, the vastness of search spaces, and the subjective nature of feedback in language tasks, it introduces:
@@ -229,7 +229,7 @@ flowchart LR
         Head2d --> T2d["t+4"]
     end
 
-    style Multi fill:#fff3e0
+    style Multi fill:#fff3e0,color:#000
 ```
 
 Training language models to predict multiple future tokens at once results in higher sample efficiency. A key fix for memory problems is to not materialize all logits and keep shared trunk and sequential pass on heads.
@@ -257,7 +257,7 @@ flowchart LR
         Opt --> Update[Full Weight\nUpdate]
     end
 
-    style GaLore fill:#e8f5e9
+    style GaLore fill:#e8f5e9,color:#000
 ```
 
 Gradient Low-Rank Projection (GaLore) is a training strategy that allows full-parameter learning but is more memory-efficient than common low-rank adaptation methods like LoRA. GaLore is closely related to projected gradient descent (PGD), but with key differences:
