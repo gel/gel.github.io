@@ -16,6 +16,7 @@
     color: var(--accent-color);
     padding-left: 10px;
     text-decoration: none;
+    border-bottom: none;
     font-weight: initial;
 
     &:hover {
@@ -71,8 +72,8 @@
       vertical-align: middle;
       padding: 0.1em 0.3em;
       border-radius: 3px;
-      color: #6e6b5e;
-      background: #f1f1f1;
+      color: var(--code-color) !important;
+      background: var(--code-bg) !important;
       font-size: 0.875em;
       font-family: "Source Code Pro", Consolas, "Ubuntu Mono", Menlo, "DejaVu Sans Mono", monospace, monospace;
     }
