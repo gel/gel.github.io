@@ -42,9 +42,11 @@ $sidebar-width: 300px;
 
 /* Integration with Site Header for book layouts */
 body.book-body {
+  position: fixed; /* Fix body to viewport to prevent overscroll/blank space */
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: 100vh;
   margin: 0;
   padding: 0; /* Override main.css body padding */
   overflow: hidden; /* Prevent body scroll */
