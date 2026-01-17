@@ -38,6 +38,15 @@
       opacity: 1;
     }
 
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
     .theme-toggle {
       cursor: pointer;
       padding: 0 10px;
@@ -195,7 +204,22 @@
       if (mermaidDivs.length === 0) return;
 
       const currentTheme = getTheme();
-      mermaid.initialize({ theme: currentTheme });
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
 
       mermaidDivs.forEach(div => {
         const originalCode = div.getAttribute("data-original-code");

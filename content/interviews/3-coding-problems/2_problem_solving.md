@@ -50,9 +50,6 @@ graph TD
         N2 <--> N3
         N3 --> Tail
     end
-
-    style Head fill:#f9f,stroke:#333,stroke-width:2px,color:#000
-    style Tail fill:#ff9,stroke:#333,stroke-width:2px,color:#000
 ```
 
 **Solution**
