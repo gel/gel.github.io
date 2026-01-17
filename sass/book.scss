@@ -39,3 +39,49 @@ $sidebar-width: 300px;
 @import "navigation";
 @import "content";
 @import "header";
+
+/* Integration with Site Header for book layouts */
+body.book-body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  padding: 0; /* Override main.css body padding */
+  overflow: hidden; /* Prevent body scroll */
+
+  /* Override main.css header styles to fit full width */
+  & > header {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0 20px; /* Match standard nav padding */
+    display: flex;
+    align-items: center;
+    background: var(--body-bg);
+    border-bottom: 1px solid var(--table-border-bottom);
+    z-index: 1000;
+  }
+
+  & > main {
+    flex: 1 1 auto;
+    position: relative;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    display: block; /* Override flex display from theme if any */
+  }
+
+  /* Ensure absolute positioned children (menu, page) fit within the main container */
+  .menu, .page {
+    height: 100%;
+    top: 0;
+  }
+
+  /* Hide the redundant theme toggle in the book internal header */
+  .page__header .theme-toggle {
+    display: none;
+  }
+}
