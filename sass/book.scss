@@ -55,12 +55,13 @@ body.book-body {
     width: 100%;
     max-width: none;
     margin: 0;
-    padding: 0 20px; /* Match standard nav padding */
+    padding: 2rem 2rem; /* Match standard nav padding and fix overlap */
     display: flex;
     align-items: center;
     background: var(--body-bg);
     border-bottom: 1px solid var(--table-border-bottom);
     z-index: 1000;
+    font-size: 1.8rem; /* Restore font size */
   }
 
   & > main {
@@ -78,6 +79,11 @@ body.book-body {
   .menu, .page {
     height: 100%;
     top: 0;
+  }
+  
+  /* Remove dividers from sidebar menu links (inherited from theme border-bottom) */
+  .menu a {
+    border-bottom: none;
   }
 
   /* Hide the redundant theme toggle in the book internal header */
