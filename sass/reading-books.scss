@@ -131,3 +131,11 @@ h2 {
     height: 400px;
   }
 }
+
+h2:first-of-type {
+  margin-top: 0;
+}
+
+main {
+  padding-top: 2rem;
+}
