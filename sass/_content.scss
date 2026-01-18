@@ -165,6 +165,28 @@
       }
     }
   }
+
+  @include variables.max-screen(600px) {
+    padding-bottom: 70px; /* Ensure content is not hidden behind the fixed navigation */
+    .previous, .next {
+      position: fixed;
+      bottom: 0;
+      top: auto;
+      height: 50px;
+      width: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 1.5em;
+      z-index: 100;
+    }
+    .previous {
+      left: 0;
+      border-right: 1px solid #eee;
+    }
+    .next {
+      right: 0;
+      left: auto;
+    }
+  }
 }
 
 @include variables.min-screen(600px) {
