@@ -18,7 +18,7 @@ nav = [
   { name = "Blog", path = "/blog/" },
   { name = "Books", path = "/books/" },
   { name = "Interviews", path = "/interviews/" },
-  { name = "Gen AI", path = "/generative-ai/" }
+  { name = "GenAI", path = "/generative-ai/" }
 ]
 
 icon = "iconweb.jpg"
