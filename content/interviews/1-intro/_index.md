@@ -5,6 +5,10 @@ sort_by = "weight"
 insert_anchor_links = "right"
 +++
 
+🎯 **New:** Practice coding problems with AI feedback → **[Live Interviews](/interviews/live/)**
+
+---
+
 Developing effective interview skills presents difficulties for those established in their current roles. Pursuing employment opportunities with other companies commonly necessitates substantial time and effort. However, seeking new positions while still employed offers advantages, including the abilities to:
 
 - Negotiate improved employment agreements with greater confidence.
