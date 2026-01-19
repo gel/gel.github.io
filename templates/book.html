@@ -17,8 +17,10 @@ Gal's {{ current_book_title }} Book - {{ section.title }}
 {% block body_class %}book-body{% endblock body_class %}
 
 {% block styles%}
-<link rel="stylesheet" href="{{ get_url(path="main.css") | safe }}">
-<link rel="stylesheet" href="{{ get_url(path="book.css") | safe }}">
+{% set main_css = get_url(path="main.css") %}
+{% set book_css = get_url(path="book.css") %}
+<link rel="stylesheet" href="{{ main_css | safe }}">
+<link rel="stylesheet" href="{{ book_css | safe }}">
 {% block css %}
 {% endblock css %}
 {% endblock styles %}
@@ -40,11 +42,19 @@ Gal's {{ current_book_title }} Book - {{ section.title }}
       {% set book_url = book_utils::get_current_book_url() %}
       {% set book_section_path = book_utils::get_book_section_path(current_book_url=book_url) %}
       {% set index = get_section(path=book_section_path | trim) %}
+      {% if book_url | trim == "interviews" %}
+      <li class="live-interviews-link">
+        <a href="{{ get_url(path='interviews/live/') | safe }}"><strong>Live Interviews</strong></a>
+      </li>
+      {% endif %}
+      {% set_global chapter_num = 0 %}
       {% for s in index.subsections %}
       {% set subsection = get_section(path=s) %}
+      {% if not subsection.extra.hidden %}
+      {% set_global chapter_num = chapter_num + 1 %}
+      {% set section_link = subsection.redirect_to | default(value=subsection.permalink) %}
       <li {% if current_path==subsection.path %}class="active" {% endif %}>
-        {% set chapter_num = loop.index %}
-        <a href="{{ subsection.permalink }}">
+        <a href="{{ section_link | safe }}">
           {% if config.extra.book_number_chapters %}<strong>{{ chapter_num }}.</strong>{% endif %}
           {{ subsection.title }}
         </a>
@@ -62,6 +72,7 @@ Gal's {{ current_book_title }} Book - {{ section.title }}
         </ul>
         {% endif %}
       </li>
+      {% endif %}
       {% endfor %}
       {% endblock menu %}
     </ul>
@@ -116,11 +127,14 @@ Gal's {{ current_book_title }} Book - {{ section.title }}
 </div>
 
 {% block js_body %}
+{% set elasticlunr_js = get_url(path="elasticlunr.min.js") %}
+{% set search_index_js = get_url(path="search_index.en.js") %}
+{% set book_js = get_url(path="book.js") %}
 {% if config.build_search_index %}
-<script type="text/javascript" src="{{ get_url(path="elasticlunr.min.js") | safe }}"></script>
-<script type="text/javascript" src="{{ get_url(path="search_index.en.js") | safe }}"></script>
+<script type="text/javascript" src="{{ elasticlunr_js | safe }}"></script>
+<script type="text/javascript" src="{{ search_index_js | safe }}"></script>
 {% endif %}
-<script type="text/javascript" src="{{ get_url(path="book.js") | safe }}"></script>
+<script type="text/javascript" src="{{ book_js | safe }}"></script>
 <script async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 {% endblock js_body %}

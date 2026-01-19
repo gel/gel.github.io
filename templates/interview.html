@@ -1,0 +1,128 @@
+{% extends "book.html" %}
+
+{% import "book-utils.html" as book_utils %}
+
+{% block css %}
+<style>
+  /* Force dark theme for interview pages */
+  body.interview-body {
+    background: var(--interview-bg, #0d1117);
+  }
+
+  /* Override page content for wider editor area */
+  body.interview-body .page__content {
+    padding: 0;
+    max-width: none;
+  }
+
+  body.interview-body .page .book-content {
+    padding: 0;
+    max-width: none;
+  }
+</style>
+{% endblock css %}
+
+{% block js %}
+<!-- Monaco Editor -->
+<script>
+  // Monaco needs RequireJS-style loader
+  var require = { paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' } };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+<script>
+  require(['vs/editor/editor.main'], function () {
+    window.MonacoEditor = monaco;
+    window.dispatchEvent(new CustomEvent('monaco-ready'));
+    console.log('[Monaco] Editor loaded successfully');
+  });
+</script>
+{% endblock js %}
+
+{% block body_class %}book-body interview-body{% endblock body_class %}
+
+{% block bookcontent %}
+<div class="interview-container">
+  <!-- Problem Description Panel -->
+  <div class="problem-description">
+    <h1>{{ page.title }}</h1>
+    {% if page.extra.difficulty %}
+    <span class="difficulty-badge difficulty-{{ page.extra.difficulty | lower }}">
+      {{ page.extra.difficulty }}
+    </span>
+    {% endif %}
+    {{ page.content | safe }}
+  </div>
+
+  <!-- Code Editor Section -->
+  <div class="code-editor-section">
+    <h2>Solution</h2>
+    <div id="code-editor"></div>
+
+    <div class="editor-actions">
+      <button id="get-hint" class="btn btn-outline">Hint</button>
+      <button id="run-tests" class="btn btn-secondary">Run Tests</button>
+      <button id="submit-solution" class="btn btn-primary">Submit for Review</button>
+    </div>
+  </div>
+
+  <!-- Test Results Section -->
+  <div class="test-results">
+    <h2>Test Results</h2>
+    <div id="test-results-content">
+      <p class="placeholder-text">Click "Run Tests" to execute your solution against test cases.</p>
+    </div>
+  </div>
+
+  <!-- AI Feedback Section -->
+  <div class="ai-feedback">
+    <h2>AI Interviewer</h2>
+    <div class="model-status">
+      <span class="status-text">AI interviewer ready. Submit your solution for feedback.</span>
+      <div id="progress-container" class="progress-container" style="display: none;">
+        <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
+      </div>
+    </div>
+    <div id="feedback-content" class="feedback-content">
+      <p>I'll review your code once you submit it. I can also give you hints if you get stuck!</p>
+    </div>
+  </div>
+</div>
+{% endblock bookcontent %}
+
+{% block js_body %}
+{{ super() }}
+<!-- Interview UI Scripts (loaded as ES modules) -->
+<script type="module" src="{{ get_url(path='interview/interview-ui.js') | safe }}"></script>
+{% endblock js_body %}
+
+{% block prev_link %}
+{% if page.smaller %}
+<a class="previous" href="{{ page.smaller.permalink | safe }}">&laquo;</a>
+{% else %}
+{% set parent = get_section(path=page.ancestors | reverse | first) %}
+<a class="previous" href="{{ parent.permalink | safe }}">&laquo;</a>
+{% endif %}
+{% endblock prev_link %}
+
+{% block next_link %}
+{% if page.higher %}
+<a class="next" href="{{ page.higher.permalink | safe }}">&raquo;</a>
+{% else %}
+{% set book_url = book_utils::get_current_book_url() %}
+{% set book_section_path = book_utils::get_book_section_path(current_book_url=book_url) %}
+{% set index = get_section(path=book_section_path | trim) %}
+{% set found_current = false %}
+{% for s in index.subsections %}
+{% set subsection = get_section(path=s) %}
+{% if found_current %}
+<a class="next" href="{{ subsection.permalink | safe }}">&raquo;</a>
+{% set_global found_current = false %}
+{% endif %}
+{% for p in subsection.pages %}
+{% if p.permalink == page.permalink %}
+{% set_global found_current = true %}
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% endif %}
+{% endblock next_link %}

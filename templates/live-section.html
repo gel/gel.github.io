@@ -1,0 +1,162 @@
+{% extends "book.html" %}
+
+{% import "book-utils.html" as book_utils %}
+
+{% block bookcontent %}
+<div class="live-practice-container">
+  <h1>🎯 Live Interview Practice</h1>
+  <p class="section-intro">
+    Practice real interview problems with an AI-powered interviewer that runs entirely in your browser.
+    Select a problem below to start coding!
+  </p>
+
+  <div class="problems-grid">
+    {% for page in section.pages %}
+    <a href="{{ page.permalink | safe }}" class="problem-card">
+      <div class="problem-header">
+        <h3>{{ page.title }}</h3>
+        {% if page.extra.difficulty %}
+        <span class="difficulty-badge difficulty-{{ page.extra.difficulty | lower }}">
+          {{ page.extra.difficulty }}
+        </span>
+        {% endif %}
+      </div>
+      {% if page.extra.category %}
+      <span class="problem-category">{{ page.extra.category }}</span>
+      {% endif %}
+      {% if page.description %}
+      <p class="problem-description">{{ page.description }}</p>
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+
+  {% if section.pages | length == 0 %}
+  <div class="no-problems">
+    <p>No problems available yet. Check back soon!</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock bookcontent %}
+
+{% block css %}
+<style>
+  .live-practice-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .live-practice-container h1 {
+    font-size: 2.4rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+  }
+
+  .section-intro {
+    font-size: 1.6rem;
+    color: var(--body-color);
+    opacity: 0.85;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
+
+  .problems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .problem-card {
+    display: block;
+    background: var(--table-bg-even);
+    border: 1px solid var(--table-border-bottom);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--body-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .problem-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent-color);
+    text-decoration: none;
+  }
+
+  .problem-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .problem-header h3 {
+    margin: 0;
+    font-size: 1.6rem;
+    color: var(--body-color);
+  }
+
+  .difficulty-badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .difficulty-easy {
+    background: rgba(63, 185, 80, 0.15);
+    color: #3fb950;
+  }
+
+  .difficulty-medium {
+    background: rgba(210, 153, 34, 0.15);
+    color: #d29922;
+  }
+
+  .difficulty-hard {
+    background: rgba(248, 81, 73, 0.15);
+    color: #f85149;
+  }
+
+  .problem-category {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    background: var(--body-bg);
+    border-radius: 4px;
+    font-size: 1.1rem;
+    color: var(--body-color);
+    opacity: 0.7;
+    margin-bottom: 0.75rem;
+  }
+
+  .problem-description {
+    font-size: 1.3rem;
+    margin: 0;
+    color: var(--body-color);
+    opacity: 0.75;
+    line-height: 1.5;
+  }
+
+  .no-problems {
+    text-align: center;
+    padding: 3rem;
+    color: var(--body-color);
+    opacity: 0.6;
+    font-size: 1.4rem;
+  }
+
+  @media (max-width: 600px) {
+    .live-practice-container {
+      padding: 1rem;
+    }
+
+    .problems-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+{% endblock css %}

@@ -39,6 +39,22 @@
       padding-left: 20px;
     }
   }
+
+  // Live Interviews link styling (appears first in sidebar)
+  .live-interviews-link {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--table-border-bottom);
+    padding-bottom: 0.5rem;
+
+    a {
+      color: var(--accent-color);
+      font-weight: 700;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 .menu-hidden {
