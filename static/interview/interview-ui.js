@@ -9,35 +9,26 @@ import {
   checkWebGPUSupport
 } from './webllm-engine.js';
 
-// --- Global Configuration ---
-const currentProblem = window.problemConfig;
-if (currentProblem) {
-  const descriptionEl = document.querySelector('.problem-description');
-  if (descriptionEl) {
-    currentProblem.description = descriptionEl.innerText.trim();
-  } else {
-    currentProblem.description = "No description available.";
-  }
-} else {
-  console.error("[Interview] No problem configuration found.");
-}
-
 // Shared State
 let editor = null;
 let testResults = [];
+
+function getProblemConfig() {
+  return window.problemConfig;
+}
 
 // --- 1. Engine Manager (Shared Service) ---
 const EngineManager = {
   async ensureReady(onProgress) {
     if (isEngineReady()) return true;
-    
+
     const gpuCheck = checkWebGPUSupport();
     if (!gpuCheck.supported) {
       throw new Error(gpuCheck.message);
     }
 
     // Default empty handler if none provided
-    const defaultProgress = (progress, text) => {};
+    const defaultProgress = (progress, text) => { };
 
     await initEngine(onProgress || defaultProgress);
     return true;
@@ -50,7 +41,7 @@ const CodeAssistant = {
     this.input = document.getElementById('ai-code-prompt');
     this.btn = document.getElementById('ai-code-submit');
     this.statusEl = document.getElementById('ai-code-status');
-    
+
     if (!this.input || !this.btn) return;
 
     this.btn.addEventListener('click', () => this.handleSubmit());
@@ -64,7 +55,7 @@ const CodeAssistant = {
     this.btn.disabled = isLoading;
     if (isLoading) {
       this.btn.classList.add('is-loading');
-      this.btn.innerHTML = '<span>⏳</span>'; 
+      this.btn.innerHTML = '<span>⏳</span>';
     } else {
       this.btn.classList.remove('is-loading');
       this.btn.innerHTML = '<span>➤</span>';
@@ -76,8 +67,8 @@ const CodeAssistant = {
     this.statusEl.textContent = msg;
     this.statusEl.className = `assistant-status ${type}`;
     if (type === 'error' || type === 'info') {
-      setTimeout(() => { 
-        if (this.statusEl) this.statusEl.textContent = ''; 
+      setTimeout(() => {
+        if (this.statusEl) this.statusEl.textContent = '';
       }, 5000);
     }
   },
@@ -97,7 +88,7 @@ const CodeAssistant = {
       });
 
       const newCode = await generateCode(prompt, currentCode);
-      
+
       if (editor && newCode) {
         editor.setValue(newCode);
         editor.getAction('editor.action.formatDocument').run();
@@ -136,7 +127,7 @@ const Interviewer = {
 
   updateStatus(progress, text) {
     const statusText = document.querySelector('.status-text');
-    if (statusText) statusText.textContent = text || `Loading Model... ${Math.round(progress * 100)}%`;
+    if (statusText) statusText.textContent = text || (progress ? `Loading Model... ${Math.round(progress * 100)}%` : "");
   },
 
   showFeedback(content, isStreaming = false) {
@@ -146,7 +137,7 @@ const Interviewer = {
     // Scroll logic
     const scrollContainer = document.querySelector('.page');
     let shouldAutoScroll = false;
-    
+
     if (isStreaming && scrollContainer) {
       const distanceToBottom = scrollContainer.scrollHeight - scrollContainer.scrollTop - scrollContainer.clientHeight;
       shouldAutoScroll = distanceToBottom < 150;
@@ -183,10 +174,11 @@ const Interviewer = {
     if (runBtn) { runBtn.disabled = true; runBtn.textContent = 'Running...'; }
 
     try {
+      const currentProblem = getProblemConfig();
       testResults = await runTests(
-        code, 
-        currentProblem.testCases, 
-        currentProblem.methodName, 
+        code,
+        currentProblem.testCases,
+        currentProblem.methodName,
         currentProblem.typeMap || {}
       );
       resultsContainer.innerHTML = formatResultsHTML(testResults);
@@ -208,7 +200,7 @@ const Interviewer = {
 
     try {
       this.showFeedback('<p class="loading-message">Initializing AI model...</p>');
-      
+
       // Pass 'this.updateStatus' to update local text while global bar handles the heavy lifting
       await EngineManager.ensureReady((p, t) => this.updateStatus(p, t));
 
@@ -222,6 +214,7 @@ const Interviewer = {
       `;
 
       let streamedContent = '';
+      const currentProblem = getProblemConfig();
       await evaluateCode(
         `${prompt}\n\nProblem: ${currentProblem.description}`,
         code,
@@ -252,6 +245,7 @@ const Interviewer = {
       await EngineManager.ensureReady((p, t) => this.updateStatus(p, t));
 
       let streamedContent = '';
+      const currentProblem = getProblemConfig();
       await getHint(
         currentProblem.description,
         code,
@@ -270,7 +264,7 @@ const Interviewer = {
 
 // --- Helper Functions ---
 function getEditorCode() {
-  if (!editor) return currentProblem?.starterCode || "";
+  if (!editor) return getProblemConfig()?.starterCode || "";
   return editor.getValue();
 }
 
@@ -278,39 +272,70 @@ function initEditor() {
   const editorContainer = document.getElementById('code-editor');
   if (!editorContainer) return;
 
-  // Poll for Monaco availability
+  // Poll for Monaco availability and problem configuration
   let attempts = 0;
   const pollInterval = setInterval(() => {
     attempts++;
-    if (window.MonacoEditor && !editor) {
+    const problemConfig = getProblemConfig();
+
+    if (window.MonacoEditor && problemConfig && !editor) {
       clearInterval(pollInterval);
       try {
         editorContainer.innerHTML = '';
         editorContainer.style.height = '500px';
         editorContainer.style.width = '100%';
-        
+
         editor = window.MonacoEditor.editor.create(editorContainer, {
-          value: currentProblem.starterCode,
+          value: problemConfig.starterCode,
           language: 'python',
           theme: 'vs-dark',
           fontSize: 15,
           fontFamily: "'JetBrains Mono', 'Fira Code', 'Consolas', monospace",
           minimap: { enabled: false },
           scrollBeyondLastLine: false,
-          automaticLayout: false,
+          automaticLayout: true, // Crucial for mobile/resize responsiveness
           wordWrap: 'on',
           lineNumbers: 'on',
           folding: true,
           tabSize: 4,
           insertSpaces: true
         });
+
         editor.layout();
+
+        // --- Mobile/Chrome Robustness Fixes ---
+
+        // 1. Force another layout after a short delay
+        setTimeout(() => {
+          if (editor) {
+            editor.layout();
+            console.log('[Interview] Safety layout triggered');
+
+            // 2. Double check initial value MUST be set (sometimes Chrome/Monaco misbehaves)
+            if (editor.getValue() === "" && problemConfig.starterCode) {
+              editor.setValue(problemConfig.starterCode);
+              console.log('[Interview] Safety value reset triggered');
+            }
+          }
+        }, 500);
+
+        // 3. ResizeObserver to handle layout changes dynamically (more robust than automaticLayout)
+        if (window.ResizeObserver) {
+          const resizeObserver = new ResizeObserver(() => {
+            if (editor) {
+              editor.layout();
+            }
+          });
+          resizeObserver.observe(editorContainer);
+        }
+
         console.log('[Interview] Monaco editor created');
       } catch (e) {
         console.error('Editor Init Error', e);
       }
     } else if (attempts > 100) {
       clearInterval(pollInterval);
+      console.error('[Interview] Monaco Editor or Problem Config loading timed out');
     }
   }, 100);
 }
@@ -323,6 +348,15 @@ if (document.readyState === 'loading') {
 }
 
 function init() {
+  // Extract description if not already set (Zola templates might not have it in JS)
+  const problemConfig = getProblemConfig();
+  if (problemConfig && !problemConfig.description) {
+    const descriptionEl = document.querySelector('.problem-description');
+    if (descriptionEl) {
+      problemConfig.description = descriptionEl.innerText.trim();
+    }
+  }
+
   initEditor();
   CodeAssistant.init();
   Interviewer.init();
