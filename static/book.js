@@ -2,9 +2,19 @@ function initToggleMenu() {
   var $menu = document.querySelector(".menu");
   var $menuIcon = document.querySelector(".menu-icon");
   var $page = document.querySelector(".page");
-  $menuIcon.addEventListener("click", function() {
+
+  // Restore sidebar state from localStorage
+  var menuHidden = localStorage.getItem("menuHidden") === "true";
+  if (menuHidden) {
+    $menu.classList.add("menu-hidden");
+    $page.classList.add("page-without-menu");
+  }
+
+  $menuIcon.addEventListener("click", function () {
     $menu.classList.toggle("menu-hidden");
     $page.classList.toggle("page-without-menu");
+    // Save state to localStorage
+    localStorage.setItem("menuHidden", $menu.classList.contains("menu-hidden"));
   });
 }
 
@@ -171,14 +181,14 @@ function initSearch() {
   var options = {
     bool: "AND",
     fields: {
-      title: {boost: 2},
-      body: {boost: 1},
+      title: { boost: 2 },
+      body: { boost: 1 },
     }
   };
   var currentTerm = "";
   var index = elasticlunr.Index.load(window.searchIndex);
 
-  $searchInput.addEventListener("keyup", debounce(function() {
+  $searchInput.addEventListener("keyup", debounce(function () {
     var term = $searchInput.value.trim();
     if (term === currentTerm || !index) {
       return;
@@ -198,7 +208,7 @@ function initSearch() {
     }
 
     currentTerm = term;
-      $searchResultsHeader.innerText = `${results.length} search results for '${term}':`;
+    $searchResultsHeader.innerText = `${results.length} search results for '${term}':`;
     for (var i = 0; i < Math.min(results.length, MAX_ITEMS); i++) {
       if (!results[i].doc.body) {
         continue;
@@ -212,7 +222,7 @@ function initSearch() {
 }
 
 if (document.readyState === "complete" ||
-    (document.readyState !== "loading" && !document.documentElement.doScroll)
+  (document.readyState !== "loading" && !document.documentElement.doScroll)
 ) {
   initToggleMenu();
 } else {

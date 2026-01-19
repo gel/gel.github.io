@@ -4,12 +4,17 @@
   height: 100%;
   position: absolute;
   left: 0;
-  overflow-y: auto;
+  overflow: hidden; // Clip content so links don't intercept clicks outside sidebar
   width: 300px;
   color: var(--body-color);
   background: var(--table-bg-even);
   border-right: 1px solid var(--table-border-bottom);
   transition: 0.5s;
+
+  nav {
+    height: 100%;
+    overflow-y: auto; // Scrolling happens inside nav
+  }
 
   ul {
     list-style: none;

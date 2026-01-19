@@ -131,6 +131,7 @@
     text-align: center;
     float: left;
     position: relative;
+    z-index: 10; // Ensure hamburger is above any overlapping sidebar content
     transition: background .5s;
     cursor: pointer;
 
