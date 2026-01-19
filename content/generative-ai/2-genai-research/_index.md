@@ -23,7 +23,9 @@ Below is the list of selected research papers that have significantly contribute
 
 - [Survey] Instruction Tuning for Large Language Models
 
--  [RA-DIT] Retrieval-Augmented Dual Instruction Tuning
+- [Set-Fit] Sentence Transformer Fine-tuning
+
+- [RA-DIT] Retrieval-Augmented Dual Instruction Tuning
 
 - [Sequential Monte Carlo] Steering of LLMs using Probabilistic Programs
 
@@ -75,6 +77,14 @@ Below is the list of selected research papers that have significantly contribute
 - [CLIP] Connecting text and images
 
 ### Models
+
+- [Survey] A Survey of Reshaping the GenAI Research Landscape
+
+- [ModernBERT] Modern Bidirectional Encoder
+
+- [GLiNER] Generalist Model for NER using Bidirectional Transformer
+
+- [Mixtral] Mixtral of Experts
 
 - [Gemini] A Family of Highly Capable Multimodal Models
 

@@ -1,6 +1,6 @@
 +++
-title = "GenAI Benchmarks & Evaluations"
-weight = 6
+title = "GenAI Evaluations"
+weight = 5
 +++
 
 ### [JudgeBench] A Benchmark for Evaluating LLM-based Judges

@@ -1,6 +1,6 @@
 +++
-title = "GenAI Security & Safety"
-weight = 9
+title = "GenAI Security"
+weight = 8
 +++
 
 ### [Instruction Hierarchy] Training LLMs to Prioritize Privileged Instructions

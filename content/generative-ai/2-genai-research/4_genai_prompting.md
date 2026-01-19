@@ -1,6 +1,6 @@
 +++
 title = "GenAI Prompting"
-weight = 5
+weight = 4
 +++
 
 ## LLM Prompting - In-Context-Learning

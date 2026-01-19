@@ -1,6 +1,6 @@
 +++
-title = "GenAI Pretraining & Fine-tuning"
-weight = 3
+title = "GenAI Training"
+weight = 2
 +++
 
 
@@ -267,3 +267,59 @@ Gradient Low-Rank Projection (GaLore) is a training strategy that allows full-pa
 - Since the gradient G may have a low-rank structure, GaLore keeps the gradient statistics of a small "core" of gradient G in optimizer states
 
 For complex optimization problems like LLM pretraining, it may be difficult to capture the entire gradient trajectory with a single low-rank subspace. GaLore addresses this by allowing switching across low-rank subspaces: Wt = W0 + ∆WT1 + ∆WT2 + ... + ∆WTn, where the switching frequency T becomes a hyperparameter.
+
+### [Survey] Instruction Tuning for Large Language Models
+
+Arxiv: [https://arxiv.org/abs/2308.10792](https://arxiv.org/abs/2308.10792) _21 Aug 2023_
+
+There are generally two methods for constructing instruction datasets:
+
+• Data integration from annotated natural language datasets. In this approach,
+
+(instruction, output) pairs are collected from existing annotated natural language datasets by using templates to transform text-label pairs to (instruction, output) pairs.
+
+Datasets such as Flan (Longpre et al., 2023) and P3 (Sanh et al., 2021).
+
+• Generating outputs using LLMs - (1) manually collected; or (2) expanded based on small handwritten seed instructions using LLMs. Next, the collected instructions are fed to LLMs to obtain outputs. Datasets such as InstructWild (Xue et al., 2023) and Self-Instruct (Wang et al., 2022c) are generated following this approach. For multi-turn conversational IT datasets, we can have large language models self-play different roles (user and AI assistant) to generate message
+
+![Survey](/generative-ai/2-genai-research/llm_1_survey.png)
+
+### [Set-Fit] Sentence Transformer Fine-tuning
+
+Arxiv: [https://arxiv.org/abs/2209.11055](https://arxiv.org/abs/2209.11055) _22 Sep 2022_
+
+```mermaid
+flowchart LR
+    subgraph Stage1["Stage 1: Siamese Fine-tuning"]
+        Pairs["Text Pairs\n(+/-)"]
+        Pairs --> ST[Sentence\nTransformer]
+        ST --> Emb[Better\nEmbeddings]
+    end
+
+    subgraph Stage2["Stage 2: Classification"]
+        Emb --> LR[Logistic\nRegression]
+        LR --> Class[Classification]
+    end
+
+    style Stage1 fill:#e1f5fe,color:#000
+    style Stage2 fill:#fff3e0,color:#000
+```
+
+SetFit is a two-stage framework for few-shot learning:
+
+1. Siamese Fine-tuning Stage:
+   - Takes pairs of text (positive/negative)
+   - Fine-tunes Sentence Transformer in contrastive manner
+   - Creates better text embeddings for target task
+
+2. Classification Stage:
+   - Uses fine-tuned embeddings from Stage 1
+   - Trains simple classifier (logistic regression) on these embeddings
+   - Produces final classification output
+
+Advantages:
+- No prompts or verbalizers needed
+- Much smaller parameter count than PEFT/PET
+- Faster training time
+- Works well in multilingual settings
+- Comparable accuracy to larger models

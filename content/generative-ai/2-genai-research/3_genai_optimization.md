@@ -1,6 +1,6 @@
 +++
-title = "GenAI Optimization"
-weight = 4
+title = "GenAI Optimizations"
+weight = 3
 +++
 
 ### [Mixture-of-Depths] Dynamically allocating compute in transformer-based LMs

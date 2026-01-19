@@ -1,6 +1,6 @@
 +++
 title = "GenAI Multi-Modal"
-weight = 7
+weight = 6
 +++
 
 ### Training Diffusion Models with RL
