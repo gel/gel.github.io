@@ -16,6 +16,18 @@ function initToggleMenu() {
     // Save state to localStorage
     localStorage.setItem("menuHidden", $menu.classList.contains("menu-hidden"));
   });
+
+  // Close sidebar on mobile when clicking a link to prevent it from persisting open
+  var $links = $menu.querySelectorAll("a");
+  Array.prototype.forEach.call($links, function($link) {
+    $link.addEventListener("click", function() {
+      if (window.matchMedia("(max-width: 600px)").matches) {
+        $menu.classList.remove("menu-hidden");
+        $page.classList.remove("page-without-menu");
+        localStorage.setItem("menuHidden", "false");
+      }
+    });
+  });
 }
 
 function debounce(func, wait) {
