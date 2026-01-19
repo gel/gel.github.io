@@ -357,6 +357,7 @@ async function handleSubmitForReview() {
       Format your response in a supportive, conversational tone.
     `;
 
+    let streamedContent = '';
     await evaluateCode(
       `${interviewerPrompt}\n\nProblem: ${currentProblem.description}`,
       code,
@@ -366,6 +367,7 @@ async function handleSubmitForReview() {
         showFeedback(formatMarkdown(streamedContent), true);
       }
     );
+
 
     // Final formatted output
     showFeedback(`<div class="ai-response">${formatMarkdown(streamedContent)}</div>`);
