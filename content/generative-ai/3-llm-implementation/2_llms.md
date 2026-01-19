@@ -4,7 +4,7 @@ weight = 2
 +++
 
 
-### Instruction-Fine-Tuned Datasets LLMs
+### Instruction-Fine-Tuned LLMs
 
 ![LLMs Fine-Tuned](/generative-ai/3-llm-implementation/llmi_2_llms_finetuned.png)
 
