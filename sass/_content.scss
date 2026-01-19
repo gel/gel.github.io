@@ -167,25 +167,62 @@
   }
 
   @include variables.max-screen(600px) {
-    padding-bottom: 70px; /* Ensure content is not hidden behind the fixed navigation */
-    .previous, .next {
+    padding-bottom: 50px;
+
+    /* Ensure content is not hidden behind the fixed navigation */
+    .previous,
+    .next {
       position: fixed;
       bottom: 0;
       top: auto;
-      height: 50px;
+      height: 40px;
       width: 50%;
-      background: var(--body-bg);
-      border-top: 1px solid var(--table-border-bottom);
-      font-size: 1.5em;
+      background: color-mix(in srgb, var(--body-bg) 85%, transparent);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-top: 1px solid color-mix(in srgb, var(--table-border-bottom) 50%, transparent);
+      font-size: 1.3em;
       z-index: 100;
+      opacity: 0.9;
+      transition: opacity 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        opacity: 1;
+        background: var(--body-bg);
+      }
     }
+
     .previous {
       left: 0;
-      border-right: 1px solid var(--table-border-bottom);
+      border-right: 1px solid color-mix(in srgb, var(--table-border-bottom) 50%, transparent);
     }
+
     .next {
       right: 0;
       left: auto;
+    }
+
+    /* Single button case: when only one nav button exists, make it full width and centered */
+    /* Only next button exists (no previous) */
+    .prev-link:not(:has(a))+.next-link .next {
+      width: 100%;
+      max-width: none;
+      left: 0;
+      right: 0;
+      border-right: none;
+    }
+
+    /* Only previous button exists (no next) - use :has() on parent .page */
+    &:has(.prev-link a):has(.next-link:empty) .previous,
+    &:has(.prev-link a):not(:has(.next-link a)) .previous {
+      width: 100%;
+      max-width: none;
+      left: 0;
+      right: 0;
+      border-right: none;
     }
   }
 }
