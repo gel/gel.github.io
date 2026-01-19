@@ -6,6 +6,7 @@ import {
   isEngineLoading,
   evaluateCode,
   getHint,
+  generateCode,
   checkWebGPUSupport
 } from './webllm-engine.js';
 
@@ -529,11 +530,90 @@ function init() {
   }
 }
 
+/**
+ * Handle AI Code Assistant submission
+ */
+async function handleCodeAssist() {
+  const input = document.getElementById('ai-code-prompt');
+  const btn = document.getElementById('ai-code-submit');
+  const prompt = input ? input.value.trim() : '';
+
+  if (!prompt || !input || !btn) return;
+
+  const currentCode = getEditorCode();
+  
+  // Disable UI
+  input.disabled = true;
+  btn.disabled = true;
+  const originalBtnText = btn.innerHTML;
+  btn.innerHTML = '<span>⏳</span>'; // Loading hourglass
+
+  try {
+    // Initialize engine if needed
+    if (!isEngineReady()) {
+      showFeedback('<p class="loading-message">Initializing AI model for code generation...</p>');
+      await initEngine(updateProgress);
+    }
+
+    // Generate code
+    const newCode = await generateCode(
+      prompt, 
+      currentCode,
+      null // We don't need to stream to a separate view, just wait for final result
+    );
+
+    // Update editor
+    if (editor && newCode) {
+      editor.setValue(newCode);
+      // Format document if possible
+      editor.getAction('editor.action.formatDocument').run();
+    }
+    
+    // Clear input on success
+    input.value = '';
+
+  } catch (error) {
+    console.error('Error generating code:', error);
+    showFeedback(`<div class="feedback-error">
+      <p><strong>Code Generation Error</strong></p>
+      <p>${error.message}</p>
+    </div>`);
+  } finally {
+    // Re-enable UI
+    input.disabled = false;
+    btn.disabled = false;
+    btn.innerHTML = originalBtnText;
+    input.focus();
+    
+    // Hide progress if it was shown
+    const progressContainer = document.getElementById('progress-container');
+    if (progressContainer) progressContainer.style.display = 'none';
+  }
+}
+
 // Initialize when DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {
   init();
 }
+
+// Add event listeners for new widget after init
+document.addEventListener('DOMContentLoaded', () => {
+  const aiCodeInput = document.getElementById('ai-code-prompt');
+  const aiCodeSubmit = document.getElementById('ai-code-submit');
+  
+  if (aiCodeSubmit) {
+    aiCodeSubmit.addEventListener('click', handleCodeAssist);
+  }
+  
+  if (aiCodeInput) {
+    aiCodeInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        handleCodeAssist();
+      }
+    });
+  }
+});
 
 export default { init };

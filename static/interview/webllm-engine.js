@@ -194,6 +194,62 @@ Give them a helpful hint to guide them toward the solution WITHOUT giving away t
   }
 }
 
+/**
+ * Generate code based on user prompt
+ * @param {string} prompt - The user's instruction
+ * @param {string} currentCode - The current code in editor
+ * @param {function} onToken - Callback for streaming tokens
+ */
+export async function generateCode(prompt, currentCode, onToken) {
+  if (!engine) {
+    throw new Error("Engine not initialized. Call initEngine first.");
+  }
+
+  const systemPrompt = `You are an expert coding assistant.
+Your task is to modify the provided code based on the user's request.
+Return ONLY the full updated code. Do not include markdown formatting, backticks, or explanations.
+Just the raw code.`;
+
+  const userMessage = `Current Code:
+${currentCode}
+
+Request: ${prompt}
+
+Return the full updated code:`;
+
+  try {
+    const response = await engine.chat.completions.create({
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userMessage }
+      ],
+      temperature: 0.1, // Lower temperature for more deterministic code generation
+      stream: true
+    });
+
+    let fullResponse = "";
+
+    for await (const chunk of response) {
+      const delta = chunk.choices[0]?.delta?.content || "";
+      fullResponse += delta;
+      if (onToken) {
+        onToken(delta, fullResponse);
+      }
+    }
+
+    // cleanup response (remove potential markdown blocks if the model ignored instructions)
+    let cleanCode = fullResponse;
+    if (cleanCode.includes("```")) {
+      cleanCode = cleanCode.replace(/```\w*\n?/g, "").replace(/```/g, "");
+    }
+    return cleanCode.trim();
+
+  } catch (error) {
+    console.error("Error generating code:", error);
+    throw error;
+  }
+}
+
 export default {
   checkWebGPUSupport,
   initEngine,
@@ -201,5 +257,6 @@ export default {
   isEngineReady,
   isEngineLoading,
   evaluateCode,
-  getHint
+  getHint,
+  generateCode
 };
