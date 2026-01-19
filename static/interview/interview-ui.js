@@ -301,10 +301,37 @@ function showFeedback(content, isStreaming = false) {
   const feedbackContent = document.getElementById('feedback-content');
   if (!feedbackContent) return;
 
+  // Find the scrollable container (the .page element)
+  const scrollContainer = document.querySelector('.page');
+  
+  // Check if we should auto-scroll BEFORE updating content
+  // We should scroll if the user is already near the bottom (within 100px)
+  let shouldAutoScroll = false;
+  
+  if (isStreaming && scrollContainer) {
+    const distanceToBottom = scrollContainer.scrollHeight - scrollContainer.scrollTop - scrollContainer.clientHeight;
+    // If distance is small, user is at the bottom. If large, they scrolled up.
+    shouldAutoScroll = distanceToBottom < 150;
+  } else if (!isStreaming) {
+    // Always scroll for final results/messages
+    shouldAutoScroll = true;
+  }
+
   if (isStreaming) {
     feedbackContent.innerHTML = `<div class="streaming-response">${content}</div>`;
+    
+    // Only scroll if we were already at the bottom
+    if (shouldAutoScroll) {
+      feedbackContent.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
   } else {
     feedbackContent.innerHTML = content;
+    
+    // Auto-scroll to feedback section when new message appears (loading, result, etc)
+    const container = feedbackContent.closest('.ai-feedback');
+    if (container && shouldAutoScroll) {
+      container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
   }
 }
 
