@@ -15,46 +15,41 @@
 .interview-container {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 20px;
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 15px;
   min-height: calc(100vh - 100px);
 
   @media (min-width: 1024px) {
     display: grid;
     grid-template-columns: 400px 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto; /* Just one row needed now */
     align-items: start;
+    gap: 15px;
 
-    // Problem description spans left column
     .problem-description {
       grid-column: 1;
-      grid-row: 1 / 4;
-    }
-
-    // Code editor in right column, first row
-    .code-editor-section {
-      grid-column: 2;
       grid-row: 1;
     }
 
-    // Test results in right column, second row
-    .test-results {
+    .interview-workspace {
       grid-column: 2;
-      grid-row: 2;
-    }
-
-    // AI feedback in right column, third row (below test results)
-    .ai-feedback {
-      grid-column: 2;
-      grid-row: 3;
+      grid-row: 1;
     }
   }
 }
 
-// Problem Description Section (Left Column on Desktop)
+// Right-side container for Editor, Tests, and Feedback
+.interview-workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Consistent spacing between major sections */
+  width: 100%;
+  min-width: 0;
+}
+
 .problem-description {
   background: var(--panel-bg);
   backdrop-filter: blur(12px);
@@ -80,8 +75,7 @@
     padding-bottom: 15px;
   }
 
-  h2,
-  h3 {
+  h2, h3 {
     color: var(--text-primary);
     font-size: 1.2rem;
     margin-top: 24px;
@@ -117,10 +111,29 @@
   }
 }
 
-// AI Code Assistant Widget
 .ai-code-assistant {
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   width: 100%;
+}
+
+.widget-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  
+  h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &::before {
+      content: '✨';
+      font-size: 1.1rem;
+    }
+  }
 }
 
 .ai-code-input-group {
@@ -129,8 +142,8 @@
   background: var(--panel-bg);
   border: 1px solid var(--panel-border);
   border-radius: 8px;
-  padding: 4px 8px;
-  gap: 8px;
+  padding: 6px 10px;
+  gap: 10px;
   transition: border-color 0.2s, box-shadow 0.2s;
 
   &:focus-within {
@@ -139,8 +152,7 @@
   }
 
   .ai-icon {
-    font-size: 1.1rem;
-    cursor: default;
+    display: none;
   }
 
   input {
@@ -149,8 +161,8 @@
     border: none;
     color: var(--text-primary);
     font-size: 0.9rem;
-    padding: 8px 0;
-    font-family: inherit;
+    padding: 4px 0;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
 
     &:focus {
       outline: none;
@@ -158,13 +170,23 @@
 
     &::placeholder {
       color: var(--text-secondary);
-      opacity: 0.7;
+      opacity: 0.6;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
   }
 
+  .assistant-status {
+    font-size: 0.8rem;
+    margin-left: auto;
+    white-space: nowrap;
+    
+    &.error { color: var(--error-color); }
+    &.info { color: var(--text-secondary); }
+  }
+
   .btn-icon {
-    background: transparent;
-    border: none;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--accent-color);
     cursor: pointer;
     padding: 6px;
@@ -174,28 +196,40 @@
     justify-content: center;
     transition: background 0.2s;
     font-size: 1rem;
+    min-width: 30px;
 
     &:hover {
-      background: rgba(88, 166, 255, 0.1);
+      background: rgba(88, 166, 255, 0.2);
+      border-color: var(--accent-color);
     }
 
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
+
+    &.is-loading span {
+      display: inline-block;
+      animation: spin 1s linear infinite;
+    }
   }
 }
 
-// Code Editor Section (Right Column on Desktop)
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .code-editor-section {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  min-width: 0; // Prevents grid blowout
+  gap: 10px;
+  min-width: 0;
   width: 100%;
 
-  h2 {
-    display: none; // cleaner look
+  /* Hide the "Solution" header only */
+  > h2 {
+    display: none;
   }
 
   #code-editor {
@@ -203,23 +237,18 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--glass-shadow);
-    background: #1e1e1e; // Monaco's default dark theme background
+    background: #1e1e1e;
     min-height: 400px;
     height: 500px;
     width: 100%;
     box-sizing: border-box;
-
-    @media (max-width: 1023px) {
-      min-height: 350px;
-      height: 400px;
-    }
+    margin-bottom: 0;
   }
 }
 
-// Editor Action Buttons
 .editor-actions {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   justify-content: flex-end;
 }
 
@@ -282,27 +311,26 @@
   }
 }
 
-// Test Results Section
 .test-results {
   background: var(--panel-bg);
   backdrop-filter: blur(12px);
   border: 1px solid var(--panel-border);
   border-radius: 12px;
-  padding: 24px;
+  padding: 16px;
   box-shadow: var(--glass-shadow);
 
   h2 {
     margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 1.2rem;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
     color: var(--text-secondary);
   }
 }
 
 .test-summary {
-  padding: 16px;
+  padding: 12px;
   border-radius: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -367,17 +395,16 @@
   }
 }
 
-// AI Feedback Section (Chat-like Interface)
 .ai-feedback {
   background: var(--panel-bg);
   backdrop-filter: blur(12px);
   border: 1px solid var(--panel-border);
   border-radius: 12px;
-  padding: 16px; /* Reduced from 24px */
+  padding: 16px;
   box-shadow: var(--glass-shadow);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 
   .ai-header {
     display: flex;
@@ -385,12 +412,12 @@
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 10px;
-    min-height: 24px;
+    min-height: 20px;
   }
 
   h2 {
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--accent-color);
     display: flex;
     align-items: center;
@@ -406,10 +433,7 @@
 .status-text {
   font-size: 0.9rem;
   color: var(--text-secondary);
-  /* No min-height to ensure 0 height when empty */
 }
-
-/* Removed .model-status block completely */
 
 .progress-container {
   margin-top: 10px;

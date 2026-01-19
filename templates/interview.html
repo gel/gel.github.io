@@ -56,48 +56,54 @@
   </div>
 
   <!-- Code Editor Section -->
-  <div class="code-editor-section">
-    <h2>Solution</h2>
-    
-    <!-- AI Code Assistant Widget -->
-    <div class="ai-code-assistant">
-      <div class="ai-code-input-group">
-        <span class="ai-icon">✨</span>
-        <input type="text" id="ai-code-prompt" placeholder="Ask AI to edit code (e.g. 'Change if to switch')...">
-        <button id="ai-code-submit" class="btn-icon" aria-label="Generate Code">
-          <span>➤</span>
-        </button>
+  <div class="interview-workspace">
+    <div class="code-editor-section">
+      <h2>Solution</h2>
+      
+      <!-- AI Code Assistant Widget -->
+      <div class="ai-code-assistant">
+        <div class="widget-header">
+          <h2>AI Code Assistant</h2>
+        </div>
+        <div class="ai-code-input-group">
+          <span class="ai-icon">✨</span>
+          <input type="text" id="ai-code-prompt" placeholder="Ask AI to edit code (e.g. 'Change if to switch')...">
+          <button id="ai-code-submit" class="btn-icon" aria-label="Generate Code">
+            <span>➤</span>
+          </button>
+        </div>
+        <div id="ai-code-status" class="assistant-status"></div>
+      </div>
+
+      <div id="code-editor"></div>
+
+      <div class="editor-actions">
+        <button id="get-hint" class="btn btn-outline">Hint</button>
+        <button id="run-tests" class="btn btn-secondary">Run Tests</button>
+        <button id="submit-solution" class="btn btn-primary">Submit for Review</button>
       </div>
     </div>
 
-    <div id="code-editor"></div>
+    <!-- Test Results Section -->
+    <div class="test-results">
+      <h2>Test Results</h2>
+      <div id="test-results-content">
+        <p class="placeholder-text">Click "Run Tests" to execute your solution against test cases.</p>
+      </div>
+    </div>
 
-    <div class="editor-actions">
-      <button id="get-hint" class="btn btn-outline">Hint</button>
-      <button id="run-tests" class="btn btn-secondary">Run Tests</button>
-      <button id="submit-solution" class="btn btn-primary">Submit for Review</button>
-    </div>
-  </div>
-
-  <!-- Test Results Section -->
-  <div class="test-results">
-    <h2>Test Results</h2>
-    <div id="test-results-content">
-      <p class="placeholder-text">Click "Run Tests" to execute your solution against test cases.</p>
-    </div>
-  </div>
-
-  <!-- AI Feedback Section -->
-  <div class="ai-feedback">
-    <div class="ai-header">
-      <h2>AI Interviewer</h2>
-      <span class="status-text"></span>
-    </div>
-    <div id="progress-container" class="progress-container" style="display: none;">
-      <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
-    </div>
-    <div id="feedback-content" class="feedback-content">
-      <p>I'll review your code once you submit it. I can also give you hints if you get stuck!</p>
+    <!-- AI Feedback Section -->
+    <div class="ai-feedback">
+      <div class="ai-header">
+        <h2>AI Interviewer</h2>
+        <span class="status-text"></span>
+      </div>
+      <div id="progress-container" class="progress-container" style="display: none;">
+        <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
+      </div>
+      <div id="feedback-content" class="feedback-content">
+        <p>I'll review your code once you submit it. I can also give you hints if you get stuck!</p>
+      </div>
     </div>
   </div>
 </div>
