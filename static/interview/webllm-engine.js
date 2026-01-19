@@ -18,7 +18,103 @@ Your role:
 
 Important: Speak directly to me in the first person (e.g., "I see you used a loop...", "How would you optimize this?"). Do not refer to "the candidate" or "the user". Be encouraging but rigorous.`;
 
-// ...
+const HINT_SYSTEM_PROMPT = `You are a helpful technical interviewer.
+Your goal is to give the candidate a small, progressive hint to unblock them.
+IMPORTANT: Speak directly to the candidate using "you" and "I".
+Example: "I suggest you check your loop condition."
+NEVER use third-person phrases like "The candidate should..." or "Tell the candidate to...".`;
+
+/**
+ * Check if WebGPU is available
+ */
+export function checkWebGPUSupport() {
+  if (!navigator.gpu) {
+    return {
+      supported: false,
+      message: "WebGPU not supported. Please use Chrome 113+ or Edge 113+."
+    };
+  }
+  return { supported: true };
+}
+
+/**
+ * Initialize the WebLLM engine with progress callback
+ * @param {function} onProgress - Progress callback (progress: number, text: string)
+ */
+export async function initEngine(onProgress) {
+  if (engine) return engine;
+  if (isLoading) {
+    throw new Error("Engine is already loading");
+  }
+
+  const gpuCheck = checkWebGPUSupport();
+  if (!gpuCheck.supported) {
+    throw new Error(gpuCheck.message);
+  }
+
+  isLoading = true;
+
+  try {
+    // Dynamic import of WebLLM from CDN (esm.run works better for browser)
+    const { CreateMLCEngine } = await import(
+      "https://esm.run/@mlc-ai/web-llm"
+    );
+
+    engine = await CreateMLCEngine(MODEL_ID, {
+      initProgressCallback: (report) => {
+        if (onProgress) {
+          onProgress(report.progress, report.text);
+        }
+      }
+    });
+
+    isLoading = false;
+    return engine;
+  } catch (error) {
+    isLoading = false;
+    throw error;
+  }
+}
+
+/**
+ * Get the current engine instance
+ */
+export function getEngine() {
+  return engine;
+}
+
+/**
+ * Check if engine is ready
+ */
+export function isEngineReady() {
+  return engine !== null;
+}
+
+/**
+ * Check if engine is currently loading
+ */
+export function isEngineLoading() {
+  return isLoading;
+}
+
+/**
+ * Evaluate user code with LLM feedback
+ * @param {string} problemDescription - The problem description
+ * @param {string} userCode - The user's submitted code
+ * @param {object} testResults - Results from running test cases
+ * @param {function} onToken - Callback for streaming tokens
+ */
+export async function evaluateCode(problemDescription, userCode, testResults, onToken) {
+  if (!engine) {
+    throw new Error("Engine not initialized. Call initEngine first.");
+  }
+
+  const testResultsSummary = testResults.map((r, i) => {
+    if (r.error) {
+      return `Test ${i + 1}: ERROR - ${r.error}`;
+    }
+    return `Test ${i + 1}: ${r.passed ? "PASSED" : "FAILED"} - Input: ${JSON.stringify(r.input)}, Expected: ${JSON.stringify(r.expected)}, Got: ${JSON.stringify(r.actual)}`;
+  }).join("\n");
 
   const userMessage = `Problem: ${problemDescription}
 
@@ -32,9 +128,45 @@ ${testResultsSummary}
 
 Please review my code and provide feedback.`;
 
-// ...
+  try {
+    const response = await engine.chat.completions.create({
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        { role: "user", content: userMessage }
+      ],
+      temperature: 0.7,
+      stream: true
+    });
 
-  const hintPrompt = `You are a helpful interviewer. I (the candidate) am working on this problem:
+    let fullResponse = "";
+
+    for await (const chunk of response) {
+      const delta = chunk.choices[0]?.delta?.content || "";
+      fullResponse += delta;
+      if (onToken) {
+        onToken(delta, fullResponse);
+      }
+    }
+
+    return fullResponse;
+  } catch (error) {
+    console.error("Error during LLM evaluation:", error);
+    throw error;
+  }
+}
+
+/**
+ * Get a hint for the problem
+ * @param {string} problemDescription - The problem description
+ * @param {string} userCode - The user's current code (may be empty)
+ * @param {function} onToken - Callback for streaming tokens
+ */
+export async function getHint(problemDescription, userCode, onToken) {
+  if (!engine) {
+    throw new Error("Engine not initialized. Call initEngine first.");
+  }
+
+  const hintPrompt = `I (the candidate) am working on this problem:
 
 ${problemDescription}
 
@@ -45,6 +177,7 @@ Please give me a helpful hint to guide me toward the solution WITHOUT giving awa
   try {
     const response = await engine.chat.completions.create({
       messages: [
+        { role: "system", content: HINT_SYSTEM_PROMPT },
         { role: "user", content: hintPrompt }
       ],
       temperature: 0.7,

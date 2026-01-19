@@ -257,7 +257,7 @@ const Interviewer = {
         code,
         (token, fullText) => {
           streamedContent = fullText;
-          this.showFeedback(`<div class="hint-response">${this.formatMarkdown(streamedContent)}</div>`, true);
+          this.showFeedback(`<div class="hint-response"><strong>💡 Hint:</strong> ${this.formatMarkdown(streamedContent)}</div>`, true);
         }
       );
     } catch (error) {

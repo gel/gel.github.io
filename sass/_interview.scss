@@ -302,11 +302,11 @@
 
 .btn-outline {
   background: transparent;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   border: 1px solid var(--panel-border);
 
   &:hover:not(:disabled) {
-    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.1);
     border-color: var(--text-primary);
   }
 }
