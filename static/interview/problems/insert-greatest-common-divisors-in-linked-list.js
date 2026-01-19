@@ -1,5 +1,9 @@
 window.problemConfig = {
   methodName: "insertGreatestCommonDivisors",
+  typeMap: {
+    head: "ListNode",
+    return: "ListNode"
+  },
   starterCode: `# Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):

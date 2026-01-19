@@ -150,7 +150,13 @@ async function handleRunTests() {
   }
 
   try {
-    testResults = await runTests(code, currentProblem.testCases, currentProblem.methodName, updateProgress);
+    testResults = await runTests(
+      code, 
+      currentProblem.testCases, 
+      currentProblem.methodName, 
+      currentProblem.typeMap || {}, // Pass typeMap or empty object
+      updateProgress
+    );
     resultsContainer.innerHTML = formatResultsHTML(testResults);
 
     // Smooth scroll to results

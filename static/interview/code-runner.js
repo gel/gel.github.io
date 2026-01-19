@@ -51,12 +51,13 @@ function sendToWorker(type, payload = {}) {
 /**
  * Run all test cases against user code using Pyodide (via Web Worker)
  */
-export async function runTests(userCode, testCases, functionName = 'twoSum', onProgress) {
+export async function runTests(userCode, testCases, functionName = 'twoSum', typeMap = {}, onProgress) {
   try {
     const results = await sendToWorker('run-tests', {
       userCode,
       testCases,
-      functionName
+      functionName,
+      typeMap
     });
 
     return results;

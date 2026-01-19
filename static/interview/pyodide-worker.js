@@ -74,7 +74,7 @@ def list_to_tree(arr):
         i += 1
     return root
 
-def run_test(user_code, test_cases_json, method_name):
+def run_test(user_code, test_cases_json, method_name, type_map_json='{}'):
     namespace = {
         'ListNode': ListNode,
         'TreeNode': TreeNode
@@ -91,26 +91,27 @@ def run_test(user_code, test_cases_json, method_name):
         return {"error": f"Method '{method_name}' not found in class 'Solution'"}
 
     test_cases = json.loads(test_cases_json)
+    type_map = json.loads(type_map_json)
     results = []
 
     for tc in test_cases:
         try:
             args = tc['input'].copy()
             
-            # Special handling for complex types
-            if method_name == 'insertGreatestCommonDivisors':
-                if 'head' in args:
-                    args['head'] = create_linked_list(args['head'])
-                    
-            elif method_name == 'rangeSumBST':
-                if 'root' in args:
-                    args['root'] = list_to_tree(args['root'])
+            # Generic Type Conversion based on type_map
+            for arg_name, arg_type in type_map.items():
+                if arg_name == 'return': continue
+                if arg_name in args:
+                    if arg_type == 'ListNode':
+                        args[arg_name] = create_linked_list(args[arg_name])
+                    elif arg_type == 'TreeNode':
+                        args[arg_name] = list_to_tree(args[arg_name])
 
             # Execute
             actual = method(**args)
 
-            # Post-processing results
-            if method_name == 'insertGreatestCommonDivisors':
+            # Generic Return Conversion
+            if type_map.get('return') == 'ListNode':
                 actual = linked_list_to_list(actual)
 
             expected = tc['expected']
@@ -146,7 +147,7 @@ self.onmessage = async function (e) {
       self.postMessage({ id, type: 'init-complete', success: true });
     }
     else if (type === 'run-tests') {
-      const { userCode, testCases, functionName } = payload;
+      const { userCode, testCases, functionName, typeMap } = payload;
 
       if (!pyodide) {
         await initPyodide();
@@ -156,7 +157,12 @@ self.onmessage = async function (e) {
       const runTest = pyodide.runPython(pythonWrapper);
 
       // Run the tests
-      const resultProxy = runTest(userCode, JSON.stringify(testCases), functionName);
+      const resultProxy = runTest(
+        userCode, 
+        JSON.stringify(testCases), 
+        functionName, 
+        JSON.stringify(typeMap || {})
+      );
       const result = resultProxy.toJs({ dict_converter: Object.fromEntries });
 
       if (result.error) {
