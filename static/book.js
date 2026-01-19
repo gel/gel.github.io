@@ -182,6 +182,11 @@ function initSearch() {
   if (!$searchInput) {
     return;
   }
+  if (!window.elasticlunr) {
+    // Search is enabled in config but script failed to load or is missing
+    console.warn("elasticlunr not loaded, search functionality disabled");
+    return;
+  }
   var $searchIcon = document.querySelector(".search-icon");
   $searchIcon.addEventListener("click", toggleSearchMode);
 
