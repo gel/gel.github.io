@@ -70,15 +70,11 @@ Below is the list of selected research papers that have significantly contribute
 
 - [Benchmark] Generating Benchmarks for Factuality Evaluation of Language Models
 
-### Multi-Modal / Vision
-
-- [Point-E] A System for Generating 3D Point Clouds from Complex Prompts
-
-- [CLIP] Connecting text and images
-
 ### Models
 
 - [Survey] A Survey of Reshaping the GenAI Research Landscape
+
+**Text & Multimodal LLMs**
 
 - [ModernBERT] Modern Bidirectional Encoder
 
@@ -87,6 +83,12 @@ Below is the list of selected research papers that have significantly contribute
 - [Mixtral] Mixtral of Experts
 
 - [Gemini] A Family of Highly Capable Multimodal Models
+
+**Vision & Diffusion Models**
+
+- [Point-E] A System for Generating 3D Point Clouds from Complex Prompts
+
+- [CLIP] Connecting text and images
 
 ---
 
