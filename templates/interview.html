@@ -28,6 +28,8 @@
   // Monaco needs RequireJS-style loader
   var require = { paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' } };
 </script>
+<!-- Load problem-specific configuration -->
+<script src="/interview/problems/{{ page.slug }}.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
 <script>
   require(['vs/editor/editor.main'], function () {

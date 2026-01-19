@@ -6,6 +6,7 @@ description = "Practice the classic stock trading problem with AI interviewer fe
 [extra]
 difficulty = "Easy"
 category = "Arrays"
+
 +++
 
 ## Problem Description

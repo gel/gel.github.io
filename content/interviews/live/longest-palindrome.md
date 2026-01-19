@@ -6,6 +6,7 @@ description = "Practice finding the longest palindrome with AI interviewer feedb
 [extra]
 difficulty = "Medium"
 category = "Strings"
+
 +++
 
 ## Problem Description

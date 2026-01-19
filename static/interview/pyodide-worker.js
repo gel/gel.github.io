@@ -21,8 +21,64 @@ async function initPyodide() {
 const pythonWrapper = `
 import json
 
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def create_linked_list(arr):
+    if not arr: return None
+    head = ListNode(arr[0])
+    curr = head
+    for val in arr[1:]:
+        curr.next = ListNode(val)
+        curr = curr.next
+    return head
+
+def linked_list_to_list(head):
+    arr = []
+    curr = head
+    while curr:
+        arr.append(curr.val)
+        curr = curr.next
+    return arr
+
+def list_to_tree(arr):
+    if not arr: return None
+    if arr[0] is None: return None
+    
+    root = TreeNode(arr[0])
+    queue = [root]
+    i = 1
+    while queue and i < len(arr):
+        node = queue.pop(0)
+        
+        # Left child
+        if i < len(arr) and arr[i] is not None:
+            node.left = TreeNode(arr[i])
+            queue.append(node.left)
+        i += 1
+        
+        # Right child
+        if i < len(arr) and arr[i] is not None:
+            node.right = TreeNode(arr[i])
+            queue.append(node.right)
+        i += 1
+    return root
+
 def run_test(user_code, test_cases_json, method_name):
-    namespace = {}
+    namespace = {
+        'ListNode': ListNode,
+        'TreeNode': TreeNode
+    }
     exec(user_code, namespace)
 
     if 'Solution' not in namespace:
@@ -39,13 +95,29 @@ def run_test(user_code, test_cases_json, method_name):
 
     for tc in test_cases:
         try:
-            args = tc['input']
-            expected = tc['expected']
+            args = tc['input'].copy()
+            
+            # Special handling for complex types
+            if method_name == 'insertGreatestCommonDivisors':
+                if 'head' in args:
+                    args['head'] = create_linked_list(args['head'])
+                    
+            elif method_name == 'rangeSumBST':
+                if 'root' in args:
+                    args['root'] = list_to_tree(args['root'])
+
+            # Execute
             actual = method(**args)
 
+            # Post-processing results
+            if method_name == 'insertGreatestCommonDivisors':
+                actual = linked_list_to_list(actual)
+
+            expected = tc['expected']
             passed = actual == expected
+            
             results.append({
-                "input": args,
+                "input": tc['input'],
                 "expected": expected,
                 "actual": actual,
                 "passed": passed

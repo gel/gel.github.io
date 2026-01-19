@@ -6,6 +6,7 @@ description = "Practice evaluating RPN expressions with AI interviewer feedback"
 [extra]
 difficulty = "Medium"
 category = "Stacks"
+
 +++
 
 ## Problem Description

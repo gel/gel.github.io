@@ -6,6 +6,7 @@ description = "Practice the classic Two Sum problem with AI interviewer feedback
 [extra]
 difficulty = "Easy"
 category = "Arrays"
+
 +++
 
 ## Problem Description
