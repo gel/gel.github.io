@@ -9,33 +9,138 @@ import {
   checkWebGPUSupport
 } from './webllm-engine.js';
 
-// Test cases for Two Sum problem
-const TWO_SUM_TEST_CASES = [
-  { input: { nums: [2, 7, 11, 15], target: 9 }, expected: [0, 1] },
-  { input: { nums: [3, 2, 4], target: 6 }, expected: [1, 2] },
-  { input: { nums: [3, 3], target: 6 }, expected: [0, 1] },
-  { input: { nums: [1, 2, 3, 4, 5], target: 9 }, expected: [3, 4] },
-  { input: { nums: [-1, -2, -3, -4, -5], target: -8 }, expected: [2, 4] }
-];
-
-// Problem description for AI context
-const PROBLEM_DESCRIPTION = `Two Sum: Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice.`;
-
-// Default starter code (Python)
-const STARTER_CODE = `from typing import List
+// Problem configurations - detected from URL
+const PROBLEMS = {
+  'two-sum': {
+    methodName: 'twoSum',
+    description: 'Two Sum: Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.',
+    testCases: [
+      { input: { nums: [2, 7, 11, 15], target: 9 }, expected: [0, 1] },
+      { input: { nums: [3, 2, 4], target: 6 }, expected: [1, 2] },
+      { input: { nums: [3, 3], target: 6 }, expected: [0, 1] },
+      { input: { nums: [1, 2, 3, 4, 5], target: 9 }, expected: [3, 4] },
+      { input: { nums: [-1, -2, -3, -4, -5], target: -8 }, expected: [2, 4] }
+    ],
+    starterCode: `from typing import List
 
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        # Hash map to store the value and its index
-        num_map = {}
+        # Brute force approach - check all pairs
+        # TODO: Can you optimize this to O(n)?
+        for i in range(len(nums)):
+            for j in range(i + 1, len(nums)):
+                if nums[i] + nums[j] == target:
+                    return [i, j]
+        return []`
+  },
 
-        for i, num in enumerate(nums):
-            complement = target - num
-            if complement in num_map:
-                return [num_map[complement], i]
-            num_map[num] = i
+  'best-time-to-buy-sell-stock': {
+    methodName: 'maxProfit',
+    description: 'Best Time to Buy and Sell Stock: Given an array prices where prices[i] is the price of a stock on day i, find the maximum profit from buying and selling once.',
+    testCases: [
+      { input: { prices: [7, 1, 5, 3, 6, 4] }, expected: 5 },
+      { input: { prices: [7, 6, 4, 3, 1] }, expected: 0 },
+      { input: { prices: [1, 2, 3, 4, 5] }, expected: 4 },
+      { input: { prices: [2, 4, 1] }, expected: 2 },
+      { input: { prices: [3, 3, 3, 3] }, expected: 0 }
+    ],
+    starterCode: `from typing import List
 
-        return [] # Should not happen based on constraints`;
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        # Brute force - check all buy/sell combinations
+        # TODO: Can you optimize this to O(n)?
+        max_profit = 0
+        for i in range(len(prices)):
+            for j in range(i + 1, len(prices)):
+                profit = prices[j] - prices[i]
+                if profit > max_profit:
+                    max_profit = profit
+        return max_profit`
+  },
+
+  'longest-palindrome': {
+    methodName: 'longestPalindrome',
+    description: 'Longest Palindromic Substring: Given a string s, return the longest palindromic substring in s.',
+    testCases: [
+      { input: { s: 'babad' }, expected: 'bab' },  // or 'aba'
+      { input: { s: 'cbbd' }, expected: 'bb' },
+      { input: { s: 'a' }, expected: 'a' },
+      { input: { s: 'ac' }, expected: 'a' },  // or 'c'
+      { input: { s: 'racecar' }, expected: 'racecar' }
+    ],
+    starterCode: `class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        # Brute force - check all substrings
+        # TODO: Can you optimize this?
+        def is_palindrome(sub):
+            return sub == sub[::-1]
+
+        longest = ""
+        for i in range(len(s)):
+            for j in range(i + 1, len(s) + 1):
+                substring = s[i:j]
+                if is_palindrome(substring) and len(substring) > len(longest):
+                    longest = substring
+        return longest`
+  },
+
+  'reverse-polish-notation': {
+    methodName: 'evalRPN',
+    description: 'Evaluate Reverse Polish Notation: Evaluate the value of an arithmetic expression in Reverse Polish Notation. Valid operators are +, -, *, /.',
+    testCases: [
+      { input: { tokens: ['2', '1', '+', '3', '*'] }, expected: 9 },
+      { input: { tokens: ['4', '13', '5', '/', '+'] }, expected: 6 },
+      { input: { tokens: ['10', '6', '9', '3', '+', '-11', '*', '/', '*', '17', '+', '5', '+'] }, expected: 22 },
+      { input: { tokens: ['3', '4', '+'] }, expected: 7 },
+      { input: { tokens: ['5', '2', '-'] }, expected: 3 }
+    ],
+    starterCode: `from typing import List
+
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        # Use a stack to evaluate the expression
+        stack = []
+
+        for token in tokens:
+            if token in ['+', '-', '*', '/']:
+                # Pop two operands
+                right = stack.pop()
+                left = stack.pop()
+
+                # Perform operation
+                if token == '+':
+                    result = left + right
+                elif token == '-':
+                    result = left - right
+                elif token == '*':
+                    result = left * right
+                elif token == '/':
+                    # Truncate toward zero
+                    result = int(left / right)
+
+                stack.append(result)
+            else:
+                stack.append(int(token))
+
+        return stack[0]`
+  }
+};
+
+// Detect current problem from URL
+function getCurrentProblem() {
+  const path = window.location.pathname;
+  for (const problemId of Object.keys(PROBLEMS)) {
+    if (path.includes(problemId)) {
+      return PROBLEMS[problemId];
+    }
+  }
+  // Default to two-sum if not found
+  return PROBLEMS['two-sum'];
+}
+
+// Get current problem config
+const currentProblem = getCurrentProblem();
 
 // Global state
 let editor = null;
@@ -66,7 +171,7 @@ function initEditor() {
     }
 
     console.log('[Interview] Creating Monaco editor with starter code...');
-    console.log('[Interview] STARTER_CODE length:', STARTER_CODE.length);
+    console.log('[Interview] Starter code length:', currentProblem.starterCode.length);
 
     try {
       const monaco = window.MonacoEditor;
@@ -83,7 +188,7 @@ function initEditor() {
 
       // Create Monaco editor instance
       editor = monaco.editor.create(editorContainer, {
-        value: STARTER_CODE,
+        value: currentProblem.starterCode,
         language: 'python',
         theme: 'vs-dark',
         fontSize: 15,
@@ -141,7 +246,7 @@ function initEditor() {
  * Get current code from editor
  */
 function getEditorCode() {
-  if (!editor) return STARTER_CODE;
+  if (!editor) return currentProblem.starterCode;
   return editor.getValue();
 }
 
@@ -161,7 +266,7 @@ async function handleRunTests() {
   }
 
   try {
-    testResults = await runTests(code, TWO_SUM_TEST_CASES, 'twoSum', updateProgress);
+    testResults = await runTests(code, currentProblem.testCases, currentProblem.methodName, updateProgress);
     resultsContainer.innerHTML = formatResultsHTML(testResults);
 
     // Smooth scroll to results
@@ -243,19 +348,17 @@ async function handleSubmitForReview() {
     if (submitBtn) submitBtn.textContent = 'Analyzing...';
     showFeedback('<p class="loading-message">AI is reviewing your code...</p>');
 
-    // Get AI feedback with "Interviewer" personality
-    let streamedContent = '';
     const interviewerPrompt = `
       You are a senior engineering interviewer at a top tech company.
-      Review this Two Sum solution.
+      Review this coding solution.
       Be professional, encouraging, but also pointed about time/space complexity.
-      If the solution is correct, acknowledge it and maybe ask about the Follow-up O(n) approach if they didn't use it.
+      If the solution is correct, acknowledge it and maybe ask about optimization if they used a brute force approach.
       If it's incorrect or inefficient, guide them to the right path without giving away the full answer immediately.
       Format your response in a supportive, conversational tone.
     `;
 
     await evaluateCode(
-      `${interviewerPrompt}\n\nProblem: ${PROBLEM_DESCRIPTION}`,
+      `${interviewerPrompt}\n\nProblem: ${currentProblem.description}`,
       code,
       testResults,
       (token, fullText) => {
@@ -319,7 +422,7 @@ async function handleGetHint() {
     // Get hint
     let streamedContent = '';
     await getHint(
-      PROBLEM_DESCRIPTION,
+      currentProblem.description,
       code,
       (token, fullText) => {
         streamedContent = fullText;
