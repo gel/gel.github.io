@@ -74,6 +74,7 @@ Model Context Protocol (MCP) servers extend your AI agents with external capabil
 |------|-----------|-------------|-----------|
 | **Gemini Deep Research** | ✅ Free via AI Studio | AI Pro (higher limits) | Long-form research, Google Search integration |
 | **ChatGPT Deep Research** | ❌ Plus required | Plus $20/mo, Pro $200/mo | Multi-source synthesis, web browsing |
+| **Perplexity Deep Research** | ❌ Pro required | Pro $20/mo | Extremely useful as MCP server (bit slow) |
 
 ---
 
