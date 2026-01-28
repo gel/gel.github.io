@@ -51,21 +51,21 @@
 
     // Smooth reveal for code blocks
     const codeBlocks = document.querySelectorAll('pre code');
+
+    const codeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          codeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
     codeBlocks.forEach(block => {
       block.style.opacity = '0';
       block.style.transform = 'translateY(10px)';
       block.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      
-      const codeObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            codeObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      
       codeObserver.observe(block);
     });
 
