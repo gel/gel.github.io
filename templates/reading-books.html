@@ -26,13 +26,5 @@
   {{ reading_book_macros::book_category_section(title="History Books", section_path="books/history/_index.md", slug="history") }}
   {{ reading_book_macros::book_category_section(title="Fiction Books", section_path="books/fiction/_index.md", slug="fiction") }}
 
-  {% set podcasts_section = get_section(path="podcasts/_index.md") %}
-  {% if podcasts_section.pages | length > 0 %}
-    <h2>Podcasts</h2>
-    {% for post in podcasts_section.pages %}
-      {% if post.extra.podcast_image_path and not post.extra.disabled %}
-        {{ reading_book_macros::podcast_preview(post=post) }}
-      {% endif %}
-    {% endfor %}
-  {% endif %}
 {% endblock content %}
+

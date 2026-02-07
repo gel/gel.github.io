@@ -36,17 +36,13 @@
   display: inline-block;
   margin: 1rem;
   position: relative;
-  overflow: hidden;
-  border-radius: 8px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 0;
-  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0; // Hidden initially
+  transform: translateY(20px); // Start slightly down
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 
-  // Stagger animation for multiple books
-  @for $i from 1 through 20 {
-    &:nth-child(#{$i}) {
-      animation-delay: #{$i * 0.1}s;
-    }
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   img {
@@ -91,12 +87,16 @@
 
 // Category section headers
 h2 {
-  opacity: 0;
-  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0; // Controlled by animations.js
   margin-top: 3rem;
   margin-bottom: 1.5rem;
   position: relative;
   padding-bottom: 0.5rem;
+
+  &.visible {
+    opacity: 1;
+  }
+
 
   // Animated underline
   &::after {

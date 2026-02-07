@@ -37,7 +37,7 @@
     <small>
       {{ page.date | date(format="%B %d, %Y") }}
       {% if page.taxonomies.tags %}
-        - 
+        -
         <span class="tags">
           {% for tag in page.taxonomies.tags %}
             <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">{{ tag }}</a>
@@ -50,19 +50,19 @@
   <div class="podcast-content">
     {% if page.extra.podcast_image_path %}
       <div class="podcast-thumbnail">
-        <img src="{{ current_path | split(pat='/') | slice(end=-1) | join(sep='/') }}/{{ page.extra.podcast_image_path }}" alt="{{ page.title }}" />
+        <img src="{{ get_url(path="podcasts/" ~ page.extra.podcast_image_path) }}" alt="{{ page.title }}" />
       </div>
     {% endif %}
 
     {% if page.extra.youtube_id %}
       <div class="podcast-video">
-        <iframe 
-          width="560" 
-          height="315" 
-          src="https://www.youtube.com/embed/{{ page.extra.youtube_id }}" 
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/{{ page.extra.youtube_id }}"
           title="{{ page.title }}"
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen>
         </iframe>
       </div>

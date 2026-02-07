@@ -54,9 +54,9 @@ Model Context Protocol (MCP) servers extend your AI agents with external capabil
 
 | MCP Server | Purpose | Link |
 |------------|---------|------|
-| **Perplexity Search** | Web research with citations (Perplexity PRO provides high-quality search value) | [perplexity-ask](https://github.com/ppl-ai/perplexity-mcp) |
+| **Perplexity Search** | Web research with citations (Perplexity PRO provides high-quality search value) | [perplexity-mcp](https://github.com/perplexityai/modelcontextprotocol) |
 | **mobile-next/mobile-mcp** | iOS/Android device automation | [mobile-mcp](https://github.com/mobile-next/mobile-mcp) |
-| **telegram-mcp** | Telegram bot integration | [telegram-mcp](https://github.com/nicekid1/telegram-mcp) |
+| **telegram-mcp** | Telegram bot integration | [telegram-mcp](https://github.com/dryeab/mcp-telegram) |
 
 ---
 

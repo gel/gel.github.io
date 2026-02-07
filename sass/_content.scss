@@ -116,113 +116,107 @@
     }
   }
 
-  .previous,
-  .next {
-    position: fixed;
+  /* Book Pagination Redesign */
+  .book-pagination {
     display: flex;
-    top: 50px;
-    bottom: 0;
-    font-size: 2.5em;
-    color: #ccc;
-    text-decoration: none;
-    text-align: center;
-    margin: 0;
-    max-width: 150px;
-    min-width: 90px;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--table-border-bottom);
+    gap: 1rem;
 
-    &:hover {
-      color: #333;
+    .prev-link,
+    .next-link {
+      flex: 1;
+      min-width: 0; // Allow flex items to shrink below content size
     }
-  }
-
-  .previous {
-    left: variables.$sidebar-width;
-    float: left;
-    transition: left 0.5s;
-  }
-
-  .next {
-    // not 0 as it goes over the sidebar otherwise
-    right: 15px;
-    float: right;
-  }
-
-  @include variables.max-screen(1250px) {
 
     .previous,
     .next {
-      position: static;
-      top: auto;
-      display: inline-block;
-      max-width: 49%;
-      width: 49%;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      border: 1px solid var(--table-border-bottom);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      height: 100%;
+      color: var(--body-color);
+      background: var(--table-bg-even);
 
       &:hover {
-        text-decoration: none;
+        border-color: var(--accent-color);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
+
+      // Label (Previous/Next)
+      &::before {
+        content: "Previous";
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+    }
+
+    .next {
+      text-align: right;
+      align-items: flex-end;
+
+      &::before {
+        content: "Next";
+      }
+    }
+
+    // Hide empty links
+    .prev-link:empty,
+    .next-link:empty {
+      display: none;
     }
   }
 
-  @include variables.max-screen(600px) {
-    padding-bottom: 50px;
+  /* Mobile Bottom Bar (max-width: 768px for broader support) */
+  @include variables.max-screen(768px) {
+    padding-bottom: 80px; // Make space for the bar
 
-    /* Ensure content is not hidden behind the fixed navigation */
-    .previous,
-    .next {
+    .book-pagination {
       position: fixed;
       bottom: 0;
-      top: auto;
-      height: 40px;
-      width: 50%;
-      background: color-mix(in srgb, var(--body-bg) 85%, transparent);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-top: 1px solid color-mix(in srgb, var(--table-border-bottom) 50%, transparent);
-      font-size: 1.3em;
-      z-index: 100;
-      opacity: 0.9;
-      transition: opacity 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      left: 0;
+      right: 0;
+      background: var(--body-bg);
+      border-top: 1px solid var(--table-border-bottom);
+      margin: 0;
+      padding: 10px;
+      z-index: 1000;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+      gap: 10px;
 
-      &:hover {
-        opacity: 1;
-        background: var(--body-bg);
+      .previous,
+      .next {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 12px;
+        border: none;
+        background: var(--accent-color);
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+
+        &:hover {
+          transform: none;
+          box-shadow: none;
+        }
+
+        &::before {
+          display: none; // Hide labels on mobile to save space
+        }
       }
-    }
-
-    .previous {
-      left: 0;
-      border-right: 1px solid color-mix(in srgb, var(--table-border-bottom) 50%, transparent);
-    }
-
-    .next {
-      right: 0;
-      left: auto;
-    }
-
-    /* Single button case: when only one nav button exists, make it full width and centered */
-    /* Only next button exists (no previous) */
-    .prev-link:not(:has(a))+.next-link .next {
-      width: 100%;
-      max-width: none;
-      left: 0;
-      right: 0;
-      border-right: none;
-    }
-
-    /* Only previous button exists (no next) - use :has() on parent .page */
-    &:has(.prev-link a):has(.next-link:empty) .previous,
-    &:has(.prev-link a):not(:has(.next-link a)) .previous {
-      width: 100%;
-      max-width: none;
-      left: 0;
-      right: 0;
-      border-right: none;
     }
   }
 }

@@ -38,7 +38,7 @@ For easy access and exploration, the following is a list of some of the most pro
 19. Guanaco Dataset: [https://huggingface.co/datasets/JosephusCheung/GuanacoDataset](https://huggingface.co/datasets/JosephusCheung/GuanacoDataset)
 20. Open Assistant: [https://github.com/LAION-AI/Open-Assistant](https://github.com/LAION-AI/Open-Assistant)
 21. Baize Chatbot: [https://github.com/project-baize/baize-chatbot](https://github.com/project-baize/baize-chatbot)
-22. UltraChat Data: [https://github.com/thunlp/UltraChat#data](https://github.com/thunlp/UltraChat#data)
+22. UltraChat Data: [https://github.com/thunlp/UltraChat](https://github.com/thunlp/UltraChat)
 
 These resources are further augmented by visual examples of task instructions and their applications, enabling a more intuitive grasp of how instruction tuning operates within LLMs.
 

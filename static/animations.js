@@ -1,10 +1,10 @@
 // Scroll-triggered animations
-(function() {
+(function () {
   'use strict';
 
   // Check if user prefers reduced motion
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  
+
   if (prefersReducedMotion) {
     return; // Exit early if user prefers reduced motion
   }
@@ -16,11 +16,28 @@
   };
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+    // Filter for intersecting entries
+    const intersectingEntries = entries.filter(entry => entry.isIntersecting);
+
+    // Sort by vertical position (rows), then horizontal (columns) for left-to-right effect
+    intersectingEntries.sort((a, b) => {
+      const rectA = a.target.getBoundingClientRect();
+      const rectB = b.target.getBoundingClientRect();
+
+      // Group by row (within 20px tolerance)
+      const topDiff = rectA.top - rectB.top;
+      if (Math.abs(topDiff) > 20) {
+        return topDiff;
       }
+      return rectA.left - rectB.left;
+    });
+
+    intersectingEntries.forEach((entry, index) => {
+      // Dynamic stagger based on the number of items appearing at once
+      // Use transitionDelay because we are using CSS transitions, not keyframe animations
+      entry.target.style.transitionDelay = `${index * 0.1}s`;
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
     });
   }, observerOptions);
 
@@ -29,12 +46,11 @@
     const fadeElements = document.querySelectorAll('.fade-in');
     fadeElements.forEach(el => observer.observe(el));
 
-    // Add fade-in to post previews
-    const postPreviews = document.querySelectorAll('.post-preview');
-    postPreviews.forEach((preview, index) => {
-      preview.classList.add('fade-in');
-      preview.style.animationDelay = `${index * 0.1}s`;
-      observer.observe(preview);
+    // Add fade-in to post previews and books without static delay
+    const animatedItems = document.querySelectorAll('.post-preview, .reading-book');
+    animatedItems.forEach((item) => {
+      item.classList.add('fade-in');
+      observer.observe(item);
     });
 
     // Add fade-in to headings
@@ -51,21 +67,21 @@
 
     // Smooth reveal for code blocks
     const codeBlocks = document.querySelectorAll('pre code');
-
-    const codeObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-          codeObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
     codeBlocks.forEach(block => {
       block.style.opacity = '0';
       block.style.transform = 'translateY(10px)';
       block.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+
+      const codeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            codeObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
       codeObserver.observe(block);
     });
 
@@ -80,7 +96,7 @@
         const centerY = rect.height / 2;
         const moveX = (x - centerX) / 10;
         const moveY = (y - centerY) / 10;
-        
+
         profileIcon.style.transform = `translate(${moveX}px, ${moveY}px)`;
       });
 
@@ -95,7 +111,7 @@
       const text = mainTitle.textContent;
       mainTitle.textContent = '';
       mainTitle.style.opacity = '1';
-      
+
       let i = 0;
       const typeInterval = setInterval(() => {
         if (i < text.length) {

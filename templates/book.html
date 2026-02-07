@@ -129,15 +129,17 @@ Gal's {{ current_book_title }} Book - {{ section.title }}
   </div>
 </div>
 
-<div class="prev-link">
-  {% block prev_link %}
-  {% endblock prev_link %}
-</div>
+<nav class="book-pagination">
+  <div class="prev-link">
+    {% block prev_link %}
+    {% endblock prev_link %}
+  </div>
 
-<div class="next-link">
-  {% block next_link %}
-  {% endblock next_link %}
-</div>
+  <div class="next-link">
+    {% block next_link %}
+    {% endblock next_link %}
+  </div>
+</nav>
 </div>
 
 {% block js_body %}
