@@ -17,6 +17,10 @@ function getProblemConfig() {
   return window.problemConfig;
 }
 
+function getMonacoTheme() {
+  return document.documentElement.getAttribute('data-theme') === 'dark' ? 'vs-dark' : 'vs';
+}
+
 // --- 1. Engine Manager (Shared Service) ---
 const EngineManager = {
   async ensureReady(onProgress) {
@@ -288,7 +292,7 @@ function initEditor() {
         editor = window.MonacoEditor.editor.create(editorContainer, {
           value: problemConfig.starterCode,
           language: 'python',
-          theme: 'vs-dark',
+          theme: getMonacoTheme(),
           fontSize: 15,
           fontFamily: "'JetBrains Mono', 'Fira Code', 'Consolas', monospace",
           minimap: { enabled: false },
@@ -360,6 +364,12 @@ function init() {
   initEditor();
   CodeAssistant.init();
   Interviewer.init();
+
+  window.addEventListener('themeChanged', () => {
+    if (window.MonacoEditor && editor) {
+      window.MonacoEditor.editor.setTheme(getMonacoTheme());
+    }
+  });
 }
 
 export default { init };

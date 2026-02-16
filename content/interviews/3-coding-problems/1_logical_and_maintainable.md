@@ -9,6 +9,7 @@ weight = 1
 - [Best Time to Buy and Sell Stock - Easy - LeetCode 121](#best-time-to-buy-and-sell-stock-easy-leetcode-121)
 - [Partitioning Into Minimum Number Of Deci-Binary Numbers - Medium - LeetCode 1689](#partitioning-into-minimum-number-of-deci-binary-numbers-medium-leetcode-1689)
 - [Insert Greatest Common Divisors in Linked List - Medium - LeetCode 2807](#insert-greatest-common-divisors-in-linked-list-medium-leetcode-2807)
+- [Directory Search Library - OO Design](#directory-search-library-oo-design)
 
 ---
 
@@ -367,4 +368,85 @@ class GreatestCommonDivisorsSolution {
     }
 }
 
+```
+
+---
+
+### Directory Search Library - OO Design
+
+**Question**
+
+Design a small directory search library that can support:
+
+1. Files larger than 5 MB.
+2. Files by extension (for example `xml`).
+
+The design should be extensible and secure, so adding new criteria later should be straightforward.
+
+**What I Evaluate**
+
+I use this question mainly for software design quality:
+
+1. Clear components and separation of responsibilities.
+2. Interface-first thinking.
+3. Composition over inheritance.
+4. Practical optimization mindset.
+5. Security and safety awareness (symlink cycles, permission failures, path handling).
+
+**Suggested Design**
+
+```java
+public final class FileFind {
+    public interface Matcher {
+        boolean matches(File file);
+    }
+
+    public static List<File> find(File root, Matcher matcher) throws IOException {
+        return find(root, matcher, new HashSet<>(), new ArrayList<>());
+    }
+
+    private static List<File> find(
+            File file,
+            Matcher matcher,
+            Set<String> seenCanonicalPaths,
+            List<File> out) throws IOException {
+
+        String canonical = file.getCanonicalPath();
+        if (!seenCanonicalPaths.add(canonical)) {
+            return out; // cycle protection
+        }
+
+        if (matcher.matches(file)) {
+            out.add(file);
+        }
+
+        if (file.isDirectory()) {
+            File[] children = file.listFiles();
+            if (children != null) {
+                for (File child : children) {
+                    find(child, matcher, seenCanonicalPaths, out);
+                }
+            }
+        }
+        return out;
+    }
+
+    public static Matcher and(Matcher... matchers) {
+        return file -> {
+            for (Matcher m : matchers) {
+                if (!m.matches(file)) return false;
+            }
+            return true;
+        };
+    }
+
+    public static Matcher extension(String ext) {
+        String suffix = "." + ext.toLowerCase();
+        return file -> file.isFile() && file.getName().toLowerCase().endsWith(suffix);
+    }
+
+    public static Matcher sizeAtLeast(long bytes) {
+        return file -> file.isFile() && file.length() >= bytes;
+    }
+}
 ```

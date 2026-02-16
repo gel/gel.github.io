@@ -74,12 +74,24 @@ export function getTestSummary(results) {
   const total = results.length;
   const passed = results.filter(r => r.passed).length;
   const failed = total - passed;
+  const score = total === 0 ? 0 : Math.round((passed / total) * 100);
+
+  let band = 'Needs Work';
+  if (score === 100) {
+    band = 'Excellent';
+  } else if (score >= 80) {
+    band = 'Strong';
+  } else if (score >= 60) {
+    band = 'Good';
+  }
 
   return {
     total,
     passed,
     failed,
-    allPassed: passed === total
+    allPassed: passed === total,
+    score,
+    band
   };
 }
 
@@ -101,6 +113,7 @@ export function formatResultsHTML(results) {
   let html = `<div class="test-summary ${summary.allPassed ? 'all-passed' : 'has-failures'}">`;
   html += `<span>${summary.allPassed ? '🚀' : '⚠️'}</span>`;
   html += `<strong>${summary.passed}/${summary.total} Tests Passed</strong>`;
+  html += `<span style="margin-left:auto;"><strong>Score: ${summary.score}%</strong> (${summary.band})</span>`;
   html += `</div>`;
 
   html += '<div class="test-cases">';

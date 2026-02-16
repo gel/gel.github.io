@@ -57,11 +57,38 @@
     }
 
     @media (max-width: 600px) {
+      header {
+        gap: 0.5rem;
+      }
+
+      header nav {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      header nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      header nav>a {
+        flex: 0 0 auto;
+      }
+
+      header nav>a.nav-projects {
+        display: none;
+      }
+
       header nav>a:not(:last-child) {
         margin-right: 0.6rem;
       }
 
       .theme-toggle {
+        flex: 0 0 auto;
         padding: 0 5px;
       }
     }
@@ -249,8 +276,9 @@
     <nav>
       {% for link in config.extra.nav %}
       <a href="{{ link.path }}"
-        class="{% if current_path is defined and current_path is starting_with(link.path) and link.path != '/' %}active-nav{% endif %}">{{
-        link.name }}</a>
+        class="nav-{{ link.name | lower | replace(from=' ', to='-') }}
+        {% if current_path is defined and current_path is starting_with(link.path) and link.path != '/' %}active-nav{% endif %}"
+      >{{ link.name }}</a>
       {% endfor %}
       {% if config.extra.dark_mode %}
       <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">

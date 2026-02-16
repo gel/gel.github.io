@@ -4,9 +4,9 @@
 
 {% block css %}
 <style>
-  /* Force dark theme for interview pages */
+  /* Keep interview background aligned with selected theme */
   body.interview-body {
-    background: var(--interview-bg, #0d1117);
+    background: var(--interview-bg, var(--body-bg));
   }
 
   /* Override page content for wider editor area */
@@ -117,16 +117,16 @@
 
 {% block prev_link %}
 {% if page.smaller %}
-<a class="previous" href="{{ page.smaller.permalink | safe }}">&laquo;</a>
+<a class="previous" href="{{ page.smaller.permalink | safe }}">&larr; Previous</a>
 {% else %}
 {% set parent = get_section(path=page.ancestors | reverse | first) %}
-<a class="previous" href="{{ parent.permalink | safe }}">&laquo;</a>
+<a class="previous" href="{{ parent.permalink | safe }}">&larr; Previous</a>
 {% endif %}
 {% endblock prev_link %}
 
 {% block next_link %}
 {% if page.higher %}
-<a class="next" href="{{ page.higher.permalink | safe }}">&raquo;</a>
+<a class="next" href="{{ page.higher.permalink | safe }}">Next &rarr;</a>
 {% else %}
 {% set book_url = book_utils::get_current_book_url() %}
 {% set book_section_path = book_utils::get_book_section_path(current_book_url=book_url) %}
@@ -135,7 +135,7 @@
 {% for s in index.subsections %}
 {% set subsection = get_section(path=s) %}
 {% if found_current %}
-<a class="next" href="{{ subsection.permalink | safe }}">&raquo;</a>
+<a class="next" href="{{ subsection.permalink | safe }}">Next &rarr;</a>
 {% set_global found_current = false %}
 {% endif %}
 {% for p in subsection.pages %}

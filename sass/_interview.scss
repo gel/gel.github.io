@@ -1,9 +1,20 @@
-// Interview Page Styles
-:root {
+// Interview Page Styles (scoped to interview pages only)
+body.interview-body {
+  --interview-bg: var(--body-bg);
+  --panel-bg: var(--body-bg);
+  --panel-border: var(--table-border-bottom);
+  --success-color: #1f8f45;
+  --error-color: #c93c37;
+  --warning-color: #a86b00;
+  --text-primary: var(--body-color);
+  --text-secondary: #66727f;
+  --glass-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] body.interview-body {
   --interview-bg: #0d1117;
   --panel-bg: rgba(22, 27, 34, 0.7);
   --panel-border: rgba(48, 54, 61, 0.8);
-  --accent-color: #58a6ff;
   --success-color: #3fb950;
   --error-color: #f85149;
   --warning-color: #d29922;
@@ -88,7 +99,7 @@
   }
 
   pre {
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--code-bg);
     padding: 15px;
     border-radius: 8px;
     overflow-x: auto;
@@ -96,7 +107,7 @@
   }
 
   code {
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--code-bg);
     padding: 2px 6px;
     border-radius: 4px;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
@@ -283,7 +294,7 @@
 
 .btn-primary {
   background: var(--accent-color);
-  color: #fff;
+  color: var(--accent-overlay-color);
 
   &:hover:not(:disabled) {
     filter: brightness(1.1);
@@ -358,7 +369,7 @@
 .test-case {
   padding: 16px;
   border-radius: 12px;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--code-bg);
   border: 1px solid var(--panel-border);
   transition: transform 0.2s ease;
 
@@ -437,7 +448,7 @@
 
 .progress-container {
   margin-top: 10px;
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--code-bg);
   border-radius: 20px;
   height: 8px;
   overflow: hidden;
@@ -445,12 +456,12 @@
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, var(--accent-color), #bc8cff);
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-color-light));
   box-shadow: 0 0 10px var(--accent-color);
 }
 
 .feedback-content {
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--code-bg);
   padding: 20px;
   border-radius: 12px;
   border: 1px solid var(--panel-border);
@@ -465,7 +476,7 @@
   }
 
   pre {
-    background: #0d1117;
+    background: var(--code-bg);
     padding: 15px;
     border-radius: 8px;
     margin: 15px 0;

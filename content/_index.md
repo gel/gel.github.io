@@ -12,4 +12,4 @@ Current areas of focus:
 - Agentic AI reliability, observability, and governance
 - Performance and cost optimization from cloud services down to infrastructure details
 
-You can connect with me on [LinkedIn](https://www.linkedin.com/in/gal-goldman/) and [X (Twitter)](https://x.com/gelings).
+You can connect with me on [LinkedIn](https://www.linkedin.com/in/gal-goldman/) and [X](https://x.com/gelings).

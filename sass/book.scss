@@ -92,4 +92,12 @@ body.book-body {
     display: none;
   }
 }
+
+@media (max-width: 600px) {
+  body.book-body {
+    & > header {
+      padding: 1rem 1rem;
+    }
+  }
+}
 @import "interview";
