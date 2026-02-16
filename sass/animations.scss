@@ -96,8 +96,8 @@ html {
   }
 }
 
-// Link hover effects - only apply to non-book links and exclude navigation/pagination
-a:not(.reading-book):not(.previous):not(.next):not(.btn) {
+// Link hover effects - apply only to content links (not header navigation)
+main a:not(.reading-book):not(.previous):not(.next):not(.btn) {
   position: relative;
   transition: all 0.3s ease;
 
@@ -123,8 +123,8 @@ a:not(.reading-book):not(.previous):not(.next):not(.btn) {
   }
 }
 
-// Navigation links special effect
-nav a {
+// Navigation links special effect (content navigation only, not header nav)
+main nav a {
   position: relative;
   padding: 0.5rem 0;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

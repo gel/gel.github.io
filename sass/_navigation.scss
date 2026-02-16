@@ -7,8 +7,9 @@
   overflow: hidden; // Clip content so links don't intercept clicks outside sidebar
   width: 300px;
   color: var(--body-color);
-  background: var(--table-bg-even);
+  background: color-mix(in srgb, var(--body-bg) 88%, transparent);
   border-right: 1px solid var(--table-border-bottom);
+  backdrop-filter: blur(8px);
   transition: 0.5s;
 
   nav {
@@ -24,20 +25,28 @@
     a {
       display: block;
       color: var(--body-color);
+      font-size: 1.5rem;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
       text-decoration: none;
-      padding: 10px 15px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      margin: 2px 8px;
+      transition: background-color 0.2s ease, transform 0.2s ease;
 
       &:hover {
-        text-decoration: underline;
+        text-decoration: none;
+        background: color-mix(in srgb, var(--accent-color) 10%, transparent);
+        transform: translateX(2px);
       }
     }
 
     li.active>a {
       color: var(--accent-color);
       text-decoration: none;
+      background: color-mix(in srgb, var(--accent-color) 14%, transparent);
+      font-weight: 600;
     }
 
     ul {
@@ -56,7 +65,7 @@
       font-weight: 700;
 
       &:hover {
-        text-decoration: underline;
+        text-decoration: none;
       }
     }
   }
@@ -70,6 +79,10 @@
   .menu {
     width: 0;
     z-index: 1;
+
+    ul a {
+      font-size: 1.32rem;
+    }
   }
 
   .menu-hidden {
