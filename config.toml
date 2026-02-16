@@ -15,6 +15,7 @@ build_search_index = true
 
 [extra]
 nav = [
+  { name = "Resume", path = "/resume/" },
   { name = "Blog", path = "/blog/" },
   { name = "Projects", path = "/projects/" },
   { name = "Books", path = "/books/" },
