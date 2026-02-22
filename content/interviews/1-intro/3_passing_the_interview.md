@@ -27,4 +27,26 @@ Select the programming language you actively use and feel most proficient in as 
 
 - Dress professionally and arrive early to interviews to make a good impression.
 
+### Behavioral Questions: "Tell Me About a Time..."
+
+Behavioral interviews are not optional for senior roles. Companies use them to evaluate judgment, ownership, collaboration, and values alignment.
+
+At Google this is often discussed as **Googliness**. At Meta, interviewers usually evaluate alignment to company values and how you work with speed, impact, and collaboration (sometimes called culture fit/value fit).
+
+The most effective approach is:
+
+1. Be fully prepared with 6-8 real stories from your experience.
+2. Keep every story honest and specific; avoid exaggerated claims.
+3. Structure answers with STAR (Situation, Task, Action, Result).
+4. Quantify outcomes when possible (latency, revenue, reliability, user impact).
+5. End with what you learned and what you would improve next time.
+
+Preparation improves clarity, but honesty builds trust. Strong candidates do both.
+
+Common questions candidates often get stuck on:
+
+1. "Tell me about a time you disagreed with your manager or a senior engineer. How did you handle it?"
+2. "Tell me about a time a colleague was impacting the team's productivity. What did you do?"
+3. "Tell me about a time you proposed a novel solution to a problem, but it was not adopted. What did you do next?"
+
 With practice and dedication to sharpening your interview abilities, you can showcase your qualifications persuasively and land the perfect job.
