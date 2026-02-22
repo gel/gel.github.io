@@ -18,6 +18,7 @@
 {% block content %}
   {{ section.content | safe }}
 
+  {{ reading_book_macros::book_category_section(title="Currently Reading", section_path="books/currently-reading/_index.md", slug="currently-reading") }}
   {{ reading_book_macros::book_category_section(title="Personal Development Books", section_path="books/personal-development/_index.md", slug="personal-development") }}
   {{ reading_book_macros::book_category_section(title="Finance Books", section_path="books/finance/_index.md", slug="finance") }}
   {{ reading_book_macros::book_category_section(title="Programming Books", section_path="books/programming/_index.md", slug="programming") }}
@@ -27,4 +28,3 @@
   {{ reading_book_macros::book_category_section(title="Fiction Books", section_path="books/fiction/_index.md", slug="fiction") }}
 
 {% endblock content %}
-
