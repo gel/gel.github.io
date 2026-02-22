@@ -10,7 +10,8 @@ html {
   font-size: 62.5%;
 }
 
-body, html {
+body,
+html {
   height: 100%;
 }
 
@@ -23,15 +24,15 @@ body {
 
 
 @mixin min-screen($min-width: $body-width) {
-   @media screen and (min-width: $min-width) {
-     @content;
-   }
+  @media screen and (min-width: $min-width) {
+    @content;
+  }
 }
 
 @mixin max-screen($max-width: $body-width) {
-   @media screen and (max-width: $max-width) {
-     @content;
-   }
+  @media screen and (max-width: $max-width) {
+    @content;
+  }
 }
 
 $sidebar-width: 300px;
@@ -42,97 +43,101 @@ $sidebar-width: 300px;
 
 /* Integration with Site Header for book layouts */
 body.book-body {
-  position: fixed; /* Fix body to viewport to prevent overscroll/blank space */
+  position: fixed;
+  /* Fix body to viewport to prevent overscroll/blank space */
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   margin: 0;
-  padding: 0; /* Override main.css body padding */
-  overflow: hidden; /* Prevent body scroll */
+  padding: 32px;
+  /* 2rem at 16px base — match text.scss body padding */
+  padding-bottom: 0;
+  overflow: hidden;
+  /* Prevent body scroll */
   background:
     radial-gradient(1100px 480px at 15% -10%, color-mix(in srgb, var(--accent-color) 16%, transparent), transparent 60%),
     radial-gradient(900px 440px at 100% 0%, color-mix(in srgb, var(--accent-color-light) 26%, transparent), transparent 58%),
     var(--body-bg);
 
-  /* Override main.css header styles to fit full width */
-  & > header {
-    flex: 0 0 auto;
-    width: calc(100% - 2rem);
-    max-width: 820px;
-    margin: 0.8rem auto 0;
-    padding: 0.55rem 0.7rem;
+  /* Match theme's text.scss header styles exactly (same as body:not(.book-body) header) */
+  &>header {
+    box-sizing: content-box;
+    /* Override global border-box to match theme */
     display: flex;
     align-items: center;
+    position: sticky;
+    top: 12.8px;
+    /* 0.8rem at 16px base */
+    z-index: 20;
     background: color-mix(in srgb, var(--body-bg) 78%, transparent);
     backdrop-filter: blur(10px);
     border: 1px solid var(--table-border-bottom);
     border-radius: 14px;
-    z-index: 1000;
-    font-size: inherit;
+    padding: 8.8px 11.2px;
+    /* 0.55rem 0.7rem at 16px base */
+    font-family: "Rubik", "PT Serif", system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+      "Droid Sans", "Helvetica Neue", sans-serif;
+    /* Match text.scss font stack */
+    font-size: 19px;
+    letter-spacing: normal;
+    /* Override book body's 0.2px */
   }
 
-  & > header .profile-icon {
+  &>header .profile-icon {
     border: none;
-    height: 50px;
-    width: 50px;
-    position: relative;
-    flex: 0 0 auto;
   }
 
-  & > header .profile-icon img {
-    border-radius: 50%;
-    display: block;
-  }
-
-  & > header nav {
+  &>header nav {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
     margin-left: auto;
     flex-wrap: nowrap;
     white-space: nowrap;
-    gap: 0.55rem;
+    gap: 8.8px;
+    /* 0.55rem at 16px base */
   }
 
-  & > header nav > a {
-    border-bottom: none;
-    padding: 0.38rem 0.72rem;
+  &>header nav>a {
+    font-size: 15.68px;
+    /* Match Blog: ~0.98rem at 16px base */
+    padding: 6.08px 11.52px;
+    /* Match Blog: 0.38rem 0.72rem at 16px base */
     border-radius: 999px;
-    font-size: 16px;
-    line-height: 1.2;
+    border-bottom: none;
     transition: background-color 0.2s ease, transform 0.2s ease;
   }
 
-  & > header nav > a:hover {
+  &>header nav>a:hover {
     background: color-mix(in srgb, var(--accent-color) 12%, transparent);
     transform: translateY(-1px);
   }
 
-  & > header .theme-toggle {
+  &>header .theme-toggle {
     font-size: 16px;
-    padding: 0.35rem 0.6rem;
-    line-height: 1.2;
     border: none;
     background: transparent;
-    color: var(--body-color);
     cursor: pointer;
-    flex: 0 0 auto;
   }
 
-  & > main {
+  &>main {
     flex: 1 1 auto;
     position: relative;
-    width: 100%;
+    width: calc(100% + 64px);
+    /* Expand to compensate 32px body padding each side */
     max-width: none;
     height: auto;
     padding: 0;
-    margin: 0;
-    display: block; /* Override flex display from theme if any */
+    margin: 0 -32px;
+    /* Negative margin to offset body padding */
+    display: block;
+    overflow: hidden;
   }
 
   /* Ensure absolute positioned children (menu, page) fit within the main container */
-  .menu, .page {
+  .menu,
+  .page {
     height: 100%;
     top: 0;
   }
@@ -185,25 +190,43 @@ body.book-body {
 
 @media (max-width: 600px) {
   body.book-body {
-    & > header {
+    padding: 16px;
+    /* 1rem at 16px base */
+    padding-bottom: 0;
+
+    /* Match theme's text.scss mobile header styles exactly */
+    &>header {
+      position: static;
+      top: auto;
+      border-radius: 0;
       width: 100%;
       max-width: none;
-      padding: 0.4rem 0.45rem;
       margin: 0;
-      border-radius: 0;
       border-left: none;
       border-right: none;
+      padding: 6.4px 7.2px;
+      /* 0.4rem 0.45rem at 16px base */
       backdrop-filter: none;
     }
 
-    & > header nav {
-      gap: 0.28rem;
+    &>header nav {
+      gap: 4.48px;
+      /* 0.28rem at 16px base */
     }
 
-    & > header nav > a {
-      padding: 0.28rem 0.5rem;
-      font-size: 14px;
+    &>header nav>a {
+      padding: 4.48px 8px;
+      /* 0.28rem 0.5rem at 16px base */
+      font-size: 14.4px;
+      /* 0.9rem at 16px base */
+    }
+
+    &>main {
+      width: calc(100% + 32px);
+      /* 16px each side */
+      margin: 0 -16px;
     }
   }
 }
+
 @import "interview";
