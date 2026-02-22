@@ -6,6 +6,8 @@ weight = 1
 - [Range Sum of BST - Easy - LeetCode 938](#range-sum-of-bst-easy-leetcode-938)
 - [Evaluate Reverse Polish Notation - Easy - LeetCode 150](#evaluate-reverse-polish-notation-easy-leetcode-150)
 - [Two Sum - Easy - LeetCode 1](#two-sum-easy-leetcode-1)
+- [Longest Substring Without Repeating Characters - Easy - LeetCode 3](#longest-substring-without-repeating-characters-easy-leetcode-3)
+- [Serialize and Deserialize Binary Tree - Hard - LeetCode 297](#serialize-and-deserialize-binary-tree-hard-leetcode-297)
 - [Best Time to Buy and Sell Stock - Easy - LeetCode 121](#best-time-to-buy-and-sell-stock-easy-leetcode-121)
 - [Partitioning Into Minimum Number Of Deci-Binary Numbers - Medium - LeetCode 1689](#partitioning-into-minimum-number-of-deci-binary-numbers-medium-leetcode-1689)
 - [Insert Greatest Common Divisors in Linked List - Medium - LeetCode 2807](#insert-greatest-common-divisors-in-linked-list-medium-leetcode-2807)
@@ -167,7 +169,124 @@ public class TwoSum {
 
         throw new IllegalArgumentException("Invalid input");
     }
+}
 ```
+
+---
+
+### Longest Substring Without Repeating Characters - Easy - [LeetCode 3](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+
+**Question**
+
+> Given a string s, find the length of the longest substring without repeating characters.
+
+**Explanation**
+
+The right approach is a sliding window.
+
+1. Keep two pointers: `left` and `right`.
+2. Expand with `right`, and track each character's latest index in a map.
+3. If a duplicate appears inside current window, move `left` to the right of the previous index.
+4. Update max window length each step.
+
+Because each index moves forward once, the solution is linear.
+
+**Solution**
+
+```java
+class LongestSubstringWithoutRepeatingCharacters {
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character, Integer> lastSeen = new HashMap<>();
+        int left = 0;
+        int maxLen = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+            char current = s.charAt(right);
+
+            if (lastSeen.containsKey(current) && lastSeen.get(current) >= left) {
+                left = lastSeen.get(current) + 1;
+            }
+
+            lastSeen.put(current, right);
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+
+        return maxLen;
+    }
+}
+```
+
+---
+
+### Serialize and Deserialize Binary Tree - Hard - [LeetCode 297](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/)
+
+**Question**
+
+> Design an algorithm to serialize and deserialize a binary tree.
+
+**Explanation**
+
+Use preorder traversal with null markers.
+
+1. Serialize: write `node.val` in preorder, and write `"N"` when node is null.
+2. Deserialize: read tokens in order and rebuild recursively.
+
+Null markers are critical because preorder values alone cannot reconstruct tree shape.
+
+**Solution**
+
+```java
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Codec {
+    private static final String NULL = "N";
+    private static final String SEP = ",";
+
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        StringBuilder builder = new StringBuilder();
+        serializePreorder(root, builder);
+        return builder.toString();
+    }
+
+    private void serializePreorder(TreeNode node, StringBuilder builder) {
+        if (node == null) {
+            builder.append(NULL).append(SEP);
+            return;
+        }
+
+        builder.append(node.val).append(SEP);
+        serializePreorder(node.left, builder);
+        serializePreorder(node.right, builder);
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        Queue<String> tokens = new LinkedList<>(Arrays.asList(data.split(SEP)));
+        return deserializePreorder(tokens);
+    }
+
+    private TreeNode deserializePreorder(Queue<String> tokens) {
+        String token = tokens.poll();
+        if (token.equals(NULL)) {
+            return null;
+        }
+
+        TreeNode node = new TreeNode(Integer.parseInt(token));
+        node.left = deserializePreorder(tokens);
+        node.right = deserializePreorder(tokens);
+        return node;
+    }
+}
+```
+
+**Follow-ups**
+
+1. Time complexity: `O(N)` for both operations, because each node (and null marker position) is processed once.
+2. Space complexity: `O(N)` for serialized output/token queue; recursion stack is `O(H)` (worst-case `O(N)` for skewed trees, `O(log N)` for balanced trees).
+3. Edge cases: empty tree serializes to `N,` and deserializes to `null`; single-node tree round-trips as `value,N,N,`.
 
 ---
 
