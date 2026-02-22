@@ -33,100 +33,88 @@ Gal's {{ current_book_title }} Book - {{ section.title }}
 {% endblock posthead %}
 
 {% block content %}
-<script>
-  // Sidebar is open by default on desktop, hidden on mobile for consistent layout
-  if (window.matchMedia("(max-width: 600px)").matches) {
-    document.write('<div class="menu menu-hidden">');
-  } else {
-    document.write('<div class="menu">');
-  }
-</script>
-{% block before_menu %}
-{% endblock before_menu %}
-<nav role="navigation">
-  <ul>
-    {% block menu %}
-    {% set book_url = book_utils::get_current_book_url() %}
-    {% set book_section_path = book_utils::get_book_section_path(current_book_url=book_url) %}
-    {% set index = get_section(path=book_section_path | trim) %}
-    {% if book_url | trim == "interviews" %}
-    <li class="live-interviews-link">
-      <a href="{{ get_url(path='interviews/live/') | safe }}"><strong>Live Interviews</strong></a>
-    </li>
-    {% endif %}
-    {% set_global chapter_num = 0 %}
-    {% for s in index.subsections %}
-    {% set subsection = get_section(path=s) %}
-    {% if not subsection.extra.hidden %}
-    {% set_global chapter_num = chapter_num + 1 %}
-    {% set section_link = subsection.redirect_to | default(value=subsection.permalink) %}
-    <li {% if current_path==subsection.path %}class="active" {% endif %}>
-      <a href="{{ section_link | safe }}">
-        {% if config.extra.book_number_chapters %}<strong>{{ chapter_num }}.</strong>{% endif %}
-        {{ subsection.title }}
-      </a>
-      {% if subsection.pages %}
-      <ul>
-        {% for page in subsection.pages %}
-        <li {% if current_path==page.path %}class="active" {% endif %}>
-          <a href="{{ page.permalink }}">
-            {% if config.extra.book_number_chapters %}<strong>{{ chapter_num }}.{{ loop.index
-              }}.</strong>{% endif %}
-            {{ page.title }}
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
+<!-- Sidebar defaults to class 'menu'. CSS max-width 600px breakpoint handles closing it automatically -->
+<div class="menu">
+  {% block before_menu %}
+  {% endblock before_menu %}
+  <nav role="navigation">
+    <ul>
+      {% block menu %}
+      {% set book_url = book_utils::get_current_book_url() %}
+      {% set book_section_path = book_utils::get_book_section_path(current_book_url=book_url) %}
+      {% set index = get_section(path=book_section_path | trim) %}
+      {% if book_url | trim == "interviews" %}
+      <li class="live-interviews-link">
+        <a href="{{ get_url(path='interviews/live/') | safe }}"><strong>Live Interviews</strong></a>
+      </li>
       {% endif %}
-    </li>
-    {% endif %}
-    {% endfor %}
-    {% endblock menu %}
-  </ul>
-</nav>
-{% block after_menu %}
-{% endblock after_menu %}
+      {% set_global chapter_num = 0 %}
+      {% for s in index.subsections %}
+      {% set subsection = get_section(path=s) %}
+      {% if not subsection.extra.hidden %}
+      {% set_global chapter_num = chapter_num + 1 %}
+      {% set section_link = subsection.redirect_to | default(value=subsection.permalink) %}
+      <li {% if current_path==subsection.path %}class="active" {% endif %}>
+        <a href="{{ section_link | safe }}">
+          {% if config.extra.book_number_chapters %}<strong>{{ chapter_num }}.</strong>{% endif %}
+          {{ subsection.title }}
+        </a>
+        {% if subsection.pages %}
+        <ul>
+          {% for page in subsection.pages %}
+          <li {% if current_path==page.path %}class="active" {% endif %}>
+            <a href="{{ page.permalink }}">
+              {% if config.extra.book_number_chapters %}<strong>{{ chapter_num }}.{{ loop.index
+                }}.</strong>{% endif %}
+              {{ page.title }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </li>
+      {% endif %}
+      {% endfor %}
+      {% endblock menu %}
+    </ul>
+  </nav>
+  {% block after_menu %}
+  {% endblock after_menu %}
 </div>
 
-<script>
-  // Page starts at full width on mobile, normal width on desktop
-  if (window.matchMedia("(max-width: 600px)").matches) {
-    document.write('<div class="page page-without-menu">');
-  } else {
-    document.write('<div class="page">');
-  }
-</script>
+<!-- Page defaults to class 'page'. CSS max-width 600px breakpoint handles making it full-width automatically -->
+<div class="page">
 
-<div class="page__content">
-  {% if config.build_search_index %}
-  <div class="search-container">
-    <input id="search" type="search" placeholder="Search..">
-    <div class="search-results">
-      <div class="search-results__header"></div>
-      <ul class="search-results__items"></ul>
+  <div class="page__content">
+    {% if config.build_search_index %}
+    <div class="search-container">
+      <input id="search" type="search" placeholder="Search..">
+      <div class="search-results">
+        <div class="search-results__header"></div>
+        <ul class="search-results__items"></ul>
+      </div>
+    </div>
+    {% endif %}
+    <button class="sidebar-toggle-inline" id="sidebar-toggle-inline" aria-label="Toggle Chapters">
+      <span class="toggle-icon">☰</span> Chapters
+    </button>
+    <div class="book-content">
+      {% block bookcontent %}
+      {% endblock bookcontent %}
     </div>
   </div>
-  {% endif %}
-  <button class="sidebar-toggle-inline" id="sidebar-toggle-inline" aria-label="Toggle Chapters">
-    <span class="toggle-icon">☰</span> Chapters
-  </button>
-  <div class="book-content">
-    {% block bookcontent %}
-    {% endblock bookcontent %}
-  </div>
-</div>
 
-<nav class="book-pagination">
-  <div class="prev-link">
-    {% block prev_link %}
-    {% endblock prev_link %}
-  </div>
+  <nav class="book-pagination">
+    <div class="prev-link">
+      {% block prev_link %}
+      {% endblock prev_link %}
+    </div>
 
-  <div class="next-link">
-    {% block next_link %}
-    {% endblock next_link %}
-  </div>
-</nav>
+    <div class="next-link">
+      {% block next_link %}
+      {% endblock next_link %}
+    </div>
+  </nav>
 </div>
 
 {% block js_body %}
