@@ -192,7 +192,9 @@ function initSearch() {
     return;
   }
   var $searchIcon = document.querySelector(".search-icon");
-  $searchIcon.addEventListener("click", toggleSearchMode);
+  if ($searchIcon) {
+    $searchIcon.addEventListener("click", toggleSearchMode);
+  }
 
   var $searchResults = document.querySelector(".search-results");
   var $searchResultsHeader = document.querySelector(".search-results__header");
