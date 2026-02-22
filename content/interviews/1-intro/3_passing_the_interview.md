@@ -49,4 +49,9 @@ Common questions candidates often get stuck on:
 2. "Tell me about a time a colleague was impacting the team's productivity. What did you do?"
 3. "Tell me about a time you proposed a novel solution to a problem, but it was not adopted. What did you do next?"
 
+Easy questions that should still be a high-impact showcase:
+
+1. "What is the hardest production bug you have debugged?"
+2. "Tell me about the best feature you have developed."
+
 With practice and dedication to sharpening your interview abilities, you can showcase your qualifications persuasively and land the perfect job.
