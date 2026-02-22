@@ -34,12 +34,8 @@ Gal's {{ current_book_title }} Book - {{ section.title }}
 
 {% block content %}
 <script>
-  // Apply sidebar state immediately to prevent transition flash
-  if (localStorage.getItem("menuHidden") === "true") {
-    document.write('<div class="menu menu-hidden">');
-  } else {
-    document.write('<div class="menu">');
-  }
+  // Sidebar starts hidden by default for consistent layout
+  document.write('<div class="menu menu-hidden">');
 </script>
 {% block before_menu %}
 {% endblock before_menu %}
@@ -89,29 +85,9 @@ Gal's {{ current_book_title }} Book - {{ section.title }}
 </div>
 
 <script>
-  // Apply page state immediately to prevent transition flash
-  if (localStorage.getItem("menuHidden") === "true") {
-    document.write('<div class="page page-without-menu">');
-  } else {
-    document.write('<div class="page">');
-  }
+  // Page starts at full width (sidebar hidden) for consistent layout
+  document.write('<div class="page page-without-menu">');
 </script>
-<div class="page__header">
-  <div class="menu-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  {% if config.build_search_index %}
-  <span class="search-icon">🔎</span>
-  {% endif %}
-  {% if config.extra.dark_mode %}
-  <button class="theme-toggle book-theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
-    <span class="theme-icon-light">☀️</span>
-    <span class="theme-icon-dark" style="display:none">🌙</span>
-  </button>
-  {% endif %}
-</div>
 
 <div class="page__content">
   {% if config.build_search_index %}
@@ -123,6 +99,9 @@ Gal's {{ current_book_title }} Book - {{ section.title }}
     </div>
   </div>
   {% endif %}
+  <button class="sidebar-toggle-inline" id="sidebar-toggle-inline" aria-label="Toggle Chapters">
+    <span class="toggle-icon">☰</span> Chapters
+  </button>
   <div class="book-content">
     {% block bookcontent %}
     {% endblock bookcontent %}

@@ -1,30 +1,34 @@
 function initToggleMenu() {
   var $menu = document.querySelector(".menu");
-  var $menuIcon = document.querySelector(".menu-icon");
   var $page = document.querySelector(".page");
+  var $toggleBtn = document.getElementById("sidebar-toggle-inline");
 
-  // Restore sidebar state from localStorage
-  var menuHidden = localStorage.getItem("menuHidden") === "true";
-  if (menuHidden) {
-    $menu.classList.add("menu-hidden");
-    $page.classList.add("page-without-menu");
+  // Sidebar starts hidden for visual consistency with other sections;
+  // no need to restore from localStorage.
+
+  if ($toggleBtn) {
+    $toggleBtn.addEventListener("click", function () {
+      $menu.classList.toggle("menu-hidden");
+      $page.classList.toggle("page-without-menu");
+    });
   }
 
-  $menuIcon.addEventListener("click", function () {
-    $menu.classList.toggle("menu-hidden");
-    $page.classList.toggle("page-without-menu");
-    // Save state to localStorage
-    localStorage.setItem("menuHidden", $menu.classList.contains("menu-hidden"));
-  });
+  // Also support the old .menu-icon if it exists (backward compat)
+  var $menuIcon = document.querySelector(".menu-icon");
+  if ($menuIcon) {
+    $menuIcon.addEventListener("click", function () {
+      $menu.classList.toggle("menu-hidden");
+      $page.classList.toggle("page-without-menu");
+    });
+  }
 
   // Close sidebar on mobile when clicking a link to prevent it from persisting open
   var $links = $menu.querySelectorAll("a");
-  Array.prototype.forEach.call($links, function($link) {
-    $link.addEventListener("click", function() {
+  Array.prototype.forEach.call($links, function ($link) {
+    $link.addEventListener("click", function () {
       if (window.matchMedia("(max-width: 600px)").matches) {
-        $menu.classList.remove("menu-hidden");
+        $menu.classList.add("menu-hidden");
         $page.classList.remove("page-without-menu");
-        localStorage.setItem("menuHidden", "false");
       }
     });
   });
