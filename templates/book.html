@@ -34,8 +34,12 @@ Gal's {{ current_book_title }} Book - {{ section.title }}
 
 {% block content %}
 <script>
-  // Sidebar starts hidden by default for consistent layout
-  document.write('<div class="menu menu-hidden">');
+  // Sidebar is open by default on desktop, hidden on mobile for consistent layout
+  if (window.matchMedia("(max-width: 600px)").matches) {
+    document.write('<div class="menu menu-hidden">');
+  } else {
+    document.write('<div class="menu">');
+  }
 </script>
 {% block before_menu %}
 {% endblock before_menu %}
@@ -85,8 +89,12 @@ Gal's {{ current_book_title }} Book - {{ section.title }}
 </div>
 
 <script>
-  // Page starts at full width (sidebar hidden) for consistent layout
-  document.write('<div class="page page-without-menu">');
+  // Page starts at full width on mobile, normal width on desktop
+  if (window.matchMedia("(max-width: 600px)").matches) {
+    document.write('<div class="page page-without-menu">');
+  } else {
+    document.write('<div class="page">');
+  }
 </script>
 
 <div class="page__content">
