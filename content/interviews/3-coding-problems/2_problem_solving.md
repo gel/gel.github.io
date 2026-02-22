@@ -6,6 +6,8 @@ weight = 2
 - [LRU Cache - Medium - LeetCode 146](#lru-cache-medium-leetcode-146)
 - [Longest Palindromic Substring - Medium - LeetCode 5](#longest-palindromic-substring-medium-leetcode-5)
 - [Find Median from Data Stream - Hard - LeetCode 295](#find-median-from-data-stream-hard-leetcode-295)
+- [Word Break II - Hard - LeetCode 140](#word-break-ii-hard-leetcode-140)
+- [Alien Dictionary - Hard - LeetCode 269](#alien-dictionary-hard-leetcode-269)
 
 ---
 
@@ -350,3 +352,184 @@ class MedianFinder {
 1. Duplicates: no special handling needed.
 2. Negative numbers: no special handling needed.
 3. Space optimization: exact median over unbounded stream requires `O(N)` memory; for bounded memory use streaming quantile sketches (e.g., t-digest/KLL), which are similar to online k-means style weighted-centroid compression of 1D values.
+
+---
+
+### Word Break II - Hard - [LeetCode 140](https://leetcode.com/problems/word-break-ii/)
+
+**Question**
+
+> Given a string `s` and a dictionary of strings `wordDict`, add spaces in `s` to construct all possible sentences where each word is in `wordDict`.
+>
+> Return all such possible sentences in any order.
+
+**Explanation**
+
+The standard approach is `DP + backtracking (memoized DFS)`.
+
+1. DFS tries every valid dictionary word starting at index `i`.
+2. Memoization stores all sentence suffixes from `i` to avoid repeated work.
+3. Backtracking builds full sentences by combining current word with suffix sentences.
+
+Without memoization this can explode with repeated subproblems.
+
+**Solution**
+
+```java
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+class WordBreakII {
+    public List<String> wordBreak(String s, List<String> wordDict) {
+        Set<String> dict = new HashSet<>(wordDict);
+        Map<Integer, List<String>> memo = new HashMap<>();
+        return dfs(s, 0, dict, memo);
+    }
+
+    private List<String> dfs(String s, int start, Set<String> dict, Map<Integer, List<String>> memo) {
+        if (memo.containsKey(start)) {
+            return memo.get(start);
+        }
+
+        List<String> result = new ArrayList<>();
+        if (start == s.length()) {
+            result.add("");
+            memo.put(start, result);
+            return result;
+        }
+
+        for (int end = start + 1; end <= s.length(); end++) {
+            String word = s.substring(start, end);
+            if (!dict.contains(word)) {
+                continue;
+            }
+
+            List<String> suffixes = dfs(s, end, dict, memo);
+            for (String suffix : suffixes) {
+                if (suffix.isEmpty()) {
+                    result.add(word);
+                } else {
+                    result.add(word + " " + suffix);
+                }
+            }
+        }
+
+        memo.put(start, result);
+        return result;
+    }
+}
+```
+
+**Follow-ups**
+
+1. Time/space: output-sensitive; worst case is exponential due to number of valid sentences.
+2. Optimization: pre-check with Word Break I boolean DP to fail fast when no solution exists.
+3. Edge cases: empty input, duplicate dictionary entries, and very long strings with dense prefixes.
+
+---
+
+### Alien Dictionary - Hard - [LeetCode 269](https://leetcode.com/problems/alien-dictionary/)
+
+**Question**
+
+> There is a new alien language that uses the English alphabet, but the order of letters is unknown.
+>
+> Given a list of words sorted lexicographically in this alien language, derive a possible order of letters.
+>
+> Return `\"\"` if the input is invalid or contains a cycle.
+
+**Explanation**
+
+Model characters as a graph:
+
+1. Compare adjacent words to find first differing character, which creates a directed edge `u -> v`.
+2. Build indegree counts for each character.
+3. Run topological sort (Kahn's algorithm).
+4. If processed character count is smaller than total unique characters, a cycle exists.
+
+Important invalid case: prefix conflict (for example `\"abc\"` before `\"ab\"`).
+
+**Solution**
+
+```java
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+
+class AlienDictionary {
+    public String alienOrder(String[] words) {
+        Map<Character, Set<Character>> graph = new HashMap<>();
+        Map<Character, Integer> indegree = new HashMap<>();
+
+        for (String word : words) {
+            for (char c : word.toCharArray()) {
+                graph.putIfAbsent(c, new HashSet<>());
+                indegree.putIfAbsent(c, 0);
+            }
+        }
+
+        for (int i = 0; i < words.length - 1; i++) {
+            String first = words[i];
+            String second = words[i + 1];
+
+            if (first.length() > second.length() && first.startsWith(second)) {
+                return "";
+            }
+
+            int minLen = Math.min(first.length(), second.length());
+            for (int j = 0; j < minLen; j++) {
+                char from = first.charAt(j);
+                char to = second.charAt(j);
+                if (from != to) {
+                    if (!graph.get(from).contains(to)) {
+                        graph.get(from).add(to);
+                        indegree.put(to, indegree.get(to) + 1);
+                    }
+                    break;
+                }
+            }
+        }
+
+        Queue<Character> queue = new ArrayDeque<>();
+        for (char c : indegree.keySet()) {
+            if (indegree.get(c) == 0) {
+                queue.offer(c);
+            }
+        }
+
+        StringBuilder order = new StringBuilder();
+        while (!queue.isEmpty()) {
+            char current = queue.poll();
+            order.append(current);
+
+            for (char next : graph.get(current)) {
+                indegree.put(next, indegree.get(next) - 1);
+                if (indegree.get(next) == 0) {
+                    queue.offer(next);
+                }
+            }
+        }
+
+        if (order.length() != indegree.size()) {
+            return "";
+        }
+
+        return order.toString();
+    }
+}
+```
+
+**Follow-ups**
+
+1. Complexity: `O(C + E)` where `C` is unique chars and `E` is precedence edges.
+2. Invalid input checks: prefix rule and cycle detection are required.
+3. If multiple valid orders exist, returning any valid topological ordering is acceptable.
