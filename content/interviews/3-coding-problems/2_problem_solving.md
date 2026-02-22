@@ -5,6 +5,7 @@ weight = 2
 
 - [LRU Cache - Medium - LeetCode 146](#lru-cache-medium-leetcode-146)
 - [Longest Palindromic Substring - Medium - LeetCode 5](#longest-palindromic-substring-medium-leetcode-5)
+- [Find Median from Data Stream - Hard - LeetCode 295](#find-median-from-data-stream-hard-leetcode-295)
 
 ---
 
@@ -263,3 +264,89 @@ public class LongestPalindromeDynamicProgramming {
     }
 }
 ```
+
+---
+
+### Find Median from Data Stream - Hard - [LeetCode 295](https://leetcode.com/problems/find-median-from-data-stream/)
+
+**Question**
+
+> The median is the middle value in an ordered integer list.
+>
+> If the size of the list is even, there is no middle value and the median is the mean of the two middle values.
+>
+> Implement the `MedianFinder` class:
+>
+> `MedianFinder()` initializes the object.
+> `void addNum(int num)` adds the integer `num` from the data stream to the data structure.
+> `double findMedian()` returns the median of all elements so far.
+
+**Explanation**
+
+The standard solution is using two heaps:
+
+1. Max-heap (`low`) stores the smaller half.
+2. Min-heap (`high`) stores the larger half.
+
+Invariants:
+
+1. `low.size()` is either equal to `high.size()` or exactly one larger.
+2. Every element in `low` is `<=` every element in `high`.
+
+Why median lookup is simple:
+
+1. Odd number of elements: `low` has one extra item, so median is `low.peek()`.
+2. Even number of elements: heaps are same size, so median is average of `low.peek()` and `high.peek()`.
+
+This is why `findMedian()` is `O(1)` after maintaining heap balance on every insert.
+
+This approach naturally handles duplicates and negative numbers because heap ordering is value-based.
+
+**Solution**
+
+```java
+import java.util.Collections;
+import java.util.PriorityQueue;
+
+class MedianFinder {
+    // Max-heap for lower half
+    private final PriorityQueue<Integer> low;
+    // Min-heap for upper half
+    private final PriorityQueue<Integer> high;
+
+    public MedianFinder() {
+        this.low = new PriorityQueue<>(Collections.reverseOrder());
+        this.high = new PriorityQueue<>();
+    }
+
+    public void addNum(int num) {
+        low.offer(num);
+        high.offer(low.poll());
+
+        // Keep low >= high and size difference at most 1
+        if (high.size() > low.size()) {
+            low.offer(high.poll());
+        }
+    }
+
+    public double findMedian() {
+        if (low.size() > high.size()) {
+            return low.peek();
+        }
+
+        return (low.peek() + high.peek()) / 2.0;
+    }
+}
+```
+
+**Complexity**
+
+- `addNum`: `O(log N)`
+- `findMedian`: `O(1)`
+- Space: `O(N)`
+
+**Follow-ups**
+
+1. Duplicates: no special handling needed.
+2. Negative numbers: no special handling needed.
+3. Space optimization: exact median over unbounded stream requires `O(N)` memory; for bounded memory use streaming quantile sketches (e.g., t-digest/KLL), which are similar to online k-means style weighted-centroid compression of 1D values.
