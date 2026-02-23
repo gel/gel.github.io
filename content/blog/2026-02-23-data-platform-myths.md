@@ -4,6 +4,8 @@ date = 2026-02-23
 description = "A pragmatic framework for deciding when to build shared platforms versus domain-owned solutions, with common failure modes and safer alternatives."
 [taxonomies]
 tags = ["architecture", "distributed-systems", "platform-engineering", "data", "engineering-leadership"]
+[extra]
+static_thumbnail = "blog/DataPlatformAntiPattern400.webp"
 +++
 
 _Originally drafted in November 2021. Updated with a 2026 lens._
@@ -13,6 +15,8 @@ Shared data platforms are often proposed as a universal solution: centralize ing
 The promise is attractive. The failure mode is also predictable.
 
 This post is a practical breakdown of where these initiatives go wrong, why the problems are structural (not just execution mistakes), and what to do instead.
+
+![Data platform anti-pattern illustration](/blog/DataPlatformAntiPattern400.webp)
 
 ## Myth 1: "A Central Data Platform Simplifies Everything"
 
