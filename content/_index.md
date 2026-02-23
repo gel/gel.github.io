@@ -1,5 +1,5 @@
 +++
-title = "Gal's Pragmatic Software Blog"
+title = "Gal Goldman | Engineering Notes"
 +++
 
 ## Senior Architect & Engineer
