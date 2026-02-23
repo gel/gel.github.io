@@ -1,6 +1,6 @@
 +++
 title = "The Pragmatic View on AI Safety"
-date = 2025-12-15
+date = 2024-01-22
 description = "Why builders must listen to the Godfather of AI: Moving from 'Human-in-the-loop' to rigorous Agentic Verification."
 template = "reading-podcast.html"
 [taxonomies]
