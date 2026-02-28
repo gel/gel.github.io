@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] img {
+      opacity: .75;
+      transition: opacity .5s ease-in-out;
+    }
+
+    [data-theme="dark"] img:hover {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 10px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        gap: 0;
+      }
+
+      header nav {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      header nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      header nav>a {
+        flex: 0 0 auto;
+      }
+
+      header nav>a.nav-projects,
+      header nav>a.nav-resume {
+        display: none;
+      }
+
+      header nav>a:not(:last-child) {
+        margin-right: 0.3rem;
+      }
+
+      .theme-toggle {
+        flex: 0 0 auto;
+        padding: 0 2px;
+      }
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#05a081');
+      root.style.setProperty('--accent-color-light', '#82d0c0');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#05a081" />
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.fe16e0bb11047769.jpg" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.605594d8be6a111f.jpg" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.3d1b2eeabf8eca47.jpg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.b6439cbc27d70267.jpg" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.e69fb5473e9ea744.jpg" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d03b11f47410640c.jpg" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d847062c67ed9f5e.jpg" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+
+  
+
+  
+
+  
+  
+  <meta name="description" content="" />
+  <meta name="twitter:description" content="">
+  
+  
+
+  
+  <meta name="twitter:title" content="Gal Goldman | Architect &amp; Engineer">
+  
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" />
+
+  <title>
+    
+    
+    Gal Goldman | Architect &amp; Engineer
+    
+    
+  </title>
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://gel.github.io/main.css">
+  <link rel="stylesheet" href="https://gel.github.io/animations.css">
+  
+   
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;agents&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;ai&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;architecture&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;aws&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;bedrock&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;biography&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;book-club&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;business&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;cloud&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;communication&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;computer-science&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;contemporary&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;cost-reduction&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;data&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;death&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;decision-making&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;diet&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;distributed-systems&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;economics&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;education&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;engineering-leadership&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;entrepreneurship&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;fiction&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;finance&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;finance-lifestyle&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;fitness&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;food&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;governance&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;health&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;history&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;humor&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;innovation&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;inspirational&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;kids&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;leadership&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;life-design&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;lifestyle&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;literary-fiction&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;machine-learning&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;medicine&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;memoir&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;mental-health&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;multi-modal&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;mystery&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;negotiation&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;non-fiction&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;nonfiction&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;nutrition&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;observability&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;optimization&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;paranormal&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;parenting&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;personal-development&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;philosophy&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;platform-engineering&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;podcast&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;politics&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;productivity&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;programming&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;psychology&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;relationships&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;romance&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;safety&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;sagemaker&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;science&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;self-help&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;softskills&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;strategy&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;technology&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;testing&#x2F;" />
+  
+    <link rel="prerender" href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;thriller&#x2F;" />
+  
+
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="">
+  
+  <header>
+    <a class="profile-icon" href="/">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" alt="profile picture">
+    </a>
+    <nav>
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        "
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        "
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        "
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        "
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        "
+      >GenAI</a>
+      
+      
+      <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <span class="theme-icon-light">☀️</span>
+        <span class="theme-icon-dark" style="display:none">🌙</span>
+      </button>
+      
+    </nav>
+  </header>
+  
+  <main>
+    
+  <h1 class="taxonomy-name">tags</h1>
+  <div class="taxonomy-container">
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;agents&#x2F;">Agents (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;ai&#x2F;">AI (4)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;architecture&#x2F;">architecture (3)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;aws&#x2F;">AWS (2)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;bedrock&#x2F;">Bedrock (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;biography&#x2F;">Biography (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;book-club&#x2F;">book club (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;business&#x2F;">Business (10)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;cloud&#x2F;">cloud (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;communication&#x2F;">Communication (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;computer-science&#x2F;">Computer Science (3)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;contemporary&#x2F;">contemporary (2)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;cost-reduction&#x2F;">Cost Reduction (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;data&#x2F;">data (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;death&#x2F;">Death (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;decision-making&#x2F;">decision-making (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;diet&#x2F;">Diet (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;distributed-systems&#x2F;">distributed-systems (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;economics&#x2F;">Economics (2)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;education&#x2F;">Education (2)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;engineering-leadership&#x2F;">engineering-leadership (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;entrepreneurship&#x2F;">Entrepreneurship (3)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;fiction&#x2F;">fiction (3)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;finance&#x2F;">Finance (3)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;finance-lifestyle&#x2F;">Finance, Lifestyle (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;fitness&#x2F;">Fitness (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;food&#x2F;">Food (2)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;governance&#x2F;">governance (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;health&#x2F;">Health (5)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;history&#x2F;">History (2)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;humor&#x2F;">humor (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;innovation&#x2F;">Innovation (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;inspirational&#x2F;">Inspirational (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;kids&#x2F;">Kids (2)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;leadership&#x2F;">Leadership (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;life-design&#x2F;">life-design (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;lifestyle&#x2F;">Lifestyle (3)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;literary-fiction&#x2F;">literary fiction (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;machine-learning&#x2F;">Machine Learning (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;medicine&#x2F;">Medicine (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;memoir&#x2F;">Memoir (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;mental-health&#x2F;">Mental Health (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;multi-modal&#x2F;">Multi-Modal (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;mystery&#x2F;">mystery (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;negotiation&#x2F;">Negotiation (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;non-fiction&#x2F;">Non-Fiction (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;nonfiction&#x2F;">Nonfiction (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;nutrition&#x2F;">Nutrition (2)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;observability&#x2F;">Observability (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;optimization&#x2F;">Optimization (2)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;paranormal&#x2F;">paranormal (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;parenting&#x2F;">Parenting (4)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;personal-development&#x2F;">personal-development (3)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;philosophy&#x2F;">Philosophy (2)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;platform-engineering&#x2F;">platform-engineering (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;podcast&#x2F;">podcast (2)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;politics&#x2F;">Politics (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;productivity&#x2F;">Productivity (2)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;programming&#x2F;">Programming (4)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;psychology&#x2F;">Psychology (6)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;relationships&#x2F;">relationships (2)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;romance&#x2F;">romance (2)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;safety&#x2F;">safety (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;sagemaker&#x2F;">SageMaker (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;science&#x2F;">Science (3)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;self-help&#x2F;">Self-Help (5)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;softskills&#x2F;">SoftSkills (3)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;strategy&#x2F;">strategy (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;technology&#x2F;">Technology (2)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;testing&#x2F;">testing (1)</a>
+      </div>
+    
+      <div class="term">
+       <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;tags&#x2F;thriller&#x2F;">thriller (1)</a>
+      </div>
+    
+  </div>
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>

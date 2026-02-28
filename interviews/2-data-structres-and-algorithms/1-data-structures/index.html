@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] img {
+      opacity: .75;
+      transition: opacity .5s ease-in-out;
+    }
+
+    [data-theme="dark"] img:hover {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 10px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        gap: 0;
+      }
+
+      header nav {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      header nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      header nav>a {
+        flex: 0 0 auto;
+      }
+
+      header nav>a.nav-projects,
+      header nav>a.nav-resume {
+        display: none;
+      }
+
+      header nav>a:not(:last-child) {
+        margin-right: 0.3rem;
+      }
+
+      .theme-toggle {
+        flex: 0 0 auto;
+        padding: 0 2px;
+      }
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#05a081');
+      root.style.setProperty('--accent-color-light', '#82d0c0');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#05a081" />
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.fe16e0bb11047769.jpg" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.605594d8be6a111f.jpg" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.3d1b2eeabf8eca47.jpg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.b6439cbc27d70267.jpg" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.e69fb5473e9ea744.jpg" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d03b11f47410640c.jpg" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d847062c67ed9f5e.jpg" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+
+  
+
+  
+
+  
+  
+  <meta name="description" content="" />
+  <meta name="twitter:description" content="">
+  
+  
+
+  
+  <meta name="twitter:title" content="Data Structures">
+  
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" />
+
+  <title>
+    
+
+
+
+Gal's 
+     
+    
+        Interviews
+    
+ Book - Data Structures
+
+
+  </title>
+
+  
+  
+
+
+<link rel="stylesheet" href="https://gel.github.io/main.css">
+<link rel="stylesheet" href="https://gel.github.io/book.css">
+
+
+
+  
+
+
+
+
+
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="book-body">
+  
+  <header>
+    <a class="profile-icon" href="/">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" alt="profile picture">
+    </a>
+    <nav>
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        "
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        "
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        "
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        active-nav"
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        "
+      >GenAI</a>
+      
+      
+      <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <span class="theme-icon-light">☀️</span>
+        <span class="theme-icon-dark" style="display:none">🌙</span>
+      </button>
+      
+    </nav>
+  </header>
+  
+  <main>
+    
+<!-- Sidebar defaults to class 'menu'. CSS max-width 600px breakpoint handles closing it automatically -->
+<div class="menu">
+  
+  
+  <nav role="navigation">
+    <ul>
+      
+      
+      
+      
+      
+      <li class="live-interviews-link">
+        <a href="https://gel.github.io/interviews/live"><strong>Live Interviews</strong></a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/interviews/1-intro/">
+          <strong>1.</strong>
+          Interviews Introduction
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;1-intro&#x2F;1-making-a-career-move&#x2F;">
+              <strong>1.1.</strong>
+              Making a Career Move
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;1-intro&#x2F;2-finding-the-best-job&#x2F;">
+              <strong>1.2.</strong>
+              Finding an Optimal Job
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;1-intro&#x2F;3-passing-the-interview&#x2F;">
+              <strong>1.3.</strong>
+              Acing the Interview Process
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/interviews/2-data-structres-and-algorithms/">
+          <strong>2.</strong>
+          Data structures and Algorithms
+        </a>
+        
+        <ul>
+          
+          <li class="active" >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;2-data-structres-and-algorithms&#x2F;1-data-structures&#x2F;">
+              <strong>2.1.</strong>
+              Data Structures
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;2-data-structres-and-algorithms&#x2F;2-algorithms&#x2F;">
+              <strong>2.2.</strong>
+              Algorithms
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/interviews/3-coding-problems/">
+          <strong>3.</strong>
+          Solving Coding Interview Problems
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;3-coding-problems&#x2F;1-logical-and-maintainable&#x2F;">
+              <strong>3.1.</strong>
+              Logical and Maintainable
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;3-coding-problems&#x2F;2-problem-solving&#x2F;">
+              <strong>3.2.</strong>
+              Problem Solving
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/interviews/4-system-design/">
+          <strong>4.</strong>
+          Mastering System Design
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;4-system-design&#x2F;1-agent-orchestration&#x2F;">
+              <strong>4.1.</strong>
+              Agent Orchestration
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;4-system-design&#x2F;2-tinyurl-and-median-stream&#x2F;">
+              <strong>4.2.</strong>
+              TinyURL
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;4-system-design&#x2F;3-design-youtube&#x2F;">
+              <strong>4.3.</strong>
+              YouTube
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+    </ul>
+  </nav>
+  
+  
+</div>
+
+<!-- Page defaults to class 'page'. CSS max-width 600px breakpoint handles making it full-width automatically -->
+<div class="page">
+
+  <div class="page__content">
+    
+    <div class="search-container">
+      <input id="search" type="search" placeholder="Search..">
+      <div class="search-results">
+        <div class="search-results__header"></div>
+        <ul class="search-results__items"></ul>
+      </div>
+    </div>
+    
+    <button class="sidebar-toggle-inline" id="sidebar-toggle-inline" aria-label="Toggle Chapters">
+      <span class="toggle-icon">☰</span> Chapters
+    </button>
+    <div class="book-content">
+      
+    <h1>Data Structures</h1>
+    <ul>
+<li><a href="https://gel.github.io/interviews/2-data-structres-and-algorithms/1-data-structures/#hashtable">Hashtable</a></li>
+<li><a href="https://gel.github.io/interviews/2-data-structres-and-algorithms/1-data-structures/#tree">Tree</a></li>
+<li><a href="https://gel.github.io/interviews/2-data-structres-and-algorithms/1-data-structures/#graph">Graph</a></li>
+<li><a href="https://gel.github.io/interviews/2-data-structres-and-algorithms/1-data-structures/#heap-min-max-priority-queue">Heap</a></li>
+<li><a href="https://gel.github.io/interviews/2-data-structres-and-algorithms/1-data-structures/#basic-data-structures">Basic Data Structures</a></li>
+<li><a href="https://gel.github.io/interviews/2-data-structres-and-algorithms/1-data-structures/#probablistic-data-structures">Probablistic Data Structures</a></li>
+</ul>
+<hr />
+<h3 id="hashtable">Hashtable<a class="zola-anchor" href="#hashtable" aria-label="Anchor link for: hashtable">🔗</a></h3>
+<p>Constant lookup - <code>O(1)</code> - uses hash function and list of entries for collisions.</p>
+<h3 id="tree">Tree<a class="zola-anchor" href="#tree" aria-label="Anchor link for: tree">🔗</a></h3>
+<p><code>Binary Tree</code> - Has up to 2 child nodes.</p>
+<p><code>BST (Binary Search Tree)</code> - Binary tree where left &lt;= parent &lt;= right - since BST is not balanced it has <code>O(N)</code> bound.</p>
+<p><code>AVL tree</code> - Balanced(self-balanced) BST, common operation is rotation/shift (L, R, LR, RL) - all balanced trees will have <code>O(Log(N))</code> bound.</p>
+<p><code>B-Tree</code> - A self-balancing search tree that generalizes the binary search tree, allowing nodes to have more than two children. It is designed to work well on secondary storage (disks) by minimizing the number of disk accesses.</p>
+<p><code>B+Tree</code> - A variation of the B-Tree (used by InnoDB) where:</p>
+<ul>
+<li>All actual data (rows) is stored <strong>only in leaf nodes</strong>.</li>
+<li>Non-leaf nodes (internal nodes) only store <strong>keys and child page pointers</strong>.</li>
+<li>Leaf nodes are linked together in a <strong>doubly-linked list</strong>, allowing for efficient range scans.</li>
+</ul>
+<p><strong>Why B+Trees for Databases?</strong></p>
+<ol>
+<li><strong>Predictable Depth</strong>: B+Trees are very &quot;flat.&quot; A tree with only 3 or 4 levels can store billions of rows, ensuring any record is reached in a fixed, small number of I/Os.</li>
+<li><strong>Efficient Range Scans</strong>: Since leaf nodes are linked, a range query (e.g., <code>WHERE id &gt; 100</code>) just finds the first leaf and then traverses the linked list.</li>
+<li><strong>Better Cache Performance</strong>: Since internal nodes don't store row data, more keys fit in a single page, increasing the &quot;fan-out&quot; and keeping the index pages in memory longer.</li>
+</ol>
+<h4 id="innodb-b-tree-structure">InnoDB B+Tree Structure<a class="zola-anchor" href="#innodb-b-tree-structure" aria-label="Anchor link for: innodb-b-tree-structure">🔗</a></h4>
+<p>In InnoDB, pages are the basic unit of storage (usually 16KB).</p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">graph TD
+    Root[&quot;Root Page (Level 2)&quot;]
+    Internal1[&quot;Internal Page (Level 1)&quot;]
+    Internal2[&quot;Internal Page (Level 1)&quot;]
+    Leaf1[&quot;Leaf Page (Level 0)&lt;br&#x2F;&gt;Records: A, B, C&quot;]
+    Leaf2[&quot;Leaf Page (Level 0)&lt;br&#x2F;&gt;Records: D, E, F&quot;]
+    Leaf3[&quot;Leaf Page (Level 0)&lt;br&#x2F;&gt;Records: G, H, I&quot;]
+
+    Root --&gt; Internal1
+    Root --&gt; Internal2
+    Internal1 --&gt; Leaf1
+    Internal1 --&gt; Leaf2
+    Internal2 --&gt; Leaf3
+
+    Leaf1 &lt;--&gt; Leaf2 &lt;--&gt; Leaf3
+</code></pre>
+<p><strong>Root Page &amp; Splitting:</strong>
+The root page is special because its location is <strong>fixed</strong> in the InnoDB data dictionary. When the root page fills up:</p>
+<ol>
+<li>It cannot be moved or split like a normal page.</li>
+<li>Instead, its records are moved to a <strong>newly allocated page</strong> (the root is &quot;raised&quot; a level).</li>
+<li>That new page is then split into two.</li>
+<li>The root page remains at the same location but now contains <strong>node pointers</strong> to the new pages.</li>
+</ol>
+<p><strong>Page Internals:</strong></p>
+<ul>
+<li>Each page has a <strong>Header</strong> and a <strong>Trailer</strong>.</li>
+<li><strong>System Records</strong>: <code>Infimum</code> (lowest possible value) and <code>Supremum</code> (highest possible value) exist in every page and act as boundary markers for the record list.</li>
+<li><strong>Records</strong>: Singly-linked list within the page, logically ordered by key. Physically, they take whatever space is available (no physical sorting).</li>
+<li><strong>Page Directory</strong>: Since records are not physically sorted, InnoDB uses a &quot;page directory&quot; (array of pointers) to enable <strong>binary search</strong> within the page. It divides the records into small groups (4-8 records) and stores the offset of the last record in each group.</li>
+</ul>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">graph LR
+    subgraph Page
+        Infimum --&gt; Rec1
+        Rec1 --&gt; Rec2
+        Rec2 --&gt; Rec3
+        Rec3 --&gt; Supremum
+    end
+</code></pre>
+<p><code>Trie</code> (prefix tree) - Tree to locate specific keys (mostly strings by traversing individual characters). A node's position in the trie defines the key with which it is associated.</p>
+<h3 id="graph">Graph<a class="zola-anchor" href="#graph" aria-label="Anchor link for: graph">🔗</a></h3>
+<p><code>Adjacency matrix</code> - size N*M - binary value(0/1) to represent existance of an edge.</p>
+<p><code>Nodes and edges sets</code></p>
+<h3 id="heap-min-max-priority-queue">Heap (Min / Max / Priority Queue)<a class="zola-anchor" href="#heap-min-max-priority-queue" aria-label="Anchor link for: heap-min-max-priority-queue">🔗</a></h3>
+<table><thead><tr><th>Operation</th><th>Bound</th><th>Explanation</th></tr></thead><tbody>
+<tr><td>Peak</td><td><code>O(1)</code></td><td>Read</td></tr>
+<tr><td>Poll/Extract/Insert</td><td><code>O(Log(N))</code></td><td>It is still requires to fix the underlying tree</td></tr>
+<tr><td>Build Heap</td><td><code>O(N)</code></td><td>Unlike the intuition <code>O(N*Log(N))</code> is not strict and since the tree is balanced the complexity is bound to the height ` (0 * n/2) + (1 * n/4) + (2 * n/8) + ... + (h * 1)).</td></tr>
+</tbody></table>
+<h3 id="basic-data-structures">Basic Data Structures<a class="zola-anchor" href="#basic-data-structures" aria-label="Anchor link for: basic-data-structures">🔗</a></h3>
+<ol>
+<li>Array</li>
+<li>Stack</li>
+<li>Queue</li>
+<li>Dequeue</li>
+<li>List</li>
+<li>Doubly-linked List</li>
+</ol>
+<h3 id="probablistic-data-structures">Probablistic Data Structures<a class="zola-anchor" href="#probablistic-data-structures" aria-label="Anchor link for: probablistic-data-structures">🔗</a></h3>
+<p><code>Bloom Filter (membership problem)</code> - no false negatives (always return the member), built by 2D binary array of buckets (B) * number of hash functions (L) = BxL.</p>
+<p><code>Count Min Sketch  (approximate heavy-hitters problem)</code> - similar to bloom filter with integer(count) array, error correlates to number of L and B size (we can’t choose epsilon = 0 since it equals to infinity memory).</p>
+
+
+    </div>
+  </div>
+
+  <nav class="book-pagination">
+    <div class="prev-link">
+      
+    
+        
+        
+        <a class="previous" href="https://gel.github.io/interviews/2-data-structres-and-algorithms/">&larr; Previous</a>
+    
+
+    </div>
+
+    <div class="next-link">
+      
+    
+        <a class="next" href="https://gel.github.io/interviews/2-data-structres-and-algorithms/2-algorithms/">Next &rarr;</a>
+    
+
+    </div>
+  </nav>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="https://gel.github.io/elasticlunr.min.js"></script>
+<script type="text/javascript" src="https://gel.github.io/search_index.en.js"></script>
+
+<script type="text/javascript" src="https://gel.github.io/book.js"></script>
+<script async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>

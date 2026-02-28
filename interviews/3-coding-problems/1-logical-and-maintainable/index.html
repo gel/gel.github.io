@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] img {
+      opacity: .75;
+      transition: opacity .5s ease-in-out;
+    }
+
+    [data-theme="dark"] img:hover {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 10px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        gap: 0;
+      }
+
+      header nav {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      header nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      header nav>a {
+        flex: 0 0 auto;
+      }
+
+      header nav>a.nav-projects,
+      header nav>a.nav-resume {
+        display: none;
+      }
+
+      header nav>a:not(:last-child) {
+        margin-right: 0.3rem;
+      }
+
+      .theme-toggle {
+        flex: 0 0 auto;
+        padding: 0 2px;
+      }
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#05a081');
+      root.style.setProperty('--accent-color-light', '#82d0c0');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#05a081" />
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.fe16e0bb11047769.jpg" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.605594d8be6a111f.jpg" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.3d1b2eeabf8eca47.jpg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.b6439cbc27d70267.jpg" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.e69fb5473e9ea744.jpg" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d03b11f47410640c.jpg" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d847062c67ed9f5e.jpg" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+
+  
+
+  
+
+  
+  
+  <meta name="description" content="" />
+  <meta name="twitter:description" content="">
+  
+  
+
+  
+  <meta name="twitter:title" content="Logical and Maintainable">
+  
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" />
+
+  <title>
+    
+
+
+
+Gal's 
+     
+    
+        Interviews
+    
+ Book - Logical and Maintainable
+
+
+  </title>
+
+  
+  
+
+
+<link rel="stylesheet" href="https://gel.github.io/main.css">
+<link rel="stylesheet" href="https://gel.github.io/book.css">
+
+
+
+  
+
+
+
+
+
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="book-body">
+  
+  <header>
+    <a class="profile-icon" href="/">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" alt="profile picture">
+    </a>
+    <nav>
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        "
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        "
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        "
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        active-nav"
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        "
+      >GenAI</a>
+      
+      
+      <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <span class="theme-icon-light">☀️</span>
+        <span class="theme-icon-dark" style="display:none">🌙</span>
+      </button>
+      
+    </nav>
+  </header>
+  
+  <main>
+    
+<!-- Sidebar defaults to class 'menu'. CSS max-width 600px breakpoint handles closing it automatically -->
+<div class="menu">
+  
+  
+  <nav role="navigation">
+    <ul>
+      
+      
+      
+      
+      
+      <li class="live-interviews-link">
+        <a href="https://gel.github.io/interviews/live"><strong>Live Interviews</strong></a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/interviews/1-intro/">
+          <strong>1.</strong>
+          Interviews Introduction
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;1-intro&#x2F;1-making-a-career-move&#x2F;">
+              <strong>1.1.</strong>
+              Making a Career Move
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;1-intro&#x2F;2-finding-the-best-job&#x2F;">
+              <strong>1.2.</strong>
+              Finding an Optimal Job
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;1-intro&#x2F;3-passing-the-interview&#x2F;">
+              <strong>1.3.</strong>
+              Acing the Interview Process
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/interviews/2-data-structres-and-algorithms/">
+          <strong>2.</strong>
+          Data structures and Algorithms
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;2-data-structres-and-algorithms&#x2F;1-data-structures&#x2F;">
+              <strong>2.1.</strong>
+              Data Structures
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;2-data-structres-and-algorithms&#x2F;2-algorithms&#x2F;">
+              <strong>2.2.</strong>
+              Algorithms
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/interviews/3-coding-problems/">
+          <strong>3.</strong>
+          Solving Coding Interview Problems
+        </a>
+        
+        <ul>
+          
+          <li class="active" >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;3-coding-problems&#x2F;1-logical-and-maintainable&#x2F;">
+              <strong>3.1.</strong>
+              Logical and Maintainable
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;3-coding-problems&#x2F;2-problem-solving&#x2F;">
+              <strong>3.2.</strong>
+              Problem Solving
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/interviews/4-system-design/">
+          <strong>4.</strong>
+          Mastering System Design
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;4-system-design&#x2F;1-agent-orchestration&#x2F;">
+              <strong>4.1.</strong>
+              Agent Orchestration
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;4-system-design&#x2F;2-tinyurl-and-median-stream&#x2F;">
+              <strong>4.2.</strong>
+              TinyURL
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;4-system-design&#x2F;3-design-youtube&#x2F;">
+              <strong>4.3.</strong>
+              YouTube
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+    </ul>
+  </nav>
+  
+  
+</div>
+
+<!-- Page defaults to class 'page'. CSS max-width 600px breakpoint handles making it full-width automatically -->
+<div class="page">
+
+  <div class="page__content">
+    
+    <div class="search-container">
+      <input id="search" type="search" placeholder="Search..">
+      <div class="search-results">
+        <div class="search-results__header"></div>
+        <ul class="search-results__items"></ul>
+      </div>
+    </div>
+    
+    <button class="sidebar-toggle-inline" id="sidebar-toggle-inline" aria-label="Toggle Chapters">
+      <span class="toggle-icon">☰</span> Chapters
+    </button>
+    <div class="book-content">
+      
+    <h1>Logical and Maintainable</h1>
+    <ul>
+<li><a href="https://gel.github.io/interviews/3-coding-problems/1-logical-and-maintainable/#range-sum-of-bst-easy-leetcode-938">Range Sum of BST - Easy - LeetCode 938</a></li>
+<li><a href="https://gel.github.io/interviews/3-coding-problems/1-logical-and-maintainable/#evaluate-reverse-polish-notation-easy-leetcode-150">Evaluate Reverse Polish Notation - Easy - LeetCode 150</a></li>
+<li><a href="https://gel.github.io/interviews/3-coding-problems/1-logical-and-maintainable/#two-sum-easy-leetcode-1">Two Sum - Easy - LeetCode 1</a></li>
+<li><a href="https://gel.github.io/interviews/3-coding-problems/1-logical-and-maintainable/#longest-substring-without-repeating-characters-easy-leetcode-3">Longest Substring Without Repeating Characters - Easy - LeetCode 3</a></li>
+<li><a href="https://gel.github.io/interviews/3-coding-problems/1-logical-and-maintainable/#serialize-and-deserialize-binary-tree-hard-leetcode-297">Serialize and Deserialize Binary Tree - Hard - LeetCode 297</a></li>
+<li><a href="https://gel.github.io/interviews/3-coding-problems/1-logical-and-maintainable/#best-time-to-buy-and-sell-stock-easy-leetcode-121">Best Time to Buy and Sell Stock - Easy - LeetCode 121</a></li>
+<li><a href="https://gel.github.io/interviews/3-coding-problems/1-logical-and-maintainable/#partitioning-into-minimum-number-of-deci-binary-numbers-medium-leetcode-1689">Partitioning Into Minimum Number Of Deci-Binary Numbers - Medium - LeetCode 1689</a></li>
+<li><a href="https://gel.github.io/interviews/3-coding-problems/1-logical-and-maintainable/#insert-greatest-common-divisors-in-linked-list-medium-leetcode-2807">Insert Greatest Common Divisors in Linked List - Medium - LeetCode 2807</a></li>
+<li><a href="https://gel.github.io/interviews/3-coding-problems/1-logical-and-maintainable/#directory-search-library-oo-design">Directory Search Library - OO Design</a></li>
+</ul>
+<hr />
+<h3 id="range-sum-of-bst-easy-leetcode-938">Range Sum of BST - Easy - <a href="https://leetcode.com/problems/range-sum-of-bst/">LeetCode 938</a><a class="zola-anchor" href="#range-sum-of-bst-easy-leetcode-938" aria-label="Anchor link for: range-sum-of-bst-easy-leetcode-938">🔗</a></h3>
+<blockquote>
+<p>Given the root node of a binary search tree and two integers low and high, return the sum of values of all nodes with a value in the inclusive range [low, high].</p>
+</blockquote>
+<p><strong>Explanation</strong></p>
+<p>Traversal of the tree in any order is fine and make sure you don't traverse the unnecessary parts of the tree. Recrusion or iterative solution are acceptable (make sure you can explain that any recursive solution can be converted to an iterative solution).</p>
+<p><strong>Solution</strong></p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">class RangeSumBST {
+    public int rangeSumBST(TreeNode root, int low, int high) {
+        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;TreeNode&gt;();
+        queue.add(root);
+
+        int sum = 0;
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node.val &gt;= low &amp;&amp; node.val &lt;= high)
+                sum += node.val;
+
+            if (node.left != null &amp;&amp; node.val &gt;= low)
+                queue.add(node.left);
+
+            if (node.right != null &amp;&amp; node.val &lt;= high)
+                queue.add(node.right);
+        }
+        return sum;
+    }
+}
+</code></pre>
+<hr />
+<h3 id="evaluate-reverse-polish-notation-easy-leetcode-150">Evaluate Reverse Polish Notation - Easy - <a href="https://leetcode.com/problems/evaluate-reverse-polish-notation/">LeetCode 150</a><a class="zola-anchor" href="#evaluate-reverse-polish-notation-easy-leetcode-150" aria-label="Anchor link for: evaluate-reverse-polish-notation-easy-leetcode-150">🔗</a></h3>
+<p><strong>Question</strong></p>
+<blockquote>
+<p>Evaluate the value of an arithmetic expression in &gt; Reverse Polish Notation.</p>
+<p>Valid operators are +, -, *, and /. Each operand may &gt; be an integer or another expression.</p>
+<p>Note that division between two integers should &gt; truncate toward zero.</p>
+<p>It is guaranteed that the given RPN expression is &gt; always valid. That means the expression would always &gt; evaluate to a result, and there will not be any &gt; division by zero operation.</p>
+</blockquote>
+<p><strong>Explanation</strong></p>
+<p>To perform operation in polish notation we need a stack data-structure (first in last out). We will read the tokens until we encounter operation and then perform the calculation.</p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">graph TD
+    subgraph &quot;RPN Stack State: [&#x27;2&#x27;, &#x27;1&#x27;, &#x27;+&#x27;, &#x27;3&#x27;, &#x27;*&#x27;]&quot;
+        direction BT
+        S1[&quot;2&quot;]
+        S2[&quot;1&quot;]
+        S3[&quot;(2 + 1) = 3&quot;]
+        S4[&quot;3&quot;]
+        S5[&quot;(3 * 3) = 9&quot;]
+
+        Step1[&quot;Push 2&quot;] --&gt; S1
+        Step2[&quot;Push 1&quot;] --&gt; S2
+        Step3[&quot;Pop 2,1 &amp; Push 3&quot;] --&gt; S3
+        Step4[&quot;Push 3&quot;] --&gt; S4
+        Step5[&quot;Pop 3,3 &amp; Push 9&quot;] --&gt; S5
+    end
+</code></pre>
+<p><strong>Solution</strong></p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">class ReversePolishNotation {
+    private static boolean isNumeric(String token) {
+      try {
+        Double.parseDouble(token);
+        return true;
+      } catch(NumberFormatException e) {
+        return false;
+      }
+    }
+
+    private static int performCalculation(int left, int right, String operand) {
+        if (operand.equals(&quot;+&quot;)) {
+            return left + right;
+        } else if (operand.equals(&quot;-&quot;)) {
+            return left - right;
+        } else if (operand.equals(&quot;*&quot;)) {
+            return left * right;
+        } else if (operand.equals(&quot;&#x2F;&quot;)) {
+            return left &#x2F; right;
+        } else {
+            System.out.println(&quot;left: &quot; + left + &quot; right: &quot; + right + &quot; operand: &quot; + operand);
+            throw new RuntimeException(&quot;Unexpected operand&quot;);
+        }
+    }
+
+    public int evalRPN(String[] tokens) {
+        Stack&lt;Integer&gt; numbers = new Stack&lt;Integer&gt;();
+        for (int i = 0; i &lt; tokens.length; i++) {
+            String token = tokens[i];
+            if (!isNumeric(token)) {
+                int right = numbers.pop();
+                int left = numbers.pop();
+                int result = performCalculation(left, right, token);
+                numbers.add(result);
+            } else {
+                numbers.add(Integer.parseInt(token));
+            }
+        }
+        return numbers.pop();
+    }
+}
+</code></pre>
+<hr />
+<h3 id="two-sum-easy-leetcode-1">Two Sum - Easy - <a href="https://leetcode.com/problems/two-sum/">LeetCode 1</a><a class="zola-anchor" href="#two-sum-easy-leetcode-1" aria-label="Anchor link for: two-sum-easy-leetcode-1">🔗</a></h3>
+<p><strong>Question</strong></p>
+<blockquote>
+<p>Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.</p>
+</blockquote>
+<p><strong>Explanation</strong></p>
+<p>In this question we need to find elem + X = target =&gt; X = target - elem;</p>
+<p>A common solution is to create a map from number to index (one pass).
+Then leverage it during traversal to check if the element exist (second pass).</p>
+<p>Since this problem is a sum of two elements we can do it in a single pass (the second element will have the first one in the data-structre).</p>
+<p><strong>Solution</strong></p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">public class TwoSum {
+    public int[] twoSum(int[] nums, int target) {
+        Map&lt;Integer, Integer&gt; numberToIndex = new HashMap&lt;&gt;();
+        int[] result = new int[2]; &#x2F;&#x2F; number, index
+        for (int i = 0; i &lt; nums.length; i++) {
+            int needed = target - nums[i];
+            if (numberToIndex.containsKey(needed)) {
+                Integer index = numberToIndex.get(needed);
+                result[0] = i;
+                result[1] = index;
+                return result;
+            }
+
+            numberToIndex.put(nums[i], i);
+        }
+
+        throw new IllegalArgumentException(&quot;Invalid input&quot;);
+    }
+}
+</code></pre>
+<hr />
+<h3 id="longest-substring-without-repeating-characters-easy-leetcode-3">Longest Substring Without Repeating Characters - Easy - <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/">LeetCode 3</a><a class="zola-anchor" href="#longest-substring-without-repeating-characters-easy-leetcode-3" aria-label="Anchor link for: longest-substring-without-repeating-characters-easy-leetcode-3">🔗</a></h3>
+<p><strong>Question</strong></p>
+<blockquote>
+<p>Given a string s, find the length of the longest substring without repeating characters.</p>
+</blockquote>
+<p><strong>Explanation</strong></p>
+<p>The right approach is a sliding window.</p>
+<ol>
+<li>Keep two pointers: <code>left</code> and <code>right</code>.</li>
+<li>Expand with <code>right</code>, and track each character's latest index in a map.</li>
+<li>If a duplicate appears inside current window, move <code>left</code> to the right of the previous index.</li>
+<li>Update max window length each step.</li>
+</ol>
+<p>Because each index moves forward once, the solution is linear.</p>
+<p><strong>Solution</strong></p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">class LongestSubstringWithoutRepeatingCharacters {
+    public int lengthOfLongestSubstring(String s) {
+        Map&lt;Character, Integer&gt; lastSeen = new HashMap&lt;&gt;();
+        int left = 0;
+        int maxLen = 0;
+
+        for (int right = 0; right &lt; s.length(); right++) {
+            char current = s.charAt(right);
+
+            if (lastSeen.containsKey(current) &amp;&amp; lastSeen.get(current) &gt;= left) {
+                left = lastSeen.get(current) + 1;
+            }
+
+            lastSeen.put(current, right);
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+
+        return maxLen;
+    }
+}
+</code></pre>
+<hr />
+<h3 id="serialize-and-deserialize-binary-tree-hard-leetcode-297">Serialize and Deserialize Binary Tree - Hard - <a href="https://leetcode.com/problems/serialize-and-deserialize-binary-tree/">LeetCode 297</a><a class="zola-anchor" href="#serialize-and-deserialize-binary-tree-hard-leetcode-297" aria-label="Anchor link for: serialize-and-deserialize-binary-tree-hard-leetcode-297">🔗</a></h3>
+<p><strong>Question</strong></p>
+<blockquote>
+<p>Design an algorithm to serialize and deserialize a binary tree.</p>
+</blockquote>
+<p><strong>Explanation</strong></p>
+<p>Use preorder traversal with null markers.</p>
+<ol>
+<li>Serialize: write <code>node.val</code> in preorder, and write <code>&quot;N&quot;</code> when node is null.</li>
+<li>Deserialize: read tokens in order and rebuild recursively.</li>
+</ol>
+<p>Null markers are critical because preorder values alone cannot reconstruct tree shape.</p>
+<p><strong>Solution</strong></p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Codec {
+    private static final String NULL = &quot;N&quot;;
+    private static final String SEP = &quot;,&quot;;
+
+    &#x2F;&#x2F; Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        StringBuilder builder = new StringBuilder();
+        serializePreorder(root, builder);
+        return builder.toString();
+    }
+
+    private void serializePreorder(TreeNode node, StringBuilder builder) {
+        if (node == null) {
+            builder.append(NULL).append(SEP);
+            return;
+        }
+
+        builder.append(node.val).append(SEP);
+        serializePreorder(node.left, builder);
+        serializePreorder(node.right, builder);
+    }
+
+    &#x2F;&#x2F; Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        Queue&lt;String&gt; tokens = new LinkedList&lt;&gt;(Arrays.asList(data.split(SEP)));
+        return deserializePreorder(tokens);
+    }
+
+    private TreeNode deserializePreorder(Queue&lt;String&gt; tokens) {
+        String token = tokens.poll();
+        if (token.equals(NULL)) {
+            return null;
+        }
+
+        TreeNode node = new TreeNode(Integer.parseInt(token));
+        node.left = deserializePreorder(tokens);
+        node.right = deserializePreorder(tokens);
+        return node;
+    }
+}
+</code></pre>
+<p><strong>Follow-ups</strong></p>
+<ol>
+<li>Time complexity: <code>O(N)</code> for both operations, because each node (and null marker position) is processed once.</li>
+<li>Space complexity: <code>O(N)</code> for serialized output/token queue; recursion stack is <code>O(H)</code> (worst-case <code>O(N)</code> for skewed trees, <code>O(log N)</code> for balanced trees).</li>
+<li>Edge cases: empty tree serializes to <code>N,</code> and deserializes to <code>null</code>; single-node tree round-trips as <code>value,N,N,</code>.</li>
+</ol>
+<hr />
+<h3 id="best-time-to-buy-and-sell-stock-easy-leetcode-121">Best Time to Buy and Sell Stock - Easy - <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/">LeetCode 121</a><a class="zola-anchor" href="#best-time-to-buy-and-sell-stock-easy-leetcode-121" aria-label="Anchor link for: best-time-to-buy-and-sell-stock-easy-leetcode-121">🔗</a></h3>
+<p><strong>Question</strong></p>
+<blockquote>
+<p>You are given an array prices where prices[i] is the price of a given stock on the ith day.</p>
+</blockquote>
+<blockquote>
+<p>You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.</p>
+</blockquote>
+<blockquote>
+<p>Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.</p>
+</blockquote>
+<p><strong>Explanation</strong></p>
+<p>We are looking for the largest difference (min / max). Therefore we need to do a simple book keeping and keep track of the current minimum and profit we have. While we traverse the array we update the min if necessary and record the profit if it's bigger than what we have. I wrote my initial solution but there is no need to keep track of the current profit (we can just record max profit when needed).</p>
+<p><strong>Solution</strong></p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">class BestTimeToSellStock {
+    public int maxProfit(int[] prices) {
+        int size = prices.length;
+        if (size &lt;= 1)
+            return 0;
+
+        int currentMin = prices[0];
+        int currentProfit = 0;
+        int maxProfit = 0;
+
+        for (int i = 1; i &lt; size; i++) {
+            if (prices[i] &lt; currentMin) {
+                maxProfit = Math.max(maxProfit, currentProfit);
+                currentProfit = 0;
+                currentMin = prices[i];
+            } else {
+                int candidateProfit = prices[i] - currentMin;
+                currentProfit = Math.max(candidateProfit, currentProfit);
+            }
+        }
+        maxProfit = Math.max(maxProfit, currentProfit);
+
+        return maxProfit;
+    }
+}
+</code></pre>
+<h3 id="partitioning-into-minimum-number-of-deci-binary-numbers-medium-leetcode-1689">Partitioning Into Minimum Number Of Deci-Binary Numbers - Medium - <a href="https://leetcode.com/problems/partitioning-into-minimum-number-of-deci-binary-numbers/">LeetCode 1689</a><a class="zola-anchor" href="#partitioning-into-minimum-number-of-deci-binary-numbers-medium-leetcode-1689" aria-label="Anchor link for: partitioning-into-minimum-number-of-deci-binary-numbers-medium-leetcode-1689">🔗</a></h3>
+<p><strong>Question</strong></p>
+<p>A decimal number is called deci-binary if each of its digits is either 0 or 1 without any leading zeros. For example, 101 and 1100 are deci-binary, while 112 and 3001 are not.</p>
+<p>Given a string n that represents a positive decimal integer, return the minimum number of positive deci-binary numbers needed so that they sum up to n.</p>
+<p>Example 1:</p>
+<p>Input: n = &quot;32&quot;
+Output: 3
+Explanation: 10 + 11 + 11 = 32
+Example 2:</p>
+<p>Input: n = &quot;82734&quot;
+Output: 8
+Example 3:</p>
+<p>Input: n = &quot;27346209830709182346&quot;
+Output: 9</p>
+<p>Constraints:</p>
+<p>\( 1 \le n.length \le 105 \)</p>
+<p>n consists of only digits.</p>
+<p>n does not contain any leading zeros and represents a positive integer.</p>
+<p><strong>Explanation</strong></p>
+<p>This question relies on logic, since we can use only deci-binary numbers (zero or 1 in each digit) it means that in order to build a specific digit k we will need at-least k different deci numbers. Therefore, the answer is the maximum of all digits in n <code>max(k)</code></p>
+<p><strong>Solution</strong></p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">class MinPartitionsSolutions {
+    public int minPartitions(String n) {
+        int max = 0;
+        for(int i = 0; i &lt; n.length(); i++){
+            int digit = n.charAt(i) - &#x27;0&#x27;;
+            if (digit &gt; max) {
+                max = digit;
+            }
+        }
+        return max;
+    }
+}
+</code></pre>
+<h3 id="insert-greatest-common-divisors-in-linked-list-medium-leetcode-2807">Insert Greatest Common Divisors in Linked List - Medium - <a href="https://leetcode.com/problems/insert-greatest-common-divisors-in-linked-list/">LeetCode 2807</a><a class="zola-anchor" href="#insert-greatest-common-divisors-in-linked-list-medium-leetcode-2807" aria-label="Anchor link for: insert-greatest-common-divisors-in-linked-list-medium-leetcode-2807">🔗</a></h3>
+<p><strong>Question</strong></p>
+<p>Given the head of a linked list head, in which each node contains an integer value.</p>
+<p>Between every pair of adjacent nodes, insert a new node with a value equal to the greatest common divisor of them.</p>
+<p>Return the linked list after insertion.</p>
+<p>The greatest common divisor of two numbers is the largest positive integer that evenly divides both numbers.</p>
+<p>Example 1:</p>
+<p>Input: head = [18,6,10,3]
+Output: [18,6,6,2,10,1,3]
+Explanation: The 1st diagram denotes the initial linked list and the 2nd diagram denotes the linked list after inserting the new nodes (nodes in blue are the inserted nodes).</p>
+<ul>
+<li>We insert the greatest common divisor of 18 and 6 = 6 between the 1st and the 2nd nodes.</li>
+<li>We insert the greatest common divisor of 6 and 10 = 2 between the 2nd and the 3rd nodes.</li>
+<li>We insert the greatest common divisor of 10 and 3 = 1 between the 3rd and the 4th nodes.
+There are no more adjacent nodes, so we return the linked list.
+Example 2:</li>
+</ul>
+<p>Input: head = [7]
+Output: [7]
+Explanation: The 1st diagram denotes the initial linked list and the 2nd diagram denotes the linked list after inserting the new nodes.
+There are no pairs of adjacent nodes, so we return the initial linked list.</p>
+<p>Constraints:</p>
+<p>The number of nodes in the list is in the range [1, 5000].
+\( 1 \le Node.val \le 1000 \)</p>
+<p><strong>Explanation</strong></p>
+<p>The idea is to break the solution into two different parts.</p>
+<ol>
+<li>
+<p>Implement GCD. The recursive way is the easiest, a side note is that it's usually not recommended to implement recursion but in this case because it is tail recursion the compiler or JVM would be able to optimize it if needed.</p>
+</li>
+<li>
+<p>Add a new node from the GCD value.</p>
+</li>
+</ol>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">graph LR
+    subgraph &quot;Before Insertion&quot;
+        A[18] --&gt; B[6]
+        B --&gt; C[10]
+        C --&gt; D[3]
+    end
+
+    subgraph &quot;After GCD Insertion&quot;
+        A1[18] --&gt; G1((6))
+        G1 --&gt; B1[6]
+        B1 --&gt; G2((2))
+        G2 --&gt; C1[10]
+        C1 --&gt; G3((1))
+        G3 --&gt; D1[3]
+    end
+
+    style G1 fill:#bbf,stroke:#333,color:#000
+    style G2 fill:#bbf,stroke:#333,color:#000
+    style G3 fill:#bbf,stroke:#333,color:#000
+</code></pre>
+<p><strong>Solution</strong></p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">
+&#x2F;**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ **&#x2F;
+class GreatestCommonDivisorsSolution {
+    public ListNode insertGreatestCommonDivisors(ListNode head) {
+        ListNode curr = head;
+        while (curr != null &amp;&amp; curr.next != null) {
+            int newVal = gcd(curr.val, curr.next.val);
+            &#x2F;&#x2F; insert new node between curr and curr.next with newVal
+            curr.next = new ListNode(newVal, curr.next);
+            curr = curr.next.next;
+        }
+        return head;
+    }
+
+    private int gcd(int a, int b) {
+        if (b == 0) return a;
+        return gcd(b, a % b);
+    }
+}
+
+</code></pre>
+<hr />
+<h3 id="directory-search-library-oo-design">Directory Search Library - OO Design<a class="zola-anchor" href="#directory-search-library-oo-design" aria-label="Anchor link for: directory-search-library-oo-design">🔗</a></h3>
+<p><strong>Question</strong></p>
+<p>Design a small directory search library that can support:</p>
+<ol>
+<li>Files larger than 5 MB.</li>
+<li>Files by extension (for example <code>xml</code>).</li>
+</ol>
+<p>The design should be extensible and secure, so adding new criteria later should be straightforward.</p>
+<p><strong>What I Evaluate</strong></p>
+<p>I use this question mainly for software design quality:</p>
+<ol>
+<li>Clear components and separation of responsibilities.</li>
+<li>Interface-first thinking.</li>
+<li>Composition over inheritance.</li>
+<li>Practical optimization mindset.</li>
+<li>Security and safety awareness (symlink cycles, permission failures, path handling).</li>
+</ol>
+<p><strong>Suggested Design</strong></p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">public final class FileFind {
+    public interface Matcher {
+        boolean matches(File file);
+    }
+
+    public static List&lt;File&gt; find(File root, Matcher matcher) throws IOException {
+        return find(root, matcher, new HashSet&lt;&gt;(), new ArrayList&lt;&gt;());
+    }
+
+    private static List&lt;File&gt; find(
+            File file,
+            Matcher matcher,
+            Set&lt;String&gt; seenCanonicalPaths,
+            List&lt;File&gt; out) throws IOException {
+
+        String canonical = file.getCanonicalPath();
+        if (!seenCanonicalPaths.add(canonical)) {
+            return out; &#x2F;&#x2F; cycle protection
+        }
+
+        if (matcher.matches(file)) {
+            out.add(file);
+        }
+
+        if (file.isDirectory()) {
+            File[] children = file.listFiles();
+            if (children != null) {
+                for (File child : children) {
+                    find(child, matcher, seenCanonicalPaths, out);
+                }
+            }
+        }
+        return out;
+    }
+
+    public static Matcher and(Matcher... matchers) {
+        return file -&gt; {
+            for (Matcher m : matchers) {
+                if (!m.matches(file)) return false;
+            }
+            return true;
+        };
+    }
+
+    public static Matcher extension(String ext) {
+        String suffix = &quot;.&quot; + ext.toLowerCase();
+        return file -&gt; file.isFile() &amp;&amp; file.getName().toLowerCase().endsWith(suffix);
+    }
+
+    public static Matcher sizeAtLeast(long bytes) {
+        return file -&gt; file.isFile() &amp;&amp; file.length() &gt;= bytes;
+    }
+}
+</code></pre>
+
+
+    </div>
+  </div>
+
+  <nav class="book-pagination">
+    <div class="prev-link">
+      
+    
+        
+        
+        <a class="previous" href="https://gel.github.io/interviews/3-coding-problems/">&larr; Previous</a>
+    
+
+    </div>
+
+    <div class="next-link">
+      
+    
+        <a class="next" href="https://gel.github.io/interviews/3-coding-problems/2-problem-solving/">Next &rarr;</a>
+    
+
+    </div>
+  </nav>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="https://gel.github.io/elasticlunr.min.js"></script>
+<script type="text/javascript" src="https://gel.github.io/search_index.en.js"></script>
+
+<script type="text/javascript" src="https://gel.github.io/book.js"></script>
+<script async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>

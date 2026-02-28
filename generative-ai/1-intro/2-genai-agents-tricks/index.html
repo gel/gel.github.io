@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] img {
+      opacity: .75;
+      transition: opacity .5s ease-in-out;
+    }
+
+    [data-theme="dark"] img:hover {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 10px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        gap: 0;
+      }
+
+      header nav {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      header nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      header nav>a {
+        flex: 0 0 auto;
+      }
+
+      header nav>a.nav-projects,
+      header nav>a.nav-resume {
+        display: none;
+      }
+
+      header nav>a:not(:last-child) {
+        margin-right: 0.3rem;
+      }
+
+      .theme-toggle {
+        flex: 0 0 auto;
+        padding: 0 2px;
+      }
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#05a081');
+      root.style.setProperty('--accent-color-light', '#82d0c0');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#05a081" />
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.fe16e0bb11047769.jpg" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.605594d8be6a111f.jpg" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.3d1b2eeabf8eca47.jpg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.b6439cbc27d70267.jpg" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.e69fb5473e9ea744.jpg" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d03b11f47410640c.jpg" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d847062c67ed9f5e.jpg" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+
+  
+
+  
+
+  
+  
+  <meta name="description" content="" />
+  <meta name="twitter:description" content="">
+  
+  
+
+  
+  <meta name="twitter:title" content="GenAI Agents Tricks">
+  
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" />
+
+  <title>
+    
+
+
+
+Gal's 
+     
+    
+        Generative AI
+    
+ Book - GenAI Agents Tricks
+
+
+  </title>
+
+  
+  
+
+
+<link rel="stylesheet" href="https://gel.github.io/main.css">
+<link rel="stylesheet" href="https://gel.github.io/book.css">
+
+
+
+  
+
+
+
+
+
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="book-body">
+  
+  <header>
+    <a class="profile-icon" href="/">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" alt="profile picture">
+    </a>
+    <nav>
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        "
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        "
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        "
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        "
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        active-nav"
+      >GenAI</a>
+      
+      
+      <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <span class="theme-icon-light">☀️</span>
+        <span class="theme-icon-dark" style="display:none">🌙</span>
+      </button>
+      
+    </nav>
+  </header>
+  
+  <main>
+    
+<!-- Sidebar defaults to class 'menu'. CSS max-width 600px breakpoint handles closing it automatically -->
+<div class="menu">
+  
+  
+  <nav role="navigation">
+    <ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/generative-ai/1-intro/">
+          <strong>1.</strong>
+          Generative AI Foundations
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;1-intro&#x2F;1-genai-environment&#x2F;">
+              <strong>1.1.</strong>
+              GenAI Agents Environment
+            </a>
+          </li>
+          
+          <li class="active" >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;1-intro&#x2F;2-genai-agents-tricks&#x2F;">
+              <strong>1.2.</strong>
+              GenAI Agents Tricks
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/generative-ai/2-genai-research/">
+          <strong>2.</strong>
+          GenAI Research
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;1-genai-agents&#x2F;">
+              <strong>2.1.</strong>
+              Agents
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;2-genai-pretraining-finetuning&#x2F;">
+              <strong>2.2.</strong>
+              GenAI Training
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;3-genai-optimization&#x2F;">
+              <strong>2.3.</strong>
+              GenAI Optimizations
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;4-genai-prompting&#x2F;">
+              <strong>2.4.</strong>
+              GenAI Prompting
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;5-genai-benchmarks&#x2F;">
+              <strong>2.5.</strong>
+              GenAI Evaluations
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;6-genai-models&#x2F;">
+              <strong>2.6.</strong>
+              GenAI Models
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;7-genai-security&#x2F;">
+              <strong>2.7.</strong>
+              GenAI Security
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/generative-ai/3-llm-implementation/">
+          <strong>3.</strong>
+          LLM Implementation
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;3-llm-implementation&#x2F;1-datasets&#x2F;">
+              <strong>3.1.</strong>
+              Datasets
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;3-llm-implementation&#x2F;2-llms&#x2F;">
+              <strong>3.2.</strong>
+              LLMs
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+    </ul>
+  </nav>
+  
+  
+</div>
+
+<!-- Page defaults to class 'page'. CSS max-width 600px breakpoint handles making it full-width automatically -->
+<div class="page">
+
+  <div class="page__content">
+    
+    <div class="search-container">
+      <input id="search" type="search" placeholder="Search..">
+      <div class="search-results">
+        <div class="search-results__header"></div>
+        <ul class="search-results__items"></ul>
+      </div>
+    </div>
+    
+    <button class="sidebar-toggle-inline" id="sidebar-toggle-inline" aria-label="Toggle Chapters">
+      <span class="toggle-icon">☰</span> Chapters
+    </button>
+    <div class="book-content">
+      
+    <h1>GenAI Agents Tricks</h1>
+    <p><em>Last updated: January 2026</em></p>
+<p>A collection of power-user tricks and best practices for getting the most out of autonomous coding agents.</p>
+<hr />
+<h2 id="brain-trick-1-the-agents-md-protocol-distilled-context">🧠 Trick 1: The &quot;Agents.md&quot; Protocol (Distilled Context)<a class="zola-anchor" href="#brain-trick-1-the-agents-md-protocol-distilled-context" aria-label="Anchor link for: brain-trick-1-the-agents-md-protocol-distilled-context">🔗</a></h2>
+<p>One of the most effective ways to align an agent with your specific project constraints and style is to maintain a high-density context file—often called <code>Agents.md</code> or <code>Context.md</code>—in your repository root.</p>
+<p>Instead of repeating instructions in every prompt, point the agent to this file. It should contain your &quot;Non-Negotiables&quot;.</p>
+<h3 id="what-to-allow-in-your-agents-md">What to allow in your <code>Agents.md</code><a class="zola-anchor" href="#what-to-allow-in-your-agents-md" aria-label="Anchor link for: what-to-allow-in-your-agents-md">🔗</a></h3>
+<h4 id="writing-code-removing-ai-slop"><strong>Writing Code: Removing &quot;AI Slop&quot;</strong><a class="zola-anchor" href="#writing-code-removing-ai-slop" aria-label="Anchor link for: writing-code-removing-ai-slop">🔗</a></h4>
+<p>AI models often generate defensive, verbose, or safe-but-sloppy code. Enforce these rules to keep quality high:</p>
+<ul>
+<li><strong>No &quot;AI Explanations&quot; in Comments:</strong> Remove extra comments that a human wouldn't add (e.g., <code>// loop through the array</code>) or that are inconsistent with the file's existing style.</li>
+<li><strong>No Paranoid Defense:</strong> Avoid extra try/catch blocks or null checks in internal, trusted code paths. If the data is validated at the edge, don't re-validate it deeply in internal helpers.</li>
+<li><strong>No <code>any</code> Casts:</strong> Do not use <code>as any</code> (TS) or equivalent to bypass type safety. Fix the type definition instead.</li>
+<li><strong>Consistency is King:</strong> Match the existing indentation, naming conventions, and patterns of the file you are editing.</li>
+</ul>
+<h4 id="unit-testing"><strong>Unit Testing</strong><a class="zola-anchor" href="#unit-testing" aria-label="Anchor link for: unit-testing">🔗</a></h4>
+<ul>
+<li><strong>Co-location:</strong> When writing code, find or create the corresponding unit test immediately.</li>
+<li><strong>Coverage:</strong> Cover the new line(s) of code.</li>
+<li><strong>Minimalism:</strong> Tests should cover the success case and critical edge cases only. Avoid over-testing trivial logic.</li>
+</ul>
+<h4 id="logging-standards"><strong>Logging Standards</strong><a class="zola-anchor" href="#logging-standards" aria-label="Anchor link for: logging-standards">🔗</a></h4>
+<ul>
+<li><strong>Error vs. Info:</strong>
+<ul>
+<li><strong>ERROR</strong> level is for system errors (5xx) where <em>action is required</em>.</li>
+<li><strong>INFO</strong> or <strong>WARN</strong> is for expected flow issues like Access Denied (4xx) or Validation Errors.</li>
+</ul>
+</li>
+<li><strong>Ban <code>log.warn</code>:</strong> Avoid <code>log.warn</code> unless strictly defined. It often becomes a graveyard of &quot;maybe important&quot; logs that no one checks.</li>
+</ul>
+<hr />
+<h2 id="deciduous-tree-trick-2-parallel-agents-with-git-worktrees">🌳 Trick 2: Parallel Agents with Git Worktrees<a class="zola-anchor" href="#deciduous-tree-trick-2-parallel-agents-with-git-worktrees" aria-label="Anchor link for: deciduous-tree-trick-2-parallel-agents-with-git-worktrees">🔗</a></h2>
+<p>Running multiple agents usually requires multiple folders. Copying your repo is slow and wastes disk space (<code>node_modules</code>, <code>.git</code> objects).</p>
+<p><strong>The Solution: Git Worktrees</strong></p>
+<p><code>git worktree</code> allows you to have multiple branches checked out in different folders simultaneously, all sharing the same <code>.git</code> object database.</p>
+<h3 id="how-to-use-it">How to use it<a class="zola-anchor" href="#how-to-use-it" aria-label="Anchor link for: how-to-use-it">🔗</a></h3>
+<ol>
+<li><strong>Create a folder</strong> for your project (e.g., <code>my-app-root</code>).</li>
+<li><strong>Clone your repo</strong> into a <code>main</code> folder inside it.</li>
+<li><strong>Add a worktree</strong> for a new feature:</li>
+</ol>
+<pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash"># Inside your main repo
+git worktree add ..&#x2F;feature-branch-alpha -b feature&#x2F;alpha
+</code></pre>
+<p>Now you have <code>../feature-branch-alpha</code> as a sibling folder. It shares the history and objects but has its own working directory. You can run one agent on <code>main</code> fixing bugs, and another agent on <code>feature-branch-alpha</code> building a new feature, in parallel.</p>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li><strong>Disk Space:</strong> 90% savings for large repos.</li>
+<li><strong>Speed:</strong> Instant creation; no re-cloning.</li>
+<li><strong>Context:</strong> Agents can work on independent tasks without file lock conflicts.</li>
+</ul>
+<hr />
+<h2 id="zap-trick-3-context-economics-navigation">⚡ Trick 3: Context Economics &amp; Navigation<a class="zola-anchor" href="#zap-trick-3-context-economics-navigation" aria-label="Anchor link for: zap-trick-3-context-economics-navigation">🔗</a></h2>
+<p>Context is your most scarce resource. Treating it inefficiently leads to &quot;lost in the middle&quot; hallucinations and wasted cost.</p>
+<ul>
+<li><strong>Context Compaction is Critical:</strong> Never dump entire raw files if you only need signatures. Use tools that &quot;compact&quot; code (stripping implementations, keeping interfaces) before adding to context.</li>
+<li><strong>Token Awareness:</strong> Always track your <code>Used</code> vs <code>Remaining</code> tokens for every interaction. If you are 80% full, performance degrades.</li>
+<li><strong>Semantic Search over Grep:</strong> Don't let agents blindly <code>grep</code>. Use tools with <strong>LSP (Language Server Protocol)</strong> awareness or <strong>Semantic Search</strong> (like Cursor's codebase indexing). Agents need to follow &quot;Go to Definition&quot; and &quot;Find References&quot; chains to understand code, just like you do.</li>
+</ul>
+<hr />
+<h2 id="repeat-trick-4-the-ralph-wiggum-loop">🔁 Trick 4: The &quot;Ralph Wiggum&quot; Loop<a class="zola-anchor" href="#repeat-trick-4-the-ralph-wiggum-loop" aria-label="Anchor link for: repeat-trick-4-the-ralph-wiggum-loop">🔗</a></h2>
+<p>Named after the Simpsons character known for persistence (and occasionally accidental genius), the <strong>Ralph Wiggum Loop</strong> is a brute-force yet highly effective technique for autonomous agents.</p>
+<h3 id="the-context">The Context<a class="zola-anchor" href="#the-context" aria-label="Anchor link for: the-context">🔗</a></h3>
+<p>Currently, many LLM providers offer &quot;Unlimited&quot; or high-tier plans where they are effectively subsidizing the compute costs (burning money) to gain market share. This creates an opportunity to trade <em>compute time</em> for <em>human time</em>.</p>
+<h3 id="the-trick">The Trick<a class="zola-anchor" href="#the-trick" aria-label="Anchor link for: the-trick">🔗</a></h3>
+<p>Instead of asking for a feature once and hoping it works, you set up a loop where the agent:</p>
+<ol>
+<li>Attempts to implement a feature.</li>
+<li>Runs a <strong>strict verification suite</strong> (tests, types, linting).</li>
+<li>If it fails, it reads the errors, adjusts, and tries again.</li>
+<li>It repeats this loop until success or a timeout.</li>
+</ol>
+<p>This turns &quot;probabilistic&quot; generation into &quot;deterministic&quot; output, provided your verification specification (your tests) is solid.</p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">graph TD
+    A[&quot;Start: Feature Request&quot;] --&gt; B[&quot;Agent Implements Feature&quot;]
+    B --&gt; C{&quot;Run Verification&lt;br&#x2F;&gt;(Tests&#x2F;Lint&#x2F;Build)&quot;}
+    C --&gt;|Fail| D[&quot;Analyze Errors&quot;]
+    D --&gt; B
+    C --&gt;|Pass| E[&quot;Success: Commit &amp; Exit&quot;]
+    C --&gt;|Timeout&#x2F;Max Retries| F[&quot;Failure: Request Human Help&quot;]
+    style B fill:#f9f,stroke:#333,stroke-width:2px,color:#000
+    style C fill:#bbf,stroke:#333,stroke-width:2px,color:#000
+</code></pre>
+<h3 id="real-world-example">Real-world Example<a class="zola-anchor" href="#real-world-example" aria-label="Anchor link for: real-world-example">🔗</a></h3>
+<p>I was able to build a live coding WebLLM feature using this technique.</p>
+
+
+    </div>
+  </div>
+
+  <nav class="book-pagination">
+    <div class="prev-link">
+      
+    
+        
+        
+        <a class="previous" href="https://gel.github.io/generative-ai/1-intro/">&larr; Previous</a>
+    
+
+    </div>
+
+    <div class="next-link">
+      
+    
+        
+        
+        
+        
+        
+        
+            
+            
+            
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                <a class="next" href="https://gel.github.io/generative-ai/2-genai-research/">Next &rarr;</a>
+                
+                
+            
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+            
+            
+            
+                
+            
+                
+            
+        
+    
+
+    </div>
+  </nav>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="https://gel.github.io/elasticlunr.min.js"></script>
+<script type="text/javascript" src="https://gel.github.io/search_index.en.js"></script>
+
+<script type="text/javascript" src="https://gel.github.io/book.js"></script>
+<script async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>

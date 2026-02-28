@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] img {
+      opacity: .75;
+      transition: opacity .5s ease-in-out;
+    }
+
+    [data-theme="dark"] img:hover {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 10px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        gap: 0;
+      }
+
+      header nav {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      header nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      header nav>a {
+        flex: 0 0 auto;
+      }
+
+      header nav>a.nav-projects,
+      header nav>a.nav-resume {
+        display: none;
+      }
+
+      header nav>a:not(:last-child) {
+        margin-right: 0.3rem;
+      }
+
+      .theme-toggle {
+        flex: 0 0 auto;
+        padding: 0 2px;
+      }
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#05a081');
+      root.style.setProperty('--accent-color-light', '#82d0c0');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#05a081" />
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.fe16e0bb11047769.jpg" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.605594d8be6a111f.jpg" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.3d1b2eeabf8eca47.jpg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.b6439cbc27d70267.jpg" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.e69fb5473e9ea744.jpg" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d03b11f47410640c.jpg" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d847062c67ed9f5e.jpg" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+
+  
+
+  
+
+  
+  
+  <meta name="description" content="" />
+  <meta name="twitter:description" content="">
+  
+  
+
+  
+  <meta name="twitter:title" content="Algorithms">
+  
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" />
+
+  <title>
+    
+
+
+
+Gal's 
+     
+    
+        Interviews
+    
+ Book - Algorithms
+
+
+  </title>
+
+  
+  
+
+
+<link rel="stylesheet" href="https://gel.github.io/main.css">
+<link rel="stylesheet" href="https://gel.github.io/book.css">
+
+
+
+  
+
+
+
+
+
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="book-body">
+  
+  <header>
+    <a class="profile-icon" href="/">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" alt="profile picture">
+    </a>
+    <nav>
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        "
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        "
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        "
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        active-nav"
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        "
+      >GenAI</a>
+      
+      
+      <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <span class="theme-icon-light">☀️</span>
+        <span class="theme-icon-dark" style="display:none">🌙</span>
+      </button>
+      
+    </nav>
+  </header>
+  
+  <main>
+    
+<!-- Sidebar defaults to class 'menu'. CSS max-width 600px breakpoint handles closing it automatically -->
+<div class="menu">
+  
+  
+  <nav role="navigation">
+    <ul>
+      
+      
+      
+      
+      
+      <li class="live-interviews-link">
+        <a href="https://gel.github.io/interviews/live"><strong>Live Interviews</strong></a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/interviews/1-intro/">
+          <strong>1.</strong>
+          Interviews Introduction
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;1-intro&#x2F;1-making-a-career-move&#x2F;">
+              <strong>1.1.</strong>
+              Making a Career Move
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;1-intro&#x2F;2-finding-the-best-job&#x2F;">
+              <strong>1.2.</strong>
+              Finding an Optimal Job
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;1-intro&#x2F;3-passing-the-interview&#x2F;">
+              <strong>1.3.</strong>
+              Acing the Interview Process
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/interviews/2-data-structres-and-algorithms/">
+          <strong>2.</strong>
+          Data structures and Algorithms
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;2-data-structres-and-algorithms&#x2F;1-data-structures&#x2F;">
+              <strong>2.1.</strong>
+              Data Structures
+            </a>
+          </li>
+          
+          <li class="active" >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;2-data-structres-and-algorithms&#x2F;2-algorithms&#x2F;">
+              <strong>2.2.</strong>
+              Algorithms
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/interviews/3-coding-problems/">
+          <strong>3.</strong>
+          Solving Coding Interview Problems
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;3-coding-problems&#x2F;1-logical-and-maintainable&#x2F;">
+              <strong>3.1.</strong>
+              Logical and Maintainable
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;3-coding-problems&#x2F;2-problem-solving&#x2F;">
+              <strong>3.2.</strong>
+              Problem Solving
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/interviews/4-system-design/">
+          <strong>4.</strong>
+          Mastering System Design
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;4-system-design&#x2F;1-agent-orchestration&#x2F;">
+              <strong>4.1.</strong>
+              Agent Orchestration
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;4-system-design&#x2F;2-tinyurl-and-median-stream&#x2F;">
+              <strong>4.2.</strong>
+              TinyURL
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;4-system-design&#x2F;3-design-youtube&#x2F;">
+              <strong>4.3.</strong>
+              YouTube
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+    </ul>
+  </nav>
+  
+  
+</div>
+
+<!-- Page defaults to class 'page'. CSS max-width 600px breakpoint handles making it full-width automatically -->
+<div class="page">
+
+  <div class="page__content">
+    
+    <div class="search-container">
+      <input id="search" type="search" placeholder="Search..">
+      <div class="search-results">
+        <div class="search-results__header"></div>
+        <ul class="search-results__items"></ul>
+      </div>
+    </div>
+    
+    <button class="sidebar-toggle-inline" id="sidebar-toggle-inline" aria-label="Toggle Chapters">
+      <span class="toggle-icon">☰</span> Chapters
+    </button>
+    <div class="book-content">
+      
+    <h1>Algorithms</h1>
+    <ul>
+<li><a href="https://gel.github.io/interviews/2-data-structres-and-algorithms/2-algorithms/#sorting-algorithms">Sorting Algorithms</a>
+<ul>
+<li><a href="https://gel.github.io/interviews/2-data-structres-and-algorithms/2-algorithms/#quicksort">Quicksort</a></li>
+<li><a href="https://gel.github.io/interviews/2-data-structres-and-algorithms/2-algorithms/#insertion-sort">Insertion Sort</a></li>
+<li><a href="https://gel.github.io/interviews/2-data-structres-and-algorithms/2-algorithms/#merge-sort">Merge Sort</a></li>
+<li><a href="https://gel.github.io/interviews/2-data-structres-and-algorithms/2-algorithms/#bucket-sort">Bucket Sort</a></li>
+<li><a href="https://gel.github.io/interviews/2-data-structres-and-algorithms/2-algorithms/#counting-sort">Counting Sort</a></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="sorting-algorithms">Sorting Algorithms<a class="zola-anchor" href="#sorting-algorithms" aria-label="Anchor link for: sorting-algorithms">🔗</a></h3>
+<table><thead><tr><th>Algorithm</th><th>Worst</th><th>Average</th><th>Best</th><th>Space</th><th>Notes</th></tr></thead><tbody>
+<tr><td>Quicksort</td><td><code>O(n^2)</code></td><td><code>O(n*log*(n))</code></td><td><code>O(n*log*(n))</code></td><td><code>O(log*(n))</code></td><td></td></tr>
+<tr><td>Mergesort</td><td><code>O(n*log*(n))</code></td><td><code>O(n*log*(n))</code></td><td><code>O(n*log*(n))</code></td><td><code>O(n)</code></td><td></td></tr>
+<tr><td>Bubble Sort</td><td><code>O(n^2)</code></td><td><code>O(n^2)</code></td><td><code>O(n))</code></td><td><code>O(1)</code></td><td>Never use!</td></tr>
+<tr><td>Insertion Sort</td><td><code>O(n^2)</code></td><td><code>O(n^2)</code></td><td><code>O(n))</code></td><td><code>O(1)</code></td><td>Less swaps - more efficient</td></tr>
+<tr><td>Selection Sort</td><td><code>O(n^2)</code></td><td><code>O(n^2)</code></td><td><code>O(n^2))</code></td><td><code>O(1)</code></td><td>Less swaps</td></tr>
+<tr><td>Bucket Sort</td><td><code>O(n^2)</code></td><td><code>O(n+k)</code></td><td><code>O(n+k))</code></td><td><code>O(n)</code></td><td></td></tr>
+<tr><td>Counting Sort</td><td><code>O(n+k)</code></td><td><code>O(n+k)</code></td><td><code>O(n+k))</code></td><td><code>O(k)</code></td><td></td></tr>
+</tbody></table>
+<h4 id="quicksort">Quicksort<a class="zola-anchor" href="#quicksort" aria-label="Anchor link for: quicksort">🔗</a></h4>
+<p>Most popular / optimized on average sorting algorithm for small data-sets (unstable - position based on pivot selection). <code>O(N^2)</code> worst case <code>O(N *Log(N))</code> average case. </p>
+<p>Lomuto partitioning (last elm), Hoare partitioning (random / middle - mostly performs better).</p>
+<p><code>QuickSelect</code> is a selection algorithm to find kth smallest element (Ohare), it’s a partial quick-sort algorithm - sort only one side of recursion partitioning -  O(logn) or it’s O(n)</p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">&#x2F;&#x2F; Sorts a (portion of an) array, divides it into partitions, then sorts those
+algorithm quicksort(A, lo, hi) is 
+    if lo &gt;= 0 &amp;&amp; hi &gt;= 0 &amp;&amp; lo &lt; hi then
+        p := partition(A, lo, hi) 
+        quicksort(A, lo, p) &#x2F;&#x2F; Note: the pivot is now included
+        quicksort(A, p + 1, hi) 
+
+    &#x2F;&#x2F; Divides array into two partitions
+    algorithm partition(A, lo, hi) is 
+    &#x2F;&#x2F; Pivot value
+    pivot := A[ floor((hi + lo) &#x2F; 2) ] &#x2F;&#x2F; The value in the middle of the array
+    &#x2F;&#x2F; Left index
+    i := lo - 1 
+    &#x2F;&#x2F; Right index
+    j := hi + 1
+
+    loop forever 
+        &#x2F;&#x2F; Move the left index to the right at least once and while the element
+        &#x2F;&#x2F; at the left index is less than the pivot 
+        do i := i + 1 while A[i] &lt; pivot 
+        
+        &#x2F;&#x2F; Move the right index to the left at least once and while the element 
+  &#x2F;&#x2F; at the right index is greater than the pivot 
+  do j := j - 1 while A[j] &gt; pivot 
+
+  &#x2F;&#x2F; If the indices crossed, return
+  if i ≥ j then return j
+        
+  &#x2F;&#x2F; Swap the elements at the left and right indices
+  swap A[i] with A[j]
+</code></pre>
+<h4 id="insertion-sort">Insertion Sort<a class="zola-anchor" href="#insertion-sort" aria-label="Anchor link for: insertion-sort">🔗</a></h4>
+<p>Simplest sorting algorithm (stable) - <code>O(N^2)</code> worst and average case.</p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">    i ← 1
+    while i &lt; length(A)
+        j ← i
+        while j &gt; 0 and A[j-1] &gt; A[j]
+            swap A[j] and A[j-1]
+            j ← j - 1
+        end while
+        i ← i + 1
+    end while
+</code></pre>
+<h4 id="merge-sort">Merge Sort<a class="zola-anchor" href="#merge-sort" aria-label="Anchor link for: merge-sort">🔗</a></h4>
+<p>Very efficient for large data-sets - <code>O(N*Log(N))</code> average and worst case.</p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">&#x2F;&#x2F; Sorting the entire array is accomplished by TopDownMergeSort(A, B, length(A)).    
+
+&#x2F;&#x2F; Array A[] has the items to sort; array B[] is a work array.
+void TopDownMergeSort(A[], B[], n)
+{
+    CopyArray(A, 0, n, B);           &#x2F;&#x2F; one time copy of A[] to B[]
+    TopDownSplitMerge(B, 0, n, A);   &#x2F;&#x2F; sort data from B[] into A[]
+}
+
+&#x2F;&#x2F; Split A[] into 2 runs, sort both runs into B[], merge both runs from B[] to A[]
+&#x2F;&#x2F; iBegin is inclusive; iEnd is exclusive (A[iEnd] is not in the set).
+void TopDownSplitMerge(B[], iBegin, iEnd, A[])
+{
+if (iEnd - iBegin &lt;= 1)                     &#x2F;&#x2F; if run size == 1
+    return;                                 &#x2F;&#x2F;   consider it sorted
+    &#x2F;&#x2F; split the run longer than 1 item into halves
+    iMiddle = (iEnd + iBegin) &#x2F; 2;              &#x2F;&#x2F; iMiddle = mid point
+    &#x2F;&#x2F; recursively sort both runs from array A[] into B[]
+    TopDownSplitMerge(A, iBegin,  iMiddle, B);  &#x2F;&#x2F; sort the left  run
+    TopDownSplitMerge(A, iMiddle,    iEnd, B);  &#x2F;&#x2F; sort the right run
+    &#x2F;&#x2F; merge the resulting runs from array B[] into A[]
+    TopDownMerge(B, iBegin, iMiddle, iEnd, A);
+}
+
+&#x2F;&#x2F;  Left source half is A[ iBegin:iMiddle-1].
+&#x2F;&#x2F; Right source half is A[iMiddle:iEnd-1   ].
+&#x2F;&#x2F; Result is            B[ iBegin:iEnd-1   ].
+void TopDownMerge(A[], iBegin, iMiddle, iEnd, B[])
+{
+    i = iBegin, j = iMiddle;
+    &#x2F;&#x2F; While there are elements in the left or right runs...
+    for (k = iBegin; k &lt; iEnd; k++) {
+        &#x2F;&#x2F; If left run head exists and is &lt;= existing right run head.
+         if (i &lt; iMiddle &amp;&amp; (j &gt;= iEnd || A[i] &lt;= A[j])) {
+             B[k] = A[i];
+             i = i + 1;
+         } else {
+             B[k] = A[j];
+             j = j + 1;
+         }
+      }
+  }
+
+  void CopyArray(A[], iBegin, iEnd, B[])
+  {
+      for (k = iBegin; k &lt; iEnd; k++)
+          B[k] = A[k];
+  }
+</code></pre>
+<h4 id="bucket-sort">Bucket Sort<a class="zola-anchor" href="#bucket-sort" aria-label="Anchor link for: bucket-sort">🔗</a></h4>
+<p>Used as a distribution sort.</p>
+<p>Runtime = <code>O(N^2)</code> worst case, <code>O(n + n^2/k + k)</code> average case when k = buckets
+Space = <code>O(N*k)</code></p>
+<ol>
+<li>Set up an array of initially empty &quot;buckets&quot;.</li>
+<li>Scatter: Go over the original array, putting each object in its bucket.</li>
+<li>Sort each non-empty bucket.</li>
+<li>Gather: Visit the buckets in order and put all elements back into the original array.</li>
+</ol>
+<p>Example:</p>
+<table><thead><tr><th>Bucket 1</th><th>Bucket 2</th><th>Bucket 3</th></tr></thead><tbody>
+<tr><td>0-9</td><td>10-99</td><td>10-999</td></tr>
+<tr><td>1,3</td><td></td><td>333</td></tr>
+</tbody></table>
+<h5 id="radix-digital-sort">Radix / digital sort<a class="zola-anchor" href="#radix-digital-sort" aria-label="Anchor link for: radix-digital-sort">🔗</a></h5>
+<p>Used to sort numbers according to their base (specific case of bucket sort)
+Runtime: <code>O(nw)</code> time, where n is the number of keys, and w is the key length.</p>
+<h4 id="counting-sort">Counting Sort<a class="zola-anchor" href="#counting-sort" aria-label="Anchor link for: counting-sort">🔗</a></h4>
+<p>​Used when the keys distribution is low compared to number of elements
+​Runtime <code>O(N+K)</code> runtime. Bucket sort can be used instead (but required dynamic allocation of memory)</p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">​function CountingSort(input, k) ​
+    ​count ← array of k + 1 zeros
+    ​output ← array of same length as input
+     ​
+    ​for i = 0 to length(input) - 1 do
+        ​j = key(input[i])
+        ​count[j] += 1
+
+    ​for i = 1 to k do
+        ​count[i] += count[i - 1]
+
+    ​for i = length(input) - 1 downto 0 do
+         ​j = key(input[i])
+         ​count[j] -= 1
+         ​output[count[j]] = input[i]
+
+    ​return output
+</code></pre>
+
+
+    </div>
+  </div>
+
+  <nav class="book-pagination">
+    <div class="prev-link">
+      
+    
+        
+        
+        <a class="previous" href="https://gel.github.io/interviews/2-data-structres-and-algorithms/">&larr; Previous</a>
+    
+
+    </div>
+
+    <div class="next-link">
+      
+    
+        
+        
+        
+        
+        
+        
+            
+            
+            
+                
+            
+                
+            
+                
+            
+        
+            
+            
+            
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                <a class="next" href="https://gel.github.io/interviews/3-coding-problems/">Next &rarr;</a>
+                
+                
+            
+            
+                
+            
+                
+            
+        
+            
+            
+            
+                
+            
+                
+            
+                
+            
+        
+            
+            
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+    
+
+    </div>
+  </nav>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="https://gel.github.io/elasticlunr.min.js"></script>
+<script type="text/javascript" src="https://gel.github.io/search_index.en.js"></script>
+
+<script type="text/javascript" src="https://gel.github.io/book.js"></script>
+<script async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>

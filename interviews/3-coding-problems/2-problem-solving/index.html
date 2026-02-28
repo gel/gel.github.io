@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] img {
+      opacity: .75;
+      transition: opacity .5s ease-in-out;
+    }
+
+    [data-theme="dark"] img:hover {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 10px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        gap: 0;
+      }
+
+      header nav {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      header nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      header nav>a {
+        flex: 0 0 auto;
+      }
+
+      header nav>a.nav-projects,
+      header nav>a.nav-resume {
+        display: none;
+      }
+
+      header nav>a:not(:last-child) {
+        margin-right: 0.3rem;
+      }
+
+      .theme-toggle {
+        flex: 0 0 auto;
+        padding: 0 2px;
+      }
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#05a081');
+      root.style.setProperty('--accent-color-light', '#82d0c0');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#05a081" />
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.fe16e0bb11047769.jpg" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.605594d8be6a111f.jpg" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.3d1b2eeabf8eca47.jpg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.b6439cbc27d70267.jpg" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.e69fb5473e9ea744.jpg" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d03b11f47410640c.jpg" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d847062c67ed9f5e.jpg" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+
+  
+
+  
+
+  
+  
+  <meta name="description" content="" />
+  <meta name="twitter:description" content="">
+  
+  
+
+  
+  <meta name="twitter:title" content="Problem Solving">
+  
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" />
+
+  <title>
+    
+
+
+
+Gal's 
+     
+    
+        Interviews
+    
+ Book - Problem Solving
+
+
+  </title>
+
+  
+  
+
+
+<link rel="stylesheet" href="https://gel.github.io/main.css">
+<link rel="stylesheet" href="https://gel.github.io/book.css">
+
+
+
+  
+
+
+
+
+
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="book-body">
+  
+  <header>
+    <a class="profile-icon" href="/">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" alt="profile picture">
+    </a>
+    <nav>
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        "
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        "
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        "
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        active-nav"
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        "
+      >GenAI</a>
+      
+      
+      <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <span class="theme-icon-light">☀️</span>
+        <span class="theme-icon-dark" style="display:none">🌙</span>
+      </button>
+      
+    </nav>
+  </header>
+  
+  <main>
+    
+<!-- Sidebar defaults to class 'menu'. CSS max-width 600px breakpoint handles closing it automatically -->
+<div class="menu">
+  
+  
+  <nav role="navigation">
+    <ul>
+      
+      
+      
+      
+      
+      <li class="live-interviews-link">
+        <a href="https://gel.github.io/interviews/live"><strong>Live Interviews</strong></a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/interviews/1-intro/">
+          <strong>1.</strong>
+          Interviews Introduction
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;1-intro&#x2F;1-making-a-career-move&#x2F;">
+              <strong>1.1.</strong>
+              Making a Career Move
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;1-intro&#x2F;2-finding-the-best-job&#x2F;">
+              <strong>1.2.</strong>
+              Finding an Optimal Job
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;1-intro&#x2F;3-passing-the-interview&#x2F;">
+              <strong>1.3.</strong>
+              Acing the Interview Process
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/interviews/2-data-structres-and-algorithms/">
+          <strong>2.</strong>
+          Data structures and Algorithms
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;2-data-structres-and-algorithms&#x2F;1-data-structures&#x2F;">
+              <strong>2.1.</strong>
+              Data Structures
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;2-data-structres-and-algorithms&#x2F;2-algorithms&#x2F;">
+              <strong>2.2.</strong>
+              Algorithms
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/interviews/3-coding-problems/">
+          <strong>3.</strong>
+          Solving Coding Interview Problems
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;3-coding-problems&#x2F;1-logical-and-maintainable&#x2F;">
+              <strong>3.1.</strong>
+              Logical and Maintainable
+            </a>
+          </li>
+          
+          <li class="active" >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;3-coding-problems&#x2F;2-problem-solving&#x2F;">
+              <strong>3.2.</strong>
+              Problem Solving
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/interviews/4-system-design/">
+          <strong>4.</strong>
+          Mastering System Design
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;4-system-design&#x2F;1-agent-orchestration&#x2F;">
+              <strong>4.1.</strong>
+              Agent Orchestration
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;4-system-design&#x2F;2-tinyurl-and-median-stream&#x2F;">
+              <strong>4.2.</strong>
+              TinyURL
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;interviews&#x2F;4-system-design&#x2F;3-design-youtube&#x2F;">
+              <strong>4.3.</strong>
+              YouTube
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+    </ul>
+  </nav>
+  
+  
+</div>
+
+<!-- Page defaults to class 'page'. CSS max-width 600px breakpoint handles making it full-width automatically -->
+<div class="page">
+
+  <div class="page__content">
+    
+    <div class="search-container">
+      <input id="search" type="search" placeholder="Search..">
+      <div class="search-results">
+        <div class="search-results__header"></div>
+        <ul class="search-results__items"></ul>
+      </div>
+    </div>
+    
+    <button class="sidebar-toggle-inline" id="sidebar-toggle-inline" aria-label="Toggle Chapters">
+      <span class="toggle-icon">☰</span> Chapters
+    </button>
+    <div class="book-content">
+      
+    <h1>Problem Solving</h1>
+    <ul>
+<li><a href="https://gel.github.io/interviews/3-coding-problems/2-problem-solving/#lru-cache-medium-leetcode-146">LRU Cache - Medium - LeetCode 146</a></li>
+<li><a href="https://gel.github.io/interviews/3-coding-problems/2-problem-solving/#longest-palindromic-substring-medium-leetcode-5">Longest Palindromic Substring - Medium - LeetCode 5</a></li>
+<li><a href="https://gel.github.io/interviews/3-coding-problems/2-problem-solving/#find-median-from-data-stream-hard-leetcode-295">Find Median from Data Stream - Hard - LeetCode 295</a></li>
+<li><a href="https://gel.github.io/interviews/3-coding-problems/2-problem-solving/#word-break-ii-hard-leetcode-140">Word Break II - Hard - LeetCode 140</a></li>
+<li><a href="https://gel.github.io/interviews/3-coding-problems/2-problem-solving/#alien-dictionary-hard-leetcode-269">Alien Dictionary - Hard - LeetCode 269</a></li>
+</ul>
+<hr />
+<h3 id="lru-cache-medium-leetcode-146">LRU Cache - Medium - <a href="https://leetcode.com/problems/lru-cache/">LeetCode 146</a><a class="zola-anchor" href="#lru-cache-medium-leetcode-146" aria-label="Anchor link for: lru-cache-medium-leetcode-146">🔗</a></h3>
+<p><strong>Question</strong></p>
+<blockquote>
+<p>Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.</p>
+</blockquote>
+<blockquote>
+<p>Implement the LRUCache class:</p>
+</blockquote>
+<blockquote>
+<p>LRUCache(int capacity) Initialize the LRU cache with positive size capacity.
+int get(int key) Return the value of the key if the key exists, otherwise return -1.
+void put(int key, int value) Update the value of the key if the key exists. Otherwise, add the &gt; key-value pair to the cache. If the number of keys exceeds the capacity from this operation, &gt; evict the least recently used key.
+The functions get and put must each run in O(1) average time complexity.</p>
+</blockquote>
+<p><strong>Explanation</strong></p>
+<p>LRU cache is a challenging problem, the problem is mostly focused on how to store the keys efficiently for removal by time inserted. Therefore in addition to the k/v hashtable we need an additional data-structure that allows retrieval, deletion and modification. Heap / Tree based solution are all applicable solutions but requires O(Log(N)) for insertion and removal.</p>
+<p>In this problem it is possible to do a constant time when choosing a doubly linked list which allows to add to head and evicti from tail. It also possible to perform modification in constant (move to HEAD).</p>
+<p>This is a java implemention of DoublyLinkedList and the LRU Cache.</p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">graph TD
+    subgraph &quot;LRU Cache Structure&quot;
+        Map[&quot;HashMap&amp;lt;Integer, Node&amp;gt;&quot;]
+        DLL[&quot;Doubly Linked List&quot;]
+    end
+
+    Map -- &quot;Points to&quot; --&gt; DLL
+
+    subgraph DLL
+        Head[&quot;Head (Most Recently Used)&quot;]
+        Tail[&quot;Tail (Least Recently Used)&quot;]
+        N1[Node 1]
+        N2[Node 2]
+        N3[Node 3]
+
+        Head --&gt; N1
+        N1 &lt;--&gt; N2
+        N2 &lt;--&gt; N3
+        N3 --&gt; Tail
+    end
+</code></pre>
+<p><strong>Solution</strong></p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">class DoublyLinkedList {
+    public Node root;
+    public Node tail;
+
+    public Node addToHead(final int key) {
+        if (root == null) {
+            this.root = new Node(key, null, null);
+            this.tail = this.root;
+        } else {
+            Node node = new Node(key, this.root, null);
+            this.root.previous = node;
+            this.root = node;
+        }
+        return this.root;
+    }
+
+    public void moveToHead(final Node node) throws IllegalArgumentException {
+        if (this.root == null) {
+            throw new RuntimeException(&quot;Invalid head state&quot;);
+        }
+
+        if (this.root == node) { &#x2F;&#x2F; node is already head
+            return;
+        }
+
+        if (this.tail == node) { &#x2F;&#x2F; node is the tail - fix it
+            this.tail = this.tail.previous;
+        }
+
+        if (node.previous != null) { &#x2F;&#x2F; fix existing previous of node
+            node.previous.next = node.next;
+        }
+
+        if (node.next != null) { &#x2F;&#x2F; fix existing next of node
+            node.next.previous = node.previous;
+        }
+
+        &#x2F;&#x2F; set as head
+        node.previous = null;
+        node.next = this.root;
+        this.root.previous = node;
+        this.root = node;
+    }
+
+    public Node evictTail() {
+        if (this.root == null) { &#x2F;&#x2F; list is empty
+            return null;
+        }
+
+        if (this.root == this.tail) {
+            Node reference = this.root;
+            this.root = null;
+            this.tail = null;
+            return reference;
+        }
+
+        Node existingTail = this.tail;
+        existingTail.previous.next = null;
+        this.tail = existingTail.previous;
+        return existingTail;
+    }
+}
+
+class LRUCache {
+    final int capacity;
+    int size;
+    final Map&lt;Integer, CacheEntry&gt; cache;
+    final DoublyLinkedList sortedTtlList;
+
+    static class CacheEntry {
+        public CacheEntry(int value, Node node) {
+            this.value = value;
+            this.node = node;
+        }
+
+        public int value;
+        public Node node;
+    }
+
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        this.size = 0;
+        this.cache = new HashMap&lt;&gt;();
+        this.sortedTtlList = new DoublyLinkedList();
+    }
+
+    public int get(int key) {
+        if (!cache.containsKey(key)) {
+            return -1;
+        }
+
+        CacheEntry entry = cache.get(key);
+        sortedTtlList.moveToHead(entry.node);
+        return entry.value;
+    }
+
+    public void put(int key, int value) {
+        if (cache.containsKey(key)) {
+            CacheEntry entry = cache.get(key);
+            sortedTtlList.moveToHead(entry.node);
+            entry.value = value;
+        } else {
+            if (this.size &lt; this.capacity) {
+                this.size = this.size + 1;
+            } else {
+                Node nodeToRemove = sortedTtlList.evictTail();
+                cache.remove(nodeToRemove.key);
+            }
+            final Node newNode = sortedTtlList.addToHead(key);
+            cache.put(key, new CacheEntry(value, newNode));
+        }
+    }
+}
+</code></pre>
+<hr />
+<h3 id="longest-palindromic-substring-medium-leetcode-5">Longest Palindromic Substring - Medium - <a href="https://leetcode.com/problems/longest-palindromic-substring/">LeetCode 5</a><a class="zola-anchor" href="#longest-palindromic-substring-medium-leetcode-5" aria-label="Anchor link for: longest-palindromic-substring-medium-leetcode-5">🔗</a></h3>
+<p><strong>Question</strong></p>
+<blockquote>
+<p>Given a string s, return the longest palindromic substring in s.</p>
+</blockquote>
+<pre><code>Input: s = &quot;babad&quot;
+Output: &quot;bab&quot;
+Explanation: &quot;aba&quot; is also a valid answer.
+</code></pre>
+<p><strong>Explanation</strong></p>
+<p>The simplest solution is calling isPalindrome for every substring. Checking palindrome is <code>O(N)</code> and all substrings are <code>O(N^2)</code> - therefore <code>O(N^3)</code>.</p>
+<p>This problem can be converted to a dynamic programming problem where <code>Palindrome(i, j) = Palindrome(i+1, j-1) &amp;&amp; s[i] == s[j]</code> (same for odd and even cases). This will require <code>O(N^2)</code> time and <code>O(N^2)</code> memory.</p>
+<p>There is a simpler way to think about this problem. We can think about a palindrome as a center-based string and then check the palindrome from all of the centers.</p>
+<p><strong>Solution</strong></p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">public class LongestPalindrome {
+    private static class PalindromeSequence {
+        public int startIndex;
+        public int length;
+
+        PalindromeSequence() {
+            this.startIndex = 0;
+            this.length = 1;
+        }
+    }
+
+    private void checkAndUpdateLongestPalindrome(String s, int leftIndex, int rightIndex, PalindromeSequence maxPalindrome) {
+        while (leftIndex &gt;= 0 &amp;&amp; rightIndex &lt; s.length() &amp;&amp; s.charAt(leftIndex) == s.charAt(rightIndex)) {
+            leftIndex -= 1;
+            rightIndex += 1;
+        }
+
+        int existingLength = rightIndex - leftIndex - 1;
+        if (existingLength &gt; maxPalindrome.length) {
+            maxPalindrome.startIndex = leftIndex + 1;
+            maxPalindrome.length = existingLength;
+        }
+    }
+
+    public String longestPalindrome(String s) {
+        PalindromeSequence maxPalindrome = new PalindromeSequence();
+
+        for (int i = 0; i &lt; s.length(); i++) {
+            int rightIndex = i;
+            int leftIndex = i - 1;
+            checkAndUpdateLongestPalindrome(s, leftIndex, rightIndex, maxPalindrome);
+
+            leftIndex = i - 1;
+            rightIndex = i + 1;
+            checkAndUpdateLongestPalindrome(s, leftIndex, rightIndex, maxPalindrome);
+        }
+
+        return s.substring(maxPalindrome.startIndex, maxPalindrome.startIndex + maxPalindrome.length);
+    }
+}
+</code></pre>
+<p>Dynamic programming alternative for reference</p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">public class LongestPalindromeDynamicProgramming {
+    public String longestPalindrome(String s) {
+        int strLength = s.length();
+        int maxLength = 0;
+        int maxStartIndex = 0;
+
+        boolean[][] dp = new boolean[strLength][strLength];
+        for (int i = strLength - 1; i &gt;= 0; i--) {
+            for (int j = i; j &lt; strLength; j++) {
+                dp[i][j] = s.charAt(i) == s.charAt(j) &amp;&amp; (j - i &lt; 2 || dp[i+1][j-1]);
+                int existingLength = j - i + 1;
+                if (dp[i][j] &amp;&amp; existingLength &gt; maxLength) {
+                    maxStartIndex = i;
+                    maxLength = j - i + 1;
+                }
+            }
+        }
+        return s.substring(maxStartIndex, maxStartIndex + maxLength);
+    }
+}
+</code></pre>
+<hr />
+<h3 id="find-median-from-data-stream-hard-leetcode-295">Find Median from Data Stream - Hard - <a href="https://leetcode.com/problems/find-median-from-data-stream/">LeetCode 295</a><a class="zola-anchor" href="#find-median-from-data-stream-hard-leetcode-295" aria-label="Anchor link for: find-median-from-data-stream-hard-leetcode-295">🔗</a></h3>
+<p><strong>Question</strong></p>
+<blockquote>
+<p>The median is the middle value in an ordered integer list.</p>
+<p>If the size of the list is even, there is no middle value and the median is the mean of the two middle values.</p>
+<p>Implement the <code>MedianFinder</code> class:</p>
+<p><code>MedianFinder()</code> initializes the object.
+<code>void addNum(int num)</code> adds the integer <code>num</code> from the data stream to the data structure.
+<code>double findMedian()</code> returns the median of all elements so far.</p>
+</blockquote>
+<p><strong>Explanation</strong></p>
+<p>The standard solution is using two heaps:</p>
+<ol>
+<li>Max-heap (<code>low</code>) stores the smaller half.</li>
+<li>Min-heap (<code>high</code>) stores the larger half.</li>
+</ol>
+<p>Invariants:</p>
+<ol>
+<li><code>low.size()</code> is either equal to <code>high.size()</code> or exactly one larger.</li>
+<li>Every element in <code>low</code> is <code>&lt;=</code> every element in <code>high</code>.</li>
+</ol>
+<p>Why median lookup is simple:</p>
+<ol>
+<li>Odd number of elements: <code>low</code> has one extra item, so median is <code>low.peek()</code>.</li>
+<li>Even number of elements: heaps are same size, so median is average of <code>low.peek()</code> and <code>high.peek()</code>.</li>
+</ol>
+<p>This is why <code>findMedian()</code> is <code>O(1)</code> after maintaining heap balance on every insert.</p>
+<p>This approach naturally handles duplicates and negative numbers because heap ordering is value-based.</p>
+<p><strong>Solution</strong></p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">import java.util.Collections;
+import java.util.PriorityQueue;
+
+class MedianFinder {
+    &#x2F;&#x2F; Max-heap for lower half
+    private final PriorityQueue&lt;Integer&gt; low;
+    &#x2F;&#x2F; Min-heap for upper half
+    private final PriorityQueue&lt;Integer&gt; high;
+
+    public MedianFinder() {
+        this.low = new PriorityQueue&lt;&gt;(Collections.reverseOrder());
+        this.high = new PriorityQueue&lt;&gt;();
+    }
+
+    public void addNum(int num) {
+        low.offer(num);
+        high.offer(low.poll());
+
+        &#x2F;&#x2F; Keep low &gt;= high and size difference at most 1
+        if (high.size() &gt; low.size()) {
+            low.offer(high.poll());
+        }
+    }
+
+    public double findMedian() {
+        if (low.size() &gt; high.size()) {
+            return low.peek();
+        }
+
+        return (low.peek() + high.peek()) &#x2F; 2.0;
+    }
+}
+</code></pre>
+<p><strong>Complexity</strong></p>
+<ul>
+<li><code>addNum</code>: <code>O(log N)</code></li>
+<li><code>findMedian</code>: <code>O(1)</code></li>
+<li>Space: <code>O(N)</code></li>
+</ul>
+<p><strong>Follow-ups</strong></p>
+<ol>
+<li>Duplicates: no special handling needed.</li>
+<li>Negative numbers: no special handling needed.</li>
+<li>Space optimization: exact median over unbounded stream requires <code>O(N)</code> memory; for bounded memory use streaming quantile sketches (e.g., t-digest/KLL), which are similar to online k-means style weighted-centroid compression of 1D values.</li>
+</ol>
+<hr />
+<h3 id="word-break-ii-hard-leetcode-140">Word Break II - Hard - <a href="https://leetcode.com/problems/word-break-ii/">LeetCode 140</a><a class="zola-anchor" href="#word-break-ii-hard-leetcode-140" aria-label="Anchor link for: word-break-ii-hard-leetcode-140">🔗</a></h3>
+<p><strong>Question</strong></p>
+<blockquote>
+<p>Given a string <code>s</code> and a dictionary of strings <code>wordDict</code>, add spaces in <code>s</code> to construct all possible sentences where each word is in <code>wordDict</code>.</p>
+<p>Return all such possible sentences in any order.</p>
+</blockquote>
+<p><strong>Explanation</strong></p>
+<p>The standard approach is <code>DP + backtracking (memoized DFS)</code>.</p>
+<ol>
+<li>DFS tries every valid dictionary word starting at index <code>i</code>.</li>
+<li>Memoization stores all sentence suffixes from <code>i</code> to avoid repeated work.</li>
+<li>Backtracking builds full sentences by combining current word with suffix sentences.</li>
+</ol>
+<p>Without memoization this can explode with repeated subproblems.</p>
+<p><strong>Solution</strong></p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+class WordBreakII {
+    public List&lt;String&gt; wordBreak(String s, List&lt;String&gt; wordDict) {
+        Set&lt;String&gt; dict = new HashSet&lt;&gt;(wordDict);
+        Map&lt;Integer, List&lt;String&gt;&gt; memo = new HashMap&lt;&gt;();
+        return dfs(s, 0, dict, memo);
+    }
+
+    private List&lt;String&gt; dfs(String s, int start, Set&lt;String&gt; dict, Map&lt;Integer, List&lt;String&gt;&gt; memo) {
+        if (memo.containsKey(start)) {
+            return memo.get(start);
+        }
+
+        List&lt;String&gt; result = new ArrayList&lt;&gt;();
+        if (start == s.length()) {
+            result.add(&quot;&quot;);
+            memo.put(start, result);
+            return result;
+        }
+
+        for (int end = start + 1; end &lt;= s.length(); end++) {
+            String word = s.substring(start, end);
+            if (!dict.contains(word)) {
+                continue;
+            }
+
+            List&lt;String&gt; suffixes = dfs(s, end, dict, memo);
+            for (String suffix : suffixes) {
+                if (suffix.isEmpty()) {
+                    result.add(word);
+                } else {
+                    result.add(word + &quot; &quot; + suffix);
+                }
+            }
+        }
+
+        memo.put(start, result);
+        return result;
+    }
+}
+</code></pre>
+<p><strong>Follow-ups</strong></p>
+<ol>
+<li>Time/space: output-sensitive; worst case is exponential due to number of valid sentences.</li>
+<li>Optimization: pre-check with Word Break I boolean DP to fail fast when no solution exists.</li>
+<li>Edge cases: empty input, duplicate dictionary entries, and very long strings with dense prefixes.</li>
+</ol>
+<hr />
+<h3 id="alien-dictionary-hard-leetcode-269">Alien Dictionary - Hard - <a href="https://leetcode.com/problems/alien-dictionary/">LeetCode 269</a><a class="zola-anchor" href="#alien-dictionary-hard-leetcode-269" aria-label="Anchor link for: alien-dictionary-hard-leetcode-269">🔗</a></h3>
+<p><strong>Question</strong></p>
+<blockquote>
+<p>There is a new alien language that uses the English alphabet, but the order of letters is unknown.</p>
+<p>Given a list of words sorted lexicographically in this alien language, derive a possible order of letters.</p>
+<p>Return <code>\&quot;\&quot;</code> if the input is invalid or contains a cycle.</p>
+</blockquote>
+<p><strong>Explanation</strong></p>
+<p>Model characters as a graph:</p>
+<ol>
+<li>Compare adjacent words to find first differing character, which creates a directed edge <code>u -&gt; v</code>.</li>
+<li>Build indegree counts for each character.</li>
+<li>Run topological sort (Kahn's algorithm).</li>
+<li>If processed character count is smaller than total unique characters, a cycle exists.</li>
+</ol>
+<p>Important invalid case: prefix conflict (for example <code>\&quot;abc\&quot;</code> before <code>\&quot;ab\&quot;</code>).</p>
+<p><strong>Solution</strong></p>
+<pre data-lang="java" class="language-java "><code class="language-java" data-lang="java">import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+
+class AlienDictionary {
+    public String alienOrder(String[] words) {
+        Map&lt;Character, Set&lt;Character&gt;&gt; graph = new HashMap&lt;&gt;();
+        Map&lt;Character, Integer&gt; indegree = new HashMap&lt;&gt;();
+
+        for (String word : words) {
+            for (char c : word.toCharArray()) {
+                graph.putIfAbsent(c, new HashSet&lt;&gt;());
+                indegree.putIfAbsent(c, 0);
+            }
+        }
+
+        for (int i = 0; i &lt; words.length - 1; i++) {
+            String first = words[i];
+            String second = words[i + 1];
+
+            if (first.length() &gt; second.length() &amp;&amp; first.startsWith(second)) {
+                return &quot;&quot;;
+            }
+
+            int minLen = Math.min(first.length(), second.length());
+            for (int j = 0; j &lt; minLen; j++) {
+                char from = first.charAt(j);
+                char to = second.charAt(j);
+                if (from != to) {
+                    if (!graph.get(from).contains(to)) {
+                        graph.get(from).add(to);
+                        indegree.put(to, indegree.get(to) + 1);
+                    }
+                    break;
+                }
+            }
+        }
+
+        Queue&lt;Character&gt; queue = new ArrayDeque&lt;&gt;();
+        for (char c : indegree.keySet()) {
+            if (indegree.get(c) == 0) {
+                queue.offer(c);
+            }
+        }
+
+        StringBuilder order = new StringBuilder();
+        while (!queue.isEmpty()) {
+            char current = queue.poll();
+            order.append(current);
+
+            for (char next : graph.get(current)) {
+                indegree.put(next, indegree.get(next) - 1);
+                if (indegree.get(next) == 0) {
+                    queue.offer(next);
+                }
+            }
+        }
+
+        if (order.length() != indegree.size()) {
+            return &quot;&quot;;
+        }
+
+        return order.toString();
+    }
+}
+</code></pre>
+<p><strong>Follow-ups</strong></p>
+<ol>
+<li>Complexity: <code>O(C + E)</code> where <code>C</code> is unique chars and <code>E</code> is precedence edges.</li>
+<li>Invalid input checks: prefix rule and cycle detection are required.</li>
+<li>If multiple valid orders exist, returning any valid topological ordering is acceptable.</li>
+</ol>
+
+
+    </div>
+  </div>
+
+  <nav class="book-pagination">
+    <div class="prev-link">
+      
+    
+        
+        
+        <a class="previous" href="https://gel.github.io/interviews/3-coding-problems/">&larr; Previous</a>
+    
+
+    </div>
+
+    <div class="next-link">
+      
+    
+        
+        
+        
+        
+        
+        
+            
+            
+            
+                
+            
+                
+            
+                
+            
+        
+            
+            
+            
+                
+            
+                
+            
+        
+            
+            
+            
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                <a class="next" href="https://gel.github.io/interviews/4-system-design/">Next &rarr;</a>
+                
+                
+            
+            
+                
+            
+                
+            
+                
+            
+        
+            
+            
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+    
+
+    </div>
+  </nav>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="https://gel.github.io/elasticlunr.min.js"></script>
+<script type="text/javascript" src="https://gel.github.io/search_index.en.js"></script>
+
+<script type="text/javascript" src="https://gel.github.io/book.js"></script>
+<script async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>

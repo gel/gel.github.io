@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] img {
+      opacity: .75;
+      transition: opacity .5s ease-in-out;
+    }
+
+    [data-theme="dark"] img:hover {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 10px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        gap: 0;
+      }
+
+      header nav {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      header nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      header nav>a {
+        flex: 0 0 auto;
+      }
+
+      header nav>a.nav-projects,
+      header nav>a.nav-resume {
+        display: none;
+      }
+
+      header nav>a:not(:last-child) {
+        margin-right: 0.3rem;
+      }
+
+      .theme-toggle {
+        flex: 0 0 auto;
+        padding: 0 2px;
+      }
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#05a081');
+      root.style.setProperty('--accent-color-light', '#82d0c0');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#05a081" />
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.fe16e0bb11047769.jpg" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.605594d8be6a111f.jpg" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.3d1b2eeabf8eca47.jpg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.b6439cbc27d70267.jpg" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.e69fb5473e9ea744.jpg" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d03b11f47410640c.jpg" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d847062c67ed9f5e.jpg" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+
+  
+
+  
+
+  
+  
+  <meta name="description" content="" />
+  <meta name="twitter:description" content="">
+  
+  
+
+  
+  <meta name="twitter:title" content="Resume">
+  
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" />
+
+  <title>
+    
+    
+    Resume
+    
+    
+  </title>
+
+  
+<style>
+  .resume-page {
+    max-width: 860px;
+    margin: 0 auto;
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .resume-page h1 {
+    margin: 0;
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .resume-page .subtitle {
+    margin-top: 0.35rem;
+    color: var(--body-color);
+    opacity: 0.8;
+  }
+
+  .resume-page h2 {
+    margin: 1.7rem 0 0.6rem;
+    font-size: 1.2rem;
+    border-bottom: 1px solid var(--table-border-bottom);
+    padding-bottom: 0.35rem;
+  }
+
+  .resume-page h3 {
+    margin: 1.1rem 0 0.3rem;
+    font-size: 1rem;
+  }
+
+  .resume-page h4 {
+    margin: 0;
+    font-size: 0.96rem;
+    font-weight: 600;
+  }
+
+  .resume-page p,
+  .resume-page ul {
+    margin: 0 0 0.65rem;
+  }
+
+  .resume-page ul {
+    padding-left: 1.1rem;
+  }
+
+  .resume-page .meta {
+    opacity: 0.75;
+    font-size: 0.86rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .resume-page .role {
+    margin-bottom: 1rem;
+  }
+
+  .resume-page .highlights {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem 1.1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .resume-page .highlights li {
+    margin-bottom: 0.2rem;
+  }
+
+  @media (max-width: 700px) {
+    .resume-page {
+      font-size: 0.9rem;
+    }
+
+    .resume-page .highlights {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+  
+  
+  
+  <link rel="stylesheet" href="https://gel.github.io/main.css">
+  <link rel="stylesheet" href="https://gel.github.io/animations.css">
+  
+  
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="">
+  
+  <header>
+    <a class="profile-icon" href="/">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" alt="profile picture">
+    </a>
+    <nav>
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        active-nav"
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        "
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        "
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        "
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        "
+      >GenAI</a>
+      
+      
+      <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <span class="theme-icon-light">☀️</span>
+        <span class="theme-icon-dark" style="display:none">🌙</span>
+      </button>
+      
+    </nav>
+  </header>
+  
+  <main>
+    
+<article class="resume-page">
+  <h1 id="gal-goldman">Gal Goldman</h1>
+<p class="subtitle">Senior Software Engineer | Backend Infrastructure, Distributed Systems, Agentic AI</p>
+<h2 id="summary">Summary</h2>
+<p>16+ years across AWS and Intel, from kernel-level systems to cloud-scale AI platforms. I focus on designing secure, scalable systems with strong engineering quality and measurable business outcomes.</p>
+<h2 id="selected-impact">Selected Impact</h2>
+<ul class="highlights">
+  <li>30+ global customers enabled to deploy production GenAI workloads.</li>
+  <li>~30% average operational cost reduction across architecture engagements.</li>
+  <li>500+ engineers trained on GenAI; 4.9/5 CSAT.</li>
+  <li>90% testing infrastructure cost reduction in Intel wireless automation.</li>
+  <li>Public launches and technical delivery at AWS Summit and AWS re:Invent.</li>
+</ul>
+<h2 id="experience">Experience</h2>
+<h3 id="amazon-web-services-aws">Amazon Web Services (AWS)</h3>
+<h4 id="senior-software-engineer">Senior Software Engineer</h4>
+<p class="meta">Jul 2024 - Present · New Jersey, United States</p>
+<ul>
+<li>Leading development of custom agentic AI capabilities on Amazon Bedrock AgentCore.</li>
+<li>Driving autonomous workflows for code generation, testing, and deployment in Amazon Q Developer scenarios.</li>
+<li>Building multi-step reasoning capabilities for infrastructure planning and troubleshooting.</li>
+</ul>
+<h4 id="senior-solutions-architect">Senior Solutions Architect</h4>
+<p class="meta">May 2022 - Jul 2024</p>
+<ul>
+<li>Accelerated cloud transformation for global R&amp;D enterprises, contributing multimillion-dollar ARR impact.</li>
+<li>Led Well-Architected reviews and implementations, reducing customer operational costs by ~30% on average while improving scalability and security posture.</li>
+<li>Enabled 30+ global customers to deploy production GenAI workloads.</li>
+<li>Built and delivered a 3-day GenAI training curriculum, training 500+ professionals with 4.9/5 CSAT.</li>
+<li>Authored technical content and presented at AWS Summit and AWS re:Invent.</li>
+</ul>
+<h4 id="senior-software-engineer-amazon-connect">Senior Software Engineer (Amazon Connect)</h4>
+<p class="meta">Aug 2020 - May 2022 · Vancouver, Canada</p>
+<ul>
+<li>Led development of ML-powered forecasting, capacity planning, and scheduling capabilities in Amazon Connect.</li>
+<li>Contributed to features launched publicly during AWS re:Invent 2022 keynote.</li>
+</ul>
+<h3 id="amazon">Amazon</h3>
+<h4 id="senior-software-engineer-alexa-for-business">Senior Software Engineer (Alexa for Business)</h4>
+<p class="meta">Sep 2019 - Aug 2020 · Vancouver, Canada</p>
+<ul>
+<li>Developed enterprise Alexa features focused on security and productivity.</li>
+<li>Built MFA-related capabilities including multimodal device lock flows and Bluetooth-based location locking.</li>
+</ul>
+<h4 id="senior-software-engineer-amazon-e-commerce-platform">Senior Software Engineer (Amazon E-Commerce Platform)</h4>
+<p class="meta">Sep 2017 - Sep 2019 · Vancouver, Canada</p>
+<ul>
+<li>Operated and optimized high-scale ordering workflows and helped decommission legacy components.</li>
+<li>Designed and built contract-convergence solutions across fulfillment, payments, tax, and accounting domains.</li>
+<li>Built immutable, highly available, low-latency storage and orchestration layers to support financial integrity and regulatory controls.</li>
+</ul>
+<h3 id="intel-corporation">Intel Corporation</h3>
+<h4 id="senior-software-engineer-1">Senior Software Engineer</h4>
+<p class="meta">Oct 2013 - Sep 2017 · Israel</p>
+<ul>
+<li>Technical leader in Intel RealSense software and algorithms.</li>
+<li>Researched, trained, and deployed classic and deep learning models for real-time face and pose tracking.</li>
+<li>Built benchmark suites and balanced datasets for real-world robustness (illumination, occlusions, distortion, and diversity conditions).</li>
+<li>Contributed to publicly announced products including Intel RealSense SDK and other partner solutions.</li>
+</ul>
+<h4 id="software-engineer">Software Engineer</h4>
+<p class="meta">Apr 2011 - Oct 2013 · Israel</p>
+<ul>
+<li>Led design and deployment of an automation platform used across Intel wireless product testing.</li>
+<li>Delivered a major cost optimization initiative, reducing testing infrastructure costs by ~90%.</li>
+</ul>
+<h4 id="software-engineer-1">Software Engineer</h4>
+<p class="meta">Aug 2009 - Apr 2011 · Israel</p>
+<ul>
+<li>Built kernel drivers and static-analysis/debugging tools in Intel Wireless.</li>
+<li>Helped identify critical C memory and reliability issues early in development workflows.</li>
+</ul>
+
+</article>
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>

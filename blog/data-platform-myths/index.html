@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] img {
+      opacity: .75;
+      transition: opacity .5s ease-in-out;
+    }
+
+    [data-theme="dark"] img:hover {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 10px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        gap: 0;
+      }
+
+      header nav {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      header nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      header nav>a {
+        flex: 0 0 auto;
+      }
+
+      header nav>a.nav-projects,
+      header nav>a.nav-resume {
+        display: none;
+      }
+
+      header nav>a:not(:last-child) {
+        margin-right: 0.3rem;
+      }
+
+      .theme-toggle {
+        flex: 0 0 auto;
+        padding: 0 2px;
+      }
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#05a081');
+      root.style.setProperty('--accent-color-light', '#82d0c0');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#05a081" />
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.fe16e0bb11047769.jpg" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.605594d8be6a111f.jpg" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.3d1b2eeabf8eca47.jpg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.b6439cbc27d70267.jpg" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.e69fb5473e9ea744.jpg" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d03b11f47410640c.jpg" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d847062c67ed9f5e.jpg" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+
+  
+
+  
+  
+  <meta property="og:image" content="https://gel.github.io/blog/DataPlatformAntiPattern400.webp">
+  
+  
+
+  
+  
+  <meta name="description" content="A pragmatic framework for deciding when to build shared platforms versus domain-owned solutions, with common failure modes and safer alternatives." />
+  <meta name="twitter:description" content="A pragmatic framework for deciding when to build shared platforms versus domain-owned solutions, with common failure modes and safer alternatives.">
+  
+  
+
+  
+  <meta name="twitter:title" content="Data Platform Myths: What Breaks at Scale and How to De-risk It">
+  
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" />
+
+  <title>
+    
+    
+    Data Platform Myths: What Breaks at Scale and How to De-risk It
+    
+    
+  </title>
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://gel.github.io/main.css">
+  <link rel="stylesheet" href="https://gel.github.io/animations.css">
+  
+  
+  
+
+  
+
+  
+    <link rel="prerender"  href="https://gel.github.io/tags/architecture/">
+  
+    <link rel="prerender"  href="https://gel.github.io/tags/distributed-systems/">
+  
+    <link rel="prerender"  href="https://gel.github.io/tags/platform-engineering/">
+  
+    <link rel="prerender"  href="https://gel.github.io/tags/data/">
+  
+    <link rel="prerender"  href="https://gel.github.io/tags/engineering-leadership/">
+  
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://google.com/article"
+      },
+      "headline": "Data Platform Myths: What Breaks at Scale and How to De-risk It",
+      "image": [],
+      "datePublished": "2026-02-23T00:00:00+00:00",
+      "dateModified": "2026-02-23T00:00:00+00:00"
+    }
+  </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        
+
+        
+        {
+          
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Gal Goldman | Engineering Notes",
+          "item": "https://gel.github.io/"
+        },
+        
+        {
+          
+          "@type": "ListItem",
+          "position": 2,
+          "name": "",
+          "item": "https://gel.github.io/blog/"
+        },
+        
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Data Platform Myths: What Breaks at Scale and How to De-risk It",
+          "item": "https://gel.github.io/blog/data-platform-myths/"
+        }
+      ]
+    }
+  </script>
+
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="">
+  
+  <header>
+    <a class="profile-icon" href="/">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" alt="profile picture">
+    </a>
+    <nav>
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        "
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        active-nav"
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        "
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        "
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        "
+      >GenAI</a>
+      
+      
+      <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <span class="theme-icon-light">☀️</span>
+        <span class="theme-icon-dark" style="display:none">🌙</span>
+      </button>
+      
+    </nav>
+  </header>
+  
+  <main>
+    
+  <div class="post-title">
+    <h1>Data Platform Myths: What Breaks at Scale and How to De-risk It</h1>
+    <small>
+      February 23, 2026
+      
+        - 
+        <span class="tags">
+          
+            <a href="https://gel.github.io/tags/architecture/">architecture</a>
+          
+            <a href="https://gel.github.io/tags/distributed-systems/">distributed-systems</a>
+          
+            <a href="https://gel.github.io/tags/platform-engineering/">platform-engineering</a>
+          
+            <a href="https://gel.github.io/tags/data/">data</a>
+          
+            <a href="https://gel.github.io/tags/engineering-leadership/">engineering-leadership</a>
+          
+        </span>
+      
+    </small>
+  </div>
+
+  <div>
+    <p><em>Originally drafted in November 2021. Updated with a 2026 lens.</em></p>
+<p>Shared data platforms are often proposed as a universal solution: centralize ingestion, storage, query patterns, and governance so product teams can move faster.</p>
+<p>The promise is attractive. The failure mode is also predictable.</p>
+<p>This post is a practical breakdown of where these initiatives go wrong, why the problems are structural (not just execution mistakes), and what to do instead.</p>
+<p><img src="/blog/DataPlatformAntiPattern400.webp" alt="Data platform anti-pattern illustration" /></p>
+<h2 id="myth-1-a-central-data-platform-simplifies-everything">Myth 1: &quot;A Central Data Platform Simplifies Everything&quot;</h2>
+<p>The usual pitch:</p>
+<ul>
+<li>Product teams focus on business logic.</li>
+<li>Platform team handles storage complexity (OLTP, OLAP, indexing, retention).</li>
+<li>One service standardizes security, compliance, and operations.</li>
+</ul>
+<p>All true in principle. But at scale, a central platform often becomes the highest-dependency component in the system and inherits every unresolved domain ambiguity.</p>
+<p>When that happens, &quot;simplification&quot; for consumers becomes hidden complexity for the platform team.</p>
+<h2 id="why-complexity-explodes">Why Complexity Explodes</h2>
+<h3 id="1-scope-complexity">1) Scope Complexity</h3>
+<p>A shared platform sits in the middle of many upstream and downstream dependencies. This creates:</p>
+<ul>
+<li>Constant requirement churn from multiple teams.</li>
+<li>Conflicting definitions of correctness and latency.</li>
+<li>Delivery coupling across unrelated roadmaps.</li>
+</ul>
+<p>If requirements are not stable, centralization amplifies uncertainty rather than reducing it.</p>
+<h3 id="2-domain-complexity">2) Domain Complexity</h3>
+<p>Not all data has the same requirements:</p>
+<ul>
+<li>Access patterns differ (streaming, batch, ad hoc analytics, transactional lookups).</li>
+<li>Constraints differ (latency, throughput, mutability, retention, privacy).</li>
+<li>Failure tolerance differs (best-effort vs strict correctness).</li>
+</ul>
+<p>A generic platform that tries to satisfy all variants often becomes over-engineered, expensive, and slower to evolve than domain-owned pipelines.</p>
+<h3 id="3-organizational-complexity">3) Organizational Complexity</h3>
+<p>Central platforms create organizational side effects:</p>
+<ul>
+<li>Teams delegate domain ownership to a central service.</li>
+<li>The platform team becomes a routing layer for cross-team misalignment.</li>
+<li>Planning overhead grows faster than implementation throughput.</li>
+</ul>
+<p>This usually looks &quot;green&quot; in project trackers while real end-to-end integration risk remains unresolved.</p>
+<h2 id="design-smell-federated-responsibility-centralized-accountability">Design Smell: Federated Responsibility, Centralized Accountability</h2>
+<p>A frequent anti-pattern is:</p>
+<p><code>Producer A -&gt; Data Platform -&gt; Consumer B</code></p>
+<p>Producers and consumers keep domain decisions local, but reliability incidents and lifecycle ownership concentrate in the platform.</p>
+<p>The platform then carries accountability without full control over source data contracts or consumer behavior. This is structurally unstable.</p>
+<h2 id="myth-2-rules-engine-first">Myth 2: &quot;Rules Engine First&quot;</h2>
+<p>Teams often introduce a generic rules engine early to handle every policy variant.</p>
+<p>In practice, this can fail when:</p>
+<ul>
+<li>Core domain rules are still changing.</li>
+<li>Rule authorship and review ownership are unclear.</li>
+<li>Debugging requires reconstructing dynamic rule state across systems.</li>
+</ul>
+<p>A rules engine is powerful after core invariants are understood. Before that, it can become an abstraction that hides weak domain modeling.</p>
+<h2 id="myth-3-audit-service-is-just-logging">Myth 3: &quot;Audit Service Is Just Logging&quot;</h2>
+<p>Audit is not a byproduct. It is a first-class system with strict requirements:</p>
+<ul>
+<li>Immutable event history.</li>
+<li>Traceability across boundaries.</li>
+<li>Schema/version compatibility over long time windows.</li>
+</ul>
+<p>Treating audit as &quot;just another sink&quot; usually creates gaps exactly where you need confidence most: incident response, compliance reviews, and customer-impact analysis.</p>
+<h2 id="myth-4-notification-service-is-trivial">Myth 4: &quot;Notification Service Is Trivial&quot;</h2>
+<p>Notification pipelines look easy until they need to be correct:</p>
+<ul>
+<li>Idempotency and deduplication.</li>
+<li>Ordering guarantees where required.</li>
+<li>Backpressure handling and retry semantics.</li>
+<li>Clear separation between transient failures and terminal failures.</li>
+</ul>
+<p>Without explicit contracts, notification systems degrade into noisy best-effort infrastructure that erodes trust.</p>
+<h2 id="config-vs-data-the-boundary-matters">Config vs Data: The Boundary Matters</h2>
+<p>Teams frequently debate whether something belongs in &quot;config&quot; or &quot;data.&quot; The distinction is operationally important:</p>
+<ul>
+<li><strong>Config</strong>: low-cardinality control-plane inputs with controlled rollout and review.</li>
+<li><strong>Data</strong>: high-cardinality runtime facts produced and consumed by business workflows.</li>
+</ul>
+<p>When business data is treated as config, change management becomes brittle and error-prone.
+When config is treated as data, governance and blast-radius control become weak.</p>
+<p>A practical rule: if a value must support high-rate mutation, lineage, and analytical replay, model it as data. If it controls behavior and requires safe rollout semantics, model it as config.</p>
+<h2 id="a-safer-alternative-narrow-domain-aligned-platforms">A Safer Alternative: Narrow, Domain-Aligned Platforms</h2>
+<p>Instead of building one platform for all use cases, use this sequence:</p>
+<ol>
+<li>Pick one well-understood product outcome.</li>
+<li>Build the smallest platform capability that serves that outcome.</li>
+<li>Validate with real end-to-end traffic.</li>
+<li>Extract reusable components only after repeated success.</li>
+</ol>
+<p>This preserves local ownership while allowing platformization to emerge from proven patterns.</p>
+<h2 id="decision-framework-before-you-centralize">Decision Framework Before You Centralize</h2>
+<p>Use these questions before committing to a shared data platform:</p>
+<ol>
+<li>Are domain contracts stable enough for shared abstractions?</li>
+<li>Is there a clear owner for schema evolution and data quality?</li>
+<li>Do we have measurable SLOs per use case, not just platform-level uptime?</li>
+<li>Can we decompose by bounded contexts instead of centralizing everything?</li>
+<li>What is the rollback strategy when one consumer requirement breaks the shared model?</li>
+</ol>
+<p>If several answers are unclear, centralization is likely premature.</p>
+<h2 id="practical-de-risking-moves">Practical De-risking Moves</h2>
+<ul>
+<li>Start with one bounded context, not the whole organization.</li>
+<li>Make data contracts explicit and versioned.</li>
+<li>Define ownership boundaries before implementation.</li>
+<li>Keep escape hatches for domain-specific pipelines.</li>
+<li>Measure success by business outcomes, not platform feature count.</li>
+</ul>
+<h2 id="closing">Closing</h2>
+<p>Shared platforms are valuable. But they are not shortcuts.</p>
+<p>The core lesson is simple: centralize capabilities only after domain invariants are understood and operational ownership is explicit. Otherwise, the platform becomes a complexity concentrator.</p>
+<p>Good architecture is less about building the most generic system and more about choosing the right boundary at the right time.</p>
+
+  </div>
+
+  <hr class="footer-rule" />
+
+  
+
+  <div class="related-container">
+
+    
+
+    
+
+  </div>
+
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] img {
+      opacity: .75;
+      transition: opacity .5s ease-in-out;
+    }
+
+    [data-theme="dark"] img:hover {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 10px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        gap: 0;
+      }
+
+      header nav {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      header nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      header nav>a {
+        flex: 0 0 auto;
+      }
+
+      header nav>a.nav-projects,
+      header nav>a.nav-resume {
+        display: none;
+      }
+
+      header nav>a:not(:last-child) {
+        margin-right: 0.3rem;
+      }
+
+      .theme-toggle {
+        flex: 0 0 auto;
+        padding: 0 2px;
+      }
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#05a081');
+      root.style.setProperty('--accent-color-light', '#82d0c0');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#05a081" />
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.fe16e0bb11047769.jpg" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.605594d8be6a111f.jpg" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.3d1b2eeabf8eca47.jpg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.b6439cbc27d70267.jpg" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.e69fb5473e9ea744.jpg" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d03b11f47410640c.jpg" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d847062c67ed9f5e.jpg" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+
+  
+
+  
+
+  
+  
+  <meta name="description" content="" />
+  <meta name="twitter:description" content="">
+  
+  
+
+  
+  <meta name="twitter:title" content="GenAI Training">
+  
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" />
+
+  <title>
+    
+
+
+
+Gal's 
+     
+    
+        Generative AI
+    
+ Book - GenAI Training
+
+
+  </title>
+
+  
+  
+
+
+<link rel="stylesheet" href="https://gel.github.io/main.css">
+<link rel="stylesheet" href="https://gel.github.io/book.css">
+
+
+
+  
+
+
+
+
+
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="book-body">
+  
+  <header>
+    <a class="profile-icon" href="/">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" alt="profile picture">
+    </a>
+    <nav>
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        "
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        "
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        "
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        "
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        active-nav"
+      >GenAI</a>
+      
+      
+      <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <span class="theme-icon-light">☀️</span>
+        <span class="theme-icon-dark" style="display:none">🌙</span>
+      </button>
+      
+    </nav>
+  </header>
+  
+  <main>
+    
+<!-- Sidebar defaults to class 'menu'. CSS max-width 600px breakpoint handles closing it automatically -->
+<div class="menu">
+  
+  
+  <nav role="navigation">
+    <ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/generative-ai/1-intro/">
+          <strong>1.</strong>
+          Generative AI Foundations
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;1-intro&#x2F;1-genai-environment&#x2F;">
+              <strong>1.1.</strong>
+              GenAI Agents Environment
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;1-intro&#x2F;2-genai-agents-tricks&#x2F;">
+              <strong>1.2.</strong>
+              GenAI Agents Tricks
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/generative-ai/2-genai-research/">
+          <strong>2.</strong>
+          GenAI Research
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;1-genai-agents&#x2F;">
+              <strong>2.1.</strong>
+              Agents
+            </a>
+          </li>
+          
+          <li class="active" >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;2-genai-pretraining-finetuning&#x2F;">
+              <strong>2.2.</strong>
+              GenAI Training
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;3-genai-optimization&#x2F;">
+              <strong>2.3.</strong>
+              GenAI Optimizations
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;4-genai-prompting&#x2F;">
+              <strong>2.4.</strong>
+              GenAI Prompting
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;5-genai-benchmarks&#x2F;">
+              <strong>2.5.</strong>
+              GenAI Evaluations
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;6-genai-models&#x2F;">
+              <strong>2.6.</strong>
+              GenAI Models
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;7-genai-security&#x2F;">
+              <strong>2.7.</strong>
+              GenAI Security
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/generative-ai/3-llm-implementation/">
+          <strong>3.</strong>
+          LLM Implementation
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;3-llm-implementation&#x2F;1-datasets&#x2F;">
+              <strong>3.1.</strong>
+              Datasets
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;3-llm-implementation&#x2F;2-llms&#x2F;">
+              <strong>3.2.</strong>
+              LLMs
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+    </ul>
+  </nav>
+  
+  
+</div>
+
+<!-- Page defaults to class 'page'. CSS max-width 600px breakpoint handles making it full-width automatically -->
+<div class="page">
+
+  <div class="page__content">
+    
+    <div class="search-container">
+      <input id="search" type="search" placeholder="Search..">
+      <div class="search-results">
+        <div class="search-results__header"></div>
+        <ul class="search-results__items"></ul>
+      </div>
+    </div>
+    
+    <button class="sidebar-toggle-inline" id="sidebar-toggle-inline" aria-label="Toggle Chapters">
+      <span class="toggle-icon">☰</span> Chapters
+    </button>
+    <div class="book-content">
+      
+    <h1>GenAI Training</h1>
+    <h3 id="self-reward-self-rewarding-language-models">[Self-Reward] Self Rewarding Language Models<a class="zola-anchor" href="#self-reward-self-rewarding-language-models" aria-label="Anchor link for: self-reward-self-rewarding-language-models">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2401.10020">https://arxiv.org/abs/2401.10020</a> <em>18 Jan 2024 <strong>Meta</strong></em></p>
+<p>In this work, we study Self-Rewarding Language Models, where the language model itself is used via LLM-as-a-Judge prompting to provide its own rewards during training. We show that during Iterative DPO training that not only does instruction following ability improve, but also the ability to provide high-quality rewards to itself.</p>
+<p><img src="/generative-ai/2-genai-research/llm_1_self_reward_explain.png" alt="Self-Reward" /></p>
+<p>Our approach first assumes access to a base pretrained language model, and a small amount of human-annotated seed data. We then build a model that aims to possess two skills simultaneously: 1. Instruction following: given a prompt that describes a user request, the ability to generate a high quality, helpful (and harmless) response. 2. Self-Instruction creation: the ability to generate and evaluate new instruction following examples to add to its own training set.</p>
+<p>While we report the results of both approaches in our experiments, we find that learning from preference pairs gives superior performance, and hence recommend that approach.</p>
+<p><img src="/generative-ai/2-genai-research/llm_1_self_reward_judge.png" alt="Self-Reward Judge" /></p>
+<p>Iterative Training Our overall procedure trains a series of models M1, . . . , MT where each successive model t uses augmented training data created by the t − 1 th model. We thus define AIFT(Mt) to mean AI Feedback Training data created using model Mt. Model Sequence We thus define the models, and the training data they use as follows: M0 : Base pretrained LLM with no fine-tuning. M1 : Initialized with M0, then fine-tuned on the IFT+EFT seed data using SFT. M2 : Initialized with M1, then trained with AIFT(M1) data using DPO. M3 : Initialized with M2, then trained with AIFT(M2) data using DPO.</p>
+<p><img src="/generative-ai/2-genai-research/llm_1_self_reward_eval.png" alt="Self-Reward Eval" /></p>
+<h3 id="in-context-pretraining-language-modeling-beyond-document-boundaries">[In-Context Pretraining] Language Modeling Beyond Document Boundaries<a class="zola-anchor" href="#in-context-pretraining-language-modeling-beyond-document-boundaries" aria-label="Anchor link for: in-context-pretraining-language-modeling-beyond-document-boundaries">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2310.10638">https://arxiv.org/abs/2310.10638</a> <em>Oct 2023 <strong>Meta</strong></em></p>
+<p>We instead present IN-CONTEXT PRETRAINING, a new approach where language models are pretrained on a sequence of related documents, thereby explicitly encouraging them to read and reason across document boundaries.</p>
+<p>IN-CONTEXT PRETRAINING instead reorders the pretraining data by combining several semantically related documents to create a coherent input context, thereby exposing LMs to long relevant contexts and providing pretraining signals beyond document boundaries.</p>
+<p>However, this document sorting problem is challenging. LMs are typically trained on billions of</p>
+<p>documents and we would like to sort them to maximize document similarity in the input context</p>
+<p>windows without repeating any data. We introduce two new approximate algorithms to tackle these challenges.</p>
+<p><img src="/generative-ai/2-genai-research/llm_1_in_context_overview.png" alt="In-Context Review" /></p>
+<p>Techniques are using embedding models and top-k similarity search and leveraging approximate solutions for the traveling salesman problem - by the means of visiting every document once.</p>
+<h3 id="dpo-direct-preference-optimization-your-lm-is-secretly-a-reward-model">[DPO] Direct Preference Optimization: Your LM is Secretly a Reward Model<a class="zola-anchor" href="#dpo-direct-preference-optimization-your-lm-is-secretly-a-reward-model" aria-label="Anchor link for: dpo-direct-preference-optimization-your-lm-is-secretly-a-reward-model">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2305.18290">https://arxiv.org/abs/2305.18290</a> <em>May 2023 <strong>Stanford</strong></em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    subgraph RLHF[&quot;Traditional RLHF&quot;]
+        Data1[Preference Data] --&gt; RM[Train Reward Model]
+        RM --&gt; RL[RL Fine-tuning]
+        RL --&gt; Model1[Aligned Model]
+    end
+
+    subgraph DPO[&quot;Direct Preference Optimization&quot;]
+        Data2[Preference Data] --&gt; Loss[&quot;Classification Loss\n(Binary Cross-Entropy)&quot;]
+        Loss --&gt; Model2[Aligned Model]
+    end
+
+    style DPO fill:#e8f5e9,color:#000
+</code></pre>
+<p>In this paper we introduce a new parameterization of the reward model in RLHF that enables extraction of the corresponding optimal policy in closed form, allowing us to solve the standard RLHF problem with only a simple classification loss. The resulting algorithm, which we call Direct Preference Optimization (DPO), is stable, performant, and computationally lightweight,</p>
+<p>eliminating the need for sampling from the LM during fine-tuning or performing significant hyperparameter tuning.</p>
+<p><img src="/generative-ai/2-genai-research/llm_1_dpo.png" alt="DPO" /></p>
+<p>DPO gradient for loss increases the likelihood of preferred completion (Y_W) and decreases the likelihood for dispreferred completion (Y_L). Importantly, the examples are weighed by how much higher the implicit reward model rˆθ rates the dispreferred completions, scaled by β, i.e, how incorrectly the implicit reward model orders the completions, accounting for the strength of the KL constraint.</p>
+<p>DPO outline. The general DPO pipeline is as follows: 1) Sample completions y1, y2 ∼ πref(· | x) for every prompt x, label with human preferences to construct the offline dataset of preferences D = {x (i) , y (i) w , yl) (i)} N i=1 and 2) optimize the language model πθ to minimize LDPO for the given πref and D and desired β.</p>
+<h3 id="rlhf-secrets-of-rlhf-in-llms-part-ii-reward-modeling">[RLHF] Secrets of RLHF in LLMs Part II: Reward Modeling<a class="zola-anchor" href="#rlhf-secrets-of-rlhf-in-llms-part-ii-reward-modeling" aria-label="Anchor link for: rlhf-secrets-of-rlhf-in-llms-part-ii-reward-modeling">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2312.15503">https://arxiv.org/abs/2312.15503</a> <em>24 Dec 2023 <strong>Fudan NLP</strong></em></p>
+<p>In conclusion, while RLHF is a significant advancement in AI development, particularly in integrating human preferences into the learning process, it also presents unique challenges. These include the inherent noise and ambiguity in human feedback, potential biases in the data, and the generalization limits of reward models trained on specific datasets. Addressing these challenges is crucial for the advancement and ethical application of RLHF in AI systems.</p>
+<p><img src="/generative-ai/2-genai-research/llm_1_secrets_rlhf.png" alt="Secrets RLHF" /></p>
+<p>To enhance the generalization ability of the reward model, we explore contrastive learning and</p>
+<p>meta-learning. By introducing unsupervised contrastive loss during the reward modeling process, the reward model can better distinguish subtle preference differences among responses. To bridge the gap between the preference data distribution and the model output distribution, we employ meta-learning to ensure that the reward model not only performs well on the preference data but also can distinguish the differences in target domain outputs.</p>
+<p>Technique is to randomize training data and do a k-fold split, build K models and then measure mean and deviations - negative mean is usually the mistakes.</p>
+<p>According to the results, we can observe that: 1) For the top 20% of data with the lowest preference strength, they have a negative impact on the model's performance on the validation set. The preference strength for these data subsets is less than 0. 2) For data ranked between 20% and 40%, after training, the model's prediction accuracy on the validation set is approximately 0.5. The preference strength for this type of data is around 0. 3) The remaining data significantly improves the model's performance. However, the top 10% of data with the highest preference strength does not achieve the best performance when trained alone. Based on the above results, we can roughly categorize preference data into three types: incorrect data, ambiguous data (almost no difference), and normal data (clear differences). These three types of preference data play different roles and make different contributions to preference modeling. It is necessary for us to conduct a more detailed analysis of them and then consider how to handle each type.</p>
+<h3 id="llara-making-llms-a-better-foundation-for-dense-retrieval">[LLARA] Making LLMs A Better Foundation For Dense Retrieval<a class="zola-anchor" href="#llara-making-llms-a-better-foundation-for-dense-retrieval" aria-label="Anchor link for: llara-making-llms-a-better-foundation-for-dense-retrieval">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2401.06080">https://arxiv.org/abs/2401.06080</a> <em>11 Jan 2024 <strong>Beijing Academy of AI</strong></em></p>
+<p>In this paper, we propose a novel approach, called LLaRA (LLM adapted for dense RetrievAl), which works as a post-hoc adaptation of LLM for the dense retrieval application. LLaRA consists of two pretext tasks: EBAE (Embedding-Based Auto-Encoding) and EBAR (Embedding-Based Auto-Regression), where the text embeddings from LLM are used to reconstruct the tokens for the input sentence and predict the tokens for the next sentence, respectively</p>
+<p><img src="/generative-ai/2-genai-research/llm_1_llara.png" alt="llara" /></p>
+<p>Particularly, there are two pretext training tasks introduced by LLaRA: EBAE (Embedding-Based Auto-Encoding) and EBAR (Embedding-Based Auto-Regression). In EBAE, the LLM is prompted to generate the text embeddings, which can be used to predict the tokens for the input sentence itself. While with EBAR, the LLM is prompted to generate the text embeddings, which can be used to predict the  tokens for the next sentence. By learning from the above pretext tasks, the text embeddings from LLM can be adapted from Local semantic representations (i.e. prediction for the next tokens) to Global semantic representations (i.e. prediction for the sentence-level features).</p>
+<h3 id="ra-dit-retrieval-augmented-dual-instruction-tuning">[RA-DIT] Retrieval-Augmented Dual Instruction Tuning<a class="zola-anchor" href="#ra-dit-retrieval-augmented-dual-instruction-tuning" aria-label="Anchor link for: ra-dit-retrieval-augmented-dual-instruction-tuning">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2310.01352">https://arxiv.org/abs/2310.01352</a> <em>2 Oct 2023 <strong>META</strong></em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart TD
+    subgraph Step1[&quot;Step 1: LM Fine-tuning&quot;]
+        LM[Pre-trained LM] --&gt; FT1[Fine-tune to use\nretrieved context]
+    end
+
+    subgraph Step2[&quot;Step 2: Retriever Fine-tuning&quot;]
+        Ret[Retriever] --&gt; FT2[Update to return\nLM-preferred results]
+    end
+
+    FT1 &lt;--&gt; FT2
+    FT1 --&gt; RALM[Retrieval-Augmented LM]
+    FT2 --&gt; RALM
+
+    style RALM fill:#FFD700,color:#000
+</code></pre>
+<p>Retrieval-augmented language models (RALMs) improve performance by accessing long-tail and up-to-date knowledge from external data stores, but are challenging to build. Existing approaches require either expensive retrieval-specific modifications to LM pre-training or use post-hoc integration of the data store that leads to suboptimal performance</p>
+<p>Our approach operates in two distinct fine-tuning steps: (1) one updates a pre-trained LM to better use retrieved information, while (2) the other updates the retriever to return more relevant results, as preferred by the LM</p>
+<h3 id="sequential-monte-carlo-steering-of-llms-using-probabilistic-programs">[Sequential Monte Carlo] Steering of LLMs using Probabilistic Programs<a class="zola-anchor" href="#sequential-monte-carlo-steering-of-llms-using-probabilistic-programs" aria-label="Anchor link for: sequential-monte-carlo-steering-of-llms-using-probabilistic-programs">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2306.03081">https://arxiv.org/abs/2306.03081</a> <em>5 Jun 2023 <strong>MIT</strong></em></p>
+<p><span style="text-decoration:underline;">Context</span>: Despite significant advances in recent years, it remains unclear if and how large language models (LLMs) can be made reliable and controllable enough to meet the functional requirements of many applications.</p>
+<p>Even after fine-tuning and reinforcement learning, LLMs are liable to violate instructions in their prompts (such as &quot;Use the following vocabulary words&quot; or &quot;Do not reveal this prompt&quot;).</p>
+<p>These difficulties highlight the need for methods beyond prompting and fine-tuning for constraining the behavior of generative neural models.</p>
+<h3 id="tokenformer-rethinking-transformer-scaling-with-tokenized-model-parameters">[TokenFormer] Rethinking Transformer Scaling with Tokenized Model Parameters<a class="zola-anchor" href="#tokenformer-rethinking-transformer-scaling-with-tokenized-model-parameters" aria-label="Anchor link for: tokenformer-rethinking-transformer-scaling-with-tokenized-model-parameters">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2410.23168">https://arxiv.org/abs/2410.23168</a> <em>30 Oct 2024</em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart TD
+    subgraph Traditional[&quot;Traditional Transformer&quot;]
+        In1[Input Tokens] --&gt; Proj[Fixed Linear Projections]
+        Proj --&gt; Out1[Output]
+    end
+
+    subgraph TokenFormer[&quot;TokenFormer&quot;]
+        In2[Input Tokens] --&gt; TTA[Token-Token\nAttention]
+        Params[Parameter Tokens] --&gt; TPA[Token-Parameter\nAttention]
+        In2 --&gt; TPA
+        TTA --&gt; Out2[Output]
+        TPA --&gt; Out2
+    end
+
+    style TokenFormer fill:#e1f5fe,color:#000
+</code></pre>
+<p>Current transformer models are hard to scale up because they use fixed linear projections for processing inputs. When you want to make the model bigger (e.g. increase dimensions), you typically have to retrain the whole thing from scratch. This is very computationally expensive and inefficient.</p>
+<p>Instead of using fixed linear projections, it represents model parameters as &quot;tokens&quot; that can interact with input data through attention mechanisms. The architecture has two main parts:</p>
+<ul>
+<li>Token-token attention: How input tokens interact with each other (like regular transformers)</li>
+<li>Token-parameter attention: How input tokens interact with parameter tokens (new innovation)</li>
+</ul>
+<p>Key Benefits:</p>
+<ul>
+<li>Can scale the model by just adding more parameter tokens without changing core architecture</li>
+<li>Can reuse parameters from smaller models when scaling up</li>
+<li>Doesn't need full retraining from scratch</li>
+</ul>
+<p>Parameter tokens come in key-value pairs. Input tokens act as queries that attend to these parameter tokens. Can add more key-value parameter pairs to increase model capacity. Old parameters can be preserved while adding new ones.</p>
+<p>Results:</p>
+<ul>
+<li>Successfully scaled from 124M to 1.4B parameters incrementally</li>
+<li>Achieved similar performance to transformers trained from scratch</li>
+<li>Required much less training compute (saved &gt;50% training cost)</li>
+<li>Works well for both language and vision tasks</li>
+</ul>
+<h3 id="context-distillation-learning-by-distilling-context">[Context Distillation] Learning by Distilling Context<a class="zola-anchor" href="#context-distillation-learning-by-distilling-context" aria-label="Anchor link for: context-distillation-learning-by-distilling-context">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2209.15189">https://arxiv.org/abs/2209.15189</a> <em>30 Sep 2022 <strong>UC</strong></em></p>
+<p>Given a synthetic unlabeled input for the target task, we condition the model on <code>[instructions] + [task-input]'' to predict </code>[scratch-pad] + [final answer]''; then we fine-tune the same model to predict its own <code>[final answer]'' conditioned on the </code>[task-input]'', without seeing the <code>[instructions]'' or using the </code>[scratch-pad]''.</p>
+<h3 id="alphallm-toward-self-improvement-of-llms-via-imagination-searching-and-criticizing">[ALPHALLM] Toward Self-Improvement of LLMs via Imagination, Searching, and Criticizing<a class="zola-anchor" href="#alphallm-toward-self-improvement-of-llms-via-imagination-searching-and-criticizing" aria-label="Anchor link for: alphallm-toward-self-improvement-of-llms-via-imagination-searching-and-criticizing">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2404.12253">https://arxiv.org/abs/2404.12253</a> <em>18 Apr 2024</em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    Imagine[&quot;🎯 Imagination\n(Data Synthesizer)&quot;] --&gt; Search[&quot;🔍 Search\n(Optimized MCTS)&quot;]
+    Search --&gt; Critic[&quot;📝 Criticize\n(Trio of Critics)&quot;]
+    Critic --&gt; |Feedback| Search
+    Search --&gt; Output[&quot;Improved\nLLM Output&quot;]
+
+    style Output fill:#90EE90,color:#000
+</code></pre>
+<p>ALPHALLM is an imagination-searching-criticizing framework designed for the self-improvement of LLMs without the necessity of additional annotations. At its heart is the integration of MCTS with LLMs. To tackle the inherent challenges associated with this integration, including data scarcity, the vastness of search spaces, and the subjective nature of feedback in language tasks, it introduces:</p>
+<ul>
+<li>A data synthesizer for strategic prompt synthesis</li>
+<li>An optimized MCTS tailored for efficient search in language tasks</li>
+<li>A trio of critic models to provide precise feedback</li>
+</ul>
+<p>Experimental findings on mathematical reasoning tasks reveal that ALPHALLM significantly boosts the performance of LLMs without requiring extra data annotations. Moreover, when decoded with ηMCTS, ALPHALLM performs comparably to GPT-4, highlighting the potential for self-improvement in LLMs.</p>
+<h3 id="multi-token-prediction-better-faster-llms-via-multi-token-prediction">[Multi-Token Prediction] Better &amp; Faster LLMs via Multi-token Prediction<a class="zola-anchor" href="#multi-token-prediction-better-faster-llms-via-multi-token-prediction" aria-label="Anchor link for: multi-token-prediction-better-faster-llms-via-multi-token-prediction">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2404.19737">https://arxiv.org/abs/2404.19737</a> <em>30 Apr 2024 <strong>Meta AI</strong></em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    subgraph Standard[&quot;Standard (1 token)&quot;]
+        H1[Hidden State] --&gt; Head1[Head]
+        Head1 --&gt; T1[&quot;Token t+1&quot;]
+    end
+
+    subgraph Multi[&quot;Multi-Token (n tokens)&quot;]
+        H2[Shared Trunk] --&gt; Head2a[Head 1]
+        H2 --&gt; Head2b[Head 2]
+        H2 --&gt; Head2c[Head 3]
+        H2 --&gt; Head2d[Head 4]
+        Head2a --&gt; T2a[&quot;t+1&quot;]
+        Head2b --&gt; T2b[&quot;t+2&quot;]
+        Head2c --&gt; T2c[&quot;t+3&quot;]
+        Head2d --&gt; T2d[&quot;t+4&quot;]
+    end
+
+    style Multi fill:#fff3e0,color:#000
+</code></pre>
+<p>Training language models to predict multiple future tokens at once results in higher sample efficiency. A key fix for memory problems is to not materialize all logits and keep shared trunk and sequential pass on heads.</p>
+<h3 id="quiet-star-lms-can-teach-themselves-to-think-before-speaking">[Quiet-STaR] LMs Can Teach Themselves to Think Before Speaking<a class="zola-anchor" href="#quiet-star-lms-can-teach-themselves-to-think-before-speaking" aria-label="Anchor link for: quiet-star-lms-can-teach-themselves-to-think-before-speaking">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2403.09629">https://arxiv.org/abs/2403.09629</a> <em>14 Mar 2024 <strong>Stanford</strong></em></p>
+<p>Quiet-STaR is a generalization of STaR in which LMs learn to generate rationales at each token to explain future text, improving their predictions. Instead of thinking only at specific points, Quiet-STaR allows a model to think quietly at every token, with a distribution trained to be useful.</p>
+<h3 id="galore-memory-efficient-llm-training-by-gradient-low-rank-projection">[GaLore] Memory-Efficient LLM Training by Gradient Low-Rank Projection<a class="zola-anchor" href="#galore-memory-efficient-llm-training-by-gradient-low-rank-projection" aria-label="Anchor link for: galore-memory-efficient-llm-training-by-gradient-low-rank-projection">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2403.03507">https://arxiv.org/abs/2403.03507</a> <em>6 Mar 2024</em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    subgraph LoRA[&quot;LoRA&quot;]
+        W1[Frozen Weights] --&gt; Plus1((+))
+        LR1[Low-Rank\nAdapters] --&gt; Plus1
+    end
+
+    subgraph GaLore[&quot;GaLore&quot;]
+        G[Gradient G] --&gt; Proj[Project to\nLow-Rank]
+        Proj --&gt; Opt[Optimizer\n(small core)]
+        Opt --&gt; Update[Full Weight\nUpdate]
+    end
+
+    style GaLore fill:#e8f5e9,color:#000
+</code></pre>
+<p>Gradient Low-Rank Projection (GaLore) is a training strategy that allows full-parameter learning but is more memory-efficient than common low-rank adaptation methods like LoRA. GaLore is closely related to projected gradient descent (PGD), but with key differences:</p>
+<ul>
+<li>GaLore considers the specific gradient form that naturally appears in training multi-layer neural networks</li>
+<li>Traditional PGD mostly treats the objective as a general blackbox nonlinear function</li>
+<li>Since the gradient G may have a low-rank structure, GaLore keeps the gradient statistics of a small &quot;core&quot; of gradient G in optimizer states</li>
+</ul>
+<p>For complex optimization problems like LLM pretraining, it may be difficult to capture the entire gradient trajectory with a single low-rank subspace. GaLore addresses this by allowing switching across low-rank subspaces: Wt = W0 + ∆WT1 + ∆WT2 + ... + ∆WTn, where the switching frequency T becomes a hyperparameter.</p>
+<h3 id="survey-instruction-tuning-for-large-language-models">[Survey] Instruction Tuning for Large Language Models<a class="zola-anchor" href="#survey-instruction-tuning-for-large-language-models" aria-label="Anchor link for: survey-instruction-tuning-for-large-language-models">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2308.10792">https://arxiv.org/abs/2308.10792</a> <em>21 Aug 2023</em></p>
+<p>There are generally two methods for constructing instruction datasets:</p>
+<p>• Data integration from annotated natural language datasets. In this approach,</p>
+<p>(instruction, output) pairs are collected from existing annotated natural language datasets by using templates to transform text-label pairs to (instruction, output) pairs.</p>
+<p>Datasets such as Flan (Longpre et al., 2023) and P3 (Sanh et al., 2021).</p>
+<p>• Generating outputs using LLMs - (1) manually collected; or (2) expanded based on small handwritten seed instructions using LLMs. Next, the collected instructions are fed to LLMs to obtain outputs. Datasets such as InstructWild (Xue et al., 2023) and Self-Instruct (Wang et al., 2022c) are generated following this approach. For multi-turn conversational IT datasets, we can have large language models self-play different roles (user and AI assistant) to generate message</p>
+<p><img src="/generative-ai/2-genai-research/llm_1_survey.png" alt="Survey" /></p>
+<h3 id="set-fit-sentence-transformer-fine-tuning">[Set-Fit] Sentence Transformer Fine-tuning<a class="zola-anchor" href="#set-fit-sentence-transformer-fine-tuning" aria-label="Anchor link for: set-fit-sentence-transformer-fine-tuning">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2209.11055">https://arxiv.org/abs/2209.11055</a> <em>22 Sep 2022</em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    subgraph Stage1[&quot;Stage 1: Siamese Fine-tuning&quot;]
+        Pairs[&quot;Text Pairs\n(+&#x2F;-)&quot;]
+        Pairs --&gt; ST[Sentence\nTransformer]
+        ST --&gt; Emb[Better\nEmbeddings]
+    end
+
+    subgraph Stage2[&quot;Stage 2: Classification&quot;]
+        Emb --&gt; LR[Logistic\nRegression]
+        LR --&gt; Class[Classification]
+    end
+
+    style Stage1 fill:#e1f5fe,color:#000
+    style Stage2 fill:#fff3e0,color:#000
+</code></pre>
+<p>SetFit is a two-stage framework for few-shot learning:</p>
+<ol>
+<li>
+<p>Siamese Fine-tuning Stage:</p>
+<ul>
+<li>Takes pairs of text (positive/negative)</li>
+<li>Fine-tunes Sentence Transformer in contrastive manner</li>
+<li>Creates better text embeddings for target task</li>
+</ul>
+</li>
+<li>
+<p>Classification Stage:</p>
+<ul>
+<li>Uses fine-tuned embeddings from Stage 1</li>
+<li>Trains simple classifier (logistic regression) on these embeddings</li>
+<li>Produces final classification output</li>
+</ul>
+</li>
+</ol>
+<p>Advantages:</p>
+<ul>
+<li>No prompts or verbalizers needed</li>
+<li>Much smaller parameter count than PEFT/PET</li>
+<li>Faster training time</li>
+<li>Works well in multilingual settings</li>
+<li>Comparable accuracy to larger models</li>
+</ul>
+
+
+    </div>
+  </div>
+
+  <nav class="book-pagination">
+    <div class="prev-link">
+      
+    
+        
+        
+        <a class="previous" href="https://gel.github.io/generative-ai/2-genai-research/">&larr; Previous</a>
+    
+
+    </div>
+
+    <div class="next-link">
+      
+    
+        <a class="next" href="https://gel.github.io/generative-ai/2-genai-research/3-genai-optimization/">Next &rarr;</a>
+    
+
+    </div>
+  </nav>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="https://gel.github.io/elasticlunr.min.js"></script>
+<script type="text/javascript" src="https://gel.github.io/search_index.en.js"></script>
+
+<script type="text/javascript" src="https://gel.github.io/book.js"></script>
+<script async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>

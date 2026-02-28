@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] img {
+      opacity: .75;
+      transition: opacity .5s ease-in-out;
+    }
+
+    [data-theme="dark"] img:hover {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 10px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        gap: 0;
+      }
+
+      header nav {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      header nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      header nav>a {
+        flex: 0 0 auto;
+      }
+
+      header nav>a.nav-projects,
+      header nav>a.nav-resume {
+        display: none;
+      }
+
+      header nav>a:not(:last-child) {
+        margin-right: 0.3rem;
+      }
+
+      .theme-toggle {
+        flex: 0 0 auto;
+        padding: 0 2px;
+      }
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#05a081');
+      root.style.setProperty('--accent-color-light', '#82d0c0');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#05a081" />
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.fe16e0bb11047769.jpg" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.605594d8be6a111f.jpg" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.3d1b2eeabf8eca47.jpg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.b6439cbc27d70267.jpg" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.e69fb5473e9ea744.jpg" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d03b11f47410640c.jpg" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d847062c67ed9f5e.jpg" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+
+  
+
+  
+
+  
+  
+  <meta name="description" content="" />
+  <meta name="twitter:description" content="">
+  
+  
+
+  
+  <meta name="twitter:title" content="GenAI Optimizations">
+  
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" />
+
+  <title>
+    
+
+
+
+Gal's 
+     
+    
+        Generative AI
+    
+ Book - GenAI Optimizations
+
+
+  </title>
+
+  
+  
+
+
+<link rel="stylesheet" href="https://gel.github.io/main.css">
+<link rel="stylesheet" href="https://gel.github.io/book.css">
+
+
+
+  
+
+
+
+
+
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="book-body">
+  
+  <header>
+    <a class="profile-icon" href="/">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" alt="profile picture">
+    </a>
+    <nav>
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        "
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        "
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        "
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        "
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        active-nav"
+      >GenAI</a>
+      
+      
+      <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <span class="theme-icon-light">☀️</span>
+        <span class="theme-icon-dark" style="display:none">🌙</span>
+      </button>
+      
+    </nav>
+  </header>
+  
+  <main>
+    
+<!-- Sidebar defaults to class 'menu'. CSS max-width 600px breakpoint handles closing it automatically -->
+<div class="menu">
+  
+  
+  <nav role="navigation">
+    <ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/generative-ai/1-intro/">
+          <strong>1.</strong>
+          Generative AI Foundations
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;1-intro&#x2F;1-genai-environment&#x2F;">
+              <strong>1.1.</strong>
+              GenAI Agents Environment
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;1-intro&#x2F;2-genai-agents-tricks&#x2F;">
+              <strong>1.2.</strong>
+              GenAI Agents Tricks
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/generative-ai/2-genai-research/">
+          <strong>2.</strong>
+          GenAI Research
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;1-genai-agents&#x2F;">
+              <strong>2.1.</strong>
+              Agents
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;2-genai-pretraining-finetuning&#x2F;">
+              <strong>2.2.</strong>
+              GenAI Training
+            </a>
+          </li>
+          
+          <li class="active" >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;3-genai-optimization&#x2F;">
+              <strong>2.3.</strong>
+              GenAI Optimizations
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;4-genai-prompting&#x2F;">
+              <strong>2.4.</strong>
+              GenAI Prompting
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;5-genai-benchmarks&#x2F;">
+              <strong>2.5.</strong>
+              GenAI Evaluations
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;6-genai-models&#x2F;">
+              <strong>2.6.</strong>
+              GenAI Models
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;7-genai-security&#x2F;">
+              <strong>2.7.</strong>
+              GenAI Security
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/generative-ai/3-llm-implementation/">
+          <strong>3.</strong>
+          LLM Implementation
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;3-llm-implementation&#x2F;1-datasets&#x2F;">
+              <strong>3.1.</strong>
+              Datasets
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;3-llm-implementation&#x2F;2-llms&#x2F;">
+              <strong>3.2.</strong>
+              LLMs
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+    </ul>
+  </nav>
+  
+  
+</div>
+
+<!-- Page defaults to class 'page'. CSS max-width 600px breakpoint handles making it full-width automatically -->
+<div class="page">
+
+  <div class="page__content">
+    
+    <div class="search-container">
+      <input id="search" type="search" placeholder="Search..">
+      <div class="search-results">
+        <div class="search-results__header"></div>
+        <ul class="search-results__items"></ul>
+      </div>
+    </div>
+    
+    <button class="sidebar-toggle-inline" id="sidebar-toggle-inline" aria-label="Toggle Chapters">
+      <span class="toggle-icon">☰</span> Chapters
+    </button>
+    <div class="book-content">
+      
+    <h1>GenAI Optimizations</h1>
+    <h3 id="mixture-of-depths-dynamically-allocating-compute-in-transformer-based-lms">[Mixture-of-Depths] Dynamically allocating compute in transformer-based LMs<a class="zola-anchor" href="#mixture-of-depths-dynamically-allocating-compute-in-transformer-based-lms" aria-label="Anchor link for: mixture-of-depths-dynamically-allocating-compute-in-transformer-based-lms">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2404.02258">https://arxiv.org/abs/2404.02258</a> <em>2 Apr 2024 <strong>DeepMind</strong></em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart TD
+    Input[Input Tokens] --&gt; Router{Router}
+    Router --&gt; |Selected| Compute[&quot;Full Computation\n(Transformer Block)&quot;]
+    Router --&gt; |Skipped| Skip[&quot;Skip\n(Residual Only)&quot;]
+    Compute --&gt; Output[Output]
+    Skip --&gt; Output
+
+    style Skip fill:#ffcdd2,color:#000
+    style Compute fill:#c8e6c9,color:#000
+</code></pre>
+<p>The benefit of the approach is the ability to set a compute budget and then based on it enforce limits - for example: enforce how many tokens can participate in block computations. Therefore, in order to avoid performance degradation the challenge becomes how to choose the right tokens for processing.</p>
+<h3 id="offload-moe-fast-inference-of-moe-language-models-with-offloading">[Offload-MoE] Fast Inference of MoE Language Models with Offloading<a class="zola-anchor" href="#offload-moe-fast-inference-of-moe-language-models-with-offloading" aria-label="Anchor link for: offload-moe-fast-inference-of-moe-language-models-with-offloading">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2312.17238">https://arxiv.org/abs/2312.17238</a> <em>28 Dec 2023 <strong>Yandex</strong></em></p>
+<p>We build upon parameter offloading algorithms and propose a novel strategy that accelerates offloading by taking advantage of innate properties of MoE LLM.</p>
+<p>Technique 1: LRU Caching</p>
+<ul>
+<li>LRU is a simple strategy that doesn't consider factors like expert activation frequencies</li>
+<li>Keep active experts in GPU memory as a &quot;cache&quot; for future tokens</li>
+<li>If same experts are activated again, they're available instantaneously</li>
+<li>For simplicity, always keep k least recently used experts as cache</li>
+<li>If k &gt; number of active experts, cache saves experts from multiple previous tokens</li>
+<li>Same number of cached experts maintained for each MoE layer</li>
+</ul>
+<p>Technique 2: Speculative Loading</p>
+<ul>
+<li>Prefetch next set of experts speculatively while processing previous layer</li>
+<li>Guess likely next experts based on previous layer's hidden states</li>
+<li>If guess is correct, speeds up next layer inference</li>
+<li>If incorrect, can load actual next layer's experts later</li>
+<li>Uses next layer's gating function applied to previous layer's hidden states</li>
+<li>Relies on transformer layers being residual (each layer adds to previous hidden states)</li>
+</ul>
+<h3 id="llm-in-a-flash-efficient-llm-inference-with-limited-memory">[LLM-in-a-Flash] Efficient LLM Inference with Limited Memory<a class="zola-anchor" href="#llm-in-a-flash-efficient-llm-inference-with-limited-memory" aria-label="Anchor link for: llm-in-a-flash-efficient-llm-inference-with-limited-memory">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2312.11514">https://arxiv.org/abs/2312.11514</a> <em>12 Dec 2023 <strong>Apple</strong></em></p>
+<p>Key Techniques:</p>
+<ol>
+<li>Windowing: Strategically reduces data transfer by reusing previously activated neurons</li>
+<li>Row-column bundling: Tailored to sequential data access strengths of flash memory, increases size of data chunks read from flash memory</li>
+</ol>
+<h3 id="rope-roformer-enhanced-transformer-with-rotary-position-embedding">[RoPE] RoFormer: Enhanced Transformer with Rotary Position Embedding<a class="zola-anchor" href="#rope-roformer-enhanced-transformer-with-rotary-position-embedding" aria-label="Anchor link for: rope-roformer-enhanced-transformer-with-rotary-position-embedding">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2104.09864">https://arxiv.org/abs/2104.09864</a> <em>20 Apr 2021 <strong>Zhuiyi Technology Co.</strong></em></p>
+<p>We investigated existing approaches to relative position encoding and found they are mostly built based on adding position encoding to context representations. We introduce Rotary Position Embedding (RoPE) to leverage positional information in PLMS learning. The key idea is to encode relative position by multiplying context representations with a rotation matrix with clear theoretical interpretation.</p>
+<h3 id="speculative-fast-inference-from-transformers-via-speculative-decoding">[Speculative] Fast Inference from Transformers via Speculative Decoding<a class="zola-anchor" href="#speculative-fast-inference-from-transformers-via-speculative-decoding" aria-label="Anchor link for: speculative-fast-inference-from-transformers-via-speculative-decoding">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2211.17192">https://arxiv.org/abs/2211.17192</a> <em>30 Nov 2022 <strong>Google</strong></em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    subgraph Draft[&quot;Draft Model (Small)&quot;]
+        D1[&quot;t1&quot;] --&gt; D2[&quot;t2&quot;] --&gt; D3[&quot;t3&quot;] --&gt; D4[&quot;t4&quot;]
+    end
+
+    D4 --&gt; Verify{&quot;Target Model\n(Large)&quot;}
+    Verify --&gt; |Accept| Out[&quot;Output: t1,t2,t3,t4&quot;]
+    Verify --&gt; |Reject t3,t4| Redo[&quot;Redo from t3&quot;]
+
+    style Draft fill:#fff3e0,color:#000
+    style Out fill:#c8e6c9,color:#000
+</code></pre>
+<p>Key Observations:</p>
+<ul>
+<li>Some inference steps are &quot;harder&quot; and some are &quot;easier&quot;</li>
+<li>Inference from large models is often bottlenecked on memory bandwidth and communication</li>
+<li>Additional computation resources might be available</li>
+</ul>
+<p>Solution:</p>
+<ul>
+<li>Increase concurrency as complementary approach to adaptive computation</li>
+<li>Accelerate inference without:
+<ul>
+<li>Changing model architectures</li>
+<li>Modifying training procedures</li>
+<li>Re-training models</li>
+<li>Changing model output distribution</li>
+</ul>
+</li>
+<li>Accomplished via speculative execution</li>
+</ul>
+<h3 id="gqa-training-generalized-multi-query-transformer-models-from-multi-head-checkpoints">[GQA] Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints<a class="zola-anchor" href="#gqa-training-generalized-multi-query-transformer-models-from-multi-head-checkpoints" aria-label="Anchor link for: gqa-training-generalized-multi-query-transformer-models-from-multi-head-checkpoints">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2305.13245">https://arxiv.org/abs/2305.13245</a> <em>22 May 2023 <strong>Google</strong></em></p>
+<h3 id="multi-heads-sharing-fast-transformer-decoding-one-write-head-is-all-you-need">[Multi-Heads Sharing] Fast Transformer Decoding: One Write-Head is All You Need<a class="zola-anchor" href="#multi-heads-sharing-fast-transformer-decoding-one-write-head-is-all-you-need" aria-label="Anchor link for: multi-heads-sharing-fast-transformer-decoding-one-write-head-is-all-you-need">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/1911.02150">https://arxiv.org/abs/1911.02150</a> <em>6 Nov 2019 <strong>Google</strong></em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart TD
+    subgraph MHA[&quot;Multi-Head Attention&quot;]
+        Q1[Q] --&gt; H1[Head 1]
+        K1[K1] --&gt; H1
+        V1[V1] --&gt; H1
+        Q2[Q] --&gt; H2[Head 2]
+        K2[K2] --&gt; H2
+        V2[V2] --&gt; H2
+    end
+
+    subgraph MQA[&quot;Multi-Query Attention&quot;]
+        Q3[Q] --&gt; H3[Head 1]
+        Q4[Q] --&gt; H4[Head 2]
+        KS[K Shared] --&gt; H3
+        KS --&gt; H4
+        VS[V Shared] --&gt; H3
+        VS --&gt; H4
+    end
+
+    style MQA fill:#e8f5e9,color:#000
+</code></pre>
+<p>Multi-head attention layers are a powerful alternative to RNNs for moving information across and between sequences. While training is generally fast and simple due to parallelizability, incremental inference is often slow due to memory-bandwidth costs of loading large &quot;keys&quot; and &quot;values&quot; tensors.</p>
+<p>Solution: Multi-query attention</p>
+<ul>
+<li>Keys and values are shared across all attention &quot;heads&quot;</li>
+<li>Greatly reduces size of tensors and memory bandwidth requirements</li>
+<li>Much faster to decode with minor quality degradation</li>
+<li>Identical to multi-head attention except heads share single set of keys and values</li>
+</ul>
+<h3 id="moe-outrageously-large-nn-the-sparsely-gated-moe-layer">[MoE] Outrageously Large NN: The Sparsely-Gated MoE Layer<a class="zola-anchor" href="#moe-outrageously-large-nn-the-sparsely-gated-moe-layer" aria-label="Anchor link for: moe-outrageously-large-nn-the-sparsely-gated-moe-layer">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/1701.06538">https://arxiv.org/abs/1701.06538</a> <em>23 Jan 2017 <strong>Google</strong></em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    Input[Input] --&gt; Gate{Gating\nNetwork}
+    Gate --&gt; |w1| E1[Expert 1]
+    Gate --&gt; |w2| E2[Expert 2]
+    Gate --&gt; |0| E3[Expert 3...]
+    Gate --&gt; |0| EN[Expert N]
+    E1 --&gt; Combine((Σ))
+    E2 --&gt; Combine
+    Combine --&gt; Output[Output]
+
+    style E3 fill:#eeeeee,color:#000
+    style EN fill:#eeeeee,color:#000
+</code></pre>
+<p>Key Points:</p>
+<ul>
+<li>Neural network capacity is limited by number of parameters</li>
+<li>Conditional computation (parts active per-example) proposed to increase capacity</li>
+<li>Introduces Sparsely-Gated Mixture-of-Experts layer (MoE)</li>
+<li>Consists of up to thousands of feed-forward sub-networks</li>
+<li>Trainable gating network determines sparse combination of experts per example</li>
+<li>Applied convolutionally between stacked LSTM layers</li>
+<li>Achieves better results than state-of-the-art at lower computational cost</li>
+</ul>
+<h3 id="moe-moe-meets-instruction-tuning-a-winning-combination-for-llm">[MoE] MoE Meets Instruction Tuning: A Winning Combination for LLM<a class="zola-anchor" href="#moe-moe-meets-instruction-tuning-a-winning-combination-for-llm" aria-label="Anchor link for: moe-moe-meets-instruction-tuning-a-winning-combination-for-llm">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2305.14705">https://arxiv.org/abs/2305.14705</a> <em>24 May 2023 <strong>Google</strong></em></p>
+<p>Sparse Mixture-of-Experts (MoE) is a neural architecture design that can be utilized to add learnable parameters to Large Language Models (LLMs) without increasing inference cost.</p>
+
+
+    </div>
+  </div>
+
+  <nav class="book-pagination">
+    <div class="prev-link">
+      
+    
+        
+        
+        <a class="previous" href="https://gel.github.io/generative-ai/2-genai-research/">&larr; Previous</a>
+    
+
+    </div>
+
+    <div class="next-link">
+      
+    
+        <a class="next" href="https://gel.github.io/generative-ai/2-genai-research/4-genai-prompting/">Next &rarr;</a>
+    
+
+    </div>
+  </nav>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="https://gel.github.io/elasticlunr.min.js"></script>
+<script type="text/javascript" src="https://gel.github.io/search_index.en.js"></script>
+
+<script type="text/javascript" src="https://gel.github.io/book.js"></script>
+<script async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>

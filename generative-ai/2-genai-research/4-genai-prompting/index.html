@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] img {
+      opacity: .75;
+      transition: opacity .5s ease-in-out;
+    }
+
+    [data-theme="dark"] img:hover {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 10px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        gap: 0;
+      }
+
+      header nav {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      header nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      header nav>a {
+        flex: 0 0 auto;
+      }
+
+      header nav>a.nav-projects,
+      header nav>a.nav-resume {
+        display: none;
+      }
+
+      header nav>a:not(:last-child) {
+        margin-right: 0.3rem;
+      }
+
+      .theme-toggle {
+        flex: 0 0 auto;
+        padding: 0 2px;
+      }
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#05a081');
+      root.style.setProperty('--accent-color-light', '#82d0c0');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#05a081" />
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.fe16e0bb11047769.jpg" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.605594d8be6a111f.jpg" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.3d1b2eeabf8eca47.jpg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.b6439cbc27d70267.jpg" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.e69fb5473e9ea744.jpg" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d03b11f47410640c.jpg" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d847062c67ed9f5e.jpg" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+
+  
+
+  
+
+  
+  
+  <meta name="description" content="" />
+  <meta name="twitter:description" content="">
+  
+  
+
+  
+  <meta name="twitter:title" content="GenAI Prompting">
+  
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" />
+
+  <title>
+    
+
+
+
+Gal's 
+     
+    
+        Generative AI
+    
+ Book - GenAI Prompting
+
+
+  </title>
+
+  
+  
+
+
+<link rel="stylesheet" href="https://gel.github.io/main.css">
+<link rel="stylesheet" href="https://gel.github.io/book.css">
+
+
+
+  
+
+
+
+
+
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="book-body">
+  
+  <header>
+    <a class="profile-icon" href="/">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" alt="profile picture">
+    </a>
+    <nav>
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        "
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        "
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        "
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        "
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        active-nav"
+      >GenAI</a>
+      
+      
+      <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <span class="theme-icon-light">☀️</span>
+        <span class="theme-icon-dark" style="display:none">🌙</span>
+      </button>
+      
+    </nav>
+  </header>
+  
+  <main>
+    
+<!-- Sidebar defaults to class 'menu'. CSS max-width 600px breakpoint handles closing it automatically -->
+<div class="menu">
+  
+  
+  <nav role="navigation">
+    <ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/generative-ai/1-intro/">
+          <strong>1.</strong>
+          Generative AI Foundations
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;1-intro&#x2F;1-genai-environment&#x2F;">
+              <strong>1.1.</strong>
+              GenAI Agents Environment
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;1-intro&#x2F;2-genai-agents-tricks&#x2F;">
+              <strong>1.2.</strong>
+              GenAI Agents Tricks
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/generative-ai/2-genai-research/">
+          <strong>2.</strong>
+          GenAI Research
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;1-genai-agents&#x2F;">
+              <strong>2.1.</strong>
+              Agents
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;2-genai-pretraining-finetuning&#x2F;">
+              <strong>2.2.</strong>
+              GenAI Training
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;3-genai-optimization&#x2F;">
+              <strong>2.3.</strong>
+              GenAI Optimizations
+            </a>
+          </li>
+          
+          <li class="active" >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;4-genai-prompting&#x2F;">
+              <strong>2.4.</strong>
+              GenAI Prompting
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;5-genai-benchmarks&#x2F;">
+              <strong>2.5.</strong>
+              GenAI Evaluations
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;6-genai-models&#x2F;">
+              <strong>2.6.</strong>
+              GenAI Models
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;7-genai-security&#x2F;">
+              <strong>2.7.</strong>
+              GenAI Security
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/generative-ai/3-llm-implementation/">
+          <strong>3.</strong>
+          LLM Implementation
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;3-llm-implementation&#x2F;1-datasets&#x2F;">
+              <strong>3.1.</strong>
+              Datasets
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;3-llm-implementation&#x2F;2-llms&#x2F;">
+              <strong>3.2.</strong>
+              LLMs
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+    </ul>
+  </nav>
+  
+  
+</div>
+
+<!-- Page defaults to class 'page'. CSS max-width 600px breakpoint handles making it full-width automatically -->
+<div class="page">
+
+  <div class="page__content">
+    
+    <div class="search-container">
+      <input id="search" type="search" placeholder="Search..">
+      <div class="search-results">
+        <div class="search-results__header"></div>
+        <ul class="search-results__items"></ul>
+      </div>
+    </div>
+    
+    <button class="sidebar-toggle-inline" id="sidebar-toggle-inline" aria-label="Toggle Chapters">
+      <span class="toggle-icon">☰</span> Chapters
+    </button>
+    <div class="book-content">
+      
+    <h1>GenAI Prompting</h1>
+    <h2 id="llm-prompting-in-context-learning">LLM Prompting - In-Context-Learning<a class="zola-anchor" href="#llm-prompting-in-context-learning" aria-label="Anchor link for: llm-prompting-in-context-learning">🔗</a></h2>
+<h3 id="llmlingua-compressing-prompts-for-accelerated-inference-of-llms">[LLMLingua] Compressing Prompts for Accelerated Inference of LLMs<a class="zola-anchor" href="#llmlingua-compressing-prompts-for-accelerated-inference-of-llms" aria-label="Anchor link for: llmlingua-compressing-prompts-for-accelerated-inference-of-llms">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2310.05736">https://arxiv.org/abs/2310.05736</a> <em>Oct 2023 <strong>Microsoft</strong></em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    Input[&quot;Long Prompt\n(10k+ tokens)&quot;] --&gt; BC[Budget Controller]
+    BC --&gt; Demo[Demonstrations]
+    BC --&gt; Inst[Instructions]
+    BC --&gt; Q[Questions]
+    Demo --&gt; |High compression| TIC[Token Iterative\nCompression]
+    Inst --&gt; |Low compression| TIC
+    Q --&gt; |Low compression| TIC
+    TIC --&gt; IT[Instruction Tuning]
+    IT --&gt; Output[&quot;Compressed Prompt\n(~500 tokens)&quot;]
+</code></pre>
+<p>Key Components:</p>
+<ol>
+<li>
+<p>Budget Controller</p>
+<ul>
+<li>Allocates different compression ratios to prompt components</li>
+<li>Prioritizes instructions and questions over demonstrations</li>
+<li>Maintains semantic integrity under high compression</li>
+</ul>
+</li>
+<li>
+<p>Token-level Iterative Compression</p>
+<ul>
+<li>Divides target prompt into segments</li>
+<li>Uses smaller model for perplexity distribution</li>
+<li>Concatenates compressed segments for accurate probability estimation</li>
+</ul>
+</li>
+<li>
+<p>Instruction Tuning</p>
+<ul>
+<li>Aligns distribution between language models</li>
+<li>Improves compression quality</li>
+</ul>
+</li>
+</ol>
+<h3 id="tot-tree-of-thoughts-deliberate-problem-solving-with-llms">[TOT] Tree of Thoughts: Deliberate Problem Solving with LLMs<a class="zola-anchor" href="#tot-tree-of-thoughts-deliberate-problem-solving-with-llms" aria-label="Anchor link for: tot-tree-of-thoughts-deliberate-problem-solving-with-llms">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2305.10601">https://arxiv.org/abs/2305.10601</a> <em>17 May 2023</em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart TD
+    Problem[Problem] --&gt; T1[Thought 1]
+    Problem --&gt; T2[Thought 2]
+    Problem --&gt; T3[Thought 3]
+    T1 --&gt; |Evaluate| T1a[&quot;Thought 1.1 ✓&quot;]
+    T1 --&gt; T1b[Thought 1.2]
+    T2 --&gt; |Evaluate| T2a[Thought 2.1]
+    T2 --&gt; T2b[&quot;Thought 2.2 ✓&quot;]
+    T1a --&gt; |Search| Sol1[&quot;Solution ★&quot;]
+    T2b --&gt; Sol2[Solution]
+
+    style T1a fill:#90EE90,color:#000
+    style T2b fill:#90EE90,color:#000
+    style Sol1 fill:#FFD700,color:#000
+</code></pre>
+<p>Key Features:</p>
+<ul>
+<li>Frames problems as search over a tree</li>
+<li>Each node represents a partial solution</li>
+<li>Four key components:
+<ol>
+<li>Decomposition of intermediate process</li>
+<li>Generation of potential thoughts</li>
+<li>Heuristic evaluation of states</li>
+<li>Search algorithm selection</li>
+</ol>
+</li>
+</ul>
+<h3 id="cot-chain-of-thought-prompting-elicits-reasoning-in-llms">[COT] Chain-of-Thought Prompting Elicits Reasoning in LLMs<a class="zola-anchor" href="#cot-chain-of-thought-prompting-elicits-reasoning-in-llms" aria-label="Anchor link for: cot-chain-of-thought-prompting-elicits-reasoning-in-llms">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2201.11903">https://arxiv.org/abs/2201.11903</a> <em>Jan 2022</em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    subgraph Standard[&quot;Standard Prompting&quot;]
+        Q1[Question] --&gt; A1[Answer]
+    end
+
+    subgraph COT[&quot;Chain-of-Thought&quot;]
+        Q2[Question] --&gt; S1[&quot;Step 1: ...&quot;]
+        S1 --&gt; S2[&quot;Step 2: ...&quot;]
+        S2 --&gt; S3[&quot;Step 3: ...&quot;]
+        S3 --&gt; A2[Answer]
+    end
+
+    style COT fill:#e1f5fe,color:#000
+</code></pre>
+<p>Limitations:</p>
+<ul>
+<li>No guarantee of correct reasoning paths</li>
+<li>Manual annotation costs for few-shot setting</li>
+<li>Potential for both correct and incorrect answers</li>
+</ul>
+<h3 id="self-discover-llm-self-compose-reasoning-structures">[Self-Discover] LLM Self-Compose Reasoning Structures<a class="zola-anchor" href="#self-discover-llm-self-compose-reasoning-structures" aria-label="Anchor link for: self-discover-llm-self-compose-reasoning-structures">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2402.03620">https://arxiv.org/abs/2402.03620</a> <em>6 Feb 2024</em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart TD
+    subgraph Stage1[&quot;Stage 1: Compose Structure&quot;]
+        Task[Task Description] --&gt; Select[SELECT relevant modules]
+        Select --&gt; Adapt[ADAPT to task]
+        Adapt --&gt; Implement[IMPLEMENT as JSON]
+    end
+
+    subgraph Stage2[&quot;Stage 2: Solve&quot;]
+        Instance[Problem Instance] --&gt; Apply[Apply Structure]
+        Apply --&gt; Answer[Final Answer]
+    end
+
+    Implement --&gt; Instance
+
+    style Stage1 fill:#fff3e0,color:#000
+    style Stage2 fill:#e8f5e9,color:#000
+</code></pre>
+<p>Two-Stage Process:</p>
+<ol>
+<li>
+<p>Stage 1: Task-level reasoning structure</p>
+<ul>
+<li>Uses three actions to guide LLM</li>
+<li>Generates coherent reasoning structure</li>
+</ul>
+</li>
+<li>
+<p>Stage 2: Instance solving</p>
+<ul>
+<li>Follows self-discovered structure</li>
+<li>Arrives at final answer</li>
+</ul>
+</li>
+</ol>
+<h3 id="intent-based-prompt-calibration-enhancing-prompt-optimization-with-synthetic-boundary-cases">[Intent-based Prompt Calibration] Enhancing prompt optimization with synthetic boundary cases<a class="zola-anchor" href="#intent-based-prompt-calibration-enhancing-prompt-optimization-with-synthetic-boundary-cases" aria-label="Anchor link for: intent-based-prompt-calibration-enhancing-prompt-optimization-with-synthetic-boundary-cases">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2402.03099">https://arxiv.org/abs/2402.03099</a> <em>5 Feb 2024</em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart TD
+    Start[Initial Prompt] --&gt; Gen[Generate Boundary Cases]
+    Gen --&gt; Eval{Evaluate on\nBoundary Cases}
+    Eval --&gt; |Failures found| Improve[Suggest Improved Prompt]
+    Improve --&gt; Gen
+    Eval --&gt; |No improvement| End[Final Optimized Prompt]
+
+    style End fill:#90EE90,color:#000
+</code></pre>
+<p>Process:</p>
+<ol>
+<li>Start with initial prompt and task description</li>
+<li>Iteratively:
+<ul>
+<li>Generate challenging boundary cases</li>
+<li>Evaluate current prompt</li>
+<li>Suggest improved prompt</li>
+</ul>
+</li>
+<li>Terminate when no improvement or max iterations reached</li>
+</ol>
+<h3 id="text2sql-prompting-enhancing-few-shot-text2sql-capabilities-of-llm">[Text2SQL Prompting] Enhancing Few-shot Text2SQL Capabilities of LLM<a class="zola-anchor" href="#text2sql-prompting-enhancing-few-shot-text2sql-capabilities-of-llm" aria-label="Anchor link for: text2sql-prompting-enhancing-few-shot-text2sql-capabilities-of-llm">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2311.16452">https://arxiv.org/abs/2311.16452</a> <em>Nov 2023 <strong>Yale</strong></em></p>
+<p>Key Findings:</p>
+<ul>
+<li>Dual emphasis on diversity and similarity in examples</li>
+<li>Database knowledge augmentation benefits</li>
+<li>Code sequence representation for databases</li>
+<li>Sensitivity to number of demonstration examples</li>
+</ul>
+<h3 id="medprompt-can-generalist-fm-outcompete-special-purpose-tuning">[MedPrompt] Can Generalist FM Outcompete Special-Purpose Tuning?<a class="zola-anchor" href="#medprompt-can-generalist-fm-outcompete-special-purpose-tuning" aria-label="Anchor link for: medprompt-can-generalist-fm-outcompete-special-purpose-tuning">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2311.16452">https://arxiv.org/abs/2311.16452</a> <em>28 Nov 2023 <strong>Microsoft</strong></em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    Q[Medical\nQuestion] --&gt; CoT[Self-Generated\nChain-of-Thought]
+    CoT --&gt; Ens[Ensemble with\nSelf-Consistency]
+    Ens --&gt; Shuffle[Choice\nShuffling]
+    Shuffle --&gt; Verify[Label\nVerification]
+    Verify --&gt; A[&quot;Answer\n(90%+ accuracy)&quot;]
+
+    style A fill:#FFD700,color:#000
+</code></pre>
+<p>Key Features:</p>
+<ul>
+<li>Self-generated chain-of-thought</li>
+<li>Ensembling with self-consistency</li>
+<li>Choice shuffling for bias reduction</li>
+<li>Label verification for hallucination mitigation</li>
+</ul>
+<h3 id="urial-rethinking-alignment-via-in-context-learning">[URIAL] Rethinking Alignment via In-Context Learning<a class="zola-anchor" href="#urial-rethinking-alignment-via-in-context-learning" aria-label="Anchor link for: urial-rethinking-alignment-via-in-context-learning">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2312.01552">https://arxiv.org/abs/2312.01552</a> <em>4 Dec 2023 <strong>Allen Institute</strong></em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    subgraph Traditional[&quot;SFT&#x2F;RLHF Alignment&quot;]
+        Base1[Base LLM] --&gt; SFT[Supervised\nFine-tuning]
+        SFT --&gt; RLHF[RLHF]
+        RLHF --&gt; Aligned1[Aligned LLM]
+    end
+
+    subgraph URIAL[&quot;URIAL (Tuning-Free)&quot;]
+        Base2[Base LLM] --&gt; ICL[&quot;3 Style Examples\n+ System Prompt&quot;]
+        ICL --&gt; Aligned2[Aligned LLM]
+    end
+
+    style URIAL fill:#e8f5e9,color:#000
+</code></pre>
+<p>Key Points:</p>
+<ul>
+<li>Tuning-free alignment method</li>
+<li>Requires only three stylistic examples</li>
+<li>Supports Superficial Alignment Hypothesis</li>
+<li>Token distribution analysis shows minimal shifts</li>
+</ul>
+<h3 id="cove-chain-of-verification-reduces-hallucinations-in-llm-models">[CoVE] Chain-of-Verification Reduces Hallucinations in LLM Models<a class="zola-anchor" href="#cove-chain-of-verification-reduces-hallucinations-in-llm-models" aria-label="Anchor link for: cove-chain-of-verification-reduces-hallucinations-in-llm-models">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2309.11495">https://arxiv.org/abs/2309.11495</a> <em>25 Sep 2023 <strong>Meta</strong></em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart TD
+    Q[Question] --&gt; Draft[&quot;1. Draft Response&quot;]
+    Draft --&gt; Plan[&quot;2. Plan Verification\nQuestions&quot;]
+    Plan --&gt; V1[&quot;Q1: Is X true?&quot;]
+    Plan --&gt; V2[&quot;Q2: Is Y correct?&quot;]
+    Plan --&gt; V3[&quot;Q3: Does Z hold?&quot;]
+    V1 --&gt; |Independent| A1[&quot;A1: Yes&#x2F;No&quot;]
+    V2 --&gt; |Independent| A2[&quot;A2: Yes&#x2F;No&quot;]
+    V3 --&gt; |Independent| A3[&quot;A3: Yes&#x2F;No&quot;]
+    A1 --&gt; Final[&quot;4. Final Verified\nResponse&quot;]
+    A2 --&gt; Final
+    A3 --&gt; Final
+
+    style Final fill:#90EE90,color:#000
+</code></pre>
+<p>Process:</p>
+<ol>
+<li>Draft initial response</li>
+<li>Plan verification questions</li>
+<li>Answer questions independently</li>
+<li>Generate final verified response</li>
+</ol>
+
+
+    </div>
+  </div>
+
+  <nav class="book-pagination">
+    <div class="prev-link">
+      
+    
+        
+        
+        <a class="previous" href="https://gel.github.io/generative-ai/2-genai-research/">&larr; Previous</a>
+    
+
+    </div>
+
+    <div class="next-link">
+      
+    
+        <a class="next" href="https://gel.github.io/generative-ai/2-genai-research/5-genai-benchmarks/">Next &rarr;</a>
+    
+
+    </div>
+  </nav>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="https://gel.github.io/elasticlunr.min.js"></script>
+<script type="text/javascript" src="https://gel.github.io/search_index.en.js"></script>
+
+<script type="text/javascript" src="https://gel.github.io/book.js"></script>
+<script async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>

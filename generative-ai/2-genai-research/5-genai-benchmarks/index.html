@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] img {
+      opacity: .75;
+      transition: opacity .5s ease-in-out;
+    }
+
+    [data-theme="dark"] img:hover {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 10px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        gap: 0;
+      }
+
+      header nav {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      header nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      header nav>a {
+        flex: 0 0 auto;
+      }
+
+      header nav>a.nav-projects,
+      header nav>a.nav-resume {
+        display: none;
+      }
+
+      header nav>a:not(:last-child) {
+        margin-right: 0.3rem;
+      }
+
+      .theme-toggle {
+        flex: 0 0 auto;
+        padding: 0 2px;
+      }
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#05a081');
+      root.style.setProperty('--accent-color-light', '#82d0c0');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#05a081" />
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.fe16e0bb11047769.jpg" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.605594d8be6a111f.jpg" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.3d1b2eeabf8eca47.jpg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.b6439cbc27d70267.jpg" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.e69fb5473e9ea744.jpg" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d03b11f47410640c.jpg" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d847062c67ed9f5e.jpg" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+
+  
+
+  
+
+  
+  
+  <meta name="description" content="" />
+  <meta name="twitter:description" content="">
+  
+  
+
+  
+  <meta name="twitter:title" content="GenAI Evaluations">
+  
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" />
+
+  <title>
+    
+
+
+
+Gal's 
+     
+    
+        Generative AI
+    
+ Book - GenAI Evaluations
+
+
+  </title>
+
+  
+  
+
+
+<link rel="stylesheet" href="https://gel.github.io/main.css">
+<link rel="stylesheet" href="https://gel.github.io/book.css">
+
+
+
+  
+
+
+
+
+
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="book-body">
+  
+  <header>
+    <a class="profile-icon" href="/">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" alt="profile picture">
+    </a>
+    <nav>
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        "
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        "
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        "
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        "
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        active-nav"
+      >GenAI</a>
+      
+      
+      <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <span class="theme-icon-light">☀️</span>
+        <span class="theme-icon-dark" style="display:none">🌙</span>
+      </button>
+      
+    </nav>
+  </header>
+  
+  <main>
+    
+<!-- Sidebar defaults to class 'menu'. CSS max-width 600px breakpoint handles closing it automatically -->
+<div class="menu">
+  
+  
+  <nav role="navigation">
+    <ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/generative-ai/1-intro/">
+          <strong>1.</strong>
+          Generative AI Foundations
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;1-intro&#x2F;1-genai-environment&#x2F;">
+              <strong>1.1.</strong>
+              GenAI Agents Environment
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;1-intro&#x2F;2-genai-agents-tricks&#x2F;">
+              <strong>1.2.</strong>
+              GenAI Agents Tricks
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/generative-ai/2-genai-research/">
+          <strong>2.</strong>
+          GenAI Research
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;1-genai-agents&#x2F;">
+              <strong>2.1.</strong>
+              Agents
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;2-genai-pretraining-finetuning&#x2F;">
+              <strong>2.2.</strong>
+              GenAI Training
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;3-genai-optimization&#x2F;">
+              <strong>2.3.</strong>
+              GenAI Optimizations
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;4-genai-prompting&#x2F;">
+              <strong>2.4.</strong>
+              GenAI Prompting
+            </a>
+          </li>
+          
+          <li class="active" >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;5-genai-benchmarks&#x2F;">
+              <strong>2.5.</strong>
+              GenAI Evaluations
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;6-genai-models&#x2F;">
+              <strong>2.6.</strong>
+              GenAI Models
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;2-genai-research&#x2F;7-genai-security&#x2F;">
+              <strong>2.7.</strong>
+              GenAI Security
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="https://gel.github.io/generative-ai/3-llm-implementation/">
+          <strong>3.</strong>
+          LLM Implementation
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;3-llm-implementation&#x2F;1-datasets&#x2F;">
+              <strong>3.1.</strong>
+              Datasets
+            </a>
+          </li>
+          
+          <li >
+            <a href="https:&#x2F;&#x2F;gel.github.io&#x2F;generative-ai&#x2F;3-llm-implementation&#x2F;2-llms&#x2F;">
+              <strong>3.2.</strong>
+              LLMs
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+    </ul>
+  </nav>
+  
+  
+</div>
+
+<!-- Page defaults to class 'page'. CSS max-width 600px breakpoint handles making it full-width automatically -->
+<div class="page">
+
+  <div class="page__content">
+    
+    <div class="search-container">
+      <input id="search" type="search" placeholder="Search..">
+      <div class="search-results">
+        <div class="search-results__header"></div>
+        <ul class="search-results__items"></ul>
+      </div>
+    </div>
+    
+    <button class="sidebar-toggle-inline" id="sidebar-toggle-inline" aria-label="Toggle Chapters">
+      <span class="toggle-icon">☰</span> Chapters
+    </button>
+    <div class="book-content">
+      
+    <h1>GenAI Evaluations</h1>
+    <h3 id="judgebench-a-benchmark-for-evaluating-llm-based-judges">[JudgeBench] A Benchmark for Evaluating LLM-based Judges<a class="zola-anchor" href="#judgebench-a-benchmark-for-evaluating-llm-based-judges" aria-label="Anchor link for: judgebench-a-benchmark-for-evaluating-llm-based-judges">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2410.12784">https://arxiv.org/abs/2410.12784</a> <em>16 Oct 2024</em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart TD
+    subgraph Principles[&quot;Judge Evaluation Hierarchy&quot;]
+        P1[&quot;📝 Follow Instructions&quot;] --&gt; P2[&quot;✅ Factual&#x2F;Logical Correctness&quot;]
+        P2 --&gt; P3[&quot;🎨 Style Preferences&quot;]
+    end
+
+    Responses[Response Pairs] --&gt; Judge{LLM Judge}
+    Judge --&gt; |Evaluate| Score[Preference Score]
+    Score --&gt; Benchmark{Compare to\nGround Truth}
+
+    style P2 fill:#c8e6c9,color:#000
+</code></pre>
+<p>The key problem: Evaluating the reliability of LLM-based judges
+The motivation: As LLMs get more advanced, we need better ways to evaluate them
+The main contribution: JudgeBench, a new benchmark focused on factual/logical correctness</p>
+<p>In this paper, we propose a hierarchical framework to analyze this problem, which contains three guiding principles that LLM-based judges should follow when selecting responses:</p>
+<ol>
+<li>The response must faithfully follow human instructions</li>
+<li>It should provide factually and logically correct answers</li>
+<li>Its style should align with human preferences</li>
+</ol>
+<p>As a result, human evaluations often become unreliable as the difficulty of the task increases. Scaling AI models to superhuman levels requires that AI judges evolve accordingly to accurately evaluate these increasingly complex responses.</p>
+<p>Is verifying a problem's solution easier than solving the problem itself? Intuitively, verification should be simpler, as the model is provided with candidate solutions and only needs to identify the correct one, a task that would yield 50% accuracy through random guessing alone. Our results show that for a fixed model, the judge's accuracy closely mirrors that of the solver. While GPT-4o's and Gemini-1.5-Pro's judges slightly outperform their corresponding solvers, Claude-3.5-Sonnet's and Llama-3.1-405BInstruct's judges lag behind their respective solvers. Although the overall accuracy between the solver and judge is close, we observe a notable discrepancy in the Coding category, where the solver consistently outperforms the judge across all models. Conversely, in the Math category, judges significantly outperform solvers. This suggests that coding problems are more difficult to evaluate, while logical errors in math problems are generally easier to identify.</p>
+<h3 id="prometheus-2-an-os-lm-specialized-in-evaluating-other-lms">[Prometheus 2] An OS LM Specialized in Evaluating Other LMs<a class="zola-anchor" href="#prometheus-2-an-os-lm-specialized-in-evaluating-other-lms" aria-label="Anchor link for: prometheus-2-an-os-lm-specialized-in-evaluating-other-lms">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2405.01535">https://arxiv.org/abs/2405.01535</a> <em>2 May 2024</em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    subgraph Training[&quot;Training Approaches&quot;]
+        Single[&quot;Single-Format\nTraining&quot;]
+        Joint[&quot;Joint\nTraining&quot;]
+        Merge[&quot;Weight\nMerging&quot;]
+    end
+
+    Base[Base Model] --&gt; Training
+    Training --&gt; Eval{Prometheus 2}
+    Eval --&gt; DA[&quot;Direct\nAssessment&quot;]
+    Eval --&gt; PR[&quot;Pairwise\nRanking&quot;]
+
+    style Eval fill:#e1f5fe,color:#000
+</code></pre>
+<p>We introduce PROMETHEUS 2 (7B &amp; 8x7B), state-of-the-art open evaluator LMs that score high correlations with both human evaluators and proprietary LM-based judges on both direct assessment and pairwise ranking.</p>
+<p>Training Approaches:</p>
+<ol>
+<li>Single-Format Training: Training a base model on either direct assessment feedback dataset or pairwise ranking feedback dataset</li>
+<li>Joint Training: Training a base model on both direct assessment and pairwise ranking feedback datasets</li>
+<li>Weight Merging: Training two models separately and merging them with linear combination: θfinal = α × θd + (1 − α) × θp</li>
+</ol>
+<h3 id="pretrainingloss-understanding-emergent-abilities-of-lms-from-the-loss-perspective">[PretrainingLoss] Understanding Emergent Abilities of LMs from the Loss Perspective<a class="zola-anchor" href="#pretrainingloss-understanding-emergent-abilities-of-lms-from-the-loss-perspective" aria-label="Anchor link for: pretrainingloss-understanding-emergent-abilities-of-lms-from-the-loss-perspective">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2403.15796">https://arxiv.org/abs/2403.15796</a> <em>30 Mar 2024 <strong>Zhipu AI</strong></em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    subgraph Old[&quot;Traditional View&quot;]
+        Size[Model Size] --&gt; Perf1[Performance]
+        Compute[Training Compute] --&gt; Perf1
+    end
+
+    subgraph New[&quot;Loss Perspective&quot;]
+        Loss[Pre-training Loss] --&gt; |Below Threshold| Emerge[&quot;✨ Emergent\nAbilities&quot;]
+        Loss --&gt; |Above Threshold| Random[&quot;Random\nGuessing&quot;]
+    end
+
+    style New fill:#fff3e0,color:#000
+    style Emerge fill:#c8e6c9,color:#000
+</code></pre>
+<p>Our paper proposes a new definition of emergent abilities of language models from the perspective of pre-training loss. Empirical results show that the pre-training loss is a better metric to represent the scaling effect of language models than model size or training compute. The performance of emergent abilities exhibits emergent increase when the pre-training loss falls below a certain threshold, even when evaluated with continuous metrics.</p>
+<h3 id="poll-replacing-judges-with-juries-evaluating-with-a-panel-of-models">[PoLL] Replacing Judges with Juries: Evaluating with a Panel of Models<a class="zola-anchor" href="#poll-replacing-judges-with-juries-evaluating-with-a-panel-of-models" aria-label="Anchor link for: poll-replacing-judges-with-juries-evaluating-with-a-panel-of-models">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2404.18796">https://arxiv.org/abs/2404.18796</a> <em>29 Apr 2024 <strong>Cohere</strong></em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    subgraph Single[&quot;Single Judge (GPT-4)&quot;]
+        Response --&gt; GPT4{GPT-4}
+        GPT4 --&gt; Score1[Score]
+    end
+
+    subgraph Panel[&quot;Panel of LLMs (PoLL)&quot;]
+        Response2[Response] --&gt; M1[Model A]
+        Response2 --&gt; M2[Model B]
+        Response2 --&gt; M3[Model C]
+        M1 --&gt; Agg((Σ))
+        M2 --&gt; Agg
+        M3 --&gt; Agg
+        Agg --&gt; Score2[&quot;Aggregated\nScore&quot;]
+    end
+
+    style Panel fill:#e8f5e9,color:#000
+</code></pre>
+<p>Evaluations most commonly use a single large model like GPT4. While this method has grown in popularity, it is costly, has been shown to introduce intramodal bias, and in this work, we find that very large models are often unnecessary. We propose instead to evaluate models using a Panel of LLm evaluators (PoLL).</p>
+<h3 id="benchmark-generating-benchmarks-for-factuality-evaluation-of-language-models">[Benchmark] Generating Benchmarks for Factuality Evaluation of Language Models<a class="zola-anchor" href="#benchmark-generating-benchmarks-for-factuality-evaluation-of-language-models" aria-label="Anchor link for: benchmark-generating-benchmarks-for-factuality-evaluation-of-language-models">🔗</a></h3>
+<p>Arxiv: <a href="https://arxiv.org/abs/2307.06908">https://arxiv.org/abs/2307.06908</a> <em>13 Jul 2023 <strong>AI21 Labs</strong></em></p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart TD
+    Corpus[Factual Corpus] --&gt; Extract[Extract Facts]
+    Extract --&gt; True[&quot;✅ True Statement&quot;]
+    True --&gt; Perturb[Perturb]
+    Perturb --&gt; F1[&quot;❌ False 1&quot;]
+    Perturb --&gt; F2[&quot;❌ False 2&quot;]
+    Perturb --&gt; F3[&quot;❌ False 3&quot;]
+
+    True --&gt; Eval{LLM\nAssigns\nLikelihood}
+    F1 --&gt; Eval
+    F2 --&gt; Eval
+    F3 --&gt; Eval
+    Eval --&gt; |True &gt; All False?| Score[FACTOR Score]
+
+    style True fill:#c8e6c9,color:#000
+    style Score fill:#FFD700,color:#000
+</code></pre>
+<p>The key idea is automatically perturbing factual statements taken from the corpus to create a constant number of false variations (hereafter, 3) for each true statement. The LM's FACTOR accuracy on our benchmark is defined as the percentage of examples for which it assigns higher likelihood to the factual completion than to any of the false variations.</p>
+<p><img src="/generative-ai/2-genai-research/llm_5_benchmark.png" alt="Chain-of-Verification" /></p>
+
+
+    </div>
+  </div>
+
+  <nav class="book-pagination">
+    <div class="prev-link">
+      
+    
+        
+        
+        <a class="previous" href="https://gel.github.io/generative-ai/2-genai-research/">&larr; Previous</a>
+    
+
+    </div>
+
+    <div class="next-link">
+      
+    
+        <a class="next" href="https://gel.github.io/generative-ai/2-genai-research/6-genai-models/">Next &rarr;</a>
+    
+
+    </div>
+  </nav>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="https://gel.github.io/elasticlunr.min.js"></script>
+<script type="text/javascript" src="https://gel.github.io/search_index.en.js"></script>
+
+<script type="text/javascript" src="https://gel.github.io/book.js"></script>
+<script async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>
