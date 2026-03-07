@@ -48,27 +48,3 @@ class Solution:
   },
   testCases: publicTests
 };
-
-window.problemConfig.publicTests = [...window.problemConfig.testCases];
-window.problemConfig.hiddenTests = [
-  { expected: [0, 3], input: { nums: [0, 4, 3, 0], target: 0 } },
-  { expected: [1, 3], input: { nums: [1, 5, 1, 5], target: 10 } }
-];
-window.problemConfig.performanceTests = [
-  {
-    expected: [9999, 10000],
-    input: {
-      nums: [...Array.from({ length: 10000 }, (_, i) => i + 1), 20000],
-      target: 30000
-    }
-  }
-];
-window.problemConfig.rubric = {
-  weights: {
-    correctness: 0.65,
-    edgeCases: 0.1,
-    efficiency: 0.2,
-    codeQuality: 0.05
-  }
-};
-window.problemConfig.testCases = window.problemConfig.publicTests;

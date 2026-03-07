@@ -69,33 +69,3 @@ class Solution:
   },
   testCases: publicTests
 };
-
-window.problemConfig.publicTests = [...window.problemConfig.testCases];
-window.problemConfig.hiddenTests = [
-  { expected: 6, input: { tokens: ["18", "3", "/"] } },
-  { expected: -2, input: { tokens: ["7", "-3", "/"] } }
-];
-window.problemConfig.performanceTests = [
-  {
-    expected: 2000,
-    input: {
-      tokens: (() => {
-        const n = 2000;
-        const tokens = ["1", "1", "+"];
-        for (let i = 2; i < n; i += 1) {
-          tokens.push("1", "+");
-        }
-        return tokens;
-      })()
-    }
-  }
-];
-window.problemConfig.rubric = {
-  weights: {
-    correctness: 0.65,
-    edgeCases: 0.15,
-    efficiency: 0.15,
-    codeQuality: 0.05
-  }
-};
-window.problemConfig.testCases = window.problemConfig.publicTests;

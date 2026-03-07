@@ -4,204 +4,272 @@ const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 
-const ROOT = path.resolve(__dirname, "..");
-const LIVE_DIR = path.join(ROOT, "content", "interviews", "live");
-const PROBLEMS_DIR = path.join(ROOT, "static", "interview", "problems");
-const CODING_CHAPTER_FILES = [
-  path.join(ROOT, "content", "interviews", "3-coding-problems", "1_logical_and_maintainable.md"),
-  path.join(ROOT, "content", "interviews", "3-coding-problems", "2_problem_solving.md")
-];
-
-const CHAPTER_SLUG_ALIASES = {
-  "best-time-to-buy-and-sell-stock": "best-time-to-buy-sell-stock",
-  "evaluate-reverse-polish-notation": "reverse-polish-notation",
-  "longest-palindromic-substring": "longest-palindrome"
+const repoRoot = path.resolve(__dirname, "..");
+const liveDir = path.join(repoRoot, "content", "interviews", "live");
+const problemsDir = path.join(repoRoot, "static", "interview", "problems");
+const chapterDir = path.join(repoRoot, "content", "interviews", "3-coding-problems");
+const chapterTitleAliases = {
+  [normalizeTitle("Partitioning Into Minimum Number Of Deci-Binary Numbers")]:
+    "partitioning-into-minimum-number-of-deci-binary-numbers",
+  [normalizeTitle("Insert Greatest Common Divisors in Linked List")]:
+    "insert-greatest-common-divisors-in-linked-list"
 };
 
-function listSlugs(dir, extension) {
+function listFiles(dir, extension) {
   return fs
     .readdirSync(dir)
-    .filter((file) => file.endsWith(extension))
-    .map((file) => file.slice(0, -extension.length))
-    .filter((slug) => slug !== "_index")
+    .filter((file) => file.endsWith(extension) && !file.startsWith("_"))
     .sort();
 }
 
-function slugify(value) {
-  return value
+function slugFromFile(file) {
+  return path.basename(file, path.extname(file));
+}
+
+function normalizeTitle(title) {
+  return title
     .toLowerCase()
-    .replace(/&/g, " and ")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .replace(/-{2,}/g, "-");
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
 }
 
-function setDiff(a, b) {
-  return [...a].filter((value) => !b.has(value)).sort();
+function uniqueTokens(title) {
+  return [...new Set(normalizeTitle(title).split(" ").filter(Boolean))];
 }
 
-function readCodingChapterSlugs() {
-  const slugs = new Set();
-  const itemRegex = /^- \[(.+?)\]\(#.+\)$/gm;
+function isSubset(left, right) {
+  return left.every((token) => right.includes(token));
+}
 
-  for (const filePath of CODING_CHAPTER_FILES) {
-    const content = fs.readFileSync(filePath, "utf8");
-    let match;
-    while ((match = itemRegex.exec(content)) !== null) {
-      const fullTitle = match[1].trim();
-      const problemTitle = fullTitle.split(" - ")[0].trim();
-      const rawSlug = slugify(problemTitle);
-      slugs.add(CHAPTER_SLUG_ALIASES[rawSlug] || rawSlug);
-    }
+function readFrontmatterTitle(filePath) {
+  const source = fs.readFileSync(filePath, "utf8");
+  let frontmatter = "";
+
+  if (source.startsWith("+++\n")) {
+    const end = source.indexOf("\n+++\n", 4);
+    frontmatter = end === -1 ? "" : source.slice(4, end);
+  } else if (source.startsWith("---\n")) {
+    const end = source.indexOf("\n---\n", 4);
+    frontmatter = end === -1 ? "" : source.slice(4, end);
   }
 
-  return [...slugs].sort();
+  const titleMatch = frontmatter.match(/^title\s*[:=]\s*["'](.+?)["']\s*$/m);
+  return titleMatch ? titleMatch[1] : null;
+}
+
+function extractChapterTitles(filePath) {
+  const source = fs.readFileSync(filePath, "utf8");
+  const matches = source.match(/^###\s+.+$/gm) || [];
+
+  return matches.map((line) => {
+    let title = line.replace(/^###\s+/, "").trim();
+    title = title.replace(/\s+-\s+(Easy|Medium|Hard)\b.*$/i, "");
+    title = title.replace(/\s+-\s+OO Design$/i, "");
+    return title.trim();
+  });
 }
 
 function loadProblemConfig(filePath) {
-  const code = fs.readFileSync(filePath, "utf8");
-  const context = { window: {} };
-  vm.createContext(context);
-  vm.runInContext(code, context, { filename: filePath });
-  return context.window.problemConfig;
+  const source = fs.readFileSync(filePath, "utf8");
+  const sandbox = { window: {} };
+  vm.createContext(sandbox);
+  vm.runInContext(source, sandbox, { filename: filePath });
+  return sandbox.window.problemConfig;
 }
 
-function validateProblemConfig(slug, config) {
-  const issues = [];
-
-  if (!config || typeof config !== "object") {
-    issues.push("missing window.problemConfig object");
-    return { issues, counts: null };
+function matchLiveTitle(chapterTitle, liveEntries) {
+  const aliasedSlug = chapterTitleAliases[normalizeTitle(chapterTitle)];
+  if (aliasedSlug) {
+    return liveEntries.find((entry) => entry.slug === aliasedSlug) || null;
   }
 
-  const publicTests = config.publicTests;
-  const hiddenTests = config.hiddenTests;
-  const performanceTests = config.performanceTests;
-  const weights = config.rubric && config.rubric.weights;
-
-  if (!Array.isArray(publicTests) || publicTests.length === 0) {
-    issues.push("publicTests missing or empty");
-  }
-  if (!Array.isArray(hiddenTests) || hiddenTests.length === 0) {
-    issues.push("hiddenTests missing or empty");
-  }
-  if (!Array.isArray(performanceTests) || performanceTests.length === 0) {
-    issues.push("performanceTests missing or empty");
+  const normalizedChapterTitle = normalizeTitle(chapterTitle);
+  const exactMatch = liveEntries.find((entry) => normalizeTitle(entry.title) === normalizedChapterTitle);
+  if (exactMatch) {
+    return exactMatch;
   }
 
-  if (!weights || typeof weights !== "object") {
-    issues.push("rubric.weights missing");
-  } else {
-    const values = Object.values(weights);
-    const allNumeric = values.every((v) => typeof v === "number" && Number.isFinite(v) && v >= 0);
-    if (!allNumeric || values.length === 0) {
-      issues.push("rubric.weights must be numeric and non-negative");
+  const chapterTokens = uniqueTokens(chapterTitle);
+  const rankedMatches = liveEntries
+    .map((entry) => {
+      const liveTokens = uniqueTokens(entry.title);
+      const subsetMatch =
+        chapterTokens.length >= 2 &&
+        liveTokens.length >= 2 &&
+        (isSubset(chapterTokens, liveTokens) || isSubset(liveTokens, chapterTokens));
+
+      return {
+        entry,
+        subsetMatch,
+        distance: Math.abs(chapterTokens.length - liveTokens.length)
+      };
+    })
+    .filter((candidate) => candidate.subsetMatch)
+    .sort((left, right) => left.distance - right.distance);
+
+  return rankedMatches.length === 1 ? rankedMatches[0].entry : null;
+}
+
+function sumWeights(weights) {
+  return Object.values(weights).reduce((sum, value) => sum + value, 0);
+}
+
+const liveFiles = listFiles(liveDir, ".md");
+const problemFiles = listFiles(problemsDir, ".js");
+
+const liveSlugs = new Set(liveFiles.map(slugFromFile));
+const problemSlugs = new Set(problemFiles.map(slugFromFile));
+
+const missingProblemForLive = [...liveSlugs].filter((slug) => !problemSlugs.has(slug)).sort();
+const missingLiveForProblem = [...problemSlugs].filter((slug) => !liveSlugs.has(slug)).sort();
+
+const liveEntries = liveFiles.map((file) => {
+  const slug = slugFromFile(file);
+  return {
+    slug,
+    title: readFrontmatterTitle(path.join(liveDir, file)) || slug
+  };
+}).sort((left, right) => left.slug.localeCompare(right.slug));
+
+const chapterFiles = listFiles(chapterDir, ".md");
+const chapterQuestions = chapterFiles.flatMap((file) => {
+  const fullPath = path.join(chapterDir, file);
+  return extractChapterTitles(fullPath).map((title) => ({
+    file,
+    title
+  }));
+});
+
+const chapterCoverage = chapterQuestions.map((question) => ({
+  ...question,
+  match: matchLiveTitle(question.title, liveEntries)
+}));
+
+const missingChapterCoverage = chapterCoverage.filter((entry) => !entry.match);
+
+const schemaResults = problemFiles.map((file) => {
+  const slug = slugFromFile(file);
+  const fullPath = path.join(problemsDir, file);
+
+  try {
+    const config = loadProblemConfig(fullPath);
+    const publicTests = Array.isArray(config.publicTests) ? config.publicTests : null;
+    const hiddenTests = Array.isArray(config.hiddenTests) ? config.hiddenTests : null;
+    const performanceTests = Array.isArray(config.performanceTests) ? config.performanceTests : null;
+    const rubricWeights = config.rubric && config.rubric.weights && typeof config.rubric.weights === "object"
+      ? config.rubric.weights
+      : null;
+    const weightsSum = rubricWeights ? sumWeights(rubricWeights) : null;
+
+    const errors = [];
+    if (!config || typeof config !== "object") {
+      errors.push("window.problemConfig missing");
+    }
+    if (!config.methodName || typeof config.methodName !== "string") {
+      errors.push("methodName missing");
+    }
+    if (!config.starterCode || typeof config.starterCode !== "string") {
+      errors.push("starterCode missing");
+    }
+    if (!publicTests || publicTests.length === 0) {
+      errors.push("publicTests missing");
+    }
+    if (!hiddenTests || hiddenTests.length === 0) {
+      errors.push("hiddenTests missing");
+    }
+    if (!performanceTests || performanceTests.length === 0) {
+      errors.push("performanceTests missing");
+    }
+    if (!Array.isArray(config.testCases)) {
+      errors.push("testCases missing");
+    } else if (publicTests && config.testCases.length !== publicTests.length) {
+      errors.push("testCases should remain aligned with publicTests for the live runner");
+    }
+    if (!rubricWeights) {
+      errors.push("rubric.weights missing");
     } else {
-      const sum = values.reduce((acc, value) => acc + value, 0);
-      if (Math.abs(sum - 1) > 1e-9) {
-        issues.push(`rubric.weights must sum to 1 (actual: ${sum.toFixed(6)})`);
+      const invalidWeight = Object.values(rubricWeights).some((value) => typeof value !== "number" || value <= 0);
+      if (invalidWeight) {
+        errors.push("rubric weights must be positive numbers");
+      }
+      if (Math.abs(weightsSum - 1) > 1e-9) {
+        errors.push(`rubric weights must sum to 1.0 (found ${weightsSum})`);
       }
     }
-  }
 
-  if (!Array.isArray(config.testCases)) {
-    issues.push("testCases missing (UI compatibility)");
+    return {
+      slug,
+      publicCount: publicTests ? publicTests.length : 0,
+      hiddenCount: hiddenTests ? hiddenTests.length : 0,
+      performanceCount: performanceTests ? performanceTests.length : 0,
+      weightsSum,
+      errors
+    };
+  } catch (error) {
+    return {
+      slug,
+      publicCount: 0,
+      hiddenCount: 0,
+      performanceCount: 0,
+      weightsSum: null,
+      errors: [error.message]
+    };
   }
+});
 
-  return {
-    issues,
-    counts: {
-      public: Array.isArray(publicTests) ? publicTests.length : 0,
-      hidden: Array.isArray(hiddenTests) ? hiddenTests.length : 0,
-      performance: Array.isArray(performanceTests) ? performanceTests.length : 0
-    }
-  };
+const schemaFailures = schemaResults.filter((result) => result.errors.length > 0);
+const hasFailures =
+  missingProblemForLive.length > 0 ||
+  missingLiveForProblem.length > 0 ||
+  missingChapterCoverage.length > 0 ||
+  schemaFailures.length > 0;
+
+console.log("=== Live Interview Sync Report ===");
+console.log("");
+console.log(`Live markdown files: ${liveFiles.length}`);
+console.log(`Problem config files: ${problemFiles.length}`);
+console.log("");
+
+console.log("Slug sync:");
+if (missingProblemForLive.length === 0 && missingLiveForProblem.length === 0) {
+  console.log(`  OK: ${liveFiles.length} live slugs match ${problemFiles.length} problem slugs.`);
+} else {
+  if (missingProblemForLive.length > 0) {
+    console.log(`  Missing problem config for live slug(s): ${missingProblemForLive.join(", ")}`);
+  }
+  if (missingLiveForProblem.length > 0) {
+    console.log(`  Missing live markdown for problem slug(s): ${missingLiveForProblem.join(", ")}`);
+  }
+}
+console.log("");
+
+console.log("Coding problems chapter coverage:");
+chapterCoverage.forEach((entry) => {
+  if (entry.match) {
+    console.log(`  OK: ${entry.title} -> ${entry.match.slug}`);
+  } else {
+    console.log(`  MISSING: ${entry.title} (${entry.file})`);
+  }
+});
+console.log("");
+
+console.log("Problem config schema:");
+schemaResults.forEach((result) => {
+  const counts = `public=${result.publicCount} hidden=${result.hiddenCount} performance=${result.performanceCount}`;
+  const weights = result.weightsSum === null ? "weights=n/a" : `weights=${result.weightsSum.toFixed(2)}`;
+  if (result.errors.length === 0) {
+    console.log(`  OK: ${result.slug} (${counts}, ${weights})`);
+  } else {
+    console.log(`  FAIL: ${result.slug} (${counts}, ${weights})`);
+    result.errors.forEach((error) => console.log(`    - ${error}`));
+  }
+});
+console.log("");
+
+if (hasFailures) {
+  console.log("Result: FAIL");
+  process.exit(1);
 }
 
-function printList(label, values) {
-  console.log(`${label} (${values.length})`);
-  if (values.length === 0) {
-    console.log("  - none");
-    return;
-  }
-  for (const value of values) {
-    console.log(`  - ${value}`);
-  }
-}
-
-function main() {
-  const liveSlugs = listSlugs(LIVE_DIR, ".md");
-  const problemSlugs = listSlugs(PROBLEMS_DIR, ".js");
-  const codingChapterSlugs = readCodingChapterSlugs();
-
-  const liveSet = new Set(liveSlugs);
-  const problemSet = new Set(problemSlugs);
-  const codingSet = new Set(codingChapterSlugs);
-
-  const missingProblemForLive = setDiff(liveSet, problemSet);
-  const missingLiveForProblem = setDiff(problemSet, liveSet);
-  const missingLiveForCodingChapters = setDiff(codingSet, liveSet);
-
-  console.log("=== Live Interview Sync Report ===");
-  console.log("");
-
-  printList("Live markdown slugs", liveSlugs);
-  console.log("");
-  printList("Problem config slugs", problemSlugs);
-  console.log("");
-
-  console.log("Slug pair validation");
-  printList("Missing problem config for live markdown", missingProblemForLive);
-  printList("Missing live markdown for problem config", missingLiveForProblem);
-  console.log("");
-
-  printList("Coding chapter problem slugs", codingChapterSlugs);
-  printList("Coding chapter problems missing from live set", missingLiveForCodingChapters);
-  console.log("");
-
-  console.log("Problem config schema validation");
-  const schemaErrors = [];
-
-  for (const slug of problemSlugs) {
-    const filePath = path.join(PROBLEMS_DIR, `${slug}.js`);
-    let config;
-    try {
-      config = loadProblemConfig(filePath);
-    } catch (error) {
-      schemaErrors.push(`${slug}: failed to evaluate config (${error.message})`);
-      continue;
-    }
-
-    const { issues, counts } = validateProblemConfig(slug, config);
-    if (issues.length > 0) {
-      schemaErrors.push(`${slug}: ${issues.join("; ")}`);
-      continue;
-    }
-
-    console.log(`  - ${slug}: public=${counts.public}, hidden=${counts.hidden}, performance=${counts.performance}`);
-  }
-
-  if (schemaErrors.length > 0) {
-    console.log("Schema issues");
-    for (const error of schemaErrors) {
-      console.log(`  - ${error}`);
-    }
-  }
-
-  const hasErrors =
-    missingProblemForLive.length > 0 ||
-    missingLiveForProblem.length > 0 ||
-    missingLiveForCodingChapters.length > 0 ||
-    schemaErrors.length > 0;
-
-  console.log("");
-  if (hasErrors) {
-    console.log("Sync status: FAIL");
-    process.exitCode = 1;
-    return;
-  }
-
-  console.log("Sync status: PASS");
-}
-
-main();
+console.log("Result: PASS");

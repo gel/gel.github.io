@@ -36,24 +36,3 @@ window.problemConfig = {
   },
   testCases: publicTests
 };
-
-window.problemConfig.publicTests = [...window.problemConfig.testCases];
-window.problemConfig.hiddenTests = [
-  { expected: 1, input: { n: "1" } },
-  { expected: 9, input: { n: "909" } }
-];
-window.problemConfig.performanceTests = [
-  {
-    expected: 9,
-    input: { n: "123456789".repeat(5000) }
-  }
-];
-window.problemConfig.rubric = {
-  weights: {
-    correctness: 0.7,
-    edgeCases: 0.1,
-    efficiency: 0.15,
-    codeQuality: 0.05
-  }
-};
-window.problemConfig.testCases = window.problemConfig.publicTests;
