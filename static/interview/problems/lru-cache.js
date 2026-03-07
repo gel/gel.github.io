@@ -69,3 +69,42 @@ class Solution:
     }
   ]
 };
+
+window.problemConfig.publicTests = [...window.problemConfig.testCases];
+window.problemConfig.hiddenTests = [
+  {
+    input: {
+      capacity: 2,
+      operations: ["put", "put", "put", "get", "get"],
+      values: [[1, 1], [2, 2], [3, 3], [1], [3]]
+    },
+    expected: [null, null, null, -1, 3]
+  },
+  {
+    input: {
+      capacity: 2,
+      operations: ["put", "put", "get", "put", "get", "get"],
+      values: [[2, 1], [2, 2], [2], [1, 1], [2], [1]]
+    },
+    expected: [null, null, 2, null, 2, 1]
+  }
+];
+window.problemConfig.performanceTests = [
+  {
+    input: {
+      capacity: 1000,
+      operations: [...Array.from({ length: 3000 }, () => "put"), "get"],
+      values: [...Array.from({ length: 3000 }, (_, i) => [i, i]), [2999]]
+    },
+    expected: [...Array.from({ length: 3000 }, () => null), 2999]
+  }
+];
+window.problemConfig.rubric = {
+  weights: {
+    correctness: 0.5,
+    edgeCases: 0.15,
+    efficiency: 0.3,
+    codeQuality: 0.05
+  }
+};
+window.problemConfig.testCases = window.problemConfig.publicTests;

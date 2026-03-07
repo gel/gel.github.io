@@ -59,3 +59,39 @@ class Solution:
     }
   ]
 };
+
+window.problemConfig.publicTests = [...window.problemConfig.testCases];
+window.problemConfig.hiddenTests = [
+  {
+    input: {
+      s: "aaaa",
+      wordDict: ["a", "aa"]
+    },
+    expected: ["a a a a", "a a aa", "a aa a", "aa a a", "aa aa"]
+  },
+  {
+    input: {
+      s: "leetcode",
+      wordDict: ["leet", "code", "le", "etc"]
+    },
+    expected: ["leet code"]
+  }
+];
+window.problemConfig.performanceTests = [
+  {
+    input: {
+      s: "a".repeat(200) + "b",
+      wordDict: ["a", "aa", "aaa", "aaaa", "aaaaa"]
+    },
+    expected: []
+  }
+];
+window.problemConfig.rubric = {
+  weights: {
+    correctness: 0.55,
+    edgeCases: 0.15,
+    efficiency: 0.25,
+    codeQuality: 0.05
+  }
+};
+window.problemConfig.testCases = window.problemConfig.publicTests;

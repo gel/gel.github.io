@@ -142,3 +142,79 @@ class Solution:
     }
   ]
 };
+
+window.problemConfig.publicTests = [...window.problemConfig.testCases];
+window.problemConfig.hiddenTests = [
+  {
+    input: {
+      root: {
+        name: "root",
+        is_file: false,
+        size: 0,
+        children: [
+          { name: "A.XML", is_file: true, size: 7000000, children: [] },
+          { name: "b.xml", is_file: true, size: 1000, children: [] },
+          { name: "c.txt", is_file: true, size: 8000000, children: [] }
+        ]
+      },
+      min_size: 5000000,
+      extension: "xml"
+    },
+    expected: ["root/A.XML"]
+  },
+  {
+    input: {
+      root: {
+        name: "root",
+        is_file: false,
+        size: 0,
+        children: [
+          {
+            name: "d",
+            is_file: false,
+            size: 0,
+            children: [
+              { name: "x.log", is_file: true, size: 12, children: [] },
+              { name: "y.log", is_file: true, size: 10, children: [] }
+            ]
+          }
+        ]
+      },
+      min_size: 11,
+      extension: "log"
+    },
+    expected: ["root/d/x.log"]
+  }
+];
+window.problemConfig.performanceTests = [
+  {
+    input: {
+      root: {
+        name: "root",
+        is_file: false,
+        size: 0,
+        children: [
+          ...Array.from({ length: 3000 }, (_, i) => ({
+            name: `file-${i}.log`,
+            is_file: true,
+            size: i,
+            children: []
+          })),
+          { name: "target.xml", is_file: true, size: 6000000, children: [] }
+        ]
+      },
+      min_size: 5000000,
+      extension: "xml"
+    },
+    expected: ["root/target.xml"]
+  }
+];
+window.problemConfig.rubric = {
+  weights: {
+    correctness: 0.6,
+    edgeCases: 0.1,
+    efficiency: 0.15,
+    design: 0.15
+  }
+};
+window.problemConfig.testCases = window.problemConfig.publicTests;
