@@ -10,26 +10,51 @@
     Select a problem below to start coding!
   </p>
 
-  <div class="problems-grid">
-    {% for page in section.pages %}
-    <a href="{{ page.permalink | safe }}" class="problem-card">
-      <div class="problem-header">
-        <h3>{{ page.title }}</h3>
-        {% if page.extra.difficulty %}
-        <span class="difficulty-badge difficulty-{{ page.extra.difficulty | lower }}">
-          {{ page.extra.difficulty }}
-        </span>
-        {% endif %}
-      </div>
-      {% if page.extra.category %}
-      <span class="problem-category">{{ page.extra.category }}</span>
-      {% endif %}
-      {% if page.description %}
-      <p class="problem-description">{{ page.description }}</p>
-      {% endif %}
+  {% if section.pages | length > 0 %}
+  {% set categories = section.pages | group_by(attribute="extra.category") %}
+
+  <div class="category-overview">
+    {% for category, pages in categories %}
+    {% set category_label = category | default(value="Uncategorized") %}
+    {% set category_anchor = category_label | lower | replace(from=" ", to="-") | replace(from="/", to="-") %}
+    <a href="#cat-{{ category_anchor }}" class="category-card">
+      <span class="category-name">{{ category_label }}</span>
+      <span class="category-count">{{ pages | length }} problems</span>
     </a>
     {% endfor %}
   </div>
+
+  <div class="category-groups">
+    {% for category, pages in categories %}
+    {% set category_label = category | default(value="Uncategorized") %}
+    {% set category_anchor = category_label | lower | replace(from=" ", to="-") | replace(from="/", to="-") %}
+    <section id="cat-{{ category_anchor }}" class="category-section">
+      <div class="category-header">
+        <h2>{{ category_label }}</h2>
+        <span class="category-meta">{{ pages | length }} total</span>
+      </div>
+
+      <div class="problems-grid">
+        {% for page in pages | sort(attribute="title") %}
+        <a href="{{ page.permalink | safe }}" class="problem-card">
+          <div class="problem-header">
+            <h3>{{ page.title }}</h3>
+            {% if page.extra.difficulty %}
+            <span class="difficulty-badge difficulty-{{ page.extra.difficulty | lower }}">
+              {{ page.extra.difficulty }}
+            </span>
+            {% endif %}
+          </div>
+          {% if page.description %}
+          <p class="problem-description">{{ page.description }}</p>
+          {% endif %}
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endfor %}
+  </div>
+  {% endif %}
 
   {% if section.pages | length == 0 %}
   <div class="no-problems">
@@ -57,8 +82,74 @@
     font-size: 1.6rem;
     color: var(--body-color);
     opacity: 0.85;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
     line-height: 1.6;
+  }
+
+  .category-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  .category-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--table-border-bottom);
+    background: var(--body-bg);
+    text-decoration: none;
+    color: var(--body-color);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .category-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+
+  .category-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .category-count {
+    font-size: 1.05rem;
+    opacity: 0.75;
+  }
+
+  .category-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+  }
+
+  .category-section {
+    border-top: 1px solid var(--table-border-bottom);
+    padding-top: 1.35rem;
+  }
+
+  .category-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .category-header h2 {
+    margin: 0;
+    font-size: 1.7rem;
+    color: var(--accent-color);
+  }
+
+  .category-meta {
+    font-size: 1.05rem;
+    opacity: 0.7;
   }
 
   .problems-grid {
@@ -122,17 +213,6 @@
     color: #f85149;
   }
 
-  .problem-category {
-    display: inline-block;
-    padding: 0.2rem 0.6rem;
-    background: var(--table-bg-even);
-    border-radius: 4px;
-    font-size: 1.1rem;
-    color: var(--body-color);
-    opacity: 0.7;
-    margin-bottom: 0.75rem;
-  }
-
   .problem-description {
     font-size: 1.3rem;
     margin: 0;
@@ -155,6 +235,10 @@
     }
 
     .problems-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .category-overview {
       grid-template-columns: 1fr;
     }
   }
