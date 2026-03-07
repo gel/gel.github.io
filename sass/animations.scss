@@ -1,94 +1,11 @@
-// Animation keyframes
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes pulse {
-
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-// Smooth scroll behavior
 html {
   scroll-behavior: smooth;
 }
 
-// Fade-in animation for content
 .fade-in {
   opacity: 0;
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  transform: translateY(30px);
+  transform: translateY(14px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
 
   &.visible {
     opacity: 1;
@@ -96,197 +13,70 @@ html {
   }
 }
 
-// Link hover effects - apply only to content links (not header navigation)
-main a:not(.reading-book):not(.previous):not(.next):not(.btn) {
-  position: relative;
-  transition: all 0.3s ease;
-
-  &:hover {
-    color: var(--accent-color);
-    transform: translateY(-2px);
-  }
-
-  // Animated underline effect
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--accent-color);
-    transition: width 0.3s ease;
-  }
-
-  &:hover::after {
-    width: 100%;
-  }
+a.profile-icon,
+.post-preview,
+.reading-book,
+.home-section-card,
+.home-link-card,
+.latest-post,
+.stat-card,
+.home-button {
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-// Navigation links special effect (content navigation only, not header nav)
-main nav a {
-  position: relative;
-  padding: 0.5rem 0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-  &:hover {
-    transform: translateY(-3px);
-    color: var(--accent-color);
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-    transform: translateX(-50%);
-    transition: width 0.3s ease;
-  }
-
-  &:hover::before {
-    width: 100%;
-  }
+.post-preview:hover,
+.reading-book:hover,
+.home-section-card:hover,
+.home-link-card:hover,
+.latest-post:hover,
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
 }
 
-// Profile icon animation
-a.profile-icon {
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: scale(1.1) rotate(5deg);
-  }
-
-  img {
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-
-  &:hover img {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  }
+main a:not(.previous):not(.next):not(.home-button) {
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-// Post preview animations
-.post-preview {
-  transition: all 0.3s ease;
-  padding: 1rem;
-  border-radius: 8px;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    background: rgba(5, 160, 129, 0.02);
-  }
+main a:not(.previous):not(.next):not(.home-button):hover {
+  color: var(--accent-color);
+  border-color: color-mix(in srgb, var(--accent-color) 45%, transparent);
 }
 
-// Heading animations
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  position: relative;
-  transition: all 0.3s ease;
-
-  &:hover {
-    color: var(--accent-color);
-    transform: translateX(5px);
-  }
-}
-
-// Image hover effects - only on hover, no scroll transforms
-img {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  }
-}
-
-// Table row hover
+blockquote,
+pre,
+img,
 table tbody tr {
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: rgba(5, 160, 129, 0.1);
-    transform: scale(1.01);
-  }
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-// Blockquote animation
-blockquote {
-  position: relative;
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateX(5px);
-    border-left-color: var(--accent-color);
-  }
-
-  &::before {
-    content: '"';
-    position: absolute;
-    left: -20px;
-    top: -10px;
-    font-size: 4rem;
-    color: var(--accent-color-light);
-    opacity: 0.3;
-    transition: all 0.3s ease;
-  }
-
-  &:hover::before {
-    opacity: 0.6;
-    transform: scale(1.1);
-  }
+blockquote:hover {
+  border-left-color: var(--accent-color);
 }
 
-// Code block hover
-pre {
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  }
+pre:hover,
+img:hover {
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
 }
 
-// Footer animation
-footer.footer-page {
-  opacity: 0;
-  animation: fadeIn 1s ease-out 0.5s forwards;
+table tbody tr:hover {
+  background-color: color-mix(in srgb, var(--accent-color) 8%, transparent);
 }
 
-// Stagger animation for lists
-@for $i from 1 through 10 {
-  .stagger-#{$i} {
-    animation-delay: #{$i * 0.1}s;
-  }
-}
-
-// Loading shimmer effect
-.shimmer {
-  background: linear-gradient(90deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.2) 50%,
-      rgba(255, 255, 255, 0) 100%);
-  background-size: 1000px 100%;
-  animation: shimmer 2s infinite;
-}
-
-// Reduced motion support
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .fade-in {
+    opacity: 1;
+    transform: none;
   }
 }

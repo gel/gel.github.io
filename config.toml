@@ -7,6 +7,7 @@ base_url = "https://gel.github.io/"
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
 title = "Gal Goldman | Architect & Engineer"
+description = "Gal Goldman writes about distributed systems, cloud architecture, GenAI systems, and engineering quality."
 
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = true
@@ -14,6 +15,8 @@ build_search_index = true
 
 
 [extra]
+accent = "#0f766e"
+accent_light = "#7dd3c7"
 nav = [
   { name = "Resume", path = "/resume/" },
   { name = "Blog", path = "/blog/" },
@@ -21,6 +24,25 @@ nav = [
   { name = "Books", path = "/books/" },
   { name = "Interviews", path = "/interviews/" },
   { name = "GenAI", path = "/generative-ai/" }
+]
+social_links = [
+  { name = "LinkedIn", path = "https://www.linkedin.com/in/gal-goldman/" },
+  { name = "X", path = "https://x.com/gelings" }
+]
+home_stats = [
+  { value = "16+", label = "years across AWS and Intel" },
+  { value = "30+", label = "customers supported on production GenAI workloads" },
+  { value = "500+", label = "engineers trained on GenAI systems" }
+]
+home_features = [
+  { name = "Books", path = "/books/", eyebrow = "Reading", description = "Books I read, notes I keep, and ideas worth revisiting." },
+  { name = "Interviews", path = "/interviews/", eyebrow = "Course + Project", description = "My technical interviewing guide and interactive practice material." },
+  { name = "GenAI", path = "/generative-ai/", eyebrow = "Explained Research", description = "Summarized research and implementation notes for production AI systems." }
+]
+home_links = [
+  { name = "Blog", path = "/blog/", description = "Engineering notes on systems, architecture, and delivery in practice." },
+  { name = "Projects", path = "/projects/", description = "Public work, workshops, and interactive experiments." },
+  { name = "Resume", path = "/resume/", description = "Experience, impact, and current role." }
 ]
 
 icon = "iconweb.jpg"

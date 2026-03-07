@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block body_class %}home-page{% endblock body_class %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ get_url(path='main.css') | safe }}">
+<link rel="stylesheet" href="{{ get_url(path='animations.css') | safe }}">
+<link rel="stylesheet" href="{{ get_url(path='index.css') | safe }}">
+{% endblock styles %}
+
+{% block posthead %}
+{% set profile_image = resize_image(path=config.extra.profile_large, width=480, height=560, op="fill") %}
+<link rel="prefetch" href="{{ profile_image.url }}">
+{% set blogs = get_section(path="blog/_index.md") %}
+{% if blogs.pages.0 %}
+<link rel="prerender" href="{{ blogs.pages.0.permalink }}" />
+{% endif %}
+{% endblock posthead %}
+
+{% block content %}
+{% set profile_image = resize_image(path=config.extra.profile_large, width=480, height=560, op="fill") %}
+{% set blogs = get_section(path="blog/_index.md") %}
+
+<section class="home-hero">
+  <div class="hero-copy fade-in">
+    <p class="hero-eyebrow">Gal Goldman</p>
+    <h1>Senior engineer building reliable systems at enterprise scale.</h1>
+    <div class="hero-intro">
+      {{ section.content | safe }}
+    </div>
+    <div class="hero-actions">
+      <a class="home-button home-button--primary" href="/resume/">View Resume</a>
+      <a class="home-button" href="/blog/">Read Writing</a>
+      {% for link in config.extra.social_links %}
+      <a class="home-button home-button--ghost" href="{{ link.path }}" target="_blank" rel="noreferrer">{{ link.name }}</a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="hero-portrait fade-in">
+    <div class="portrait-frame">
+      <img src="{{ profile_image.url }}" alt="Portrait of Gal Goldman">
+    </div>
+  </div>
+</section>
+
+<section class="home-stats">
+  {% for stat in config.extra.home_stats %}
+  <article class="stat-card">
+    <p class="stat-value">{{ stat.value }}</p>
+    <p class="stat-label">{{ stat.label }}</p>
+  </article>
+  {% endfor %}
+</section>
+
+<section class="home-block">
+  <div class="section-heading fade-in">
+    <p class="section-eyebrow">Explore</p>
+    <h2>Distinct sections with different kinds of value.</h2>
+    <p>Each area is intentionally separate: reading notes, interview material, research summaries, writing, projects, and a formal resume.</p>
+  </div>
+
+  <div class="home-feature-grid">
+    {% for feature in config.extra.home_features %}
+    <article class="home-section-card">
+      <p class="card-eyebrow">{{ feature.eyebrow }}</p>
+      <h3><a href="{{ feature.path }}">{{ feature.name }}</a></h3>
+      <p>{{ feature.description }}</p>
+      <a class="card-link" href="{{ feature.path }}">Open {{ feature.name }}</a>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="home-block">
+  <div class="section-heading fade-in">
+    <p class="section-eyebrow">More</p>
+    <h2>Writing, public work, and background.</h2>
+    <p>For visitors who want a fast route into your notes, your projects, or your experience.</p>
+  </div>
+
+  <div class="home-link-grid">
+    {% for item in config.extra.home_links %}
+    <article class="home-link-card">
+      <h3><a href="{{ item.path }}">{{ item.name }}</a></h3>
+      <p>{{ item.description }}</p>
+      <a class="card-link" href="{{ item.path }}">Go to {{ item.name }}</a>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+{% if blogs.pages %}
+<section class="home-block">
+  <div class="section-heading fade-in">
+    <p class="section-eyebrow">Recent Writing</p>
+    <h2>Latest notes.</h2>
+    <p>Recent articles across systems, architecture, and production AI.</p>
+  </div>
+
+  <div class="latest-post-grid">
+    {% for post in blogs.pages %}
+    {% if loop.index <= 3 %}
+    <article class="latest-post">
+      <p class="post-meta">{{ post.date | date(format="%b %d, %Y") }}</p>
+      <h3><a href="{{ post.permalink }}">{{ post.title }}</a></h3>
+      {% if post.description %}
+      <p class="post-summary">{{ post.description }}</p>
+      {% elif post.summary %}
+      <p class="post-summary">{{ post.summary | striptags | safe }}</p>
+      {% endif %}
+      <a class="card-link" href="{{ post.permalink }}">Read article</a>
+    </article>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock content %}
