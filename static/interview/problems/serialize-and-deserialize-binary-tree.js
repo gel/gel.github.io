@@ -1,3 +1,86 @@
+function buildBalancedBstLevelOrder(start, end) {
+  function build(low, high) {
+    if (low > high) {
+      return null;
+    }
+
+    const mid = Math.floor((low + high) / 2);
+    return {
+      val: mid,
+      left: build(low, mid - 1),
+      right: build(mid + 1, high)
+    };
+  }
+
+  const root = build(start, end);
+  const result = [];
+  const queue = [root];
+
+  while (queue.length > 0) {
+    const node = queue.shift();
+    if (node === null) {
+      result.push(null);
+      continue;
+    }
+
+    result.push(node.val);
+    if (node.left !== null || node.right !== null) {
+      queue.push(node.left);
+      queue.push(node.right);
+    }
+  }
+
+  while (result.length > 0 && result[result.length - 1] === null) {
+    result.pop();
+  }
+
+  return result;
+}
+
+const publicTests = [
+  {
+    expected: [1, 2, 3, null, null, 4, 5],
+    input: { root: [1, 2, 3, null, null, 4, 5] }
+  },
+  {
+    expected: [],
+    input: { root: [] }
+  },
+  {
+    expected: [1],
+    input: { root: [1] }
+  },
+  {
+    expected: [5, 3, 8, 1, 4, null, 9],
+    input: { root: [5, 3, 8, 1, 4, null, 9] }
+  }
+];
+
+const hiddenTests = [
+  {
+    expected: [1, null, 2, null, 3],
+    input: { root: [1, null, 2, null, 3] }
+  },
+  {
+    expected: [-1, -2, -3, null, -4],
+    input: { root: [-1, -2, -3, null, -4] }
+  },
+  {
+    expected: [7, 3, 9, 1, 5, 8, 10],
+    input: { root: [7, 3, 9, 1, 5, 8, 10] }
+  }
+];
+
+const performanceTests = [
+  (() => {
+    const root = buildBalancedBstLevelOrder(1, 511);
+    return {
+      input: { root },
+      expected: root
+    };
+  })()
+];
+
 window.problemConfig = {
   methodName: "roundTrip",
   typeMap: {
@@ -65,49 +148,16 @@ class Solution:
         while result and result[-1] is None:
             result.pop()
         return result`,
-  testCases: [
-    {
-      expected: [1, 2, 3, null, null, 4, 5],
-      input: { root: [1, 2, 3, null, null, 4, 5] }
-    },
-    {
-      expected: [],
-      input: { root: [] }
-    },
-    {
-      expected: [1],
-      input: { root: [1] }
-    },
-    {
-      expected: [5, 3, 8, 1, 4, null, 9],
-      input: { root: [5, 3, 8, 1, 4, null, 9] }
+  publicTests,
+  hiddenTests,
+  performanceTests,
+  rubric: {
+    weights: {
+      correctness: 0.45,
+      efficiency: 0.25,
+      codeQuality: 0.2,
+      communication: 0.1
     }
-  ]
-};
-
-window.problemConfig.publicTests = [...window.problemConfig.testCases];
-window.problemConfig.hiddenTests = [
-  {
-    expected: [1, null, 2, 3],
-    input: { root: [1, null, 2, 3] }
   },
-  {
-    expected: [2, 1, 3, null, null, 4],
-    input: { root: [2, 1, 3, null, null, 4] }
-  }
-];
-window.problemConfig.performanceTests = [
-  {
-    expected: Array.from({ length: 511 }, (_, i) => i + 1),
-    input: { root: Array.from({ length: 511 }, (_, i) => i + 1) }
-  }
-];
-window.problemConfig.rubric = {
-  weights: {
-    correctness: 0.65,
-    edgeCases: 0.15,
-    efficiency: 0.15,
-    codeQuality: 0.05
-  }
+  testCases: publicTests
 };
-window.problemConfig.testCases = window.problemConfig.publicTests;

@@ -38,7 +38,7 @@ async function main() {
   const rawRunnerResults = [
     { passed: true, input: { nums: [2, 7], target: 9 }, expected: [0, 1], actual: [0, 1] },
     { passed: true, input: { nums: [3, 2, 4], target: 6 }, expected: [1, 2], actual: [1, 2] },
-    { passed: false, input: { nums: [3, 3], target: 6 }, expected: [0, 1], actual: [], error: 'Wrong answer' }
+    { passed: false, input: { nums: [3, 3], target: 6 }, expected: [0, 1], actual: [] }
   ];
 
   const strongPayload = {
@@ -92,13 +92,13 @@ async function main() {
   assert.equal(currentScore.band.key, 'developing');
 
   const strongReport = buildInterviewReport(strongPayload, {}, { problemId: 'demo-strong' });
-  assert.equal(strongReport.score, 95.98);
+  assert.equal(strongReport.score, 99.34);
   assert.equal(strongReport.band.key, 'excellent');
   assert.equal(strongReport.sections.hiddenTests.passed, 3);
   assert.equal(strongReport.aiContext.facts.metadata.problemId, 'demo-strong');
 
   const overfitReport = buildInterviewReport(overfitPayload);
-  assert.equal(overfitReport.band.key, 'developing');
+  assert.equal(overfitReport.band.key, 'needs-work');
   assert.ok(overfitReport.score < strongReport.score);
   assert.ok(
     overfitReport.highlights.concerns.some((item) => item.includes('overfitting')),

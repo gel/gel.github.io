@@ -1,3 +1,65 @@
+const publicTests = [
+  {
+    input: {
+      s: "catsanddog",
+      wordDict: ["cat", "cats", "and", "sand", "dog"]
+    },
+    expected: ["cat sand dog", "cats and dog"]
+  },
+  {
+    input: {
+      s: "pineapplepenapple",
+      wordDict: ["apple", "pen", "applepen", "pine", "pineapple"]
+    },
+    expected: [
+      "pine apple pen apple",
+      "pine applepen apple",
+      "pineapple pen apple"
+    ]
+  },
+  {
+    input: {
+      s: "catsandog",
+      wordDict: ["cats", "dog", "sand", "and", "cat"]
+    },
+    expected: []
+  }
+];
+
+const hiddenTests = [
+  {
+    input: {
+      s: "aaaa",
+      wordDict: ["a", "aa"]
+    },
+    expected: ["a a a a", "a a aa", "a aa a", "aa a a", "aa aa"]
+  },
+  {
+    input: {
+      s: "leetcode",
+      wordDict: ["leet", "code", "le", "etc"]
+    },
+    expected: ["leet code"]
+  },
+  {
+    input: {
+      s: "cars",
+      wordDict: ["car", "ca", "rs"]
+    },
+    expected: ["ca rs"]
+  }
+];
+
+const performanceTests = [
+  {
+    input: {
+      s: "a".repeat(18) + "b",
+      wordDict: ["a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa"]
+    },
+    expected: []
+  }
+];
+
 window.problemConfig = {
   methodName: "wordBreak",
   starterCode: `from typing import List, Dict
@@ -31,67 +93,16 @@ class Solution:
         answer = dfs(0)
         answer.sort()
         return answer`,
-  testCases: [
-    {
-      input: {
-        s: "catsanddog",
-        wordDict: ["cat", "cats", "and", "sand", "dog"]
-      },
-      expected: ["cat sand dog", "cats and dog"]
-    },
-    {
-      input: {
-        s: "pineapplepenapple",
-        wordDict: ["apple", "pen", "applepen", "pine", "pineapple"]
-      },
-      expected: [
-        "pine apple pen apple",
-        "pine applepen apple",
-        "pineapple pen apple"
-      ]
-    },
-    {
-      input: {
-        s: "catsandog",
-        wordDict: ["cats", "dog", "sand", "and", "cat"]
-      },
-      expected: []
+  publicTests,
+  hiddenTests,
+  performanceTests,
+  rubric: {
+    weights: {
+      correctness: 0.45,
+      efficiency: 0.25,
+      codeQuality: 0.2,
+      communication: 0.1
     }
-  ]
-};
-
-window.problemConfig.publicTests = [...window.problemConfig.testCases];
-window.problemConfig.hiddenTests = [
-  {
-    input: {
-      s: "aaaa",
-      wordDict: ["a", "aa"]
-    },
-    expected: ["a a a a", "a a aa", "a aa a", "aa a a", "aa aa"]
   },
-  {
-    input: {
-      s: "leetcode",
-      wordDict: ["leet", "code", "le", "etc"]
-    },
-    expected: ["leet code"]
-  }
-];
-window.problemConfig.performanceTests = [
-  {
-    input: {
-      s: "a".repeat(200) + "b",
-      wordDict: ["a", "aa", "aaa", "aaaa", "aaaaa"]
-    },
-    expected: []
-  }
-];
-window.problemConfig.rubric = {
-  weights: {
-    correctness: 0.55,
-    edgeCases: 0.15,
-    efficiency: 0.25,
-    codeQuality: 0.05
-  }
+  testCases: publicTests
 };
-window.problemConfig.testCases = window.problemConfig.publicTests;

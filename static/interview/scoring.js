@@ -31,32 +31,33 @@ const DEFAULT_RUBRIC = {
 
 const SECTION_PATHS = {
   publicTests: [
+    'tests.public',
+    'results.public',
     'publicTests',
     'public',
     'testResults',
-    'results',
-    'tests.public',
-    'results.public'
+    'tests',
+    'results'
   ],
   hiddenTests: [
-    'hiddenTests',
-    'hidden',
     'tests.hidden',
-    'results.hidden'
+    'results.hidden',
+    'hiddenTests',
+    'hidden'
   ],
   performanceTests: [
+    'performance.tests',
+    'results.performance',
     'performanceTests',
     'perfTests',
-    'performance',
-    'performance.tests',
-    'results.performance'
+    'performance'
   ],
   qualityHooks: [
+    'quality.hooks',
+    'codeQuality.hooks',
     'qualityHooks',
     'hooks',
-    'codeQualityHooks',
-    'quality.hooks',
-    'codeQuality.hooks'
+    'codeQualityHooks'
   ]
 };
 
@@ -334,8 +335,8 @@ function normalizeResultPayload(resultPayload) {
   return {
     explicitScores: {
       correctness: toNumber(firstDefined(source, ['correctnessScore', 'scores.correctness'])),
-      efficiency: toNumber(firstDefined(source, ['efficiencyScore', 'performanceScore', 'scores.efficiency'])),
-      codeQuality: toNumber(firstDefined(source, ['codeQualityScore', 'qualityScore', 'scores.codeQuality']))
+      efficiency: toNumber(firstDefined(source, ['efficiencyScore', 'performanceScore', 'scores.efficiency', 'scores.performance'])),
+      codeQuality: toNumber(firstDefined(source, ['codeQualityScore', 'qualityScore', 'scores.codeQuality', 'scores.quality']))
     },
     sections: {
       publicTests: summarizeCaseCollection(publicTests),
@@ -670,7 +671,7 @@ function buildHighlights(normalized, dimensions, overallScore, band) {
   if ((publicSummary.errors + hiddenSummary.errors) > 0) {
     concerns.push('Runtime errors were observed during execution.');
   }
-  if (dimensions.codeQuality.score < 60) {
+  if (dimensions.codeQuality.available && dimensions.codeQuality.score < 60) {
     concerns.push('The pass/fail pattern suggests maintainability or robustness issues.');
   }
   if (overallScore < 50 || band.key === 'needs-work') {
