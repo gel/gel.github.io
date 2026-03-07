@@ -1,3 +1,26 @@
+const publicTests = [
+  { expected: "wertf", input: { words: ["wrt", "wrf", "er", "ett", "rftt"] } },
+  { expected: "zx", input: { words: ["z", "x"] } },
+  { expected: "", input: { words: ["z", "x", "z"] } },
+  { expected: "", input: { words: ["abc", "ab"] } }
+];
+
+const hiddenTests = [
+  { expected: "bdac", input: { words: ["baa", "abcd", "abca", "cab", "cad"] } },
+  { expected: "cab", input: { words: ["caa", "aaa", "aab"] } },
+  { expected: "azbc", input: { words: ["za", "zb", "ca", "cb"] } }
+];
+
+const performanceTests = [
+  (() => {
+    const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+    return {
+      input: { words: alphabet.map((ch) => `${ch}${"x".repeat(50)}`) },
+      expected: alphabet.join("")
+    };
+  })()
+];
+
 window.problemConfig = {
   methodName: "alienOrder",
   starterCode: `from typing import List, Dict, Set
@@ -46,33 +69,16 @@ class Solution:
             return ""
 
         return "".join(order)`,
-  testCases: [
-    { expected: "wertf", input: { words: ["wrt", "wrf", "er", "ett", "rftt"] } },
-    { expected: "zx", input: { words: ["z", "x"] } },
-    { expected: "", input: { words: ["z", "x", "z"] } },
-    { expected: "", input: { words: ["abc", "ab"] } }
-  ]
-};
-
-window.problemConfig.publicTests = [...window.problemConfig.testCases];
-window.problemConfig.hiddenTests = [
-  { expected: "wxyz", input: { words: ["w", "x", "y", "z"] } },
-  { expected: "", input: { words: ["a", "b", "a"] } }
-];
-window.problemConfig.performanceTests = [
-  {
-    expected: "abc",
-    input: {
-      words: Array.from({ length: 2000 }, () => "abc")
+  publicTests,
+  hiddenTests,
+  performanceTests,
+  rubric: {
+    weights: {
+      correctness: 0.45,
+      efficiency: 0.25,
+      codeQuality: 0.2,
+      communication: 0.1
     }
-  }
-];
-window.problemConfig.rubric = {
-  weights: {
-    correctness: 0.55,
-    edgeCases: 0.2,
-    efficiency: 0.2,
-    codeQuality: 0.05
-  }
+  },
+  testCases: publicTests
 };
-window.problemConfig.testCases = window.problemConfig.publicTests;

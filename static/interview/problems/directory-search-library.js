@@ -1,3 +1,184 @@
+const publicTests = [
+  {
+    input: {
+      root: {
+        name: "root",
+        is_file: false,
+        size: 0,
+        children: [
+          { name: "a.xml", is_file: true, size: 7000000, children: [] },
+          { name: "b.txt", is_file: true, size: 8000000, children: [] },
+          {
+            name: "data",
+            is_file: false,
+            size: 0,
+            children: [
+              { name: "c.xml", is_file: true, size: 3000000, children: [] },
+              { name: "d.xml", is_file: true, size: 9000000, children: [] }
+            ]
+          }
+        ]
+      },
+      min_size: 5000000,
+      extension: "xml"
+    },
+    expected: ["root/a.xml", "root/data/d.xml"]
+  },
+  {
+    input: {
+      root: {
+        name: "root",
+        is_file: false,
+        size: 0,
+        children: [
+          { name: "a.xml", is_file: true, size: 7000000, children: [] },
+          { name: "b.txt", is_file: true, size: 8000000, children: [] },
+          { name: "c.xml", is_file: true, size: 3000000, children: [] }
+        ]
+      },
+      min_size: null,
+      extension: "xml"
+    },
+    expected: ["root/a.xml", "root/c.xml"]
+  },
+  {
+    input: {
+      root: {
+        name: "root",
+        is_file: false,
+        size: 0,
+        children: [
+          { name: "a.xml", is_file: true, size: 7000000, children: [] },
+          { name: "b.txt", is_file: true, size: 8000000, children: [] },
+          { name: "c.log", is_file: true, size: 2000000, children: [] }
+        ]
+      },
+      min_size: 7500000,
+      extension: null
+    },
+    expected: ["root/b.txt"]
+  },
+  {
+    input: {
+      root: {
+        name: "root",
+        is_file: false,
+        size: 0,
+        children: []
+      },
+      min_size: 1,
+      extension: "xml"
+    },
+    expected: []
+  }
+];
+
+const hiddenTests = [
+  {
+    input: {
+      root: {
+        name: "root",
+        is_file: false,
+        size: 0,
+        children: [
+          { name: "README.MD", is_file: true, size: 50, children: [] },
+          { name: "notes.md", is_file: true, size: 25, children: [] }
+        ]
+      },
+      min_size: null,
+      extension: "md"
+    },
+    expected: ["root/README.MD", "root/notes.md"]
+  },
+  {
+    input: {
+      root: {
+        name: "root",
+        is_file: false,
+        size: 0,
+        children: [
+          {
+            name: "src",
+            is_file: false,
+            size: 0,
+            children: [
+              { name: "app.py", is_file: true, size: 20, children: [] },
+              { name: "lib.py", is_file: true, size: 200, children: [] }
+            ]
+          },
+          { name: "build", is_file: false, size: 0, children: [] }
+        ]
+      },
+      min_size: 100,
+      extension: "py"
+    },
+    expected: ["root/src/lib.py"]
+  },
+  {
+    input: {
+      root: {
+        name: "root",
+        is_file: false,
+        size: 0,
+        children: [
+          { name: "alpha.txt", is_file: true, size: 1, children: [] },
+          {
+            name: "nested",
+            is_file: false,
+            size: 0,
+            children: [
+              { name: "beta.log", is_file: true, size: 2, children: [] }
+            ]
+          }
+        ]
+      },
+      min_size: null,
+      extension: null
+    },
+    expected: ["root/alpha.txt", "root/nested/beta.log"]
+  }
+];
+
+const performanceTests = [
+  (() => {
+    const expected = [];
+    const children = [];
+
+    for (let dirIndex = 0; dirIndex < 200; dirIndex += 1) {
+      const dirChildren = [];
+      for (let fileIndex = 0; fileIndex < 10; fileIndex += 1) {
+        const isXml = fileIndex % 2 === 0;
+        const name = `file-${dirIndex}-${fileIndex}.${isXml ? "xml" : "txt"}`;
+        const size = isXml ? 10000 + fileIndex : 5000 + fileIndex;
+        dirChildren.push({ name, is_file: true, size, children: [] });
+        if (isXml) {
+          expected.push(`root/dir-${dirIndex}/${name}`);
+        }
+      }
+      children.push({
+        name: `dir-${dirIndex}`,
+        is_file: false,
+        size: 0,
+        children: dirChildren
+      });
+    }
+
+    return {
+      input: {
+        root: {
+          name: "root",
+          is_file: false,
+          size: 0,
+          children
+        },
+        min_size: 10000,
+        extension: "xml"
+      },
+      expected
+    };
+  })()
+];
+
 window.problemConfig = {
   methodName: "findMatchingPaths",
   starterCode: `from typing import Any, Dict, List, Optional
@@ -67,154 +248,16 @@ class Solution:
         dfs(root, "")
         result.sort()
         return result`,
-  testCases: [
-    {
-      input: {
-        root: {
-          name: "root",
-          is_file: false,
-          size: 0,
-          children: [
-            { name: "a.xml", is_file: true, size: 7000000, children: [] },
-            { name: "b.txt", is_file: true, size: 8000000, children: [] },
-            {
-              name: "data",
-              is_file: false,
-              size: 0,
-              children: [
-                { name: "c.xml", is_file: true, size: 3000000, children: [] },
-                { name: "d.xml", is_file: true, size: 9000000, children: [] }
-              ]
-            }
-          ]
-        },
-        min_size: 5000000,
-        extension: "xml"
-      },
-      expected: ["root/a.xml", "root/data/d.xml"]
-    },
-    {
-      input: {
-        root: {
-          name: "root",
-          is_file: false,
-          size: 0,
-          children: [
-            { name: "a.xml", is_file: true, size: 7000000, children: [] },
-            { name: "b.txt", is_file: true, size: 8000000, children: [] },
-            { name: "c.xml", is_file: true, size: 3000000, children: [] }
-          ]
-        },
-        min_size: null,
-        extension: "xml"
-      },
-      expected: ["root/a.xml", "root/c.xml"]
-    },
-    {
-      input: {
-        root: {
-          name: "root",
-          is_file: false,
-          size: 0,
-          children: [
-            { name: "a.xml", is_file: true, size: 7000000, children: [] },
-            { name: "b.txt", is_file: true, size: 8000000, children: [] },
-            { name: "c.log", is_file: true, size: 2000000, children: [] }
-          ]
-        },
-        min_size: 7500000,
-        extension: null
-      },
-      expected: ["root/b.txt"]
-    },
-    {
-      input: {
-        root: {
-          name: "root",
-          is_file: false,
-          size: 0,
-          children: []
-        },
-        min_size: 1,
-        extension: "xml"
-      },
-      expected: []
+  publicTests,
+  hiddenTests,
+  performanceTests,
+  rubric: {
+    weights: {
+      correctness: 0.4,
+      efficiency: 0.15,
+      codeQuality: 0.35,
+      communication: 0.1
     }
-  ]
-};
-
-window.problemConfig.publicTests = [...window.problemConfig.testCases];
-window.problemConfig.hiddenTests = [
-  {
-    input: {
-      root: {
-        name: "root",
-        is_file: false,
-        size: 0,
-        children: [
-          { name: "A.XML", is_file: true, size: 7000000, children: [] },
-          { name: "b.xml", is_file: true, size: 1000, children: [] },
-          { name: "c.txt", is_file: true, size: 8000000, children: [] }
-        ]
-      },
-      min_size: 5000000,
-      extension: "xml"
-    },
-    expected: ["root/A.XML"]
   },
-  {
-    input: {
-      root: {
-        name: "root",
-        is_file: false,
-        size: 0,
-        children: [
-          {
-            name: "d",
-            is_file: false,
-            size: 0,
-            children: [
-              { name: "x.log", is_file: true, size: 12, children: [] },
-              { name: "y.log", is_file: true, size: 10, children: [] }
-            ]
-          }
-        ]
-      },
-      min_size: 11,
-      extension: "log"
-    },
-    expected: ["root/d/x.log"]
-  }
-];
-window.problemConfig.performanceTests = [
-  {
-    input: {
-      root: {
-        name: "root",
-        is_file: false,
-        size: 0,
-        children: [
-          ...Array.from({ length: 3000 }, (_, i) => ({
-            name: `file-${i}.log`,
-            is_file: true,
-            size: i,
-            children: []
-          })),
-          { name: "target.xml", is_file: true, size: 6000000, children: [] }
-        ]
-      },
-      min_size: 5000000,
-      extension: "xml"
-    },
-    expected: ["root/target.xml"]
-  }
-];
-window.problemConfig.rubric = {
-  weights: {
-    correctness: 0.6,
-    edgeCases: 0.1,
-    efficiency: 0.15,
-    design: 0.15
-  }
+  testCases: publicTests
 };
-window.problemConfig.testCases = window.problemConfig.publicTests;
