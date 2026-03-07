@@ -2,8 +2,15 @@
 
 {% import "book-utils.html" as book_utils %}
 
+{% block body_class %}book-body live-interviews-body{% endblock body_class %}
+
 {% block bookcontent %}
 <div class="live-practice-container">
+  <div class="live-page-topbar">
+    <a class="live-home-link" href="{{ get_url(path='interviews/') | safe }}">&larr; Interview Book</a>
+    <span class="live-problem-count">{{ section.pages | length }} live problems</span>
+  </div>
+
   <h1>🎯 Live Interview Practice</h1>
   <p class="section-intro">
     Practice real interview problems with an AI-powered interviewer that runs entirely in your browser.
@@ -66,10 +73,44 @@
 
 {% block css %}
 <style>
+  body.live-interviews-body .menu,
+  body.live-interviews-body .sidebar-toggle-inline {
+    display: none !important;
+  }
+
+  body.live-interviews-body .page {
+    width: 100%;
+    left: 0;
+  }
+
   .live-practice-container {
     max-width: 900px;
     margin: 0 auto;
     padding: 2rem;
+  }
+
+  .live-page-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--table-border-bottom);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--body-bg) 90%, transparent);
+  }
+
+  .live-home-link {
+    border-bottom: none;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .live-problem-count {
+    font-size: 1.1rem;
+    opacity: 0.75;
   }
 
   .live-practice-container h1 {
@@ -232,6 +273,11 @@
   @media (max-width: 600px) {
     .live-practice-container {
       padding: 1rem;
+    }
+
+    .live-page-topbar {
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .problems-grid {
