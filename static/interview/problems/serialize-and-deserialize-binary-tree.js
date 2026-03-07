@@ -84,3 +84,30 @@ class Solution:
     }
   ]
 };
+
+window.problemConfig.publicTests = [...window.problemConfig.testCases];
+window.problemConfig.hiddenTests = [
+  {
+    expected: [1, null, 2, 3],
+    input: { root: [1, null, 2, 3] }
+  },
+  {
+    expected: [2, 1, 3, null, null, 4],
+    input: { root: [2, 1, 3, null, null, 4] }
+  }
+];
+window.problemConfig.performanceTests = [
+  {
+    expected: Array.from({ length: 511 }, (_, i) => i + 1),
+    input: { root: Array.from({ length: 511 }, (_, i) => i + 1) }
+  }
+];
+window.problemConfig.rubric = {
+  weights: {
+    correctness: 0.65,
+    edgeCases: 0.15,
+    efficiency: 0.15,
+    codeQuality: 0.05
+  }
+};
+window.problemConfig.testCases = window.problemConfig.publicTests;

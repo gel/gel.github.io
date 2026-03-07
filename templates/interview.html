@@ -161,8 +161,42 @@
     <!-- Test Results Section -->
     <div class="test-results">
       <h2>Test Results</h2>
-      <div id="test-results-content">
-        <p class="placeholder-text">Click "Run Tests" to execute your solution against test cases.</p>
+      <div id="test-results-content" class="results-dashboard">
+        <section class="results-section results-section-overview" aria-live="polite">
+          <div id="results-overview-content" class="results-section-body">
+            <p class="placeholder-text">Run tests to see the overall score, band, and section breakdown.</p>
+          </div>
+        </section>
+
+        <section class="results-section" aria-live="polite">
+          <div class="results-section-heading">
+            <h3>Public Tests</h3>
+            <p>Detailed feedback for visible cases.</p>
+          </div>
+          <div id="results-public-content" class="results-section-body">
+            <p class="placeholder-text">Public test details will appear here after you run your solution.</p>
+          </div>
+        </section>
+
+        <section class="results-section" aria-live="polite">
+          <div class="results-section-heading">
+            <h3>Hidden Tests</h3>
+            <p>Summary only, with no hidden inputs or outputs.</p>
+          </div>
+          <div id="results-hidden-content" class="results-section-body">
+            <p class="placeholder-text">No hidden test results yet.</p>
+          </div>
+        </section>
+
+        <section class="results-section" aria-live="polite">
+          <div class="results-section-heading">
+            <h3>Performance</h3>
+            <p>Execution timing and pass/fail status.</p>
+          </div>
+          <div id="results-performance-content" class="results-section-body">
+            <p class="placeholder-text">No performance results yet.</p>
+          </div>
+        </section>
       </div>
     </div>
 

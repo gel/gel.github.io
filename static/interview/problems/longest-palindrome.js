@@ -1,3 +1,27 @@
+const publicTests = [
+  { expected: "geeksskeeg", input: { s: "forgeeksskeegfor" } },
+  { expected: "bb", input: { s: "cbbd" } },
+  { expected: "a", input: { s: "a" } },
+  { expected: "a", input: { s: "ac" } },
+  { expected: "anana", input: { s: "anana" } }
+];
+
+const hiddenTests = [
+  { expected: "anana", input: { s: "bananas" } },
+  { expected: "abba", input: { s: "abba" } },
+  { expected: "a", input: { s: "abcda" } }
+];
+
+const performanceTests = [
+  (() => {
+    const s = "z".repeat(900);
+    return {
+      input: { s },
+      expected: s
+    };
+  })()
+];
+
 window.problemConfig = {
   methodName: "longestPalindrome",
   starterCode: `class Solution:
@@ -14,11 +38,16 @@ window.problemConfig = {
                 if is_palindrome(substring) and len(substring) > len(longest):
                     longest = substring
         return longest`,
-  testCases: [
-    { expected: "bab", input: { s: "babad" } },
-    { expected: "bb", input: { s: "cbbd" } },
-    { expected: "a", input: { s: "a" } },
-    { expected: "a", input: { s: "ac" } },
-    { expected: "racecar", input: { s: "racecar" } }
-  ]
+  publicTests,
+  hiddenTests,
+  performanceTests,
+  rubric: {
+    weights: {
+      correctness: 0.5,
+      efficiency: 0.2,
+      codeQuality: 0.2,
+      communication: 0.1
+    }
+  },
+  testCases: publicTests
 };

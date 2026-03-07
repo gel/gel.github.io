@@ -53,3 +53,26 @@ class Solution:
     { expected: "", input: { words: ["abc", "ab"] } }
   ]
 };
+
+window.problemConfig.publicTests = [...window.problemConfig.testCases];
+window.problemConfig.hiddenTests = [
+  { expected: "wxyz", input: { words: ["w", "x", "y", "z"] } },
+  { expected: "", input: { words: ["a", "b", "a"] } }
+];
+window.problemConfig.performanceTests = [
+  {
+    expected: "abc",
+    input: {
+      words: Array.from({ length: 2000 }, () => "abc")
+    }
+  }
+];
+window.problemConfig.rubric = {
+  weights: {
+    correctness: 0.55,
+    edgeCases: 0.2,
+    efficiency: 0.2,
+    codeQuality: 0.05
+  }
+};
+window.problemConfig.testCases = window.problemConfig.publicTests;
