@@ -8,7 +8,7 @@
 {% macro book_category_section(title, section_path, slug) %}
   {% set subsection = get_section(path=section_path) %}
   {% if subsection.pages | length > 0 %}
-    <h2>{{ title }}</h2>
+    <h2 class="fade-in">{{ title }}</h2>
     {% for post in subsection.pages %}
       <a class="reading-book" href="{{ post.permalink }}" target="_blank" rel="noopener nofollow noreferrer" title="{{ post.title }}">
          <img src="{{slug}}/{{ post.extra.book_image_path }}" alt="{{ post.title }}" />

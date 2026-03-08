@@ -12,6 +12,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     const revealSelector = [
       ".fade-in",
+      "h2",
       ".post-preview",
       ".reading-book",
       ".home-section-card",
