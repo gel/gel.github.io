@@ -1,6 +1,7 @@
 {% macro reading_book_preview(post, path) %}
 <a class="reading-book" href="{{ post.permalink }}" target="_blank" rel="noopener nofollow noreferrer" title="{{ post.title }}">
    <img src="{{path}}/{{ post.extra.book_image_path }}" alt="{{ post.title }}" />
+   <span class="reading-book-title">{{ post.title }}</span>
 </a>
 {% endmacro input %}
 
@@ -11,6 +12,7 @@
     {% for post in subsection.pages %}
       <a class="reading-book" href="{{ post.permalink }}" target="_blank" rel="noopener nofollow noreferrer" title="{{ post.title }}">
          <img src="{{slug}}/{{ post.extra.book_image_path }}" alt="{{ post.title }}" />
+         <span class="reading-book-title">{{ post.title }}</span>
       </a>
     {% endfor %}
   {% endif %}
@@ -19,5 +21,6 @@
 {% macro podcast_preview(post) %}
 <a class="reading-book" href="{{ post.permalink }}" title="{{ post.title }}">
    <img src="/podcasts/{{ post.extra.podcast_image_path }}" alt="{{ post.title }}" />
+   <span class="reading-book-title">{{ post.title }}</span>
 </a>
 {% endmacro podcast_preview %}
