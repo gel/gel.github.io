@@ -1,0 +1,323 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+  .projects-page {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding-bottom: 1.75rem;
+  }
+
+  .projects-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(240px, 320px);
+    gap: 1rem;
+    align-items: stretch;
+    margin-bottom: 1.25rem;
+  }
+
+  .projects-intro,
+  .projects-summary,
+  .project-card {
+    border: 1px solid color-mix(in srgb, var(--table-border-bottom) 88%, transparent);
+    background: color-mix(in srgb, var(--body-bg) 92%, transparent);
+    border-radius: 20px;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+  }
+
+  .projects-intro,
+  .projects-summary {
+    padding: 1.5rem;
+  }
+
+  .projects-kicker,
+  .project-kicker,
+  .project-period {
+    margin: 0 0 0.75rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--accent-color) 70%, var(--body-color));
+  }
+
+  .projects-intro h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 4vw, 3.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+
+  .projects-intro p:last-child,
+  .projects-summary p:last-child {
+    margin-bottom: 0;
+  }
+
+  .projects-summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .projects-summary ul {
+    margin: 0.85rem 0 0;
+    padding-left: 1.1rem;
+  }
+
+  .projects-section {
+    margin-top: 2.6rem;
+  }
+
+  .projects-section-header {
+    max-width: 760px;
+    margin-bottom: 1.35rem;
+  }
+
+  .projects-section-header h2 {
+    margin: 0;
+    font-size: 1.7rem;
+    line-height: 1.12;
+  }
+
+  .projects-section-header p {
+    margin: 0.65rem 0 0;
+    color: color-mix(in srgb, var(--body-color) 82%, transparent);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1rem;
+    row-gap: 2.1rem;
+    align-items: stretch;
+  }
+
+  .projects-section + .projects-section {
+    margin-top: 4rem;
+    padding-top: 0.5rem;
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.6rem 1.35rem 1.35rem;
+    height: 100%;
+  }
+
+  .projects-grid > .project-card:nth-child(n + 3) {
+    margin-top: 1.75rem;
+  }
+
+  .project-card-header {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .project-card h3 {
+    margin: 0.15rem 0 0;
+    font-size: 1.3rem;
+    line-height: 1.22;
+  }
+
+  .project-card p {
+    margin: 0;
+    color: color-mix(in srgb, var(--body-color) 82%, transparent);
+  }
+
+  .project-period {
+    margin: 0;
+    justify-self: start;
+    padding: 0.34rem 0.65rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--table-border-bottom) 88%, transparent);
+    background: color-mix(in srgb, var(--body-bg) 96%, transparent);
+    color: color-mix(in srgb, var(--body-color) 78%, transparent);
+    letter-spacing: 0.08em;
+  }
+
+  .project-impact {
+    padding-top: 0.9rem;
+    border-top: 1px solid color-mix(in srgb, var(--table-border-bottom) 85%, transparent);
+  }
+
+  .project-impact strong {
+    color: var(--heading-color);
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .project-tags li {
+    padding: 0.36rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--table-border-bottom) 88%, transparent);
+    background: color-mix(in srgb, var(--body-bg) 96%, transparent);
+    font-size: 0.88rem;
+    color: color-mix(in srgb, var(--body-color) 82%, transparent);
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: auto;
+    padding-top: 0.25rem;
+  }
+
+  .project-links a,
+  .project-links a:visited {
+    border-bottom: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.72rem 0.95rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--table-border-bottom) 88%, transparent);
+    background: color-mix(in srgb, var(--body-bg) 96%, transparent);
+    color: var(--body-color);
+    font-size: 0.93rem;
+    font-weight: 500;
+  }
+
+  .project-links a:hover {
+    border-color: color-mix(in srgb, var(--accent-color) 45%, var(--table-border-bottom));
+    background: color-mix(in srgb, var(--accent-color) 10%, transparent);
+  }
+
+  @media (max-width: 900px) {
+    .projects-hero,
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .projects-grid > .project-card:nth-child(n + 3) {
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .projects-intro,
+    .projects-summary,
+    .project-card {
+      padding: 1.3rem 1.15rem 1.15rem;
+      border-radius: 16px;
+    }
+
+    .project-card-header {
+      gap: 0.6rem;
+    }
+
+    .project-links a {
+      width: 100%;
+    }
+  }
+</style>
+{% endblock head %}
+
+{% block content %}
+<article class="projects-page">
+  <section class="projects-hero">
+    <div class="projects-intro fade-in">
+      <p class="projects-kicker">Selected Work</p>
+      <h1>{{ page.title }}</h1>
+      {{ page.content | safe }}
+    </div>
+
+    <aside class="projects-summary fade-in">
+      <div>
+        <p class="projects-kicker">What This Covers</p>
+        <p>A compact portfolio of things I have built, taught, published, or shipped in public-facing form.</p>
+      </div>
+      <ul>
+        <li>Interactive products and learning experiences</li>
+        <li>Technical publishing and knowledge systems</li>
+        <li>Hands-on GenAI enablement</li>
+        <li>Applied computer vision and real-time tracking</li>
+      </ul>
+    </aside>
+  </section>
+
+  <section class="projects-section">
+    <div class="projects-section-header fade-in">
+      <p class="projects-kicker">Featured</p>
+      <h2>Projects that best represent the current direction of the site and the work behind it.</h2>
+    </div>
+    <div class="projects-grid">
+      {% for project in page.extra.projects %}
+      {% if project.featured %}
+      <article class="project-card">
+        <div class="project-card-header">
+          <div>
+            <p class="project-kicker">{{ project.category }}</p>
+            <h3>{{ project.title }}</h3>
+          </div>
+          <p class="project-period">{{ project.period }}</p>
+        </div>
+
+        <p>{{ project.summary }}</p>
+
+        <p class="project-impact"><strong>Why it matters:</strong> {{ project.impact }}</p>
+
+        <ul class="project-tags">
+          {% for item in project.stack %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+
+        <div class="project-links">
+          {% for link in project.links %}
+          <a href="{{ link.path }}"{% if link.path is matching("^http") %} target="_blank" rel="noreferrer"{% endif %}>{{ link.label }}</a>
+          {% endfor %}
+        </div>
+      </article>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="projects-section">
+    <div class="projects-section-header fade-in">
+      <p class="projects-kicker">Earlier Work</p>
+      <h2>Selected product integrations from earlier computer-vision work.</h2>
+      <p>Older projects that still show the applied systems side of the portfolio.</p>
+    </div>
+    <div class="projects-grid">
+      {% for project in page.extra.projects %}
+      {% if not project.featured %}
+      <article class="project-card">
+        <div class="project-card-header">
+          <div>
+            <p class="project-kicker">{{ project.category }}</p>
+            <h3>{{ project.title }}</h3>
+          </div>
+          <p class="project-period">{{ project.period }}</p>
+        </div>
+
+        <p>{{ project.summary }}</p>
+
+        <p class="project-impact"><strong>Why it matters:</strong> {{ project.impact }}</p>
+
+        <ul class="project-tags">
+          {% for item in project.stack %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+
+        <div class="project-links">
+          {% for link in project.links %}
+          <a href="{{ link.path }}"{% if link.path is matching("^http") %} target="_blank" rel="noreferrer"{% endif %}>{{ link.label }}</a>
+          {% endfor %}
+        </div>
+      </article>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+</article>
+{% endblock content %}

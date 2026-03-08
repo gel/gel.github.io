@@ -173,11 +173,12 @@ body.home-page .footer-page {
 .latest-post-grid {
   display: grid;
   gap: 1rem;
+  align-items: stretch;
 }
 
 .home-stats {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: 1.25rem 0 0;
+  margin: 1.5rem 0 0;
 }
 
 .stat-card {
@@ -198,12 +199,17 @@ body.home-page .footer-page {
 }
 
 .home-block {
-  margin-top: 2.5rem;
+  margin-top: 3rem;
+}
+
+.home-block + .home-block {
+  margin-top: 4rem;
+  padding-top: 0.35rem;
 }
 
 .section-heading {
   max-width: 760px;
-  margin-bottom: 1.15rem;
+  margin-bottom: 1.4rem;
 }
 
 .section-heading h2 {
@@ -222,6 +228,7 @@ body.home-page .footer-page {
 .home-link-grid,
 .latest-post-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1.15rem;
 }
 
 .home-section-card,
@@ -307,6 +314,11 @@ body.home-page .footer-page {
   }
 
   .home-block {
-    margin-top: 2rem;
+    margin-top: 2.4rem;
+  }
+
+  .home-block + .home-block {
+    margin-top: 3rem;
+    padding-top: 0.2rem;
   }
 }
