@@ -1,5 +1,5 @@
 +++
-title = "A Man Called Ove"
+title = "A Man Called Ove @ Fredrik Backman"
 date = 2025-07-24
 description = "A heartwarming and humorous novel by Fredrik Backman about unexpected friendship, love, and the hidden stories behind a grumpy exterior."
 [taxonomies]

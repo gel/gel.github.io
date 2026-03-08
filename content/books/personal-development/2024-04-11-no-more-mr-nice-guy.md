@@ -1,5 +1,5 @@
 +++
-title = "No More Mr. Nice Guy"
+title = "No More Mr. Nice Guy @ Dr. Robert Glover"
 date = 2024-03-24
 description = "A transformative book about breaking free from people-pleasing patterns and embracing authentic masculinity"
 [taxonomies]

@@ -1,5 +1,5 @@
 +++
-title = "It Ends with Us"
+title = "It Ends with Us @ Colleen Hoover"
 date = 2025-04-26
 description = "A heart-wrenching romance novel that explores love, resilience, and difficult choices."
 [taxonomies]
