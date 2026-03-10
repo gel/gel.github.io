@@ -17,11 +17,17 @@
     {
       "@context": "https://schema.org",
       "@type": "VideoObject",
+      "url": "{{ page.permalink | safe }}",
       "name": "{{ page.title }}",
-      "description": "{{ page.description }}",
+      "description": "{{ page.description | default(value=config.description) }}",
       "thumbnailUrl": "{{ get_url(path="podcasts/" ~ page.extra.podcast_image_path) | safe }}",
       "uploadDate": "{{ page.date | date(format="%+") }}",
-      "contentUrl": "{{ page.extra.youtube_url }}"
+      "contentUrl": "{{ page.extra.youtube_url }}",
+      "embedUrl": "https://www.youtube.com/embed/{{ page.extra.youtube_id }}"{% if config.extra.author %},
+      "publisher": {
+        "@type": "Person",
+        "name": "{{ config.extra.author }}"
+      }{% endif %}
     }
   </script>
 {% endblock %}
@@ -101,4 +107,3 @@
   </div>
 
 {% endblock content %}
-

@@ -15,8 +15,11 @@ build_search_index = true
 
 
 [extra]
+author = "Gal Goldman"
 accent = "#0f766e"
 accent_light = "#7dd3c7"
+default_og_image = "iconweb.png"
+site_logo = "iconweb.png"
 nav = [
   { name = "Resume", path = "/resume/" },
   { name = "Blog", path = "/blog/" },
@@ -29,6 +32,7 @@ social_links = [
   { name = "LinkedIn", path = "https://www.linkedin.com/in/gal-goldman/" },
   { name = "X", path = "https://x.com/gelings" }
 ]
+twitter_handle = "gelings"
 home_stats = [
   { value = "16+", label = "years across AWS and Intel" },
   { value = "30+", label = "customers supported on production GenAI workloads" },

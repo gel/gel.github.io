@@ -16,25 +16,28 @@
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "NewsArticle",
+      "@type": "BlogPosting",
+      "url": "{{ page.permalink | safe }}",
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://google.com/article"
+        "@id": "{{ page.permalink | safe }}"
       },
       "headline": "{{ page.title }}",
-      "image": [],
+      "description": "{{ page.description | default(value=config.description) }}",
+      "image": [{% if page.extra.thumbnail %}"{{ get_url(path=page.path ~ page.extra.thumbnail) | safe }}"{% elif page.extra.static_thumbnail %}{% if page.extra.static_thumbnail is matching("^http[s]?://") %}"{{ page.extra.static_thumbnail }}"{% else %}"{{ get_url(path=page.extra.static_thumbnail) | safe }}"{% endif %}{% elif config.extra.default_og_image %}"{{ get_url(path=config.extra.default_og_image) | safe }}"{% endif %}],
       "datePublished": "{{ page.date | date(format="%+") }}",
-      "dateModified": "{{ page.date | date(format="%+") }}"{% if config.extra.author %},
+      "dateModified": "{{ page.updated | default(value=page.date) | date(format="%+") }}",
+      "inLanguage": "en"{% if config.extra.author %},
       "author": {
         "@type": "Person",
         "name": "{{ config.extra.author }}"
       },
        "publisher": {
         "@type": "Organization",
-        "name": "{{ config.extra.author }}"{% if config.extra.icon %},
+        "name": "{{ config.extra.author }}"{% if config.extra.site_logo %},
         "logo": {
           "@type": "ImageObject",
-          "url": "{{ get_url(path=config.extra.icon) | safe }}"
+          "url": "{{ get_url(path=config.extra.site_logo) | safe }}"
         }
         {% endif %}
       }
