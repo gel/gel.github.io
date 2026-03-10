@@ -1,5 +1,6 @@
 +++
 title = "Oh Crap! Potty Training: Everything Modern Parents Need to Know to Do It Once and Do It Right @ Jamie Glowacki"
+description = "Reading notes and review of Oh Crap! Potty Training: Everything Modern Parents Need to Know to Do It Once and Do It Right, covering parenting, kids, and."
 [taxonomies]
 tags = [ "Parenting", "Kids", "Education" ]
 [extra]

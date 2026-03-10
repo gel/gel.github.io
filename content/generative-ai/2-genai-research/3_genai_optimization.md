@@ -1,6 +1,7 @@
 +++
 title = "GenAI Optimizations"
 weight = 3
+description = "Research summary of GenAI Optimizations with practical takeaways for LLMs and production AI systems."
 +++
 
 ### [Mixture-of-Depths] Dynamically allocating compute in transformer-based LMs

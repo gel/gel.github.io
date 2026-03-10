@@ -1,6 +1,6 @@
-
 +++
 title = "Smarter Faster Better: The Secrets of Being Productive in Life and Business @ Charles Duhigg"
+description = "Reading notes and review of Smarter Faster Better, covering productivity, business, and psychology."
 [taxonomies]
 tags = [ "Productivity", "Business", "Psychology" ]
 [extra]

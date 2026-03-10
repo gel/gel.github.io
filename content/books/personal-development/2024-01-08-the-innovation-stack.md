@@ -1,5 +1,6 @@
 +++
 title = "The Innovation Stack: Building an Unbeatable Business One Crazy Idea at a Time @ Jim McKelvey"
+description = "This is an interesting book if you want to learn about innovation, innovators, and entrepreneurship."
 [taxonomies]
 tags = [ "Business", "Entrepreneurship", "Innovation" ]
 [extra]

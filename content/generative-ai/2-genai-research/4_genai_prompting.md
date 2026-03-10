@@ -1,6 +1,7 @@
 +++
 title = "GenAI Prompting"
 weight = 4
+description = "Research summary of GenAI Prompting with practical takeaways for LLMs and production AI systems."
 +++
 
 ## LLM Prompting - In-Context-Learning

@@ -1,5 +1,6 @@
 +++
 title = "The Pragmatic Programmer: From Journeyman to Master @ Andy Hunt, Dave Thomas"
+description = "Reading notes and review of The Pragmatic Programmer: From Journeyman to Master, covering programming, computer science."
 [taxonomies]
 tags = [ "Programming", "Computer Science" ]
 [extra]

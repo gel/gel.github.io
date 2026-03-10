@@ -1,5 +1,6 @@
 +++
 title = "The Obesity Code: Unlocking the Secrets of Weight Loss @ Jason Fung"
+description = "Reading notes and review of The Obesity Code: Unlocking the Secrets of Weight Loss, covering health, nutrition, and science."
 [taxonomies]
 tags = [ "Health", "Nutrition", "Science" ]
 [extra]

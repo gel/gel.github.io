@@ -1,6 +1,7 @@
 +++
 title = "Acing the Interview Process"
 weight = 3
+description = "Interview preparation notes on Acing the Interview Process for software engineering career moves and hiring processes."
 +++
 
 ### Schedule Practice Interviews

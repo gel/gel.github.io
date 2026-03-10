@@ -2,6 +2,7 @@
 title = "Crucial Conversations @ Kerry Patterson, Joseph Grenny"
 date = 2026-03-07
 weight = 10
+description = "Queued reading notes for Crucial Conversations."
 [taxonomies]
 tags = ["communication", "relationships", "personal-development"]
 [extra]

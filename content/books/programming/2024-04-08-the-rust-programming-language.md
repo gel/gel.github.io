@@ -1,5 +1,6 @@
 +++
 title = "The Rust Programming Language, 2nd Edition @ Steve Klabnik,  Carol Nichols"
+description = "Reading notes and review of The Rust Programming Language, 2nd Edition, covering programming, computer science."
 [taxonomies]
 tags = [ "Programming", "Computer Science" ]
 [extra]

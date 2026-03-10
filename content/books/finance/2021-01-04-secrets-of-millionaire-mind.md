@@ -1,5 +1,6 @@
 +++
 title = "Secrets of the Millionaire Mind: Mastering the Inner Game of Wealth @ T. Harv Eker"
+description = "Reading notes and review of Secrets of the Millionaire Mind: Mastering the Inner Game of Wealth, covering finance, lifestyle."
 [taxonomies]
 tags = [ "Finance, Lifestyle" ]
 [extra]

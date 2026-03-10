@@ -1,6 +1,7 @@
 +++
 title = "Life Reimagined @ Barbara Bradley Hagerty"
 date = 2026-02-22
+description = "Currently reading notes and early takeaways from Life Reimagined."
 [taxonomies]
 tags = ["life-design", "personal-development"]
 [extra]

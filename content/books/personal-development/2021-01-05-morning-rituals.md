@@ -1,5 +1,6 @@
 +++
 title = "Morning Rituals @ Katie Stone"
+description = "Reading notes and review of Morning Rituals, covering self-help, lifestyle."
 [taxonomies]
 tags = [ "Self-Help", "Lifestyle" ]
 [extra]

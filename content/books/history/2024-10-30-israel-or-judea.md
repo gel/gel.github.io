@@ -1,5 +1,6 @@
 +++
 title = "Israel or Judea @ Sefi Rachlevsky"
+description = "Reading notes and review of Israel or Judea, covering politics, history, and non-fiction."
 [taxonomies]
 tags = [ "Politics", "History", "Non-Fiction" ]
 [extra]

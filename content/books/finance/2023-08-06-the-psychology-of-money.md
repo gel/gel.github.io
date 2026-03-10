@@ -1,5 +1,6 @@
 +++
 title = "The Psychology of Money @ Morgan Housel"
+description = "Reading notes and review of The Psychology of Money, covering finance, psychology, and economics."
 [taxonomies]
 tags = [ "Finance", "Psychology", "Economics" ]
 [extra]

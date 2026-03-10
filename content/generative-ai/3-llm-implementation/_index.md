@@ -2,6 +2,7 @@
 title = "LLM Implementation"
 weight = 3
 sort_by = "weight"
+description = "Implementation notes for datasets, model customization, and practical LLM system design."
 insert_anchor_links = "right"
 +++
 

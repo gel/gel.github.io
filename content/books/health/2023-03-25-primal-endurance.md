@@ -1,5 +1,6 @@
 +++
 title = "Primal Endurance: Escape Chronic Cardio and Carbohydrate Dependency and Become a Fat Burning Beast! @ Mark Sisson"
+description = "Mark Sisson’s approach to endurance was a massive unlock for my running."
 [taxonomies]
 tags = [ "Health", "Fitness", "Lifestyle" ]
 [extra]

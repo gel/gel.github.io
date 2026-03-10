@@ -1,6 +1,7 @@
 +++
 title = "Resume"
 template = "resume-page.html"
+description = "Resume for Gal Goldman covering senior engineering experience across AWS and Intel, with work in distributed systems, cloud architecture, and AI platforms."
 +++
 
 # Gal Goldman

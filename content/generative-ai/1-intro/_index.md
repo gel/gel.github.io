@@ -2,6 +2,7 @@
 title = "Generative AI Foundations"
 weight = 1
 sort_by = "weight"
+description = "An introduction to generative AI, the modern tooling ecosystem, and practical agent-building concepts."
 insert_anchor_links = "right"
 +++
 

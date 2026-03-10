@@ -2,6 +2,7 @@
 title = "Solving Coding Interview Problems"
 weight = 3
 sort_by = "weight"
+description = "Coding interview guidance on writing logical, maintainable solutions and improving problem-solving approach."
 insert_anchor_links = "right"
 +++
 

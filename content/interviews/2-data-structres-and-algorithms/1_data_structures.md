@@ -1,6 +1,7 @@
 +++
 title = "Data Structures"
 weight = 1
+description = "Interview notes on Data Structures, covering core data structures, algorithms, and problem-solving patterns."
 +++
 
 - [Hashtable](#hashtable)

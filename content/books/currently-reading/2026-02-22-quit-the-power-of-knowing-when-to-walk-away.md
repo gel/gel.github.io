@@ -1,6 +1,7 @@
 +++
 title = "Quit: The Power of Knowing When to Walk Away @ Annie Duke"
 date = 2026-02-22
+description = "Currently reading notes and early takeaways from Quit: The Power of Knowing When to Walk Away."
 [taxonomies]
 tags = ["decision-making", "strategy", "personal-development"]
 [extra]

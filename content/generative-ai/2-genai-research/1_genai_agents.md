@@ -1,6 +1,7 @@
 +++
 title = "Agents"
 weight = 1
+description = "Research summary of Agents with practical takeaways for LLMs and production AI systems."
 +++
 
 ### [SICA] A Self-Improving Coding Agent

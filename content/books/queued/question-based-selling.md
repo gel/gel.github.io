@@ -2,6 +2,7 @@
 title = "Secrets of Question Based Selling @ Thomas A. Freese"
 date = 2026-03-07
 weight = 50
+description = "Queued reading notes for Secrets of Question Based Selling."
 [taxonomies]
 tags = ["sales", "business", "communication"]
 [extra]

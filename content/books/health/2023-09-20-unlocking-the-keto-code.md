@@ -1,5 +1,6 @@
 +++
 title = "Unlocking the Keto Code: The Revolutionary New Science of Keto That Offers More Benefits Without Deprivation @ Steven R Gundry"
+description = "I was never fully into the keto concept, but this book made me think it has more practical value than I initially assumed."
 [taxonomies]
 tags = [ "Food", "Health", "Nutrition" ]
 [extra]

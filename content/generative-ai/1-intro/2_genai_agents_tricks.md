@@ -1,6 +1,7 @@
 +++
 title = "GenAI Agents Tricks"
 weight = 2
+description = "Practical notes on GenAI Agents Tricks in the modern generative AI tooling and agent ecosystem."
 +++
 
 *Last updated: January 2026*

@@ -1,5 +1,6 @@
 +++
 title = "Rich Dad's Before You Quit Your Job @ Robert T. Kiyosaki"
+description = "In the wake of Rich Dad's bankruptcy, my curiosity was piqued to explore his latest literary offering, hoping to glean fresh perspectives."
 [taxonomies]
 tags = [ "Business", "Finance", "Entrepreneurship" ]
 [extra]

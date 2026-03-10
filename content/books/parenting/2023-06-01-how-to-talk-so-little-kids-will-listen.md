@@ -1,5 +1,6 @@
 +++
 title = "How to Talk so Little Kids Will Listen: A Survival Guide to Life with Children Ages 2-7 @ Joanna Faber"
+description = "Reading notes and review of How to Talk so Little Kids Will Listen: A Survival Guide to Life with Children Ages 2-7, covering parenting, communication, and."
 [taxonomies]
 tags = [ "Parenting", "Communication", "Self-Help" ]
 [extra]

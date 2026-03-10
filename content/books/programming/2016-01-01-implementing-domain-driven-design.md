@@ -1,5 +1,6 @@
 +++
 title = "Implementing Domain-Driven Design @ Vaughn Vernon"
+description = "Warning: this is a very hard read, personally I feel this book is not written in a concise and organized form."
 [taxonomies]
 tags = [ "Programming", "Computer Science" ]
 [extra]

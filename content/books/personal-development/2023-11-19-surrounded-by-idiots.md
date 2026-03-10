@@ -1,5 +1,6 @@
 +++
 title = "Surrounded by Idiots @ Thomas Erikson"
+description = "Reading notes and review of Surrounded by Idiots, covering business, softskills, and psychology."
 [taxonomies]
 tags = [ "Business", "SoftSkills", "Psychology" ]
 [extra]

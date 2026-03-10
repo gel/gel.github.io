@@ -1,6 +1,7 @@
 +++
 title = "Streamlining ML Workflows: Lessons from Nielsen Sports' 75% Cost Reduction"
 date = 2024-04-04
+description = "Lessons from Nielsen Sports using Amazon SageMaker multi-model endpoints to cut ML infrastructure costs by 75 percent."
 [taxonomies]
 tags = [ "Machine Learning", "SageMaker", "AWS", "Optimization", "Cost Reduction", "Multi-Modal" ]
 +++

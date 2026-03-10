@@ -2,6 +2,7 @@
 title = "Following the Sun @ Margaret Bensfield Sullivan"
 date = 2026-03-07
 weight = 30
+description = "Queued reading notes for Following the Sun."
 [taxonomies]
 tags = ["travel", "family", "memoir"]
 [extra]

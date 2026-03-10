@@ -1,6 +1,7 @@
 +++
 title = "GenAI Models"
 weight = 6
+description = "Research summary of GenAI Models with practical takeaways for LLMs and production AI systems."
 +++
 
 

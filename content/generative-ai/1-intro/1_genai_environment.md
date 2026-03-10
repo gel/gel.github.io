@@ -1,6 +1,7 @@
 +++
 title = "GenAI Agents Environment"
 weight = 1
+description = "Practical notes on GenAI Agents Environment in the modern generative AI tooling and agent ecosystem."
 +++
 
 *Last updated: January 2026*

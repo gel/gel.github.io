@@ -2,6 +2,7 @@
 title = "Crucial Accountability @ Kerry Patterson, Joseph Grenny"
 date = 2026-03-07
 weight = 20
+description = "Queued reading notes for Crucial Accountability."
 [taxonomies]
 tags = ["communication", "accountability", "leadership"]
 [extra]

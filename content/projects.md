@@ -55,6 +55,7 @@ links = [
 
 [[extra.projects]]
 title = "FaceRig Intel RealSense Support"
+description = "Selected public projects across interactive interview practice, technical publishing, GenAI education, and applied computer vision."
 period = "2015"
 featured = false
 category = "Real-Time Tracking"

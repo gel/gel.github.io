@@ -1,6 +1,7 @@
 +++
 title = "GenAI Security"
 weight = 7
+description = "Research summary of GenAI Security with practical takeaways for LLMs and production AI systems."
 +++
 
 ### [Instruction Hierarchy] Training LLMs to Prioritize Privileged Instructions

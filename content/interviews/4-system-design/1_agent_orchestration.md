@@ -1,6 +1,7 @@
 +++
 title = "Agent Orchestration"
 weight = 1
+description = "System design interview notes on Agent Orchestration, including tradeoffs, APIs, and scaling considerations."
 +++
 
 ### Design an Agent Task Orchestrator - Hard - [System Design]

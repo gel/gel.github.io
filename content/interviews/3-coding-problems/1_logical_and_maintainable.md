@@ -1,6 +1,7 @@
 +++
 title = "Logical and Maintainable"
 weight = 1
+description = "Coding interview notes on Logical and Maintainable, with patterns, examples, and practical solution guidance."
 +++
 
 - [Range Sum of BST - Easy - LeetCode 938](#range-sum-of-bst-easy-leetcode-938)

@@ -1,5 +1,6 @@
 +++
 title = "Never Split the Difference: Negotiating as if Your Life Depended on It @ Chris Voss"
+description = "For me, some of the techniques felt a bit too manipulative and sales oriented."
 [taxonomies]
 tags = [ "Business", "Negotiation", "Psychology" ]
 [extra]

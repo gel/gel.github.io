@@ -1,6 +1,7 @@
 +++
 title = "Building Trustworthy AI Agents by Abstracting Infrastructure"
 date = 2025-09-10
+description = "A summary of Amazon Bedrock AgentCore Observability and why infrastructure abstraction matters for trustworthy AI agents."
 [taxonomies]
 tags = [ "AI", "Agents", "AWS", "Bedrock", "Observability" ]
 +++

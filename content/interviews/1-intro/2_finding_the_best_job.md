@@ -1,6 +1,7 @@
 +++
 title = "Finding an Optimal Job"
 weight = 2
+description = "Interview preparation notes on Finding an Optimal Job for software engineering career moves and hiring processes."
 +++
 
 It's important to recognize that no job is 100% perfect. However, with the right approach, you can identify opportunities that are the best fit for your skills, interests and professional goals.

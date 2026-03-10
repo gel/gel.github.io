@@ -1,5 +1,6 @@
 +++
 title = "The Complete Guide to Fasting: Heal Your Body Through Intermittent, Alternate-Day, and Extended Fasting @ Jason Fung"
+description = "Reading notes and review of The Complete Guide to Fasting: Heal Your Body Through Intermittent, Alternate-Day, and Extended Fasting, covering health, food."
 [taxonomies]
 tags = [ "Health", "Food", "Lifestyle", "Diet" ]
 [extra]

@@ -2,6 +2,7 @@
 title = "Mastering System Design"
 weight = 4
 sort_by = "weight"
+description = "System design interview material covering architecture tradeoffs, APIs, scaling, and reliability."
 insert_anchor_links = "right"
 +++
 

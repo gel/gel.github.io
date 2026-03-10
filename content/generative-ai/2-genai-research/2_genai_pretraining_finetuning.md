@@ -1,6 +1,7 @@
 +++
 title = "GenAI Training"
 weight = 2
+description = "Research summary of GenAI Training with practical takeaways for LLMs and production AI systems."
 +++
 
 

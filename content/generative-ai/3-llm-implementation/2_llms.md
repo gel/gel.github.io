@@ -1,6 +1,7 @@
 +++
 title = "LLMs"
 weight = 2
+description = "Implementation notes on LLMs for building and adapting practical LLM systems."
 +++
 
 

@@ -1,5 +1,6 @@
 +++
 title = "The Cancer Code: A Revolutionary New Understanding of a Medical Mystery @ Jason Fung"
+description = "As someone with family history in this area, this book was very important to me."
 [taxonomies]
 tags = [ "Health", "Medicine", "Science" ]
 [extra]

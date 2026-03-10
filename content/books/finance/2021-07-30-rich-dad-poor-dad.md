@@ -1,5 +1,6 @@
 +++
 title = "Rich Dad, Poor Dad @ Robert T. Kiyosaki"
+description = "This is one of the iconic finance books that almost everyone gets recommended at some point."
 [taxonomies]
 tags = [ "Finance", "Business", "Self-Help" ]
 [extra]

@@ -1,5 +1,6 @@
 +++
 title = "Anger Management for Parents: How to Manage your Emotions & Raise a Happy and Confident Child @ Susan Garcia"
+description = "Reading notes and review of Anger Management for Parents: How to Manage your Emotions & Raise a Happy and Confident Child, covering parenting, kids, and."
 [taxonomies]
 tags = [ "Parenting", "Kids", "SoftSkills" ]
 [extra]

@@ -1,6 +1,7 @@
 +++
 title = "Algorithms"
 weight = 2
+description = "Interview notes on Algorithms, covering core data structures, algorithms, and problem-solving patterns."
 +++
 
 - [Sorting Algorithms](#sorting-algorithms)

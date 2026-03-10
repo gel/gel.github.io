@@ -1,5 +1,6 @@
 +++
 title = "The Anxious Generation: How the Great Rewiring of Childhood Caused an Epidemic of Mental Illness @ Jonathan Haidt"
+description = "Reading notes and review of The Anxious Generation: How the Great Rewiring of Childhood Caused an Epidemic of Mental Illness, covering parenting."
 [taxonomies]
 tags = [ "Parenting", "Psychology", "Mental Health", "Technology", "Education" ]
 [extra]

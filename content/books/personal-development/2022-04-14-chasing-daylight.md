@@ -1,5 +1,6 @@
 +++
 title = "Chasing Daylight: How My Forthcoming Death Transformed My Life @ Eugene O'Kelly"
+description = "Reading notes and review of Chasing Daylight: How My Forthcoming Death Transformed My Life, covering nonfiction, memoir, and biography."
 [taxonomies]
 tags = [ "Nonfiction", "Memoir", "Biography", "Business", "Philosophy", "Death", "Self-Help", "Inspirational" ]
 [extra]

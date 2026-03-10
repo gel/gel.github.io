@@ -1,5 +1,6 @@
 +++
 title = "The Subtle Art of Not Giving a F*ck: A Counterintuitive Approach to Living a Good Life @ Mark Manson"
+description = "For me, this is another case where the title has more value than the book itself."
 [taxonomies]
 tags = [ "Business", "Entrepreneurship", "SoftSkills" ]
 [extra]

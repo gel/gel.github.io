@@ -1,5 +1,6 @@
 +++
 title = "Start with Why: How Great Leaders Inspire Everyone to Take Action @ Simon Sinek"
+description = "Reading notes and review of Start with Why: How Great Leaders Inspire Everyone to Take Action, covering leadership and business."
 [taxonomies]
 tags = [ "Leadership", "Business" ]
 [extra]

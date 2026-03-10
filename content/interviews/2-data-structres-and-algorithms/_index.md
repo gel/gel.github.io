@@ -2,6 +2,7 @@
 title = "Data structures and Algorithms"
 weight = 2
 sort_by = "weight"
+description = "Data structures and algorithms notes focused on interview preparation and practical problem solving."
 insert_anchor_links = "right"
 +++
 

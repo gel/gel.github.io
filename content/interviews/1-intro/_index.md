@@ -2,6 +2,7 @@
 title = "Interviews Introduction"
 weight = 1
 sort_by = "weight"
+description = "Interview preparation guidance for career moves, job search strategy, and passing the interview process."
 insert_anchor_links = "right"
 +++
 
