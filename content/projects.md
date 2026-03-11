@@ -1,6 +1,10 @@
 +++
 title = "Projects"
 template = "projects-page.html"
+description = "Selected public projects across interactive interview practice, technical publishing, GenAI education, and applied computer vision."
+
+[extra]
+static_thumbnail = "og/projects.svg"
 
 [[extra.projects]]
 title = "Interactive Interview Playground"

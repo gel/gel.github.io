@@ -1,6 +1,8 @@
 +++
-title = "Gal Goldman | Engineering Notes"
+title = "Gal Goldman | Architect & Engineer"
 description = "Gal Goldman writes about distributed systems, cloud architecture, GenAI systems, engineering quality, and long-term technical learning."
+[extra]
+static_thumbnail = "og/home.svg"
 +++
 
 I am a **Senior Software Engineer and Enterprise Solution Architect** at **AWS**, formerly a Software Architect at **Intel**. I build production systems that are scalable, observable, and cost-efficient.
