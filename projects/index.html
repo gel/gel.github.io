@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 10px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        gap: 0;
+      }
+
+      header nav {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      header nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      header nav>a {
+        flex: 0 0 auto;
+      }
+
+      header nav>a:not(:last-child) {
+        margin-right: 0.3rem;
+      }
+
+      .theme-toggle {
+        flex: 0 0 auto;
+        padding: 0 2px;
+      }
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#0f766e');
+      root.style.setProperty('--accent-color-light', '#7dd3c7');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#0f766e" />
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.fe16e0bb11047769.jpg" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.605594d8be6a111f.jpg" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.3d1b2eeabf8eca47.jpg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.b6439cbc27d70267.jpg" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.e69fb5473e9ea744.jpg" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d03b11f47410640c.jpg" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d847062c67ed9f5e.jpg" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <link rel="canonical" href="https://gel.github.io/projects/" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Projects">
+  <meta property="og:description" content="Selected public projects across interactive interview practice, technical publishing, GenAI education, and applied computer vision.">
+  <meta property="og:url" content="https://gel.github.io/projects/">
+  <meta property="og:site_name" content="Gal Goldman | Architect &amp; Engineer">
+
+  
+  <meta property="og:image" content="https://gel.github.io/og/projects.svg">
+  <meta property="og:image:alt" content="Projects">
+  
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  
+  
+
+  
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  
+  <meta name="twitter:creator" content="@gelings">
+  <meta name="twitter:site" content="@gelings">
+  
+  <meta name="twitter:title" content="Projects">
+  <meta name="twitter:description" content="Selected public projects across interactive interview practice, technical publishing, GenAI education, and applied computer vision.">
+  
+  <meta name="twitter:image" content="https://gel.github.io/og/projects.svg">
+  
+
+  
+  <meta name="description" content="Selected public projects across interactive interview practice, technical publishing, GenAI education, and applied computer vision." />
+  
+
+  
+  <meta name="author" content="Gal Goldman">
+  
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://gel.github.io/#person",
+          "name": "Gal Goldman",
+          "url": "https://gel.github.io/",
+          "description": "Gal Goldman writes about distributed systems, cloud architecture, GenAI systems, and engineering quality.",
+          "jobTitle": "Senior Software Engineer and Enterprise Solution Architect",
+          "worksFor": { "@id": "https://gel.github.io/#org" },
+          
+          "image": "https://gel.github.io/iconweb.jpg",
+          
+          "sameAs": [
+            
+            "https://www.linkedin.com/in/gal-goldman/",
+            
+            "https://x.com/gelings"
+            
+          ]
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://gel.github.io/#org",
+          "name": "Gal Goldman",
+          "url": "https://gel.github.io/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://gel.github.io/iconweb.png"
+          }
+          
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://gel.github.io/#website",
+          "url": "https://gel.github.io/",
+          "name": "Gal Goldman | Architect & Engineer",
+          "description": "Gal Goldman writes about distributed systems, cloud architecture, GenAI systems, and engineering quality.",
+          "publisher": { "@id": "https://gel.github.io/#org" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://gel.github.io/projects/#webpage",
+          "url": "https://gel.github.io/projects/",
+          "name": "Projects",
+          "description": "Selected public projects across interactive interview practice, technical publishing, GenAI education, and applied computer vision.",
+          "isPartOf": { "@id": "https://gel.github.io/#website" },
+          "about": { "@id": "https://gel.github.io/#person" },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://gel.github.io/og/projects.svg",
+            "width": 1200,
+            "height": 630
+            
+          }
+          
+        }
+      ]
+    }
+  </script>
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" />
+
+  <title>
+    
+    
+    Projects | Gal Goldman | Architect &amp; Engineer
+    
+    
+  </title>
+
+  
+<style>
+  .projects-page {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding-bottom: 1.75rem;
+  }
+
+  .projects-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(240px, 320px);
+    gap: 1rem;
+    align-items: stretch;
+    margin-bottom: 1.25rem;
+  }
+
+  .projects-intro,
+  .projects-summary,
+  .project-card {
+    border: 1px solid color-mix(in srgb, var(--table-border-bottom) 88%, transparent);
+    background: color-mix(in srgb, var(--body-bg) 92%, transparent);
+    border-radius: 20px;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+  }
+
+  .projects-intro,
+  .projects-summary {
+    padding: 1.5rem;
+  }
+
+  .projects-kicker,
+  .project-kicker,
+  .project-period {
+    margin: 0 0 0.75rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--accent-color) 70%, var(--body-color));
+  }
+
+  .projects-intro h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 4vw, 3.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+
+  .projects-intro p:last-child,
+  .projects-summary p:last-child {
+    margin-bottom: 0;
+  }
+
+  .projects-summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .projects-summary ul {
+    margin: 0.85rem 0 0;
+    padding-left: 1.1rem;
+  }
+
+  .projects-section {
+    margin-top: 2.6rem;
+  }
+
+  .projects-section-header {
+    max-width: 760px;
+    margin-bottom: 1.35rem;
+  }
+
+  .projects-section-header h2 {
+    margin: 0;
+    font-size: 1.7rem;
+    line-height: 1.12;
+  }
+
+  .projects-section-header p {
+    margin: 0.65rem 0 0;
+    color: color-mix(in srgb, var(--body-color) 82%, transparent);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1rem;
+    row-gap: 2.1rem;
+    align-items: stretch;
+  }
+
+  .projects-section + .projects-section {
+    margin-top: 4rem;
+    padding-top: 0.5rem;
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.6rem 1.35rem 1.35rem;
+    height: 100%;
+  }
+
+  .projects-grid > .project-card:nth-child(n + 3) {
+    margin-top: 1.75rem;
+  }
+
+  .project-card-header {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .project-card h3 {
+    margin: 0.15rem 0 0;
+    font-size: 1.3rem;
+    line-height: 1.22;
+  }
+
+  .project-card p {
+    margin: 0;
+    color: color-mix(in srgb, var(--body-color) 82%, transparent);
+  }
+
+  .project-period {
+    margin: 0;
+    justify-self: start;
+    padding: 0.34rem 0.65rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--table-border-bottom) 88%, transparent);
+    background: color-mix(in srgb, var(--body-bg) 96%, transparent);
+    color: color-mix(in srgb, var(--body-color) 78%, transparent);
+    letter-spacing: 0.08em;
+  }
+
+  .project-impact {
+    padding-top: 0.9rem;
+    border-top: 1px solid color-mix(in srgb, var(--table-border-bottom) 85%, transparent);
+  }
+
+  .project-impact strong {
+    color: var(--heading-color);
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .project-tags li {
+    padding: 0.36rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--table-border-bottom) 88%, transparent);
+    background: color-mix(in srgb, var(--body-bg) 96%, transparent);
+    font-size: 0.88rem;
+    color: color-mix(in srgb, var(--body-color) 82%, transparent);
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: auto;
+    padding-top: 0.25rem;
+  }
+
+  .project-links a,
+  .project-links a:visited {
+    border-bottom: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.72rem 0.95rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--table-border-bottom) 88%, transparent);
+    background: color-mix(in srgb, var(--body-bg) 96%, transparent);
+    color: var(--body-color);
+    font-size: 0.93rem;
+    font-weight: 500;
+  }
+
+  .project-links a:hover {
+    border-color: color-mix(in srgb, var(--accent-color) 45%, var(--table-border-bottom));
+    background: color-mix(in srgb, var(--accent-color) 10%, transparent);
+  }
+
+  @media (max-width: 900px) {
+    .projects-hero,
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .projects-grid > .project-card:nth-child(n + 3) {
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .projects-intro,
+    .projects-summary,
+    .project-card {
+      padding: 1.3rem 1.15rem 1.15rem;
+      border-radius: 16px;
+    }
+
+    .project-card-header {
+      gap: 0.6rem;
+    }
+
+    .project-links a {
+      width: 100%;
+    }
+  }
+</style>
+
+  
+  
+  
+  <link rel="stylesheet" href="https://gel.github.io/main.css">
+  <link rel="stylesheet" href="https://gel.github.io/animations.css">
+  
+  
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="">
+  
+  <header>
+    <a class="profile-icon" href="/">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" alt="profile picture">
+    </a>
+    <nav>
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        "
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        "
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        active-nav"
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        "
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        "
+      >GenAI</a>
+      
+      
+      <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <span class="theme-icon-light">☀️</span>
+        <span class="theme-icon-dark" style="display:none">🌙</span>
+      </button>
+      
+    </nav>
+  </header>
+  
+  <main>
+    
+<article class="projects-page">
+  <section class="projects-hero">
+    <div class="projects-intro fade-in">
+      <p class="projects-kicker">Selected Work</p>
+      <h1>Projects</h1>
+      <p>Selected public work across interactive learning tools, technical publishing, GenAI education, and applied computer vision.</p>
+
+    </div>
+
+    <aside class="projects-summary fade-in">
+      <div>
+        <p class="projects-kicker">What This Covers</p>
+        <p>A compact portfolio of things I have built, taught, published, or shipped in public-facing form.</p>
+      </div>
+      <ul>
+        <li>Interactive products and learning experiences</li>
+        <li>Technical publishing and knowledge systems</li>
+        <li>Hands-on GenAI enablement</li>
+        <li>Applied computer vision and real-time tracking</li>
+      </ul>
+    </aside>
+  </section>
+
+  <section class="projects-section">
+    <div class="projects-section-header fade-in">
+      <p class="projects-kicker">Featured</p>
+      <h2>Projects that best represent the current direction of the site and the work behind it.</h2>
+    </div>
+    <div class="projects-grid">
+      
+      
+      <article class="project-card">
+        <div class="project-card-header">
+          <div>
+            <p class="project-kicker">Interactive Product</p>
+            <h3>Interactive Interview Playground</h3>
+          </div>
+          <p class="project-period">Current</p>
+        </div>
+
+        <p>A browser-based coding interview playground with executable problems, scoring logic, and custom interview UI flows.</p>
+
+        <p class="project-impact"><strong>Why it matters:</strong> Turns the interview material on the site into something visitors can actively practice instead of only read.</p>
+
+        <ul class="project-tags">
+          
+          <li>JavaScript modules</li>
+          
+          <li>Browser execution</li>
+          
+          <li>Custom UI</li>
+          
+          <li>Problem library</li>
+          
+        </ul>
+
+        <div class="project-links">
+          
+          <a href="&#x2F;interviews&#x2F;live&#x2F;">Open Playground</a>
+          
+          <a href="&#x2F;interviews&#x2F;">Interview Guide</a>
+          
+        </div>
+      </article>
+      
+      
+      
+      <article class="project-card">
+        <div class="project-card-header">
+          <div>
+            <p class="project-kicker">Publishing Platform</p>
+            <h3>Personal Blog and Website</h3>
+          </div>
+          <p class="project-period">Current</p>
+        </div>
+
+        <p>The site itself: a structured technical publication for writing, reading notes, interview material, and long-term engineering references.</p>
+
+        <p class="project-impact"><strong>Why it matters:</strong> Acts as a durable knowledge base rather than a chronological stream of posts.</p>
+
+        <ul class="project-tags">
+          
+          <li>Zola</li>
+          
+          <li>Tera templates</li>
+          
+          <li>Sass</li>
+          
+          <li>Static publishing</li>
+          
+        </ul>
+
+        <div class="project-links">
+          
+          <a href="https:&#x2F;&#x2F;gel.github.io" target="_blank" rel="noreferrer">Visit Site</a>
+          
+          <a href="https:&#x2F;&#x2F;github.com&#x2F;gel&#x2F;gel.github.io" target="_blank" rel="noreferrer">Repository</a>
+          
+        </div>
+      </article>
+      
+      
+      
+      <article class="project-card">
+        <div class="project-card-header">
+          <div>
+            <p class="project-kicker">Technical Education</p>
+            <h3>GenAI Learning Track on AWS</h3>
+          </div>
+          <p class="project-period">2023-2024</p>
+        </div>
+
+        <p>A hands-on AWS learning track covering GenAI foundations, prompt engineering, model customization, and production-oriented implementation patterns.</p>
+
+        <p class="project-impact"><strong>Why it matters:</strong> Converted complex GenAI topics into practical workshops for engineers working with Amazon Bedrock and SageMaker.</p>
+
+        <ul class="project-tags">
+          
+          <li>Amazon Bedrock</li>
+          
+          <li>Amazon SageMaker</li>
+          
+          <li>Workshops</li>
+          
+          <li>Prompt evaluation</li>
+          
+        </ul>
+
+        <div class="project-links">
+          
+          <a href="https:&#x2F;&#x2F;aws-experience.com&#x2F;emea&#x2F;tel-aviv&#x2F;e&#x2F;f3172&#x2F;aiml-track--generative-ai-basics" target="_blank" rel="noreferrer">Workshop 1</a>
+          
+          <a href="https:&#x2F;&#x2F;aws-experience.com&#x2F;emea&#x2F;tel-aviv&#x2F;e&#x2F;7d5a7&#x2F;aiml-track--start-developing-aiml-on-aws" target="_blank" rel="noreferrer">Workshop 2</a>
+          
+        </div>
+      </article>
+      
+      
+      
+      
+      
+      
+    </div>
+  </section>
+
+  <section class="projects-section">
+    <div class="projects-section-header fade-in">
+      <p class="projects-kicker">Earlier Work</p>
+      <h2>Selected product integrations from earlier computer-vision work.</h2>
+      <p>Older projects that still show the applied systems side of the portfolio.</p>
+    </div>
+    <div class="projects-grid">
+      
+      
+      
+      
+      
+      
+      
+      
+      <article class="project-card">
+        <div class="project-card-header">
+          <div>
+            <p class="project-kicker">Computer Vision</p>
+            <h3>ASUS Zenbo RealSense Integration</h3>
+          </div>
+          <p class="project-period">2016</p>
+        </div>
+
+        <p>Integrated Intel RealSense face-recognition capabilities into Zenbo interactions for a more responsive robotics experience.</p>
+
+        <p class="project-impact"><strong>Why it matters:</strong> Connected applied computer vision work to a consumer robotics product.</p>
+
+        <ul class="project-tags">
+          
+          <li>Intel RealSense</li>
+          
+          <li>Face recognition</li>
+          
+          <li>Robotics</li>
+          
+          <li>Human-computer interaction</li>
+          
+        </ul>
+
+        <div class="project-links">
+          
+          <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Zenbo" target="_blank" rel="noreferrer">Zenbo Reference</a>
+          
+        </div>
+      </article>
+      
+      
+      
+      <article class="project-card">
+        <div class="project-card-header">
+          <div>
+            <p class="project-kicker">Real-Time Tracking</p>
+            <h3>FaceRig Intel RealSense Support</h3>
+          </div>
+          <p class="project-period">2015</p>
+        </div>
+
+        <p>Integrated Intel RealSense facial landmarks and tracking into FaceRig for live avatar control.</p>
+
+        <p class="project-impact"><strong>Why it matters:</strong> Brought computer vision tracking into a real-time interactive product used by end users.</p>
+
+        <ul class="project-tags">
+          
+          <li>Intel RealSense</li>
+          
+          <li>Facial tracking</li>
+          
+          <li>Real-time interaction</li>
+          
+          <li>Avatar control</li>
+          
+        </ul>
+
+        <div class="project-links">
+          
+          <a href="https:&#x2F;&#x2F;store.steampowered.com&#x2F;app&#x2F;420824&#x2F;FaceRig_support_for_Intel_RealSense&#x2F;" target="_blank" rel="noreferrer">Store Page</a>
+          
+        </div>
+      </article>
+      
+      
+    </div>
+  </section>
+</article>
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>
