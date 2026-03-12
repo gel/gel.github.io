@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
 {% block posthead %}
+  {% set site_root = config.base_url | trim_end_matches(pat="/") %}
+  {% set article_id = page.permalink ~ "#article" %}
+  {% set webpage_id = page.permalink ~ "#webpage" %}
+  {% set website_id = site_root ~ "/#website" %}
+  {% set person_id = site_root ~ "/#person" %}
+  {% set org_id = site_root ~ "/#org" %}
+
   {% if page.earlier %}
     <link rel="prerender" href="{{ page.earlier.permalink }}">
   {% endif %}
@@ -17,29 +24,26 @@
     {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
-      "url": "{{ page.permalink | safe }}",
+      "@id": {{ article_id | json_encode | safe }},
+      "url": {{ page.permalink | json_encode | safe }},
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "{{ page.permalink | safe }}"
+        "@id": {{ webpage_id | json_encode | safe }}
       },
-      "headline": "{{ page.title }}",
-      "description": "{{ page.description | default(value=config.description) }}",
-      "image": [{% if page.extra.thumbnail %}"{{ get_url(path=page.path ~ page.extra.thumbnail) | safe }}"{% elif page.extra.static_thumbnail %}{% if page.extra.static_thumbnail is matching("^http[s]?://") %}"{{ page.extra.static_thumbnail }}"{% else %}"{{ get_url(path=page.extra.static_thumbnail) | safe }}"{% endif %}{% elif config.extra.default_og_image %}"{{ get_url(path=config.extra.default_og_image) | safe }}"{% endif %}],
-      "datePublished": "{{ page.date | date(format="%+") }}",
-      "dateModified": "{{ page.updated | default(value=page.date) | date(format="%+") }}",
-      "inLanguage": "en"{% if config.extra.author %},
+      "headline": {{ page.title | json_encode | safe }},
+      "description": {{ page.description | default(value=config.description) | json_encode | safe }},
+      "image": [{% if page.extra.thumbnail %}{{ get_url(path=page.path ~ page.extra.thumbnail) | json_encode | safe }}{% elif page.extra.static_thumbnail %}{% if page.extra.static_thumbnail is matching("^http[s]?://") %}{{ page.extra.static_thumbnail | json_encode | safe }}{% else %}{{ get_url(path=page.extra.static_thumbnail) | json_encode | safe }}{% endif %}{% elif config.extra.default_og_image %}{{ get_url(path=config.extra.default_og_image) | json_encode | safe }}{% endif %}],
+      "datePublished": {{ page.date | date(format="%+") | json_encode | safe }},
+      "dateModified": {{ page.updated | default(value=page.date) | date(format="%+") | json_encode | safe }},
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": {{ website_id | json_encode | safe }}
+      }{% if config.extra.author %},
       "author": {
-        "@type": "Person",
-        "name": "{{ config.extra.author }}"
+        "@id": {{ person_id | json_encode | safe }}
       },
        "publisher": {
-        "@type": "Organization",
-        "name": "{{ config.extra.author }}"{% if config.extra.site_logo %},
-        "logo": {
-          "@type": "ImageObject",
-          "url": "{{ get_url(path=config.extra.site_logo) | safe }}"
-        }
-        {% endif %}
+        "@id": {{ org_id | json_encode | safe }}
       }
       {% endif %}
     }
