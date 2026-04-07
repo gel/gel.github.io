@@ -5,8 +5,8 @@ description = "Currently reading notes and early takeaways from Quit: The Power 
 [taxonomies]
 tags = ["decision-making", "strategy", "personal-development"]
 [extra]
-review_image_path = "https://www.goodreads.com/book/show/55481121-quit"
-book_image_path = "2026-02-22-quit-the-power-of-knowing-when-to-walk-away.svg"
+review_image_path = "https://www.goodreads.com/book/show/60097435-quit?ref=nav_sb_ss_1_18"
+book_image_path = "2026-02-22-quit-the-power-of-knowing-when-to-walk-away.jpg"
 rating = "In progress"
 +++
 
