@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Agentic Engineering: From Syntax to Intent</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/theme/black.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/plugin/highlight/monokai.min.css">
+    
+    <style>
+      /* Custom Styling to match original Marp theme */
+      .reveal {
+        background-color: #0d1117;
+        color: #c9d1d9;
+      }
+      .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+        color: #ffffff;
+        text-transform: none; /* Keep original casing */
+      }
+      /* Auto-animate highlight colors */
+      .reveal .hljs {
+          background: #161b22;
+      }
+
+      /* Mockup UI Styles */
+      .mockup-container {
+        display: flex;
+        width: 100%;
+        height: 500px;
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 8px;
+        overflow: hidden;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      }
+      .mockup-sidebar {
+        width: 25%;
+        background: #0d1117;
+        border-right: 1px solid #30363d;
+        padding: 15px;
+        text-align: left;
+        font-size: 0.4em;
+      }
+      .mockup-main {
+        width: 75%;
+        padding: 0;
+        text-align: left;
+        position: relative;
+        background: #0d1117;
+      }
+      .mockup-tab-bar {
+        background: #161b22;
+        height: 30px;
+        border-bottom: 1px solid #30363d;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+      }
+      .mockup-tab {
+        background: #0d1117;
+        height: 100%;
+        padding: 0 15px;
+        font-size: 0.3em;
+        display: flex;
+        align-items: center;
+        border-right: 1px solid #30363d;
+        color: #c9d1d9;
+      }
+      .chat-bubble {
+        background: #1f6feb;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        font-size: 0.8em;
+      }
+      .chat-response {
+        background: #30363d;
+        color: #c9d1d9;
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        font-size: 0.8em;
+      }
+
+      /* Agentic Loop Diagram */
+      .loop-container {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .loop-node {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: #161b22;
+        border: 2px solid #a371f7;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.5em;
+        font-weight: bold;
+        z-index: 2;
+      }
+      .loop-arrow {
+        position: absolute;
+        width: 250px;
+        height: 250px;
+        border: 2px dashed #30363d;
+        border-radius: 50%;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- Slide 1a: Initial Title -->
+        <section data-auto-animate>
+          <div data-id="title-container">
+            <h1 data-id="vibe-title" style="margin-bottom: 0;">Vibe Coding</h1>
+            <h1 data-id="agentic-title" style="opacity: 0; margin-top: -1.2em;">Agentic Engineering</h1>
+          </div>
+          <div data-id="subtitle-container">
+            <h3 data-id="syntax-subtitle" style="margin-bottom: 0;">From Syntax to Intent</h3>
+            <h3 data-id="orchestrate-subtitle" style="opacity: 0; margin-top: -1.2em;">Orchestrating the Autonomous Development Lifecycle</h3>
+          </div>
+          <p data-id="bottom-text">How it is Redefining <span data-id="redefine-target">Software Development</span></p>
+          <p><small><strong>Gal Goldman</strong>, April 2026</small></p>
+        </section>
+
+        <!-- Slide 1b: Transitioned Title -->
+        <section data-auto-animate>
+          <div data-id="title-container">
+            <h1 data-id="vibe-title" style="text-decoration: line-through; color: #f85149; opacity: 0.6; margin-bottom: 0;">Vibe Coding</h1>
+            <h1 data-id="agentic-title" style="opacity: 1; margin-top: 0;">Agentic Engineering</h1>
+          </div>
+          <div data-id="subtitle-container">
+            <h3 data-id="syntax-subtitle" style="text-decoration: line-through; color: #f85149; opacity: 0.6; margin-bottom: 0;">From Syntax to Intent</h3>
+            <h3 data-id="orchestrate-subtitle" style="opacity: 1; margin-top: 0;">Orchestrating the Autonomous Development Lifecycle</h3>
+          </div>
+          <p data-id="bottom-text">How it is Redefining <span data-id="redefine-target" style="text-decoration: line-through; color: #f85149; opacity: 0.6;">Software Development</span> Knowledge Workers</p>
+          <p><small><strong>Gal Goldman</strong>, April 2026</small></p>
+        </section>
+
+        <!-- Slide 1c: About Me Timeline -->
+        <section data-auto-animate>
+          <h2 data-id="about-title">Gal Goldman</h2>
+          <p style="font-size: 0.6em; color: #8b949e; margin-top: -10px;">Building Reliable Systems at Enterprise Scale</p>
+          
+          <div style="display: flex; gap: 20px; margin-top: 30px; align-items: stretch;">
+            <!-- Timeline Column -->
+            <div style="flex: 1.5; text-align: left; border-left: 2px solid #30363d; padding-left: 20px; margin-left: 10px;">
+              <div style="margin-bottom: 25px; position: relative;">
+                <div style="position: absolute; left: -27px; top: 0; width: 12px; height: 12px; background: #a371f7; border-radius: 50%; border: 2px solid #0d1117;"></div>
+                <h4 style="font-size: 0.6em; color: #a371f7; margin-bottom: 5px;">2024 - Present: AWS (New Jersey, US)</h4>
+                <p style="font-size: 0.45em; line-height: 1.4;"><strong>Senior Software Engineer / Architect</strong><br>
+                Leading <strong>Amazon Bedrock AgentCore</strong>. Pioneering agentic AI capabilities for Amazon Q Developer.</p>
+              </div>
+              <div style="margin-bottom: 25px; position: relative;">
+                <div style="position: absolute; left: -27px; top: 0; width: 12px; height: 12px; background: #58a6ff; border-radius: 50%; border: 2px solid #0d1117;"></div>
+                <h4 style="font-size: 0.6em; color: #58a6ff; margin-bottom: 5px;">2017 - 2024: Amazon & AWS (Vancouver Canada & Israel)</h4>
+                <p style="font-size: 0.45em; line-height: 1.4;"><strong>Senior SDE & Solutions Architect</strong><br>
+                Built ML-powered forecasting for Amazon Connect. Led EMEA GenAI training (500+ engineers).</p>
+              </div>
+              <div style="position: relative;">
+                <div style="position: absolute; left: -27px; top: 0; width: 12px; height: 12px; background: #3fb950; border-radius: 50%; border: 2px solid #0d1117;"></div>
+                <h4 style="font-size: 0.6em; color: #3fb950; margin-bottom: 5px;">2009 - 2017: Intel Corporation (Israel)</h4>
+                <p style="font-size: 0.45em; line-height: 1.4;"><strong>Senior Software Engineer</strong><br>
+                Built Intel RealSense (RGBD tracking/recognition). Led automation for global wireless products.</p>
+              </div>
+            </div>
+
+            <!-- Stats & Links Column -->
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 15px;">
+              <div style="background: rgba(163, 113, 247, 0.1); border: 1px solid #a371f744; padding: 15px; border-radius: 8px;">
+                <p style="font-size: 0.8em; font-weight: bold; color: #a371f7; margin: 0;">2 Decades</p>
+                <p style="font-size: 0.4em; color: #8b949e; margin: 0;">Enterprise Systems Experience</p>
+              </div>
+              <div style="background: rgba(88, 166, 255, 0.1); border: 1px solid #58a6ff44; padding: 15px; border-radius: 8px; text-align: left;">
+                <p style="font-size: 0.4em; line-height: 1.4; margin: 0;">
+                  🌐 <strong>LinkedIn:</strong> <span style="color: #58a6ff;">/in/gal-goldman</span><br>
+                  ✍️ <strong>Blog:</strong> <span style="color: #58a6ff;">gel.github.io</span><br>
+                  🚀 <strong>Focus:</strong> Agentic AI, Architecture at Scale
+                </p>
+              </div>
+              <p style="font-size: 0.4em; color: #8b949e; text-align: left; font-style: italic; margin-top: auto;">
+                "I bridge the gap between technical teams and business stakeholders to accelerate GenAI adoption."
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 2: Evolution Overview -->
+        <section data-auto-animate>
+          <h2 data-id="evo-title">The Evolution of AI Coding</h2>
+          <div style="display: flex; gap: 20px; margin-top: 40px;">
+            <div data-id="stage-1" style="flex: 1; border: 1px solid #30363d; padding: 20px; border-radius: 8px; opacity: 1;">
+              <h4 style="color: #58a6ff;">Stage 1</h4>
+              <p><small>The Typist Era</small></p>
+            </div>
+            <div data-id="stage-2" style="flex: 1; border: 1px solid #30363d; padding: 20px; border-radius: 8px; opacity: 1;">
+              <h4 style="color: #3fb950;">Stage 2</h4>
+              <p><small>The Co-pilot Era</small></p>
+            </div>
+            <div data-id="stage-3" style="flex: 1; border: 1px solid #30363d; padding: 20px; border-radius: 8px; opacity: 1;">
+              <h4 style="color: #a371f7;">Stage 3</h4>
+              <p><small>The Autonomous Era</small></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 2.1: Stage 1 Detail -->
+        <section data-auto-animate>
+          <h2 data-id="evo-title" style="opacity: 0.5;">The Evolution: Stage 1</h2>
+          <div style="display: flex; gap: 20px; align-items: flex-start;">
+            <div data-id="stage-1" style="flex: 1; border: 2px solid #58a6ff; padding: 20px; border-radius: 8px; background: rgba(88, 166, 255, 0.1);">
+              <h4 style="color: #58a6ff;">The Typist Era</h4>
+              <ul style="font-size: 0.6em; text-align: left;">
+                <li><strong>Tools:</strong> GitHub Copilot</li>
+                <li><strong>Mechanism:</strong> Tab Completion</li>
+                <li><strong>Role:</strong> Human dictates 99% of logic. AI predicts the next few tokens.</li>
+              </ul>
+            </div>
+            <div style="flex: 1.5;">
+              <p><small>The "Ghost Text" Experience:</small></p>
+              <pre><code class="hljs javascript" data-trim>
+                function calculateTotal(price, tax) {
+                  // AI suggests:
+                  return price + (price * tax); // [TAB]
+                }
+              </code></pre>
+              <p style="font-size: 0.4em; color: #8b949e; margin-top: 40px; border-top: 1px solid #30363d; padding-top: 10px;">
+                Note: The term <strong>"Vibe Coding"</strong> was popularized during this era by <strong>Andrej Karpathy</strong>.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 2.1b: Stage 1 IDE Mockup -->
+        <section>
+          <h3>Stage 1: Classic IDE Experience</h3>
+          <div class="mockup-container">
+            <div class="mockup-sidebar">
+              <p style="color: #8b949e; margin-bottom: 10px;">EXPLORER</p>
+              <ul style="list-style: none; padding: 0; color: #c9d1d9;">
+                <li>📄 index.js</li>
+                <li style="color: #58a6ff;">📄 utils.js</li>
+                <li>📄 package.json</li>
+              </ul>
+            </div>
+            <div class="mockup-main">
+              <div class="mockup-tab-bar"><div class="mockup-tab">utils.js</div></div>
+              <pre style="font-size: 0.4em; padding: 20px;"><code class="hljs javascript">
+function calculateTotal(price, tax) {
+  <span style="color: #8b949e;">// Ghost text appears here...</span>
+  <span style="color: #8b949e; opacity: 0.5;">return price + (price * tax);</span>
+}
+              </code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 2.2: Stage 2 Detail -->
+        <section data-auto-animate>
+          <h2 data-id="evo-title" style="opacity: 0.5;">The Evolution: Stage 2</h2>
+          <div style="display: flex; gap: 20px; align-items: flex-start;">
+            <div data-id="stage-2" style="flex: 1; border: 2px solid #3fb950; padding: 20px; border-radius: 8px; background: rgba(63, 185, 80, 0.1);">
+              <h4 style="color: #3fb950;">The Co-pilot Era</h4>
+              <ul style="font-size: 0.6em; text-align: left;">
+                <li><strong>Tools:</strong> ChatGPT, Claude</li>
+                <li><strong>Mechanism:</strong> Chat-based generation</li>
+                <li><strong>Role:</strong> Human acts as an Integrator, wiring isolated chunks together.</li>
+              </ul>
+            </div>
+            <div style="flex: 1.5; text-align: left;">
+              <p><small>The "Copy-Paste-Modify" Workflow:</small></p>
+              <pre style="font-size: 0.35em;"><code class="hljs javascript" data-trim>
+                // AI: "Here is your full component..."
+                export function UserCard({ name, role, avatar }) {
+                  return (
+                    <div className="p-4 border rounded-lg shadow-sm">
+                      <img src={avatar} alt={name} className="w-12 h-12 rounded-full" />
+                      <div className="mt-2">
+                        <h3 className="text-lg font-bold">{name}</h3>
+                        <p className="text-sm text-gray-500">{role}</p>
+                      </div>
+                      <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
+                        View Profile
+                      </button>
+                    </div>
+                  );
+                }
+              </code></pre>
+              <p style="font-size: 0.4em; color: #8b949e; margin-top: 10px;">
+                Workflow: Human copies the generated chunk and manually wires it into the app.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 2.2b: Stage 2 Chat Mockup -->
+        <section>
+          <h3>Stage 2: Conversational Workflow</h3>
+          <div class="mockup-container">
+            <div class="mockup-sidebar" style="width: 35%;">
+              <p style="color: #8b949e; margin-bottom: 10px;">CHATS</p>
+              <div class="chat-bubble">Write a React card component...</div>
+              <div class="chat-response">Here is a modern card component using Tailwind CSS...</div>
+              <div style="border-top: 1px solid #30363d; padding-top: 10px; margin-top: 20px;">
+                <p style="font-size: 0.8em; color: #8b949e;">Type a message...</p>
+              </div>
+            </div>
+            <div class="mockup-main" style="width: 65%;">
+              <div class="mockup-tab-bar"><div class="mockup-tab">UserCard.jsx</div></div>
+              <pre style="font-size: 0.3em; padding: 15px;"><code class="hljs javascript">
+export function UserCard({ name, role, avatar }) {
+  return (
+    <div className="p-4 border rounded-lg shadow-sm">
+      <img src={avatar} alt={name} className="w-12 h-12 rounded-full" />
+      {/* ... component details ... */}
+    </div>
+  );
+}
+              </code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 2.3: Stage 3 Detail -->
+        <section data-auto-animate>
+          <h2 data-id="evo-title" style="opacity: 0.5;">The Evolution: Stage 3</h2>
+          <div style="display: flex; gap: 20px; align-items: flex-start;">
+            <div data-id="stage-3" style="flex: 1; border: 2px solid #a371f7; padding: 20px; border-radius: 8px; background: rgba(163, 113, 247, 0.1);">
+              <h4 style="color: #a371f7;">The Autonomous Era</h4>
+              <ul style="font-size: 0.6em; text-align: left;">
+                <li><strong>Tools:</strong> Cursor, Anti-gravity, Kiro</li>
+                <li><strong>Mechanism:</strong> Agentic Workflows</li>
+                <li><strong>Role:</strong> Human as Technical Director. AI navigates, edits, and debugs.</li>
+              </ul>
+            </div>
+            <div style="flex: 1.5; text-align: left;">
+              <p><small>The "Autonomous Task" Workflow:</small></p>
+              <div style="font-size: 0.38em; background: #0d1117; border: 1px solid #30363d; padding: 10px; border-radius: 8px; font-family: monospace; line-height: 1.1;">
+                <p style="color: #8b949e; margin-bottom: 5px;">&gt; "Migrate Auth to JWT"</p>
+                <div style="margin-left: 10px;">
+                  <p style="color: #a371f7;">[1/3] Planning & Execution:</p>
+                  <p style="color: #c9d1d9; margin-left: 10px;">• <span style="color: #58a6ff;">EDIT:</span> `server.js`, `auth.js`</p>
+                  <p style="color: #c9d1d9; margin-left: 10px;">• <span style="color: #3fb950;">NEW:</span> `utils/jwt.js`</p>
+                  <p style="color: #a371f7;">[2/3] Verification:</p>
+                  <p style="color: #f85149; margin-left: 10px;">✘ Error: `Missing secret`</p>
+                  <p style="color: #a371f7;">[3/3] Self-Healing:</p>
+                  <p style="color: #3fb950; margin-left: 10px;">✔ Fixed `.env`. All tests passed.</p>
+                </div>
+              </div>
+              <p style="font-size: 0.35em; color: #8b949e; margin-top: 5px;">
+                Human provides goal; AI executes Plan → Act → Verify.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 2.3b: Stage 3 Agent Mockup -->
+        <section>
+          <h3>Stage 3: Agentic Workspace</h3>
+          <div class="mockup-container" style="background: #0d1117; border: 1px solid #a371f7;">
+            <div class="mockup-sidebar" style="width: 22%; background: #0d1117; display: flex; flex-direction: column; padding: 10px;">
+              <!-- Search Bar -->
+              <div style="background: #161b22; padding: 5px 10px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #30363d; font-size: 0.7em; color: #8b949e;">
+                🔍 Search tasks...
+              </div>
+
+              <!-- Global Nav -->
+              <div style="margin-bottom: 25px;">
+                <p style="color: #8b949e; font-weight: bold; font-size: 0.6em; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Global</p>
+                <ul style="list-style: none; padding: 0; color: #c9d1d9; font-size: 0.8em;">
+                  <li style="padding: 4px 0;">🏠 Dashboard</li>
+                  <li style="padding: 4px 0;">🧩 Marketplace</li>
+                  <li style="padding: 4px 0;">📚 Knowledge Base</li>
+                </ul>
+              </div>
+
+              <!-- Projects Section (Scrollable Area) -->
+              <div style="flex-grow: 1; overflow-y: auto;">
+                <p style="color: #a371f7; font-weight: bold; font-size: 0.6em; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Projects</p>
+                <ul style="list-style: none; padding: 0; color: #8b949e; font-size: 0.8em;">
+                  <li style="margin-bottom: 15px;">
+                    <div style="color: #ffffff; background: #a371f733; padding: 5px; border-radius: 4px; margin-bottom: 5px; font-size: 0.9em;">
+                      📂 Personal Blog
+                    </div>
+                    <ul style="list-style: none; padding-left: 12px; font-size: 0.85em; border-left: 1px solid #a371f744;">
+                      <li style="color: #ffffff; margin-bottom: 4px; display: flex; align-items: center;">
+                        <span style="color: #3fb950; margin-right: 5px;">●</span> #42: SEO Fix
+                      </li>
+                      <li style="margin-bottom: 4px;">• #41: Dark Mode</li>
+                    </ul>
+                  </li>
+                  <li style="margin-bottom: 10px;">
+                    <div style="padding: 5px; font-size: 0.9em;">📂 E-commerce Site</div>
+                    <ul style="list-style: none; padding-left: 12px; font-size: 0.85em; opacity: 0.5;">
+                      <li>• #12: Stripe Setup</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- User Profile -->
+              <div style="border-top: 1px solid #30363d; padding-top: 15px; margin-top: 10px; display: flex; align-items: center; gap: 10px;">
+                <div style="width: 24px; height: 24px; background: #a371f7; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.6em; color: white; font-weight: bold;">GG</div>
+                <div style="font-size: 0.7em;">
+                  <p style="margin: 0; color: #ffffff; font-weight: bold;">Gal Goldman</p>
+                  <p style="margin: 0; color: #8b949e; font-size: 0.9em;">Technical Director</p>
+                </div>
+                <div style="margin-left: auto; color: #8b949e; font-size: 0.8em;">⚙️</div>
+              </div>
+            </div>
+            <div class="mockup-main" style="width: 80%;">
+              <div class="mockup-tab-bar" style="background: #161b22;">
+                 <div class="mockup-tab">Agent Plan: Auth Migration</div>
+              </div>
+              <div style="padding: 20px; font-size: 0.5em;">
+                <h4 style="color: #a371f7; margin-bottom: 10px;">Agent is working on: "Migrate Auth to JWT"</h4>
+                <div style="border: 1px solid #30363d; padding: 15px; border-radius: 8px;">
+                  <p style="color: #3fb950;">✔ Goal analyzed. Identified 3 affected files.</p>
+                  <p style="color: #c9d1d9; margin-top: 10px;">Current Action: Running `npm test` after modifying `src/auth.js`...</p>
+                  <div style="background: #000; padding: 10px; margin-top: 10px; border-radius: 4px; font-family: monospace;">
+                    <span style="color: #3fb950;">PASS</span> tests/auth.test.js<br>
+                    <span style="color: #3fb950;">PASS</span> tests/server.test.js
+                  </div>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                  <div style="flex: 1; border: 1px solid #30363d; padding: 10px; border-radius: 4px;">
+                    <p style="font-size: 0.6em; color: #8b949e;">Modified Files:</p>
+                    <p style="font-size: 0.8em;">server.js, auth.js, jwt.js</p>
+                  </div>
+                  <div style="flex: 1; border: 1px solid #3fb950; padding: 10px; border-radius: 4px;">
+                    <p style="font-size: 0.6em; color: #3fb950;">Execution Status:</p>
+                    <p style="font-size: 0.8em;">95% Complete</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        </section>
+
+        <!-- Slide 3: What is it -->
+        <section data-auto-animate>
+          <h2 data-id="agentic-def">What is "Agentic Engineering"?</h2>
+          <p>The internet calls it <strong>"Vibe Coding"</strong>.</p>
+          <p style="font-size: 0.8em;">In reality, it is the shift from writing literal syntax to dictating architecture, user experience, and system constraints.</p>
+          <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; margin-top: 20px;">
+              <h4>The Developer's New Role:</h4>
+              <p>You are no longer a typist. You are a <strong>Technical Director</strong>.</p>
+              <ul style="font-size: 0.8em;">
+                  <li>System Architecture</li>
+                  <li>Context Management</li>
+                  <li>Prompt Engineering</li>
+                  <li>High-speed Code Review</li>
+              </ul>
+          </div>
+        </section>
+
+        <!-- Slide 3b: The Agentic Loop -->
+        <section data-auto-animate>
+          <h2 data-id="agentic-def" style="opacity: 0.5;">The Mechanism: The Agentic Loop</h2>
+          <div class="loop-container">
+            <div class="loop-arrow"></div>
+            <div class="loop-node" style="top: 0; border-color: #58a6ff;">PLAN<br><small>(Reasoning)</small></div>
+            <div class="loop-node" style="bottom: 50px; left: 0; border-color: #3fb950;">ACT<br><small>(Tools)</small></div>
+            <div class="loop-node" style="bottom: 50px; right: 0; border-color: #f85149;">OBSERVE<br><small>(Feedback)</small></div>
+            <div style="z-index: 3; font-size: 0.4em; color: #a371f7; font-weight: bold; background: #0d1117; padding: 10px;">The Director (YOU)<br>Supervises the Loop</div>
+          </div>
+          <p style="font-size: 0.5em; color: #8b949e; margin-top: 20px;">The agent iterates autonomously until the goal is achieved or you intervene.</p>
+        </section>
+
+        <!-- Slide 4: AI-Enhanced SDLC -->
+        <section data-auto-animate>
+          <h2 data-id="sdlc-title">The "10%" Reality</h2>
+          <p style="font-size: 0.8em; color: #8b949e;">Why "Vibe Coding" isn't just about writing syntax.</p>
+          
+          <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 15px; align-items: center;">
+            <!-- SDLC Progress Bar -->
+            <div style="width: 80%; height: 30px; background: #30363d; border-radius: 15px; overflow: hidden; display: flex; border: 1px solid #c9d1d933;">
+              <div style="width: 25%; background: #58a6ff; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 0.4em; font-weight: bold; color: white;">PLANNING</div>
+              <div style="width: 25%; background: #3fb950; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 0.4em; font-weight: bold; color: white;">ARCHITECT</div>
+              <div data-id="coding-bar" style="width: 10%; background: #f85149; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 0.4em; font-weight: bold; color: white;">CODE</div>
+              <div style="width: 20%; background: #a371f7; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 0.4em; font-weight: bold; color: white;">TEST</div>
+              <div style="width: 20%; background: #d29922; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 0.4em; font-weight: bold; color: white;">REVIEW</div>
+            </div>
+            <p style="font-size: 0.6em; color: #f85149; font-weight: bold;">Traditional Coding = ~10% of the SDLC</p>
+          </div>
+
+          <div style="display: flex; gap: 20px; margin-top: 40px; text-align: left;">
+            <div style="flex: 1; font-size: 0.5em; border-left: 3px solid #58a6ff; padding-left: 15px;">
+              <h4 style="color: #58a6ff;">Agentic Planning</h4>
+              <p>AI drafts the PRD, identifies edge cases, and maps out the database schema before a single line is written.</p>
+            </div>
+            <div style="flex: 1; font-size: 0.5em; border-left: 3px solid #a371f7; padding-left: 15px;">
+              <h4 style="color: #a371f7;">Agentic Verification</h4>
+              <p>AI writes its own test suites, identifies regressions, and attempts to self-heal when tests fail.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 5a: Case Study #1 -->
+        <section data-auto-animate>
+          <h2 data-id="demo-title">Case Study #1: Automated Platforms</h2>
+          <div style="display: flex; gap: 30px; align-items: flex-start; margin-top: 20px;">
+            <div style="flex: 1.2; text-align: left;">
+              <h4 style="color: #58a6ff;">The Context (2024)</h4>
+              <ul style="font-size: 0.55em; line-height: 1.4;">
+                <li><strong>Era:</strong> Built using <strong>Stage 2</strong> (Conversational AI).</li>
+                <li><strong>Timeline:</strong> ~2 months from idea to MVP.</li>
+                <li style="margin-top: 10px;"><strong>The Goal:</strong> Reducing operational complexity through rapid prototyping.</li>
+                <li style="margin-top: 10px;"><strong>The Philosophy:</strong> High-velocity delivery through AI-scaffolded design.</li>
+              </ul>
+            </div>
+            <div style="flex: 0.8;">
+               <div style="border: 2px solid #58a6ff; padding: 20px; border-radius: 12px; background: #161b22; font-family: sans-serif; position: relative;">
+                  <h3 style="color: #ffffff; margin: 0; font-size: 0.9em;">Case Study #1</h3>
+                  <div style="margin-top: 20px; border-top: 1px solid #30363d; padding-top: 10px;">
+                    <p style="font-size: 0.4em; color: #3fb950;">✔ Complex Scaffolding</p>
+                    <p style="font-size: 0.4em; color: #3fb950;">✔ Conversational Workflows</p>
+                    <p style="font-size: 0.4em; color: #3fb950;">✔ Real-world Deployment</p>
+                  </div>
+               </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 5c: Case Study #1 Successes -->
+        <section data-auto-animate>
+          <h2 data-id="demo-title">Case Study #1: Successes</h2>
+          <div style="display: flex; gap: 20px; margin-top: 40px; text-align: left; justify-content: center;">
+            <div style="width: 80%; border: 1px solid #3fb950; padding: 30px; border-radius: 8px; background: rgba(63, 185, 80, 0.05);">
+              <ul style="font-size: 0.6em; list-style-type: '🚀 '; line-height: 1.6;">
+                <li><strong>The Workflow Win:</strong> Rapidly reduced planning stress by empowering stakeholders to interact with design intent early.</li>
+                <li><strong>Feature Explosion:</strong> Added complex sub-systems in days that would take weeks in traditional development.</li>
+                <li><strong>Pure Growth:</strong> High user engagement driven by "vibe-aligned" user experiences.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 5d: Case Study #1 Pitfalls -->
+        <section data-auto-animate>
+          <h2 data-id="demo-title" style="opacity: 0.5;">Case Study #1: Pitfalls</h2>
+          <div style="display: flex; gap: 20px; margin-top: 40px; text-align: left; justify-content: center;">
+            <div style="width: 80%; border: 1px solid #f85149; padding: 30px; border-radius: 8px; background: rgba(248, 81, 73, 0.05);">
+              <ul style="font-size: 0.6em; list-style-type: '⚠️ '; line-height: 1.6;">
+                <li><strong>Architectural Crisis:</strong> Critical downtime during scaling revealed the hidden costs of "vibe-first" design without deep-tier HA.</li>
+                <li><strong>Ongoing Investment:</strong> The myth of the "finished project" — 1-2 months of continuous iteration to meet enterprise standards.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 6a: Case Study #2 -->
+        <section data-auto-animate>
+          <h2 data-id="deepstox-title">Case Study #2: Agentic Automation</h2>
+          <div style="display: flex; gap: 30px; align-items: flex-start; margin-top: 20px;">
+            <div style="flex: 1.2; text-align: left;">
+              <h4 style="color: #a371f7;">Stage 3 in Action (2025)</h4>
+              <ul style="font-size: 0.55em; line-height: 1.4;">
+                <li><strong>The Challenge:</strong> High-volume data curation and visual storytelling requiring 24/7 attention.</li>
+                <li><strong>The Agentic Solution:</strong> Fully autonomous agents managing data ingestion, mood analysis, and UI generation.</li>
+                <li style="margin-top: 10px; color: #3fb950; font-weight: bold;">Timeline: &lt; 1 Week from concept to production.</li>
+                <li style="margin-top: 10px;"><strong>Core Value:</strong> Immediate technical intuition through automated visualization.</li>
+              </ul>
+            </div>
+            <div style="flex: 0.8;">
+               <div style="border: 2px solid #a371f7; padding: 20px; border-radius: 12px; background: #0d1117; position: relative; box-shadow: 0 0 20px rgba(163, 113, 247, 0.2);">
+                  <div style="position: absolute; top: -10px; right: -10px; background: #a371f7; color: white; padding: 5px 10px; border-radius: 5px; font-size: 0.4em; font-weight: bold;">STAGE 3 AGENTIC</div>
+                  <h3 style="color: #ffffff; margin: 0; font-size: 0.9em;">Case Study #2</h3>
+                  <div style="margin-top: 20px; text-align: left; font-size: 0.35em; font-family: monospace;">
+                    <p style="color: #a371f7; margin-bottom: 2px;">Agent Log:</p>
+                    <p style="color: #3fb950; margin: 0;">✔ Data Ingestion Pass</p>
+                    <p style="color: #3fb950; margin: 0;">✔ Visual Generation Pass</p>
+                    <p style="color: #3fb950; margin: 0;">✔ UI Optimization Pass</p>
+                  </div>
+               </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 7: The Agentic Shift -->
+        <section data-auto-animate>
+          <h2 data-id="reality-title">The Agentic Shift <small style="font-size: 0.4em; color: #8b949e; vertical-align: middle; opacity: 0.8;">(A Personal Perspective)</small></h2>
+          <p style="font-size: 0.8em; color: #f85149;"><strong>"If you can model it, AI can solve it."</strong></p>
+          
+          <div style="display: flex; gap: 20px; margin-top: 30px; text-align: left;">
+            <div style="flex: 1; border-left: 3px solid #f85149; padding-left: 20px;">
+              <h4 style="font-size: 0.8em; color: #ffffff;">The Canary in the Coal Mine</h4>
+              <p style="font-size: 0.5em; line-height: 1.5;">Software engineering is just the first to witness this. Any problem that can be modeled is now a candidate for total automation. <strong>Margins are shrinking.</strong></p>
+            </div>
+            <div style="flex: 1; border-left: 3px solid #3fb950; padding-left: 20px;">
+              <h4 style="font-size: 0.8em; color: #ffffff;">The New Moat</h4>
+              <p style="font-size: 0.5em; line-height: 1.5;">Specialized knowledge is losing its premium. Survival now depends on skills that <em>can't</em> be easily modeled:</p>
+              <ul style="font-size: 0.45em; line-height: 1.4; margin-top: 10px;">
+                <li><strong>Problem Modeling:</strong> Defining the "What" so the "How" is a commodity.</li>
+                <li><strong>Human Centricity:</strong> Empathy, high-stakes communication, and people-facing leadership.</li>
+                <li><strong>Extreme Multi-tasking:</strong> Pragmatic problem solvers orchestrating across domains, not just deep-diving into one.</li>
+              </ul>
+            </div>
+          </div>
+          <p style="font-size: 0.5em; color: #8b949e; margin-top: 40px; text-align: center; font-style: italic;">
+            "We are moving from being creators of knowledge / processes to being architects of intent and communication."
+          </p>
+        </section>
+
+        <!-- Slide 8: How to Start Tomorrow -->
+        <section>
+          <h2>How to Start Tomorrow</h2>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+            
+            <!-- 1. Subscriptions -->
+            <div style="border: 1px solid #30363d; padding: 15px; border-radius: 8px; background: rgba(255,255,255,0.02);">
+              <h4 style="color: #d29922; font-size: 0.6em; margin-bottom: 10px;">1. Subscriptions</h4>
+              <ul style="font-size: 0.45em; text-align: left; line-height: 1.6;">
+                <li>ChatGPT Plus / Pro</li>
+                <li>Claude Pro</li>
+              </ul>
+            </div>
+
+            <!-- 2. CLI Tools -->
+            <div style="border: 1px solid #30363d; padding: 15px; border-radius: 8px; background: rgba(255,255,255,0.02);">
+              <h4 style="color: #58a6ff; font-size: 0.6em; margin-bottom: 10px;">2. CLI Tools</h4>
+              <ul style="font-size: 0.45em; text-align: left; line-height: 1.6;">
+                <li>Codex CLI</li>
+                <li>Claude-code</li>
+                <li>Gemini / CLI</li>
+                <li>Kiro-cli</li>
+              </ul>
+            </div>
+
+            <!-- 3. Agentic Tools -->
+            <div style="border: 1px solid #30363d; padding: 15px; border-radius: 8px; background: rgba(255,255,255,0.02);">
+              <h4 style="color: #3fb950; font-size: 0.6em; margin-bottom: 10px;">3. Agentic Tools</h4>
+              <ul style="font-size: 0.45em; text-align: left; line-height: 1.6;">
+                <li>Claude CoWork</li>
+                <li>Codex App</li>
+              </ul>
+            </div>
+
+            <!-- 4. IDEs -->
+            <div style="border: 1px solid #30363d; padding: 15px; border-radius: 8px; background: rgba(255,255,255,0.02);">
+              <h4 style="color: #a371f7; font-size: 0.6em; margin-bottom: 10px;">4. IDEs</h4>
+              <ul style="font-size: 0.45em; text-align: left; line-height: 1.6;">
+                <li>Anti-gravity</li>
+                <li>GitHub Co-pilot</li>
+                <li>Kiro</li>
+                <li>Cursor</li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Slide 9: 3 Key Takeaways -->
+        <section>
+          <h2>3 Key Takeaways</h2>
+          <div style="margin-top: 40px; text-align: left; display: flex; flex-direction: column; gap: 20px; align-items: center;">
+            <div style="width: 80%; background: rgba(88, 166, 255, 0.1); border-left: 5px solid #58a6ff; padding: 20px; border-radius: 4px;">
+              <h4 style="color: #58a6ff; margin: 0; font-size: 0.7em;">1. Coding is the 10%</h4>
+              <p style="font-size: 0.5em; margin-top: 5px;">Agentic tools aren't just for syntax; they are for the 90% (Planning, Testing, Reviewing).</p>
+            </div>
+            <div style="width: 80%; background: rgba(63, 185, 80, 0.1); border-left: 5px solid #3fb950; padding: 20px; border-radius: 4px;">
+              <h4 style="color: #3fb950; margin: 0; font-size: 0.7em;">2. Model it to Solve it</h4>
+              <p style="font-size: 0.5em; margin-top: 5px;">If you can clearly model a problem, AI can learn and solve it. Invest in problem-modeling skills.</p>
+            </div>
+            <div style="width: 80%; background: rgba(163, 113, 247, 0.1); border-left: 5px solid #a371f7; padding: 20px; border-radius: 4px;">
+              <h4 style="color: #a371f7; margin: 0; font-size: 0.7em;">3. Own the Intent</h4>
+              <p style="font-size: 0.5em; margin-top: 5px;">Move from being a creator of knowledge to an architect of intent. Pragmatic problem solving is your new moat.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 10: Q&A -->
+        <section>
+          <h1>Q&A</h1>
+          <p>Thank you.</p>
+          <div style="margin-top: 50px; font-size: 0.5em; color: #8b949e;">
+            <p>🌐 linkedin.com/in/gal-goldman</p>
+            <p>✍️ gel.github.io</p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/plugin/notes/notes.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/plugin/markdown/markdown.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/plugin/highlight/highlight.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+        preloadIframes: true
+      });
+    </script>
+  </body>
+</html>

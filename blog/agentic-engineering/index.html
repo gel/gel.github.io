@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 10px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        gap: 0;
+      }
+
+      header nav {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      header nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      header nav>a {
+        flex: 0 0 auto;
+      }
+
+      header nav>a:not(:last-child) {
+        margin-right: 0.3rem;
+      }
+
+      .theme-toggle {
+        flex: 0 0 auto;
+        padding: 0 2px;
+      }
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#0f766e');
+      root.style.setProperty('--accent-color-light', '#7dd3c7');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#0f766e" />
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.5bc282474aa9c014.jpg" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.fe16e0bb11047769.jpg" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.605594d8be6a111f.jpg" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.3d1b2eeabf8eca47.jpg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.b6439cbc27d70267.jpg" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.e69fb5473e9ea744.jpg" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d03b11f47410640c.jpg" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.d847062c67ed9f5e.jpg" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <link rel="canonical" href="https://gel.github.io/blog/agentic-engineering/" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Agentic Engineering: Orchestrating the Autonomous Development Lifecycle">
+  <meta property="og:description" content="A talk on how &#x27;Vibe Coding&#x27; is redefining the role of the knowledge worker and the future of the SDLC.">
+  <meta property="og:url" content="https://gel.github.io/blog/agentic-engineering/">
+  <meta property="og:site_name" content="Gal Goldman | Architect &amp; Engineer">
+
+  
+  <meta property="og:image" content="https://gel.github.io/og/site-default.svg">
+  <meta property="og:image:alt" content="Agentic Engineering: Orchestrating the Autonomous Development Lifecycle">
+  
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  
+  
+
+  
+  <meta property="article:published_time" content="2026-04-07T00:00:00+00:00">
+  <meta property="article:modified_time" content="2026-04-07T00:00:00+00:00">
+  
+  
+  <meta property="article:tag" content="generative-ai">
+  
+  <meta property="article:tag" content="agentic-ai">
+  
+  <meta property="article:tag" content="engineering-leadership">
+  
+  <meta property="article:tag" content="architecture">
+  
+  <meta property="article:tag" content="future-of-work">
+  
+  
+  
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  
+  <meta name="twitter:creator" content="@gelings">
+  <meta name="twitter:site" content="@gelings">
+  
+  <meta name="twitter:title" content="Agentic Engineering: Orchestrating the Autonomous Development Lifecycle">
+  <meta name="twitter:description" content="A talk on how &#x27;Vibe Coding&#x27; is redefining the role of the knowledge worker and the future of the SDLC.">
+  
+  <meta name="twitter:image" content="https://gel.github.io/og/site-default.svg">
+  
+
+  
+  <meta name="description" content="A talk on how &#x27;Vibe Coding&#x27; is redefining the role of the knowledge worker and the future of the SDLC." />
+  
+
+  
+  <meta name="author" content="Gal Goldman">
+  
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://gel.github.io/#person",
+          "name": "Gal Goldman",
+          "url": "https://gel.github.io/",
+          "description": "Gal Goldman writes about distributed systems, cloud architecture, GenAI systems, and engineering quality.",
+          "jobTitle": "Senior Software Engineer and Enterprise Solution Architect",
+          "worksFor": { "@id": "https://gel.github.io/#org" },
+          
+          "image": "https://gel.github.io/iconweb.jpg",
+          
+          "sameAs": [
+            
+            "https://www.linkedin.com/in/gal-goldman/",
+            
+            "https://x.com/gelings"
+            
+          ]
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://gel.github.io/#org",
+          "name": "Gal Goldman",
+          "url": "https://gel.github.io/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://gel.github.io/iconweb.png"
+          }
+          
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://gel.github.io/#website",
+          "url": "https://gel.github.io/",
+          "name": "Gal Goldman | Architect & Engineer",
+          "description": "Gal Goldman writes about distributed systems, cloud architecture, GenAI systems, and engineering quality.",
+          "publisher": { "@id": "https://gel.github.io/#org" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://gel.github.io/blog/agentic-engineering/#webpage",
+          "url": "https://gel.github.io/blog/agentic-engineering/",
+          "name": "Agentic Engineering: Orchestrating the Autonomous Development Lifecycle",
+          "description": "A talk on how 'Vibe Coding' is redefining the role of the knowledge worker and the future of the SDLC.",
+          "isPartOf": { "@id": "https://gel.github.io/#website" },
+          "about": { "@id": "https://gel.github.io/#person" },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://gel.github.io/og/site-default.svg",
+            "width": 1200,
+            "height": 630
+            
+          }
+          
+        }
+      ]
+    }
+  </script>
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" />
+
+  <title>
+    
+    
+    Agentic Engineering: Orchestrating the Autonomous Development Lifecycle | Gal Goldman | Architect &amp; Engineer
+    
+    
+  </title>
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://gel.github.io/main.css">
+  <link rel="stylesheet" href="https://gel.github.io/animations.css">
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    <link rel="prerender"  href="https://gel.github.io/tags/generative-ai/">
+  
+    <link rel="prerender"  href="https://gel.github.io/tags/agentic-ai/">
+  
+    <link rel="prerender"  href="https://gel.github.io/tags/engineering-leadership/">
+  
+    <link rel="prerender"  href="https://gel.github.io/tags/architecture/">
+  
+    <link rel="prerender"  href="https://gel.github.io/tags/future-of-work/">
+  
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "@id": "https://gel.github.io/blog/agentic-engineering/#article",
+      "url": "https://gel.github.io/blog/agentic-engineering/",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://gel.github.io/blog/agentic-engineering/#webpage"
+      },
+      "headline": "Agentic Engineering: Orchestrating the Autonomous Development Lifecycle",
+      "description": "A talk on how 'Vibe Coding' is redefining the role of the knowledge worker and the future of the SDLC.",
+      "image": ["https://gel.github.io/og/site-default.svg"],
+      "datePublished": "2026-04-07T00:00:00+00:00",
+      "dateModified": "2026-04-07T00:00:00+00:00",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://gel.github.io/#website"
+      },
+      "author": {
+        "@id": "https://gel.github.io/#person"
+      },
+       "publisher": {
+        "@id": "https://gel.github.io/#org"
+      }
+      
+    }
+  </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        
+
+        
+        {
+          
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Gal Goldman | Architect &amp; Engineer",
+          "item": "https://gel.github.io/"
+        },
+        
+        {
+          
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://gel.github.io/blog/"
+        },
+        
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Agentic Engineering: Orchestrating the Autonomous Development Lifecycle",
+          "item": "https://gel.github.io/blog/agentic-engineering/"
+        }
+      ]
+    }
+  </script>
+
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="">
+  
+  <header>
+    <a class="profile-icon" href="/">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;iconweb.db45dd197188a7fb.jpg" alt="profile picture">
+    </a>
+    <nav>
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        "
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        active-nav"
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        "
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        "
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        "
+      >GenAI</a>
+      
+      
+      <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <span class="theme-icon-light">☀️</span>
+        <span class="theme-icon-dark" style="display:none">🌙</span>
+      </button>
+      
+    </nav>
+  </header>
+  
+  <main>
+    
+  <div class="post-title">
+    <h1>Agentic Engineering: Orchestrating the Autonomous Development Lifecycle</h1>
+    <small>
+      April 07, 2026
+      
+        - 
+        <span class="tags">
+          
+            <a href="https://gel.github.io/tags/generative-ai/">generative-ai</a>
+          
+            <a href="https://gel.github.io/tags/agentic-ai/">agentic-ai</a>
+          
+            <a href="https://gel.github.io/tags/engineering-leadership/">engineering-leadership</a>
+          
+            <a href="https://gel.github.io/tags/architecture/">architecture</a>
+          
+            <a href="https://gel.github.io/tags/future-of-work/">future-of-work</a>
+          
+        </span>
+      
+    </small>
+  </div>
+
+  <div>
+    <p>I recently gave a talk on the shift from manual coding to <strong>Agentic Engineering</strong>. </p>
+<p>The core of my argument is simple: <strong>If you can model a problem, AI can learn it and solve it.</strong> Engineering is just the first industry to witness this transition, but it is coming for all knowledge workers. We are moving from being creators of knowledge and processes to being architects of intent and communication.</p>
+<p>Below are the interactive slides from the presentation.</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 8px; border: 1px solid #30363d; margin: 30px 0;">
+  <iframe 
+    src="/talks/agentic-engineering/" 
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" 
+    allowfullscreen>
+  </iframe>
+</div>
+<h3 id="key-takeaways">Key Takeaways:</h3>
+<ol>
+<li><strong>Coding is the 10%:</strong> Agentic tools are for the 90% (Planning, Testing, Reviewing).</li>
+<li><strong>Model it to Solve it:</strong> Focus on problem-modeling skills to stay ahead of the automation curve.</li>
+<li><strong>Pragmatic Problem Solving:</strong> Your new moat is the ability to orchestrate across domains and own the &quot;What.&quot;</li>
+</ol>
+<p>You can view the full-screen presentation <a href="/talks/agentic-engineering/">here</a>.</p>
+
+  </div>
+
+  <hr class="footer-rule" />
+
+  
+
+  <div class="related-container">
+
+    
+
+    
+
+  </div>
+
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>
