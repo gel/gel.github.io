@@ -18,7 +18,6 @@ Command-line AI coding agents that integrate directly into your terminal workflo
 |-------|----------|-----------|------------|----------|
 | **Claude Code** | Anthropic | ❌ None | Pro $20/mo, Max $100-200/mo | The viral, full-featured coding agent |
 | **Gemini CLI** | Google | ✅ **1M tokens/min**, 1.5k req/day | Flash $0.10/M, Pro $1.25/M (higher limits with AI Pro) | Best free tier value |
-| **OpenAI Codex** | OpenAI | ❌ None | Plus $20/mo, Pro $200/mo | ChatGPT ecosystem integration |
 | **Kiro CLI (Q-CLI)** | AWS | ✅ 50 vibe requests/mo | Pro $20/mo, Power $200/mo | Spec-driven workflows |
 | **OpenCode** | Open Source | ✅ **Free forever** | Uses your API keys (note: default OpenCode Zen model can throttle) | Self-hosted, full control |
 
@@ -46,6 +45,21 @@ Modern editors with deep AI integration for autocomplete, chat, and agentic codi
 > **Top Pick:** **Antigravity**. Generous free tokens and excellent agentic workflow support.
 >
 > **Alternative:** **Cursor** Pro at $20/mo with flexible credit pool for model choice.
+
+---
+
+## 🚀 Agentic Productivity Apps
+
+A new category of desktop applications that package AI models inside full work environments, moving away from standalone text boxes to autonomous agents acting on local files and applications.
+
+| App | Provider | Target Audience | Features |
+|-----|----------|-----------------|----------|
+| **Codex App** | OpenAI | Agentic software work | Worktrees, skills, automations, in-app browser, computer use |
+| **Claude Cowork** | Anthropic | Autonomous knowledge work | Local file/folder access, cross-application workflows |
+
+### Recommendation
+
+> **Strongly Recommended:** **Codex App**. An excellent paradigm shift for desktop productivity, especially with its automations and in-app tools.
 
 ---
 
