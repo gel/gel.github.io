@@ -18,6 +18,7 @@ Command-line AI coding agents that integrate directly into your terminal workflo
 |-------|----------|-----------|------------|----------|
 | **Claude Code** | Anthropic | ❌ None | Pro $20/mo, Max $100-200/mo | The viral, full-featured coding agent |
 | **Gemini CLI** | Google | ✅ **1M tokens/min**, 1.5k req/day | Flash $0.10/M, Pro $1.25/M (higher limits with AI Pro) | Best free tier value |
+| **OpenAI Codex** | OpenAI | ❌ None | Plus $20/mo, Pro $200/mo | ChatGPT ecosystem integration |
 | **Kiro CLI (Q-CLI)** | AWS | ✅ 50 vibe requests/mo | Pro $20/mo, Power $200/mo | Spec-driven workflows |
 | **OpenCode** | Open Source | ✅ **Free forever** | Uses your API keys (note: default OpenCode Zen model can throttle) | Self-hosted, full control |
 
