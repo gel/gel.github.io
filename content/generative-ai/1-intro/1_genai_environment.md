@@ -49,6 +49,21 @@ Modern editors with deep AI integration for autocomplete, chat, and agentic codi
 
 ---
 
+## 🚀 Agentic Productivity Apps
+
+A new category of desktop applications that package AI models inside full work environments, moving away from standalone text boxes to autonomous agents acting on local files and applications.
+
+| App | Provider | Target Audience | Features |
+|-----|----------|-----------------|----------|
+| **Codex App** | OpenAI | Agentic software work | Worktrees, skills, automations, in-app browser, computer use |
+| **Claude Cowork** | Anthropic | Autonomous knowledge work | Local file/folder access, cross-application workflows |
+
+### Recommendation
+
+> **Strongly Recommended:** **Codex App**. An excellent paradigm shift for desktop productivity, especially with its automations and in-app tools.
+
+---
+
 ## 🔌 Recommended MCP Servers
 
 Model Context Protocol (MCP) servers extend your AI agents with external capabilities. A key benefit: **same MCP config works across all environments**. You can switch agents/editors without reconfiguring.
