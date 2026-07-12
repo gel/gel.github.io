@@ -33,25 +33,18 @@ social_links = [
   { name = "X", path = "https://x.com/gelings" }
 ]
 twitter_handle = "gelings"
-home_stats = [
-  { value = "16+", label = "years across AWS and Intel" },
-  { value = "30+", label = "customers supported on production GenAI workloads" },
-  { value = "500+", label = "engineers trained on GenAI systems" }
-]
-home_features = [
-  { name = "Books", path = "/books/", eyebrow = "Reading", description = "Books I read, notes I keep, and ideas worth revisiting." },
-  { name = "Interviews", path = "/interviews/", eyebrow = "Course + Project", description = "My technical interviewing guide and interactive practice material." },
-  { name = "GenAI", path = "/generative-ai/", eyebrow = "Explained Research", description = "Summarized research and implementation notes for production AI systems." }
-]
-home_links = [
-  { name = "Blog", path = "/blog/", description = "Engineering notes on systems, architecture, and delivery in practice." },
-  { name = "Projects", path = "/projects/", description = "Public work, workshops, and interactive experiments." },
-  { name = "Resume", path = "/resume/", description = "Experience, impact, and current role." }
+home_nav = [
+  { name = "Blog", path = "/blog/" },
+  { name = "Projects", path = "/projects/" },
+  { name = "Books", path = "/books/" },
+  { name = "Interviews", path = "/interviews/" },
+  { name = "GenAI", path = "/generative-ai/" },
+  { name = "Resume", path = "/resume/" }
 ]
 
-icon = "iconweb.jpg"
-profile_small = "iconweb.jpg"
-profile_large = "profileweb.jpg"
+icon = "profileweb.png"
+profile_small = "profileweb.png"
+profile_large = "profileweb.png"
 footer_about = """
 """
 

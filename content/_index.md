@@ -5,10 +5,4 @@ description = "Gal Goldman writes about distributed systems, cloud architecture,
 static_thumbnail = "og/home.svg"
 +++
 
-I am a **Senior Software Engineer and Enterprise Solution Architect** at **AWS**, formerly a Software Architect at **Intel**. I build production systems that are scalable, observable, and cost-efficient.
-
-Current areas of focus:
-- Distributed systems and architecture at enterprise scale
-- ML and GenAI systems in production
-- Agentic AI reliability, observability, and governance
-- Performance and cost optimization from cloud services down to infrastructure details
+Senior Software Engineer and Enterprise Solution Architect at **AWS**, formerly at **Intel**. I spend most of my time on distributed systems, production ML, and making agentic AI actually reliable at scale.
