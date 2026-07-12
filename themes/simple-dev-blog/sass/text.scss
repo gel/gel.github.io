@@ -1,5 +1,9 @@
 @import "./fonts.scss";
 
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Rubik", "PT Serif", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
