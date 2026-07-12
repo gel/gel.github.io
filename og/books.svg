@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Gal Goldman books social card</title>
+  <desc id="desc">A branded social share image for the Gal Goldman books section.</desc>
+  <rect width="1200" height="630" fill="#f2ede4" />
+  <rect x="0" y="0" width="1200" height="630" fill="url(#fade)" />
+  <defs>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff9ef" />
+      <stop offset="100%" stop-color="#e7efe9" />
+    </linearGradient>
+  </defs>
+  <rect x="94" y="134" width="72" height="316" rx="10" fill="#0f172a" />
+  <rect x="176" y="110" width="84" height="340" rx="10" fill="#0f766e" />
+  <rect x="270" y="148" width="72" height="302" rx="10" fill="#355070" />
+  <text x="420" y="168" fill="#0f766e" font-family="Arial, Helvetica, sans-serif" font-size="28" letter-spacing="5">BOOKS</text>
+  <text x="420" y="264" fill="#0f172a" font-family="Georgia, serif" font-size="76" font-weight="700">Reading notes that</text>
+  <text x="420" y="344" fill="#0f172a" font-family="Georgia, serif" font-size="76" font-weight="700">are worth revisiting.</text>
+  <text x="420" y="432" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="31">Programming, finance, health, history, parenting, and personal development.</text>
+</svg>

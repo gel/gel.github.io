@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Gal Goldman home social card</title>
+  <desc id="desc">A branded social share image for the Gal Goldman homepage.</desc>
+  <rect width="1200" height="630" fill="#f7f2ea" />
+  <rect x="0" y="0" width="1200" height="28" fill="#0f766e" />
+  <rect x="0" y="452" width="1200" height="178" fill="#0f172a" />
+  <circle cx="985" cy="144" r="164" fill="#0f766e" opacity="0.13" />
+  <text x="84" y="136" fill="#0f766e" font-family="Arial, Helvetica, sans-serif" font-size="28" letter-spacing="5">GAL GOLDMAN</text>
+  <text x="84" y="232" fill="#0f172a" font-family="Georgia, serif" font-size="74" font-weight="700">Architect and engineer</text>
+  <text x="84" y="314" fill="#0f172a" font-family="Georgia, serif" font-size="74" font-weight="700">building reliable systems.</text>
+  <text x="84" y="392" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="31">Distributed systems, cloud architecture, production AI, and engineering notes.</text>
+  <text x="84" y="540" fill="#f8fafc" font-family="Arial, Helvetica, sans-serif" font-size="34">AWS and Intel experience. GenAI systems. Practical technical writing.</text>
+</svg>

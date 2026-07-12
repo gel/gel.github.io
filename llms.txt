@@ -1,0 +1,23 @@
+# Gal Goldman
+
+> Personal site and technical publication by Gal Goldman, a senior software engineer and architect focused on distributed systems, cloud architecture, production AI systems, engineering quality, interview preparation, and long-term technical learning.
+
+## Main Content
+
+- [Home](https://gel.github.io/): Overview of Gal Goldman, current focus areas, and the main sections of the site.
+- [Resume](https://gel.github.io/resume/): Career history across AWS, Amazon, and Intel, with experience in distributed systems, cloud architecture, and AI platforms.
+- [Blog](https://gel.github.io/blog/): Technical writing on distributed systems, platform architecture, cloud optimization, and production AI engineering.
+- [Projects](https://gel.github.io/projects/): Selected public projects across interactive interview practice, technical publishing, GenAI education, and applied computer vision.
+- [Generative AI](https://gel.github.io/generative-ai/): Structured guide to generative AI foundations, research, implementation patterns, and production tradeoffs.
+- [Interviews](https://gel.github.io/interviews/): Interview preparation material covering career moves, data structures, system design, and live coding practice.
+
+## Recent Writing
+
+- [Data Platform Myths: What Breaks at Scale and How to De-risk It](https://gel.github.io/blog/data-platform-myths/): Framework for deciding when to build shared platforms versus domain-owned solutions.
+- [Profit in the Stack: Why We Need Low-Level Optimization](https://gel.github.io/blog/profit-in-the-stack/): Why hardware-aware optimization matters as software margins tighten.
+- [Building Trustworthy AI Agents by Abstracting Infrastructure](https://gel.github.io/blog/agentcore-observability/): Notes on infrastructure abstraction and observability for AI agents.
+
+## Optional
+
+- [Books](https://gel.github.io/books/): Reading notes, ratings, and curated book lists across multiple domains.
+- [Podcasts](https://gel.github.io/podcasts/): Podcast notes and selected talks on AI, programming, systems, and product thinking.

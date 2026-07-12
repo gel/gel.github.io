@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Gal Goldman interviews social card</title>
+  <desc id="desc">A branded social share image for the Gal Goldman interviews section.</desc>
+  <rect width="1200" height="630" fill="#eef4f6" />
+  <rect x="74" y="76" width="1052" height="478" rx="30" fill="#0f172a" />
+  <rect x="74" y="76" width="1052" height="92" rx="30" fill="#0f766e" />
+  <text x="118" y="136" fill="#f8fafc" font-family="Arial, Helvetica, sans-serif" font-size="30" letter-spacing="5">INTERVIEWS</text>
+  <text x="118" y="276" fill="#f8fafc" font-family="Georgia, serif" font-size="74" font-weight="700">Prep guides and live</text>
+  <text x="118" y="354" fill="#f8fafc" font-family="Georgia, serif" font-size="74" font-weight="700">coding practice.</text>
+  <text x="118" y="444" fill="#cbd5e1" font-family="Arial, Helvetica, sans-serif" font-size="31">Career moves, data structures, system design, and browser-based interview drills.</text>
+  <text x="894" y="492" fill="#7dd3c7" font-family="Arial, Helvetica, sans-serif" font-size="112" font-weight="700">&lt;/&gt;</text>
+</svg>
