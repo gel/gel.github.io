@@ -52,6 +52,21 @@
         gap: 0;
       }
 
+      .profile-icon {
+        display: none;
+      }
+
+      .nav-home-mobile {
+        display: inline !important;
+      }
+
+      /* keep only the most important nav links on mobile */
+      header nav .nav-books,
+      header nav .nav-interviews,
+      header nav .nav-genai {
+        display: none;
+      }
+
       header nav {
         display: flex;
         flex-wrap: nowrap;
@@ -78,6 +93,10 @@
         flex: 0 0 auto;
         padding: 0 2px;
       }
+    }
+
+    .nav-home-mobile {
+      display: none;
     }
 
     .active-nav {
@@ -399,6 +418,7 @@
       <img src="{{ icon.url }}" alt="profile picture">
     </a>
     <nav>
+      <a class="nav-home-mobile" href="/">Home</a>
       {% for link in config.extra.nav %}
       <a href="{{ link.path }}"
         class="nav-{{ link.name | lower | replace(from=' ', to='-') }}

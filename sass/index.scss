@@ -20,6 +20,44 @@ body.home-page .footer-page {
   max-width: 760px;
 }
 
+/* ─── Mobile-only section nav ─────────────────────────────────────────────── */
+
+.home-nav-mobile {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .home-nav-mobile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 1.25rem;
+    border-top: 1px solid color-mix(in srgb, var(--table-border-bottom) 55%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--table-border-bottom) 55%, transparent);
+  }
+
+  .home-nav-mobile a,
+  .home-nav-mobile a:visited {
+    flex: 1 0 calc(33.333% - 1px);
+    text-align: center;
+    padding: 0.7rem 0.5rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: color-mix(in srgb, var(--body-color) 72%, transparent);
+    border-bottom: none;
+    border-right: 1px solid color-mix(in srgb, var(--table-border-bottom) 55%, transparent);
+  }
+
+  .home-nav-mobile a:last-child {
+    border-right: none;
+  }
+
+  .home-nav-mobile a:hover {
+    color: var(--accent-color);
+    background: color-mix(in srgb, var(--accent-color) 5%, transparent);
+  }
+}
+
 .hero-copy,
 .hero-portrait {
   border: 1px solid color-mix(in srgb, var(--table-border-bottom) 88%, transparent);

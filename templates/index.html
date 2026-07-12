@@ -52,7 +52,11 @@
 
 </section>
 
-
+<nav class="home-nav-mobile" aria-label="All sections">
+  {% for link in config.extra.nav %}
+  <a href="{{ link.path }}">{{ link.name }}</a>
+  {% endfor %}
+</nav>
 {% if blogs.pages %}
 <section class="home-posts fade-in">
   <p class="home-posts-label">Recent writing</p>
