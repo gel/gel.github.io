@@ -4,6 +4,42 @@ weight = 7
 description = "Research summary of GenAI Security with practical takeaways for LLMs and production AI systems."
 +++
 
+### [Data Extraction] Extracting Alignment Data in Open Models
+
+Arxiv: [https://arxiv.org/abs/2510.18554](https://arxiv.org/abs/2510.18554) _Oct 2025 **Google DeepMind**_
+
+```mermaid
+flowchart TD
+    subgraph Attack["Extraction via Start Token"]
+        Prefix["Start or Template Token<br/>e.g. &lt;|im_start|&gt; or &lt;think&gt;"] --> Autoregressive["Unconditioned Next-Token Prediction"]
+        Autoregressive --> Regurgitate["Model Regurgitates Memorized Training Sample"]
+    end
+
+    subgraph Output["Leaked Alignment Data"]
+        Regurgitate --> P["Original User Prompt"]
+        Regurgitate --> R["Reasoning Trace / CoT"]
+        Regurgitate --> A["Target Assistant Response"]
+    end
+
+    subgraph Impact["Distillation & Recovery"]
+        Output --> Dataset["Harvested Alignment Set"]
+        Dataset --> Retrain["Fine-tune Raw Base Model"]
+        Retrain --> Recovery["Recover Original Reasoning & Alignment Performance"]
+    end
+
+    style Prefix fill:#e1f5fe,color:#000
+    style Regurgitate fill:#fff3e0,color:#000
+    style Recovery fill:#c8e6c9,color:#000
+```
+
+Post-training phases such as Supervised Fine-Tuning (SFT) and Reinforcement Learning (RL) impart models with vital capabilities: instruction following, safety guardrails, math problem solving, and long-context reasoning traces. While open-weight models publish parameters, their underlying alignment datasets are frequently kept proprietary. This paper demonstrates that open models heavily memorize their alignment datasets and can be coerced into leaking them using minimal structural prompts.
+
+**The "Start Token" Attack Vector:** Post-training introduces specialized conversational chat templates and control tokens (such as `<|start_of_turn|>`, `<|im_start|>`, or `<think>`) that base models never saw during pre-training. By prompting the model with solely the start-of-turn or template prefix—providing no user query at all—the model is placed directly into its post-training distribution. Because the model operates autoregressively with no prompt constraints, it unrolls verbatim or near-verbatim training samples, regurgitating the user prompt, internal reasoning chain (CoT), and assistant response in sequence.
+
+**Semantic Memorization vs. String Matching:** Earlier research suggested models rarely memorize post-training data. The authors show this was an artifact of relying on strict or approximate string-matching metrics (like Levenshtein distance), which fail when trivial formatting or punctuation shifts occur. When using high-quality embedding models to compute semantic similarity against ground truth data, the actual rate of extractable alignment data is at least **10x higher** than previously estimated.
+
+**Implications for Model Distillation:** The extracted data is sufficiently rich and accurate that retraining an unaligned base model on the harvested samples recovers a substantial fraction of the original model's reasoning and alignment capabilities. This demonstrates that open-weight releases inevitably leak proprietary alignment recipes, turning post-training memorization into an efficient distillation vector.
+
 ### [Instruction Hierarchy] Training LLMs to Prioritize Privileged Instructions
 
 Arxiv: [https://arxiv.org/abs/2404.13208](https://arxiv.org/abs/2404.13208) _19 Apr 2024 **OpenAI**_
@@ -83,39 +119,3 @@ We experiment with methods for training a harmless AI assistant through self imp
 An AI assistant that answers all questions with "I don't know" would be harmless, but of course it would also be completely useless. In our prior work using human feedback to train a helpful and harmless assistant, we found that there was a significant tension between helpfulness and harmlessness, and in particular, our assistant often refused to answer controversial questions.
 
 We will be experimenting with an extreme form of scaled supervision, which we refer to as Constitutional AI (CAI). The idea is that human supervision will come entirely from a set of principles that should govern AI behavior, along with a small number of examples used for few-shot prompting. Together these principles form the constitution.
-
-### [Data Extraction] Extracting Alignment Data in Open Models
-
-Arxiv: [https://arxiv.org/abs/2510.18554](https://arxiv.org/abs/2510.18554) _Oct 2025 **Google DeepMind**_
-
-```mermaid
-flowchart TD
-    subgraph Attack["Extraction via Start Token"]
-        Prefix["Start or Template Token<br/>e.g. &lt;|im_start|&gt; or &lt;think&gt;"] --> Autoregressive["Unconditioned Next-Token Prediction"]
-        Autoregressive --> Regurgitate["Model Regurgitates Memorized Training Sample"]
-    end
-
-    subgraph Output["Leaked Alignment Data"]
-        Regurgitate --> P["Original User Prompt"]
-        Regurgitate --> R["Reasoning Trace / CoT"]
-        Regurgitate --> A["Target Assistant Response"]
-    end
-
-    subgraph Impact["Distillation & Recovery"]
-        Output --> Dataset["Harvested Alignment Set"]
-        Dataset --> Retrain["Fine-tune Raw Base Model"]
-        Retrain --> Recovery["Recover Original Reasoning & Alignment Performance"]
-    end
-
-    style Prefix fill:#e1f5fe,color:#000
-    style Regurgitate fill:#fff3e0,color:#000
-    style Recovery fill:#c8e6c9,color:#000
-```
-
-Post-training phases such as Supervised Fine-Tuning (SFT) and Reinforcement Learning (RL) impart models with vital capabilities: instruction following, safety guardrails, math problem solving, and long-context reasoning traces. While open-weight models publish parameters, their underlying alignment datasets are frequently kept proprietary. This paper demonstrates that open models heavily memorize their alignment datasets and can be coerced into leaking them using minimal structural prompts.
-
-**The "Start Token" Attack Vector:** Post-training introduces specialized conversational chat templates and control tokens (such as `<|start_of_turn|>`, `<|im_start|>`, or `<think>`) that base models never saw during pre-training. By prompting the model with solely the start-of-turn or template prefix—providing no user query at all—the model is placed directly into its post-training distribution. Because the model operates autoregressively with no prompt constraints, it unrolls verbatim or near-verbatim training samples, regurgitating the user prompt, internal reasoning chain (CoT), and assistant response in sequence.
-
-**Semantic Memorization vs. String Matching:** Earlier research suggested models rarely memorize post-training data. The authors show this was an artifact of relying on strict or approximate string-matching metrics (like Levenshtein distance), which fail when trivial formatting or punctuation shifts occur. When using high-quality embedding models to compute semantic similarity against ground truth data, the actual rate of extractable alignment data is at least **10x higher** than previously estimated.
-
-**Implications for Model Distillation:** The extracted data is sufficiently rich and accurate that retraining an unaligned base model on the harvested samples recovers a substantial fraction of the original model's reasoning and alignment capabilities. This demonstrates that open-weight releases inevitably leak proprietary alignment recipes, turning post-training memorization into an efficient distillation vector.

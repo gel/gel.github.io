@@ -93,6 +93,8 @@ Below is the list of selected research papers that have significantly contribute
 
 ### Security
 
+- [Data Extraction] Extracting Alignment Data in Open Models
+
 - [Instruction Hierarchy] Training LLMs to Prioritize Privileged Instructions
 
 - [Reward Tampering] Sycophancy to Subterfuge: Investigating Reward-Tampering in LLMs
@@ -100,8 +102,6 @@ Below is the list of selected research papers that have significantly contribute
 - [Model Stealing] Stealing Part of a Production Language Model
 
 - [Constitutional AI] Harmlessness from AI Feedback
-
-- [Data Extraction] Extracting Alignment Data in Open Models
 
 ---
 
