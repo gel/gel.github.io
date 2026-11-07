@@ -91,6 +91,18 @@ Below is the list of selected research papers that have significantly contribute
 
 - [CLIP] Connecting text and images
 
+### Security
+
+- [Instruction Hierarchy] Training LLMs to Prioritize Privileged Instructions
+
+- [Reward Tampering] Sycophancy to Subterfuge: Investigating Reward-Tampering in LLMs
+
+- [Model Stealing] Stealing Part of a Production Language Model
+
+- [Constitutional AI] Harmlessness from AI Feedback
+
+- [Data Extraction] Extracting Alignment Data in Open Models
+
 ---
 
 As we embark on this scholarly expedition, remember that this is just the beginning. The field of GenAI is ever-evolving, with new discoveries and insights emerging regularly. Keep this page bookmarked, and revisit often to stay updated with the latest research that shapes the future of generative AI.
