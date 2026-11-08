@@ -36,8 +36,8 @@ static_thumbnail = "og/resume.svg"
 - Pioneering agentic AI capabilities for **Amazon Q Developer**, enabling autonomous code generation, testing, and deployment workflows.
 - Building multi-step reasoning capabilities for AI agents to handle complex infrastructure planning and troubleshooting scenarios.
 
-#### Senior Solutions Architect
-<p class="meta">May 2022 - Jul 2024</p>
+#### Senior Solutions Architect — EMEA - XL Enterprise Customers
+<p class="meta">May 2022 - Jul 2024 · EMEA</p>
 
 - Accelerated cloud transformation for multiple global R&D-driven enterprises, delivering multimillion-dollar ARR impact through strategic workload migrations and architecture optimization.
 - Led architecture reviews and implementations across AWS Well-Architected Framework pillars for enterprise clients, reducing operational costs by an average of 30% while ensuring scalability and security compliance.
