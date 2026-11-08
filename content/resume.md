@@ -12,12 +12,12 @@ static_thumbnail = "og/resume.svg"
 
 ## Summary
 
-17+ years across **Amazon Web Services (AWS)** and **Intel**, spanning kernel drivers and real-time computer vision to cloud-scale distributed systems and enterprise AI platforms. Currently leading core engineering on **Amazon Bedrock AgentCore (Observability, Evaluation, and Memory)**.
+17+ years across **Amazon Web Services (AWS)** and **Intel**, spanning kernel drivers and real-time computer vision to cloud-scale distributed systems and enterprise AI platforms. Currently building **Amazon Bedrock AgentCore**—having pioneered **AgentCore Observability**, architected **AgentCore Evaluation**, and delivering selected features for **AgentCore Memory**.
 
 ## Selected Impact
 
 <ul class="highlights">
-  <li>Leading core capabilities in Amazon Bedrock AgentCore (Observability, Evaluation, Memory).</li>
+  <li>Pioneered AgentCore Observability and architected AgentCore Evaluation in Amazon Bedrock.</li>
   <li>30+ global enterprise customers enabled to deploy production GenAI workloads.</li>
   <li>~30% average operational cost reduction across AWS Well-Architected engagements.</li>
   <li>500+ engineers trained via AWS's first 3-day GenAI curriculum (4.9/5 CSAT).</li>
@@ -32,7 +32,7 @@ static_thumbnail = "og/resume.svg"
 #### Senior Software Engineer — Amazon Bedrock AgentCore & Q Developer
 <p class="meta">Jul 2024 - Present · New Jersey, United States</p>
 
-- Leading development of custom agentic AI platform primitives in **Amazon Bedrock AgentCore**, focusing on **AgentCore Observability, Evaluation, and Memory**.
+- **Amazon Bedrock AgentCore:** Pioneered the enablement of **AgentCore Observability**, built the architecture for **AgentCore Evaluation**, and developing selected features for **AgentCore Memory**.
 - Pioneering agentic AI capabilities for **Amazon Q Developer**, enabling autonomous code generation, testing, and deployment workflows.
 - Building multi-step reasoning capabilities for AI agents to handle complex infrastructure planning and troubleshooting scenarios.
 
