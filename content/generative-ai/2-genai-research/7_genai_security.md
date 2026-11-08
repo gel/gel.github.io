@@ -22,7 +22,7 @@ flowchart TD
     end
 
     subgraph Impact["Distillation & Recovery"]
-        Output --> Dataset["Harvested Alignment Set"]
+        P & R & A --> Dataset["Harvested Alignment Set"]
         Dataset --> Retrain["Fine-tune Raw Base Model"]
         Retrain --> Recovery["Recover Original Reasoning & Alignment Performance"]
     end

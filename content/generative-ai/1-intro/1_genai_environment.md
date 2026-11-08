@@ -29,14 +29,17 @@ flowchart TD
         MCP["wakeahuman.com · Mobile MCP · Telegram MCP"]
     end
 
-    Orch --> Layer2
-    Layer2 --> Layer3
-    Layer2 --> Layer4
+    Orch --> H_OpenAI & H_Google & H_Pi & H_Anthropic
+    H_OpenAI & H_Google & H_Pi & H_Anthropic --> Skills
+    H_OpenAI & H_Google & H_Pi & H_Anthropic --> MCP
 
-    style Layer1 fill:#e3f2fd,stroke:#1976d2,color:#000
-    style Layer2 fill:#e8f5e9,stroke:#388e3c,color:#000
-    style Layer3 fill:#fff3e0,stroke:#f57c00,color:#000
-    style Layer4 fill:#ede7f6,stroke:#512da8,color:#000
+    style Orch fill:#bbdefb,stroke:#1976d2,color:#000
+    style H_OpenAI fill:#c8e6c9,stroke:#388e3c,color:#000
+    style H_Google fill:#c8e6c9,stroke:#388e3c,color:#000
+    style H_Pi fill:#dcedc8,stroke:#689f38,color:#000
+    style H_Anthropic fill:#c8e6c9,stroke:#388e3c,color:#000
+    style Skills fill:#ffe0b2,stroke:#f57c00,color:#000
+    style MCP fill:#d1c4e9,stroke:#512da8,color:#000
 ```
 
 ---
@@ -84,16 +87,28 @@ Developers frequently confuse **Skills** and **MCP (Model Context Protocol)**. T
 * **Skills (Procedural Knowledge):** *How the agent thinks and writes.* Domain rules, writing constraints, and workflow instructions loaded when needed without bloating the base prompt.
 * **MCP (State & Connectivity):** *What external tools and services the agent calls.* Client-server RPC protocol connecting agents to external APIs, escalation chains, and device interfaces.
 
-```
-┌────────────────────────────────────────────────────────┐
-│                        AGENT                           │
-│  ┌─────────────────────────┐  ┌─────────────────────┐  │
-│  │   SKILLS (Procedural)   │  │   MCP (Connectors)  │  │
-│  │ • Simplified English    │  │ • Wake a Human      │  │
-│  │ • Doc writing rules     │  │ • Control Mobile OS │  │
-│  │ • Domain checklists     │  │ • Send Telegram msg │  │
-│  └─────────────────────────┘  └─────────────────────┘  │
-└────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    Agent["🤖 Autonomous Agent"]
+
+    subgraph Procedural["Skills (Procedural Knowledge)"]
+        S1["Simplified Technical English (ASD-STE100)"]
+        S2["Domain & Formatting Rules"]
+    end
+
+    subgraph Connectivity["MCP (State & Connectivity)"]
+        M1["Wake a Human (wakeahuman.com)"]
+        M2["Mobile & Telegram MCPs"]
+    end
+
+    Agent --> S1 & S2
+    Agent --> M1 & M2
+
+    style Agent fill:#bbdefb,stroke:#1976d2,color:#000
+    style S1 fill:#ffe0b2,stroke:#f57c00,color:#000
+    style S2 fill:#ffe0b2,stroke:#f57c00,color:#000
+    style M1 fill:#d1c4e9,stroke:#512da8,color:#000
+    style M2 fill:#d1c4e9,stroke:#512da8,color:#000
 ```
 
 ### The Standard for Technical Writing: ASD-STE100
