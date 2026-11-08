@@ -1,17 +1,17 @@
 +++
 title = "GenAI Agents Environment"
 weight = 1
-description = "A practical guide to the modern GenAI agent environment: visual orchestrators, native harnesses, skills, MCP servers, and sandboxes."
+description = "A practical guide to the modern GenAI agent environment: orchestrators, native harnesses, skills, MCP servers, and workflow automation."
 +++
 
 *Last updated: November 2026*
 
-The GenAI development ecosystem has shifted from basic "autocomplete in an IDE" to a **multi-tiered agent operations stack**. Modern agentic engineering separates the system into distinct layers: visual orchestrators, execution harnesses, modular skills, protocol connectors, and isolated sandboxes.
+The GenAI development ecosystem has matured from basic "autocomplete in an IDE" into a **modular agent operations stack**. Modern agentic engineering separates the system into distinct layers: orchestrators & multiplexers, execution harnesses, procedural skills, protocol connectors, and workflow automation.
 
 ```mermaid
 flowchart TD
-    subgraph Layer1["1. Visual Orchestrators & Multiplexers"]
-        Orch["t3code · dmux · cmux · emdash · sidecar"]
+    subgraph Layer1["1. Orchestration & Multiplexing"]
+        Orch["Herdr · t3code · Native Harness Orchestrators"]
     end
 
     subgraph Layer2["2. Execution Harnesses (Native Pairings)"]
@@ -22,15 +22,15 @@ flowchart TD
     end
 
     subgraph Layer3["3. Skills & Playbooks (Procedural)"]
-        Skills["SKILL.md specs · agent-scripts · recall · domain playbooks"]
+        Skills["asd-ste100 (Simplified Technical English) · SKILL.md specs"]
     end
 
     subgraph Layer4["4. MCP & Connectors (Data / Tool RPC)"]
         MCP["Model Context Protocol (Perplexity · Mobile · Telegram)"]
     end
 
-    subgraph Layer5["5. Sandboxes & Isolation (Safe Execution)"]
-        Sandbox["Neko WebRTC Docker · Orca · Computer Use"]
+    subgraph Layer5["5. Workflow Automation"]
+        Auto["oh-my-pr · claude-desktop-debian · curated prompts"]
     end
 
     Orch --> Layer2
@@ -42,25 +42,22 @@ flowchart TD
     style Layer2 fill:#e8f5e9,stroke:#388e3c,color:#000
     style Layer3 fill:#fff3e0,stroke:#f57c00,color:#000
     style Layer4 fill:#ede7f6,stroke:#512da8,color:#000
-    style Layer5 fill:#ffebee,stroke:#d32f2f,color:#000
+    style Layer5 fill:#f3e5f5,stroke:#7b1fa2,color:#000
 ```
 
 ---
 
-## 🎛️ 1. Agents Visual Orchestrators & Terminal Multiplexers
+## 🎛️ 1. Agent Orchestrators & Multiplexers
 
-As workflows scale from single-turn chat to running multiple parallel agents across worktrees, traditional IDEs become the bottleneck. A new class of orchestrators, multiplexers, and dashboards has emerged to coordinate concurrent agent tasks.
+As workflows shift from single-turn prompts to running multiple agents across branches and tasks, orchestrators manage concurrent agent sessions, terminal state persistence, and handoffs.
 
 | Tool | Core Philosophy | Best For | Link |
 |------|-----------------|----------|------|
-| **t3code** | High-speed terminal & web UI orchestrator for multi-task coding | Parallel agent sessions & fast review | [pingdotgg/t3code](https://github.com/pingdotgg/t3code) |
-| **dmux** | Terminal multiplexer designed specifically for agent workflows | Headless agent swarming across worktrees | [dmux.ai](https://dmux.ai/) · [standardagents/dmux](https://github.com/standardagents/dmux) |
-| **cmux** | Context-aware multiplexer for multi-agent terminal management | Splitting agent logs & interactive shells | [manaflow-ai/cmux](https://github.com/manaflow-ai/cmux) |
-| **emdash** | Visual dashboard & execution workspace for autonomous coding | GUI-driven multi-agent tracking | [generalaction/emdash](https://github.com/generalaction/emdash) |
-| **sidecar** | Lightweight companion agent panel next to your editor | Keeping persistent agent context close | [marcus/sidecar](https://github.com/marcus/sidecar) |
-| **Agent Orchestrator** | Composio's multi-agent routing harness | Connecting complex agent workflows | [ComposioHQ/agent-orchestrator](https://github.com/ComposioHQ/agent-orchestrator) |
+| **Herdr** | Open-source, agent-native terminal runtime and multiplexer | Persistent agent sessions, live status tracking (`Working`, `Blocked`, `Done`), and programmatic agent steering via `hc` | [herdr.dev](https://herdr.dev/) · [GitHub](https://github.com/herdr/herdr) |
+| **t3code** | High-speed terminal and web UI orchestrator for multi-task coding | Parallel agent sessions and fast code review | [pingdotgg/t3code](https://github.com/pingdotgg/t3code) |
+| **Native Harnesses** | Self-contained multi-agent environments (Codex App, Antigravity) | Full-workspace tasks, background subagents, and rich artifacts without external tooling | Integrated in native apps |
 
-> **The Multi-Agent Parallel Pattern:** Popularized by builders like Pieter Levels ([levels.io](https://x.com/levelsio/status/2057933239600263582)), the winning workflow is no longer watching one agent slowly type code. Instead, developers multiplex several headless agent sessions simultaneously (each bound to its own git worktree branch) and use tools like **t3code** or **dmux** to manage handoffs, reviews, and merges.
+> **My Setup:** I use **Herdr** as my primary orchestrator for managing persistent agent sessions and tracking when an agent is blocked or done. For end-to-end features, I rely on the native orchestration loops built directly into **Codex App** and **Antigravity**.
 
 ---
 
@@ -83,7 +80,7 @@ The harness is the runtime engine that manages prompt assembly, tool execution l
 | **HermesAgent / OpenClaw** | Open-Source Autonomous Agents | Function-calling open weights | Specialized function calling and local inference workflows |
 
 #### My Current Daily Setup:
-* **Workstation Heavyweight:** **Codex App** (OpenAI) and **Antigravity** (Google) for production cloud architecture and complex multi-file engineering.
+* **Workstation Heavyweights:** **Codex App** (OpenAI) and **Antigravity** (Google) for production cloud architecture and complex multi-file engineering.
 * **Local / Hacker Daily Driver:** **Pi** paired with **OpenRouter** targeting **DeepSeek** or free frontier models for fast command-line execution and cost-effective iteration.
 
 ---
@@ -92,7 +89,7 @@ The harness is the runtime engine that manages prompt assembly, tool execution l
 
 Developers frequently confuse **Skills** and **MCP (Model Context Protocol)**. They solve two fundamentally different problems:
 
-* **Skills (Procedural Knowledge):** *How the agent thinks and acts.* Standardized markdown instructions, conventions, and reusable scripts loaded on-demand.
+* **Skills (Procedural Knowledge):** *How the agent thinks and acts.* Standardized markdown instructions, conventions, and reusable scripts loaded on-demand without bloating system prompts.
 * **MCP (State & Connectivity):** *What external tools and data the agent accesses.* Client-server RPC protocol connecting agents to APIs, databases, and device interfaces.
 
 ```
@@ -100,28 +97,24 @@ Developers frequently confuse **Skills** and **MCP (Model Context Protocol)**. T
 │                        AGENT                           │
 │  ┌─────────────────────────┐  ┌─────────────────────┐  │
 │  │   SKILLS (Procedural)   │  │   MCP (Connectors)  │  │
-│  │ • How to format code    │  │ • Query Perplexity  │  │
-│  │ • How to run migrations │  │ • Control Mobile OS │  │
-│  │ • Domain checklists     │  │ • Send Telegram msg │  │
+│  │ • How to format docs    │  │ • Query Perplexity  │  │
+│  │ • Rule checklists       │  │ • Control Mobile OS │  │
+│  │ • Simplified English    │  │ • Send Telegram msg │  │
 │  └─────────────────────────┘  └─────────────────────┘  │
 └────────────────────────────────────────────────────────┘
 ```
 
-### Essential Skills & Script Bundles
+### The Standard for Technical Writing: ASD-STE100
 
-| Repository / Skill | Purpose | Link |
-|--------------------|---------|------|
-| **Uncodixfy / SKILL.md** | Clean, declarative standard for defining agent skill manifests and invocation triggers | [cyxzdev/Uncodixfy](https://github.com/cyxzdev/Uncodixfy/blob/main/SKILL.md) |
-| **agent-scripts** | Battle-tested utility scripts and automation hooks for coding agents (by Peter Steinberger) | [steipete/agent-scripts](https://github.com/steipete/agent-scripts) |
-| **recall** | Context retrieval and persistent memory tools across agent sessions | [arjunkmrm/recall](https://github.com/arjunkmrm/recall) |
-| **asd-ste100-skill** | Enforces Simplified Technical English (ASD-STE100) for clean, unambiguous documentation | [danyuchn/asd-ste100-skill](https://github.com/danyuchn/asd-ste100-skill) |
-| **Claude-to-IM-skill** | Dispatches agent execution milestones and alerts directly to instant messaging channels | [op7418/Claude-to-IM-skill](https://github.com/op7418/Claude-to-IM-skill) |
+* **[asd-ste100-skill](https://github.com/danyuchn/asd-ste100-skill):** Enforces **Simplified Technical English (ASD-STE100)** for clean, unambiguous technical writing.
+  * **Karpathy's Recommendation:** Andrej Karpathy highlighted Simplified Technical English as an ideal framework for prompting LLMs to write technical documentation. By restricting vocabulary to a single meaning per word and eliminating unnecessary filler, it forces the model to generate clear, deterministic, and fluff-free explanations.
+* **[SKILL.md Spec](https://github.com/cyxzdev/Uncodixfy/blob/main/SKILL.md):** The declarative standard for packaging instructions, triggers, and bundled scripts so agents can load capabilities modularly on-demand.
 
 ---
 
 ## 🔌 4. Recommended MCP (Model Context Protocol) Servers
 
-MCP eliminates vendor lock-in by providing a universal protocol for tool exposure. A single MCP configuration works across Antigravity, Claude Code, Cursor, and headless agents.
+MCP eliminates vendor lock-in by providing a universal protocol for tool exposure. A single MCP configuration works across Antigravity, Claude Code, and headless agents.
 
 | MCP Server | Protocol Capability | Link |
 |------------|---------------------|------|
@@ -131,28 +124,13 @@ MCP eliminates vendor lock-in by providing a universal protocol for tool exposur
 
 ---
 
-## 🛡️ 5. Agent Sandboxes & Virtual Isolation Runtimes
+## 🛠️ 5. Workflow Automation & Utilities
 
-> **The Reality Check:** Most engineers today run coding agents "naked" on their host machines with full terminal permissions. While tolerable for simple edits, true agent autonomy (browsing, installing packages, executing tests, or using mouse/keyboard) creates significant risk.
+Tools for automated reviews and desktop workflows:
 
-Isolated execution environments provide secure, disposable sandboxes for browser automation and computer-use tasks:
-
-| Tool | Architecture | Why It Matters | Link |
-|------|--------------|----------------|------|
-| **Neko** | Self-hosted virtual browser in Docker streamed via WebRTC | Gives agents a real Chromium instance running inside an isolated Docker container with sub-second WebRTC video streaming | [m1k1o/neko](https://github.com/m1k1o/neko) |
-| **Orca** | Agentic testing and isolated sandbox execution environment | Safe boundary testing for untrusted agent-generated code | [stablyai/orca](https://github.com/stablyai/orca) |
-| **Anthropic Computer Use Demo** | Dockerized X11 desktop environment | Standard reference architecture for OS-level GUI agent automation | [anthropics/computer-use-demo](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) |
-
----
-
-## 🛠️ 6. Agent Management & Workflow Automation
-
-Managing fleets of agents, prompts, and pull request reviews:
-
-* **Herdr**: Multi-agent process manager for flocking, dispatching, and monitoring agents.
 * **oh-my-pr**: Automated PR generation, code review synthesis, and validation loops ([yungookim/oh-my-pr](https://github.com/yungookim/oh-my-pr)).
 * **awesome-claude-prompts**: High-signal curated prompt engineering patterns ([yzfly/awesome-claude-prompts](https://github.com/yzfly/awesome-claude-prompts)).
-* **claude-desktop-debian**: Unofficial packaging to run desktop agent environments natively on Debian/Ubuntu Linux ([aaddrick/claude-desktop-debian](https://github.com/aaddrick/claude-desktop-debian)).
+* **claude-desktop-debian**: Packaging to run desktop agent environments natively on Debian/Ubuntu Linux ([aaddrick/claude-desktop-debian](https://github.com/aaddrick/claude-desktop-debian)).
 
 ---
 
@@ -160,8 +138,8 @@ Managing fleets of agents, prompts, and pull request reviews:
 
 If you want a productive, cost-effective setup today without getting trapped in fragile abstractions:
 
-1. **Orchestrator:** Use **t3code** or **dmux** to manage parallel agent streams across git worktrees.
+1. **Orchestration:** Use **Herdr** for persistent agent tracking across terminal panes, or lean on the native multi-agent loops in **Codex App** and **Antigravity**.
 2. **Native Cloud Harnesses:** **Antigravity** (Gemini) and **Codex App** (OpenAI) for complex multi-file architectural work.
 3. **Local / Hacker Terminal:** **Pi** with **OpenRouter** routing to **DeepSeek** for high-volume, low-cost CLI tasks.
-4. **Skills over Bloat:** Use modular `SKILL.md` bundles and `agent-scripts` rather than enormous monolithic system prompts.
-5. **Sandbox Ahead:** Run browser and GUI agents inside **Docker + Neko** to avoid security risks on your host machine.
+4. **Skills over Fluff:** Use **`asd-ste100`** for deterministic, fluff-free documentation and modular `SKILL.md` playbooks.
+5. **Connectors:** Plug in **MCP servers** (Perplexity, Mobile, Telegram) for universal tool integration across any harness.
