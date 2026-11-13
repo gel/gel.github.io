@@ -10,7 +10,8 @@ insert_anchor_links = "right"
 
 Welcome to a resource for Generative AI: from practical development tools to cutting-edge research papers. This section covers:
 
-- **GenAI Agents Environment**: CLI agents, AI editors, MCP servers, and tools for your development workflow
+- **[Agentic Stack](@/generative-ai/1-intro/1_genai_environment.md)**: orchestrators, execution harnesses, skills, and MCP connectors
+- **[Agentic Workspace](@/generative-ai/1-intro/2_agentic_workspace.md)**: my setup and workflow across operating systems
 - **Agents**: Research on autonomous AI agents and multi-agent systems
 - **Research Papers**: Curated summaries of influential papers on training, optimization, prompting, and more
 

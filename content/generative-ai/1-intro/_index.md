@@ -21,3 +21,8 @@ In this book, I will look at the technical foundations of these AI systems, thei
 - Industry Impact: Analyzing how businesses and industries are being transformed by the adoption of generative AI technologies.
 
 - Future Visions: Speculating on the potential future developments and the direction in which generative AI is heading.
+
+## Agentic Development
+
+- [Agentic Stack](@/generative-ai/1-intro/1_genai_environment.md): orchestrators, harnesses, skills, and MCP connectors.
+- [Agentic Workspace](@/generative-ai/1-intro/2_agentic_workspace.md): my setup, workflow principles, and a developing keyboard configuration across operating systems.
