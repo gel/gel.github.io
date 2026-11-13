@@ -230,3 +230,24 @@ body.book-body {
 }
 
 @import "interview";
+/* Topic navigation within long GenAI pages. */
+.page-toc {
+  margin: 0 0 2rem;
+  padding: 1.2rem 1.6rem;
+  border: 1px solid var(--table-border-bottom);
+  border-radius: 8px;
+
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  ul {
+    margin: 1rem 0 0;
+    padding-left: 2rem;
+  }
+
+  li {
+    margin: 0.5rem 0;
+  }
+}

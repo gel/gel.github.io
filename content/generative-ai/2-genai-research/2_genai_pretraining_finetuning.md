@@ -7,6 +7,49 @@ description = "Research summary of GenAI Training with practical takeaways for L
 
 
 
+### [Chinchilla / Scaling Laws] Calculating Training FLOPs: Why 6ND?
+
+Papers: [Training Compute-Optimal Large Language Models — Appendix F](https://arxiv.org/html/2203.15556v1#A6) (Hoffmann et al., 2022) and [Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361) (Kaplan et al., 2020).
+
+For a dense transformer, a useful estimate of training compute is **C ≈ 6 × N × D FLOPs**, where **N** is the parameter count and **D** is the total number of training tokens processed, including repeated tokens. FLOPs count floating-point operations; FLOP/s measures speed.
+
+#### Start With One Linear Layer
+
+Let **Y = XW**, with X shaped **T × i** (T token positions, i input features), W shaped **i × o**, and Y shaped **T × o**. The layer has **N_layer = i × o** weights.
+
+Each output element is a dot product: approximately i multiplications and i additions. Counting a multiply-add as **two FLOPs**, the forward matrix multiplication costs approximately **2 × T × i × o**.
+
+For backpropagation, let **G = ∂L/∂Y**, the gradient arriving from the next layer:
+
+| Pass | Calculation | Approximate FLOPs |
+|------|-------------|-------------------|
+| Forward | Y = XW | 2 × T × i × o |
+| Backward: weights | ∂L/∂W = XᵀG | 2 × T × i × o |
+| Backward: input activations | ∂L/∂X = GWᵀ | 2 × T × i × o |
+| **Total** | **One forward + two backward matrix multiplications** | **6 × T × N_layer** |
+
+**Why differentiate with respect to X?** Its gradient carries the loss signal back to earlier layers so their weights can be trained. We update W; we propagate through X. Backward therefore costs roughly twice forward.
+
+#### Scale to the Training Run
+
+Sum over the model's dominant weight matrices and all D training tokens:
+
+- **Forward:** approximately 2ND FLOPs.
+- **Backward:** approximately 2 × 2ND = 4ND FLOPs.
+- **Total:** approximately **6ND FLOPs**.
+
+For example, **7 billion parameters × 1 trillion tokens × 6 ≈ 4.2 × 10²² FLOPs** across the full run, not per GPU.
+
+**Remember:** the first **2** is multiply + add; the **3** is forward + weight gradient + activation gradient.
+
+#### What the Estimate Leaves Out
+
+This approximates dense, full-parameter training dominated by weight matrix multiplications. Attention's token-to-token operations add sequence-length-dependent compute; long contexts can make that significant. Activation checkpointing adds recomputation. Optimizer updates, other operations, and distributed communication also need separate accounting. Some boundary activations do not require gradients, so the three-matmul picture is an approximation across the model.
+
+For MoE, total stored parameters do not all participate in every token's computation; account for active experts and shared layers. **6ND estimates arithmetic, not memory use or elapsed training time.**
+
+Learning reference: Umar Jamil, *Building a distributed training framework from first principles*, chapter **00:16:50 — Model Architecture, Parameters and Training FLOPs**; [companion code](https://github.com/hkproj/torchfeather).
+
 ### [Self-Reward] Self Rewarding Language Models
 
 Arxiv: [https://arxiv.org/abs/2401.10020](https://arxiv.org/abs/2401.10020) _18 Jan 2024 **Meta**_

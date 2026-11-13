@@ -4,6 +4,18 @@
 
 {% block bookcontent %}
     <h1>{{ page.title }}</h1>
+    {% if current_path is starting_with("/generative-ai/") and page.toc | length > 1 %}
+    <nav class="page-toc" aria-label="On this page">
+      <details>
+        <summary>On this page · {{ page.toc | length }} topics</summary>
+        <ul>
+          {% for heading in page.toc %}
+          <li><a href="{{ heading.permalink | safe }}">{{ heading.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </details>
+    </nav>
+    {% endif %}
     {{ page.content | safe }}
 {% endblock bookcontent %}
 
