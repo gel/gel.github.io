@@ -1,28 +1,14 @@
 +++
-title = "Generative AI Foundations"
+title = "Agentic Development"
 weight = 1
 sort_by = "weight"
-description = "An introduction to generative AI, the modern tooling ecosystem, and practical agent-building concepts."
+description = "Practical notes on the tools, models, and workspace I use for agentic software development."
 insert_anchor_links = "right"
 +++
 
-Generative AI is changing how we build software and create content. From coding assistants to image generation, these tools are practical utilities that are becoming standard in our workflows.
+These are my practical notes on building software with coding agents: how the tools fit together and how I use them day to day.
 
-Large Language Models, a subset of generative AI, are particularly fascinating. They have the ability to understand and generate human language with remarkable proficiency. As we explore the inner workings of LLMs, we will encounter systems like Antrophic Claude, GPT-4, BERT, and their successors, which continue to push the limits of what machines can achieve with words.
+- **[Agentic Stack](@/generative-ai/1-intro/1_genai_environment.md)** — orchestrators, execution harnesses, hosted and local models, skills, and MCP connectors.
+- **[Agentic Workspace](@/generative-ai/1-intro/2_agentic_workspace.md)** — my Omarchy and Herdr setup, with a keyboard cheat sheet for managing workspaces, tabs, panes, and agents.
 
-In this book, I will look at the technical foundations of these AI systems, their philosophical and ethical considerations, their potential applications, and the challenges they pose. By combining thorough research with accessible explanations, my goal is to make this complex subject matter engaging for both AI aficionados and newcomers alike.
-
-## A Preview of the Journey Ahead ##
-
-- Deep Dives into AI Mechanics: Understanding the algorithms, neural networks, and data that power generative AI and LLMs.
-
-- Creative Showcases: Highlighting the most impressive and thought-provoking outputs of generative AI.
-
-- Industry Impact: Analyzing how businesses and industries are being transformed by the adoption of generative AI technologies.
-
-- Future Visions: Speculating on the potential future developments and the direction in which generative AI is heading.
-
-## Agentic Development
-
-- [Agentic Stack](@/generative-ai/1-intro/1_genai_environment.md): orchestrators, harnesses, skills, and MCP connectors.
-- [Agentic Workspace](@/generative-ai/1-intro/2_agentic_workspace.md): my setup, workflow principles, and a developing keyboard configuration across operating systems.
+For model training, prompting, evaluation, and optimization papers, continue to [GenAI Research](@/generative-ai/2-genai-research/_index.md). For datasets and model implementation notes, see [LLM Implementation](@/generative-ai/3-llm-implementation/_index.md).
