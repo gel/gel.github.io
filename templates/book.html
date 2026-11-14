@@ -45,7 +45,7 @@ Gal's {{ current_book_title }} Book - {{ section.title }}
       {% set index = get_section(path=book_section_path | trim) %}
       {% if book_url | trim == "interviews" %}
       <li class="live-interviews-link">
-        <a href="{{ get_url(path='interviews/live/') | safe }}"><strong>Live Interviews</strong></a>
+        <a href="/interviews/live/"><strong>Live Interviews</strong></a>
       </li>
       {% endif %}
       {% set_global chapter_num = 0 %}
@@ -53,7 +53,7 @@ Gal's {{ current_book_title }} Book - {{ section.title }}
       {% set subsection = get_section(path=s) %}
       {% if not subsection.extra.hidden %}
       {% set_global chapter_num = chapter_num + 1 %}
-      {% set section_link = subsection.redirect_to | default(value=subsection.permalink) %}
+      {% set section_link = subsection.redirect_to | default(value=subsection.path) %}
       <li {% if current_path==subsection.path %}class="active" {% endif %}>
         <a href="{{ section_link | safe }}">
           {% if config.extra.book_number_chapters %}<strong>{{ chapter_num }}.</strong>{% endif %}
@@ -63,7 +63,7 @@ Gal's {{ current_book_title }} Book - {{ section.title }}
         <ul>
           {% for page in subsection.pages %}
           <li {% if current_path==page.path %}class="active" {% endif %}>
-            <a href="{{ page.permalink }}">
+            <a href="{{ page.path }}">
               {% if config.extra.book_number_chapters %}<strong>{{ chapter_num }}.{{ loop.index
                 }}.</strong>{% endif %}
               {{ page.title }}

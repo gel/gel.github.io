@@ -110,10 +110,10 @@
     <a class="quick-back" href="{{ get_url(path='interviews/live/') | safe }}">&larr; Back to Live Questions</a>
     <div class="quick-links">
       {% if page.smaller %}
-      <a class="quick-link-pill" href="{{ page.smaller.permalink | safe }}">&larr; Prev</a>
+      <a class="quick-link-pill" href="{{ page.smaller.path | safe }}">&larr; Prev</a>
       {% endif %}
       {% if page.higher %}
-      <a class="quick-link-pill" href="{{ page.higher.permalink | safe }}">Next &rarr;</a>
+      <a class="quick-link-pill" href="{{ page.higher.path | safe }}">Next &rarr;</a>
       {% endif %}
     </div>
   </div>
@@ -225,16 +225,16 @@
 
 {% block prev_link %}
 {% if page.smaller %}
-<a class="previous" href="{{ page.smaller.permalink | safe }}">&larr; Previous</a>
+<a class="previous" href="{{ page.smaller.path | safe }}">&larr; Previous</a>
 {% else %}
 {% set parent = get_section(path=page.ancestors | reverse | first) %}
-<a class="previous" href="{{ parent.permalink | safe }}">&larr; Previous</a>
+<a class="previous" href="{{ parent.path | safe }}">&larr; Previous</a>
 {% endif %}
 {% endblock prev_link %}
 
 {% block next_link %}
 {% if page.higher %}
-<a class="next" href="{{ page.higher.permalink | safe }}">Next &rarr;</a>
+<a class="next" href="{{ page.higher.path | safe }}">Next &rarr;</a>
 {% else %}
 {% set book_url = book_utils::get_current_book_url() %}
 {% set book_section_path = book_utils::get_book_section_path(current_book_url=book_url) %}
@@ -243,7 +243,7 @@
 {% for s in index.subsections %}
 {% set subsection = get_section(path=s) %}
 {% if found_current %}
-<a class="next" href="{{ subsection.permalink | safe }}">Next &rarr;</a>
+<a class="next" href="{{ subsection.path | safe }}">Next &rarr;</a>
 {% set_global found_current = false %}
 {% endif %}
 {% for p in subsection.pages %}

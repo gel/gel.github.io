@@ -3,7 +3,7 @@
   {% for heading in headings %}
   {% if heading.level <= 3 %}
   <li>
-    <a href="{{ heading.permalink | safe }}">{{ heading.title }}</a>
+    <a href="#{{ heading.id }}">{{ heading.title }}</a>
     {% if heading.level < 3 and heading.children %}
     {{ page_toc::render(headings=heading.children) }}
     {% endif %}
