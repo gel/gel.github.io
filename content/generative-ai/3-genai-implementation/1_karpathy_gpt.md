@@ -1,10 +1,29 @@
 +++
 title = "Karpathy: Building GPT"
 weight = 1
-description = "My GPT learning track, starting with tiny Shakespeare and continuing toward GPT-2."
+description = "My GPT learning track: micrograd and backpropagation, tiny Shakespeare, and GPT-2."
 +++
 
-My starting point was Karpathy's tiny Shakespeare example: a small model I could train and use to generate text. This track connects that exercise to the larger GPT-2 implementation.
+My starting point was Karpathy's tiny Shakespeare example: a small model I could train and use to generate text. This track connects micrograd's explanation of backpropagation to that exercise and the larger GPT-2 implementation.
+
+### Micrograd: Backpropagation from Scratch
+
+References: [micrograd code](https://github.com/karpathy/micrograd) · [The spelled-out intro to neural networks and backpropagation](https://youtu.be/VMj-3S1tku0).
+
+Micrograd makes backpropagation visible by building a small automatic differentiation engine around scalar values. Each operation records its inputs and how to pass a gradient back to them.
+
+- **Forward pass:** calculate values and build the computation graph.
+- **Chain rule:** multiply the gradient arriving from later operations by the local derivative.
+- **Multiple paths:** add gradient contributions when a value influences the result through more than one path; this is why the implementation uses `+=`.
+- **Backward pass:** visit nodes in reverse topological order so downstream contributions arrive before a node propagates its gradient further.
+
+For one path through an intermediate value z:
+
+{% math() %}
+\frac{\partial L}{\partial x} = \frac{\partial L}{\partial z}\,\frac{\partial z}{\partial x}
+{% end %}
+
+The [`Value` engine](https://github.com/karpathy/micrograd/blob/master/micrograd/engine.py) explains what `loss.backward()` computes. Updating the weights using those gradients is a separate optimizer step.
 
 ### Tiny Shakespeare
 
