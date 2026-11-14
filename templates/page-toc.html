@@ -1,0 +1,14 @@
+{% macro render(headings) %}
+<ul>
+  {% for heading in headings %}
+  {% if heading.level <= 3 %}
+  <li>
+    <a href="{{ heading.permalink | safe }}">{{ heading.title }}</a>
+    {% if heading.level < 3 and heading.children %}
+    {{ page_toc::render(headings=heading.children) }}
+    {% endif %}
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>
+{% endmacro render %}

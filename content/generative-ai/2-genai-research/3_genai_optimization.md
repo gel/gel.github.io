@@ -24,6 +24,8 @@ The benefit of the approach is the ability to set a compute budget and then base
 
 ### [Offload-MoE] Fast Inference of MoE Language Models with Offloading
 
+For the architecture and compute background, read [DeepSeekMoE: shared and routed experts](@/generative-ai/2-genai-research/6_genai_models.md#deepseekmoe-shared-and-routed-experts) and [active parameters and MoE scaling](@/generative-ai/2-genai-research/2_genai_pretraining_finetuning.md#moe-scaling-active-parameters-granularity-and-training-flops).
+
 Arxiv: [https://arxiv.org/abs/2312.17238](https://arxiv.org/abs/2312.17238) _28 Dec 2023 **Yandex**_
 
 We build upon parameter offloading algorithms and propose a novel strategy that accelerates offloading by taking advantage of innate properties of MoE LLM.
@@ -130,6 +132,8 @@ Solution: Multi-query attention
 - Identical to multi-head attention except heads share single set of keys and values
 
 ### [MoE] Outrageously Large NN: The Sparsely-Gated MoE Layer
+
+For a transformer architecture using shared and routed experts, continue to [DeepSeekMoE](@/generative-ai/2-genai-research/6_genai_models.md#deepseekmoe-shared-and-routed-experts), then [active parameters and training FLOPs](@/generative-ai/2-genai-research/2_genai_pretraining_finetuning.md#moe-scaling-active-parameters-granularity-and-training-flops).
 
 Arxiv: [https://arxiv.org/abs/1701.06538](https://arxiv.org/abs/1701.06538) _23 Jan 2017 **Google**_
 

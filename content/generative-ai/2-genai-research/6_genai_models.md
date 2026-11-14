@@ -15,6 +15,46 @@ This survey explores Generative AI (AI), focusing on Mixture of Experts (MoE), m
 
 ## Text & Multimodal LLMs
 
+### [DeepSeekMoE] Shared and Routed Experts
+
+Paper: [DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models](https://arxiv.org/abs/2401.06066) — Dai et al., January 2024, **DeepSeek-AI**.
+
+#### From a Dense FFN to Experts
+
+A dense transformer sends each token through the same feed-forward network (FFN). An MoE module replaces that FFN at selected layers; attention remains a separate operation. Each expert is itself an FFN. DeepSeekMoE combines **shared experts**, used for every token, with **routed experts**, selected per token. See the paper's [architecture, Sections 2–3](https://arxiv.org/html/2401.06066v1#S3).
+
+```mermaid
+flowchart TD
+    X["Token representation after attention"] --> Shared["All Ns shared experts"]
+    X --> Router["Router: score Nr routed experts"]
+    Router --> Select["Select Top-Kr for this token"]
+    X --> Routed["Run selected routed FFNs"]
+    Select --> Routed
+    Shared --> Sum["Sum shared outputs and weighted routed outputs"]
+    Routed --> Sum
+    Sum --> Y["MoE output, before residual addition"]
+```
+
+The router scores the routed pool and keeps **Kr** selections. Shared experts bypass selection. In the original formulation, the selected softmax scores weight routed outputs; unselected gates are zero. Schematically:
+
+**MoE(x) = Σ shared_FFN(x) + Σ selected_gate(x) × selected_FFN(x)**
+
+#### Smaller Experts, More Combinations
+
+DeepSeekMoE reduces each expert's intermediate width by a factor **m**, increasing the expert count and active count by **m**. If the original selected count was **K**, reserving **Ns** shared experts then leaves **Kr = mK − Ns** routed selections. Shared experts aim to capture common features and reduce duplication; routed experts can specialize. Balancing losses address routing collapse and device imbalance. Specialties are learned, without predefined labels such as “math expert.” [Sections 3.1–3.3](https://arxiv.org/html/2401.06066v1#S3).
+
+**Worked illustration:** start with eight experts of size P, selecting two. Split each into two half-size experts, then reserve one as shared:
+
+| Arrangement | Available experts | Active per token | Total expert weights | Active expert weights |
+|-------------|-------------------|------------------|----------------------|-----------------------|
+| Original | 8 routed, size P | 2 routed | 8P | 2P |
+| Split in two | 16 routed, size P/2 | 4 routed | 8P | 2P |
+| With sharing | 1 shared + 15 routed, size P/2 | 1 shared + 3 routed | 8P | 2P |
+
+These are architecture choices before training. The arithmetic holds the expert matrix budget constant; the router's cost still changes with the number of routed experts.
+
+Next: [active parameters, training FLOPs, and fine-grained MoE scaling](@/generative-ai/2-genai-research/2_genai_pretraining_finetuning.md#moe-scaling-active-parameters-granularity-and-training-flops). For the earlier sparse-gating paper and inference offloading, see [Optimizations](@/generative-ai/2-genai-research/3_genai_optimization.md#moe-outrageously-large-nn-the-sparsely-gated-moe-layer).
+
 ### [Mixtral] Mixtral of Experts
 
 Arxiv: [https://arxiv.org/abs/2401.04088](https://arxiv.org/abs/2401.04088) _8 Jan 2024 **Mixtral.ai**_

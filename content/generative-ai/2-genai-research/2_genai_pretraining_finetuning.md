@@ -47,9 +47,73 @@ For example, **7 billion parameters × 1 trillion tokens × 6 ≈ 4.2 × 10²² 
 
 This approximates dense, full-parameter training dominated by weight matrix multiplications. Attention's token-to-token operations add sequence-length-dependent compute; long contexts can make that significant. Activation checkpointing adds recomputation. Optimizer updates, other operations, and distributed communication also need separate accounting. Some boundary activations do not require gradients, so the three-matmul picture is an approximation across the model.
 
-For MoE, total stored parameters do not all participate in every token's computation; account for active experts and shared layers. **6ND estimates arithmetic, not memory use or elapsed training time.**
+For MoE, total stored parameters do not all participate in every token's computation; see [active parameters and MoE scaling below](#moe-scaling-active-parameters-granularity-and-training-flops). **6ND estimates arithmetic, not memory use or elapsed training time.**
 
 Learning reference: Umar Jamil, *Building a distributed training framework from first principles*, chapter **00:16:50 — Model Architecture, Parameters and Training FLOPs**; [companion code](https://github.com/hkproj/torchfeather).
+
+### [MoE Scaling] Active Parameters, Granularity, and Training FLOPs
+
+Paper: [Scaling Laws for Fine-Grained Mixture of Experts](https://proceedings.mlr.press/v235/ludziejewski24a.html) — Ludziejewski et al., **ICML 2024**. The [February 2024 preprint](https://arxiv.org/html/2402.07871v1) provides the equations referenced below.
+
+Start with [DeepSeekMoE's shared and routed experts](@/generative-ai/2-genai-research/6_genai_models.md#deepseekmoe-shared-and-routed-experts), then apply the [6ND derivation above](#chinchilla-scaling-laws-calculating-training-flops-why-6nd). The following bookkeeping and numerical example are explanatory derivations, not reported model configurations.
+
+#### Dense, Routed, Total, and Active Parameters
+
+An expert's weight matrices can be dense even when expert selection is sparse. “Sparse” describes which experts execute for a token. Distinguish the stored parameter count from the weights used in its computation.
+
+For one block with equal-size experts, define:
+
+| Symbol | Meaning |
+|--------|---------|
+| P_base | Always-used matrix weights outside the experts, such as attention projections |
+| P_e | Matrix weights in one expert |
+| Ns | Number of shared experts; all execute |
+| Nr | Number of available routed experts |
+| Kr | Number of routed experts selected for a token |
+
+Excluding router weights and small bias/normalization terms:
+
+**P_total,block = P_base + (Ns + Nr) × P_e**
+
+**P_active,block = P_base + (Ns + Kr) × P_e**
+
+An ordinary two-matrix FFN with model width **d** and intermediate width **h** has **P_e ≈ 2dh** weights: one d × h matrix and one h × d matrix. A three-matrix gated FFN has **P_e ≈ 3dh**. Count the actual matrices in the architecture you are studying.
+
+For unequal expert sizes, sum their individual weight counts. For a complete model, sum over blocks, including any dense FFNs that remain. Account for the input embedding lookup and vocabulary output projection separately: storing an embedding table does not mean multiplying by every entry for each input token.
+
+#### From Active Weights to Training FLOPs
+
+The earlier matrix-multiplication argument applies to each executed expert: forward costs roughly two FLOPs per weight per token, and backward contributes roughly four more. For **D** processed training tokens:
+
+**C_block_weights ≈ 6 × D × Σ_blocks P_active,block**
+
+This is the block-weight contribution. Add router computation, attention's token-to-token products, the output head, and other omitted operations for a fuller estimate. If active weight counts vary by token, replace D times a fixed count with the sum over tokens.
+
+**Worked example:** each of twelve identical blocks has **2M** base weights, **1** shared expert, **8** routed experts, and **Kr = 2**. Each expert has **1M** weights.
+
+| Quantity | Calculation | Result |
+|----------|-------------|--------|
+| Stored block weights | 2M + (1 + 8) × 1M | 11M |
+| Active block weights per token | 2M + (1 + 2) × 1M | 5M |
+| Stored weights across 12 blocks | 12 × 11M | 132M |
+| Active weights across 12 blocks | 12 × 5M | 60M |
+| Training block matmuls over 1B tokens | 6 × 60M × 1B | 3.6 × 10¹⁷ FLOPs |
+
+Using all 132M block weights would give **7.92 × 10¹⁷ FLOPs**, incorrectly treating every routed expert as active on every token. These are block subtotals, not full-model parameter counts or complete training costs.
+
+Stored weights still require memory somewhere, together with gradients and optimizer state during training. Routing, expert dispatch, load imbalance, and communication affect elapsed time; a FLOPs ratio alone does not establish a speedup.
+
+#### Granularity and the Scaling Law
+
+The scaling paper studies **granularity G = h_ff / h_expert** and **expansion E = total expert weights / dense-FFN weights**. Its setup has **E × G** available experts and activates **G** per token. Increasing G shrinks each expert while retaining the active expert-weight budget. This setup does not prescribe DeepSeekMoE's shared-expert split. [Section 4](https://arxiv.org/html/2402.07871v1#S4).
+
+The preprint fits loss as:
+
+**L(N, D, G) = c + (a + g/G^γ)/N^α + b/D^β**
+
+Here **N** counts non-embedding model weights, excluding routing in its parameter model; **D** counts training tokens. The remaining symbols are fitted constants. Use the paper's N consistently; substituting active parameters into this fitted law changes its meaning. [Sections 5–6](https://arxiv.org/html/2402.07871v1#S5).
+
+At fixed expansion, the study jointly optimizes model size, tokens, and granularity for a FLOPs budget, explicitly charging routing overhead. Its compute-optimal comparisons favor fine-grained MoE within the studied setup and extrapolations. Larger extrapolations and hardware speedups need separate validation. [Section 6](https://arxiv.org/html/2402.07871v1#S6).
 
 ### [Self-Reward] Self Rewarding Language Models
 

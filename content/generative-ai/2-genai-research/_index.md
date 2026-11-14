@@ -12,9 +12,9 @@ Paper notes organized by topic. Open a category, then use **On this page** to ju
 | Topic | Notes |
 |-------|-------|
 | [Agents](@/generative-ai/2-genai-research/1_genai_agents.md) | Agent architectures, collaboration, and self-improvement |
-| [Training](@/generative-ai/2-genai-research/2_genai_pretraining_finetuning.md) | Training FLOPs, pretraining, fine-tuning, and alignment |
+| [Training](@/generative-ai/2-genai-research/2_genai_pretraining_finetuning.md) | Training FLOPs, MoE scaling, pretraining, fine-tuning, and alignment |
 | [Optimizations](@/generative-ai/2-genai-research/3_genai_optimization.md) | RoPE, attention, efficient inference, and adaptation |
 | [Prompting](@/generative-ai/2-genai-research/4_genai_prompting.md) | Prompting methods and in-context learning |
 | [Evaluations](@/generative-ai/2-genai-research/5_genai_benchmarks.md) | Benchmarks, factuality, and verification |
-| [Models](@/generative-ai/2-genai-research/6_genai_models.md) | Model architectures and multimodal systems |
+| [Models](@/generative-ai/2-genai-research/6_genai_models.md) | DeepSeekMoE, Mixtral, and other model architectures and multimodal systems |
 | [Security](@/generative-ai/2-genai-research/7_genai_security.md) | Instruction hierarchy, data extraction, and model safety |
