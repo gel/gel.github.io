@@ -1,50 +1,36 @@
-# Gal's Guide to Technical Interviews
+# Gal Goldman | Architect & Engineer
 
-## About
+Source for [gel.github.io](https://gel.github.io/), my personal site covering distributed systems, cloud architecture, production AI, and engineering quality.
 
-This is the personal blog and online book of Gal Goldman, a software architect with over 15 years of industry experience at top technology companies. 
+Built with Zola, Markdown, Tera templates, Sass, and JavaScript. Hosted on GitHub Pages.
 
-After going through numerous technical interviews and vetting many candidates over the years, Gal decided to create these resources to share his knowledge and tips.
+## Site content
 
-His goal is to help both interviewers and interviewees succeed and land their dream roles by mastering the art of the technical interview.
+- **[Blog](https://gel.github.io/blog/)** — technical articles and engineering experience.
+- **[Projects](https://gel.github.io/projects/)** — selected projects, tools, and workshops.
+- **[Generative AI](https://gel.github.io/generative-ai/)** — agentic development tools, workflows, and research notes.
+- **[Interviews](https://gel.github.io/interviews/)** — interview preparation, coding problems, system design, and an [interactive coding playground](https://gel.github.io/interviews/live/).
+- **[Books](https://gel.github.io/books/)** and **[Podcasts](https://gel.github.io/podcasts/)** — reading and listening notes.
+- **[Resume](https://gel.github.io/resume/)** — professional background and experience.
 
-## Blog Content
+## Run locally
 
-The blog covers topics like:
+Install [Zola](https://www.getzola.org/documentation/getting-started/installation/) (the deployment workflow uses **0.17.2**).
 
-- Optimizing your LinkedIn profile for recruiter discovery
-- How to research companies and prepare for coding interviews
-- Strategies for writing readable, well-structured code 
-- Big O time and space complexity analysis explained 
-- Walkthroughs of solving sample interview coding problems
-- How to assess company culture fit in interviews
-- Negotiating job offers and salaries as a software engineer
-- Transitioning from coding interviews to conducting them
-- Sample behavioral interview questions and answers
-- Technical interview practices from around the world
+From the repository root:
 
-## Book Contents
-
-The book expands on the blog, providing a comprehensive playbook for acing coding interviews, including:
-
-- Gal's top strategies for standing out from other candidates
-- Step-by-step preparation guide and timeline
-- Essential computer science concepts to review 
-- Tips for communicating effectively with interviewers 
-- Common behavioral questions with sample responses
-- Collection of sample technical interview coding challenges with solutions
-- Negotiation tips to maximize your compensation
-- Insights on detecting company red flags
-- Advice for getting hired remotely overseas
-- Bonus cheat sheets and resources for interview prep
-
-Check out the blog and book today to learn from Gal's years of software engineering interview experience! Your dream tech job awaits.
-
-### Development
-
-```
+```sh
 zola serve
 ```
 
-Open web server to view http://127.0.0.1:1111
-- Server support hot-reloading
+Open <http://127.0.0.1:1111/>. Changes reload automatically; stop with `Ctrl+C`.
+
+## Build and publish
+
+Build the production site:
+
+```sh
+zola build
+```
+
+Output goes to `public/` (ignored by Git). The [GitHub Actions workflow](.github/workflows/main.yml) builds and publishes to the `gh-pages` branch on pushes to `main`.
