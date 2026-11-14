@@ -8,7 +8,7 @@ Built with Zola, Markdown, Tera templates, Sass, and JavaScript. Hosted on GitHu
 
 - **[Blog](https://gel.github.io/blog/)** — technical articles and engineering experience.
 - **[Projects](https://gel.github.io/projects/)** — selected projects, tools, and workshops.
-- **[Generative AI](https://gel.github.io/generative-ai/)** — agentic development tools, workflows, and research notes.
+- **[Generative AI](https://gel.github.io/generative-ai/)** — agentic development tools, research notes, and hands-on model implementation.
 - **[Interviews](https://gel.github.io/interviews/)** — interview preparation, coding problems, system design, and an [interactive coding playground](https://gel.github.io/interviews/live/).
 - **[Books](https://gel.github.io/books/)** and **[Podcasts](https://gel.github.io/podcasts/)** — reading and listening notes.
 - **[Resume](https://gel.github.io/resume/)** — professional background and experience.

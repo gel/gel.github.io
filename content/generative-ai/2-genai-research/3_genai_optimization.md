@@ -64,22 +64,28 @@ Token content alone does not explicitly describe order or distance. A causal mas
 
 #### Angles, Frequencies, and the Base
 
-For rotary dimension **d**, pair index **i = 0, …, d/2 − 1**, and token position **p**:
+For rotary dimension \\( d \\), pair index \\( i = 0,\ldots,d/2-1 \\), and token position \\( p \\):
 
-**ω_i = B^(−2i/d)** and **φ_i(p) = p × ω_i**
+{% math() %}
+\omega_i = B^{-2i/d}, \qquad \phi_i(p) = p\,\omega_i
+{% end %}
 
-The original frequency base is **B = 10,000**. Each pair rotates at its own rate, like clocks with different speeds. A pair **(u, v)** becomes:
+RoPE uses complex numbers to represent each pair of real coordinates as one value, making multiplication by \\( e^{i\phi} \\) equivalent to a 2D rotation.
 
-```text
-u′ = u cos φ − v sin φ
-v′ = u sin φ + v cos φ
-```
+The original frequency base is \\( B = 10\,000 \\). Each pair rotates at its own rate, like clocks with different speeds. A pair \\( (u,v) \\) becomes:
 
-Equivalently, define **β_base = B^(2/d)**; then **ω_i = β_base^(−i)**. This algebraic rewrite explains the base-β notation used in some discussions. Keep it distinct from YaRN's β threshold below.
+{% math() %}
+\begin{aligned}
+u' &= u\cos\phi - v\sin\phi \\
+v' &= u\sin\phi + v\cos\phi
+\end{aligned}
+{% end %}
 
-**Worked illustration:** with d = 8 and B = 10,000, β_base = 10:
+Equivalently, define \\( \beta_{\mathrm{base}} = B^{2/d} \\); then \\( \omega_i = \beta_{\mathrm{base}}^{-i} \\). This algebraic rewrite explains the base-β notation used in some discussions. Keep it distinct from YaRN's β threshold below.
 
-| Coordinate pair | Frequency ω_i | Angle at p = 10, in radians |
+**Worked illustration:** with \\( d = 8 \\), \\( B = 10\,000 \\), and \\( \beta_{\mathrm{base}} = 10 \\):
+
+| Coordinate pair | Frequency \\( \omega_i \\) | Angle at \\( p = 10 \\), in radians |
 |-----------------|---------------|----------------------------|
 | 0 | 1 | 10 |
 | 1 | 0.1 | 1 |
@@ -88,11 +94,13 @@ Equivalently, define **β_base = B^(2/d)**; then **ω_i = β_base^(−i)**. This
 
 #### Why Relative Distance Appears
 
-Writing the block of pairwise rotations at position m as **R(m)**:
+Writing the block of pairwise rotations at position \\( m \\) as \\( R(m) \\):
 
-**(R(m)q)ᵀ(R(n)k) = qᵀR(n − m)k**
+{% math() %}
+\bigl(R(m)q\bigr)^{\mathsf{T}}\bigl(R(n)k\bigr) = q^{\mathsf{T}}R(n-m)k
+{% end %}
 
-The positional contribution depends on **n − m**; content still determines the score. [RoFormer, Section 3.2](https://arxiv.org/html/2104.09864v5#S3.SS2).
+The positional contribution depends on \\( n-m \\); content still determines the score. [RoFormer, Section 3.2](https://arxiv.org/html/2104.09864v5#S3.SS2).
 
 For fixed, unrotated q and k, positions **3 and 7** and positions **13 and 17** produce the same relative rotation: both have separation 4. This does not mean whole sequences shifted by ten tokens have identical hidden states.
 
@@ -104,15 +112,17 @@ Paper: [Extending Context Window of Large Language Models via Position Interpola
 
 #### Fit More Positions into the Trained Range
 
-Direct extrapolation feeds a model positions beyond its training window. Position Interpolation (PI) instead compresses the coordinates. For original window **L**, target window **L′**, and extension factor **s = L′/L**:
+Direct extrapolation feeds a model positions beyond its training window. Position Interpolation (PI) instead compresses the coordinates. For original window \\( L \\), target window \\( L' \\), and extension factor \\( s = L^{\prime}/L \\):
 
-**p′ = p/s**, so **φ_i(p) = (p/s) × ω_i**
+{% math() %}
+p^{\prime} = \frac{p}{s}, \qquad \phi_i(p) = \frac{p}{s}\,\omega_i
+{% end %}
 
-Equivalently, keep p and replace every frequency with **ω_i/s**. The paper combines this change with fine-tuning to adapt pretrained RoPE models to longer context. [Method, Section 2](https://arxiv.org/html/2306.15595v2#S2).
+Equivalently, keep p and replace every frequency with \\( \omega_i/s \\). The paper combines this change with fine-tuning to adapt pretrained RoPE models to longer context. [Method, Section 2](https://arxiv.org/html/2306.15595v2#S2).
 
-**Worked illustration:** extend 4,096 positions to 16,384, so s = 4:
+**Worked illustration:** extend 4,096 positions to 16,384, so \\( s = 4 \\):
 
-| Actual token position p | RoPE coordinate p′ |
+| Actual token position \\( p \\) | RoPE coordinate \\( p' \\) |
 |-------------------------|--------------------|
 | 0 | 0 |
 | 4,096 | 1,024 |
@@ -129,31 +139,35 @@ Paper: [YaRN: Efficient Context Window Extension of Large Language Models](https
 
 #### NTK-aware: Change the Frequency Base
 
-**NTK** refers to the **Neural Tangent Kernel**. NTK-aware scaling changes RoPE's base instead of scaling all frequencies equally. For rotary dimension **d > 2**:
+**NTK** refers to the **Neural Tangent Kernel**. NTK-aware scaling changes RoPE's base instead of scaling all frequencies equally. For rotary dimension \\( d > 2 \\):
 
-**B′ = B × s^(d/(d − 2))**, then **ω′_i = B′^(−2i/d)**
+{% math() %}
+B^{\prime} = B\,s^{\frac{d}{d-2}}, \qquad \omega_i^{\prime} = (B^{\prime})^{-2i/d}
+{% end %}
 
 The fastest pair stays unchanged; progressively slower pairs are stretched more. This differs from PI's uniform scaling. See [Section 3.1](https://arxiv.org/html/2309.00071v2#S3.SS1) and the [authors' NTK-aware implementation](https://github.com/jquesnelle/yarn/blob/master/scaled_rope/LlamaNTKScaledRotaryEmbedding.py).
 
 #### NTK-by-parts: Choose Which Bands to Stretch
 
-Let **λ_i = 2π/ω_i** be one full rotation's length in tokens, and **r_i = L/λ_i** the rotations within the original window. Thresholds **α** and **β** define the bands:
+Let \\( \lambda_i = \frac{2\pi}{\omega_i} \\) be one full rotation's length in tokens, and \\( r_i = L/\lambda_i \\) the rotations within the original window. Thresholds \\( \alpha \\) and \\( \beta \\) define the bands:
 
 | Band | Treatment |
 |------|-----------|
-| Slow: r_i < α | Interpolate fully: ω′_i = ω_i/s |
-| Middle: α ≤ r_i ≤ β | Blend interpolated and original frequencies |
-| Fast: r_i > β | Preserve original frequency: ω′_i = ω_i |
+| Slow: \\( r_i < \alpha \\) | Interpolate fully: \\( \omega_i^{\prime} = \omega_i/s \\) |
+| Middle: \\( \alpha \le r_i \le \beta \\) | Blend interpolated and original frequencies |
+| Fast: \\( r_i > \beta \\) | Preserve original frequency: \\( \omega_i^{\prime} = \omega_i \\) |
 
-The paper uses **α = 1, β = 32** for its LLaMA experiments. Here β is a band cutoff, distinct from **B**, **β_base**, and rotation angle **φ**. [Section 3.2](https://arxiv.org/html/2309.00071v2#S3.SS2).
+The paper uses \\( \alpha = 1,\ \beta = 32 \\) for its LLaMA experiments. Here β is a band cutoff, distinct from \\( B \\), \\( \beta_{\mathrm{base}} \\), and rotation angle \\( \phi \\). [Section 3.2](https://arxiv.org/html/2309.00071v2#S3.SS2).
 
 The [authors' implementation](https://github.com/jquesnelle/yarn/blob/master/scaled_rope/LlamaYaRNScaledRotaryEmbedding.py) names these cutoffs `beta_slow` and `beta_fast`, respectively.
 
 #### YaRN Adds Attention Scaling
 
-YaRN combines NTK-by-parts with a temperature **t** applied before attention softmax:
+YaRN combines NTK-by-parts with a temperature \\( t \\) applied before attention softmax:
 
-**softmax(q′ᵀk′ / (t × √d))**
+{% math() %}
+\operatorname{softmax}\!\left(\frac{(q^{\prime})^{\mathsf{T}}k^{\prime}}{t\sqrt{d}}\right)
+{% end %}
 
 Temperature changes attention sharpness; it is separate from the frequency adjustments. [Section 3.4](https://arxiv.org/html/2309.00071v2#S3.SS4).
 

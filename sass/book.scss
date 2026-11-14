@@ -230,6 +230,19 @@ body.book-body {
 }
 
 @import "interview";
+
+/* Keep display equations readable without widening the page on small screens. */
+.book-content .math-display {
+  max-width: 100%;
+  margin: 1.2em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  .MathJax_Display {
+    margin: 0.6em 0;
+  }
+}
+
 /* Topic navigation within long GenAI pages. */
 .page-toc {
   margin: 0 0 2rem;

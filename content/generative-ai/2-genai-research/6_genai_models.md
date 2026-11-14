@@ -37,11 +37,16 @@ flowchart TD
 
 The router scores the routed pool and keeps **Kr** selections. Shared experts bypass selection. In the original formulation, the selected softmax scores weight routed outputs; unselected gates are zero. Schematically:
 
-**MoE(x) = Σ shared_FFN(x) + Σ selected_gate(x) × selected_FFN(x)**
+{% math() %}
+\begin{aligned}
+\operatorname{MoE}(x) &= \sum_{s=1}^{N_s}\operatorname{FFN}_{s}(x) \\
+&\quad + \sum_{r\in\operatorname{TopK}(x)} g_r(x)\operatorname{FFN}_{r}(x)
+\end{aligned}
+{% end %}
 
 #### Smaller Experts, More Combinations
 
-DeepSeekMoE reduces each expert's intermediate width by a factor **m**, increasing the expert count and active count by **m**. If the original selected count was **K**, reserving **Ns** shared experts then leaves **Kr = mK − Ns** routed selections. Shared experts aim to capture common features and reduce duplication; routed experts can specialize. Balancing losses address routing collapse and device imbalance. Specialties are learned, without predefined labels such as “math expert.” [Sections 3.1–3.3](https://arxiv.org/html/2401.06066v1#S3).
+DeepSeekMoE reduces each expert's intermediate width by a factor **m**, increasing the expert count and active count by **m**. If the original selected count was **K**, reserving **Ns** shared experts then leaves \\( K_r=mK-N_s \\) routed selections. Shared experts aim to capture common features and reduce duplication; routed experts can specialize. Balancing losses address routing collapse and device imbalance. Specialties are learned, without predefined labels such as “math expert.” [Sections 3.1–3.3](https://arxiv.org/html/2401.06066v1#S3).
 
 **Worked illustration:** start with eight experts of size P, selecting two. Split each into two half-size experts, then reserve one as shared:
 

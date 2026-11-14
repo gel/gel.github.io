@@ -12,22 +12,22 @@ description = "Research summary of training with practical takeaways for LLMs an
 
 Papers: [Training Compute-Optimal Large Language Models — Appendix F](https://arxiv.org/html/2203.15556v1#A6) (Hoffmann et al., 2022) and [Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361) (Kaplan et al., 2020).
 
-For a dense transformer, a useful estimate of training compute is **C ≈ 6 × N × D FLOPs**, where **N** is the parameter count and **D** is the total number of training tokens processed, including repeated tokens. FLOPs count floating-point operations; FLOP/s measures speed.
+For a dense transformer, a useful estimate of training compute is \\( C \approx 6ND \\) FLOPs, where **N** is the parameter count and **D** is the total number of training tokens processed, including repeated tokens. FLOPs count floating-point operations; FLOP/s measures speed.
 
 #### Start With One Linear Layer
 
-Let **Y = XW**, with X shaped **T × i** (T token positions, i input features), W shaped **i × o**, and Y shaped **T × o**. The layer has **N_layer = i × o** weights.
+Let \\( Y = XW \\), with X shaped \\( T\times i \\) (T token positions, i input features), W shaped \\( i\times o \\), and Y shaped \\( T\times o \\). The layer has \\( N_{\mathrm{layer}} = io \\) weights.
 
-Each output element is a dot product: approximately i multiplications and i additions. Counting a multiply-add as **two FLOPs**, the forward matrix multiplication costs approximately **2 × T × i × o**.
+Each output element is a dot product: approximately i multiplications and i additions. Counting a multiply-add as **two FLOPs**, the forward matrix multiplication costs approximately \\( 2Tio \\).
 
-For backpropagation, let **G = ∂L/∂Y**, the gradient arriving from the next layer:
+For backpropagation, let \\( G = \partial L/\partial Y \\), the gradient arriving from the next layer:
 
 | Pass | Calculation | Approximate FLOPs |
 |------|-------------|-------------------|
-| Forward | Y = XW | 2 × T × i × o |
-| Backward: weights | ∂L/∂W = XᵀG | 2 × T × i × o |
-| Backward: input activations | ∂L/∂X = GWᵀ | 2 × T × i × o |
-| **Total** | **One forward + two backward matrix multiplications** | **6 × T × N_layer** |
+| Forward | \\( Y = XW \\) | \\( 2Tio \\) |
+| Backward: weights | \\( \partial L/\partial W = X^{\mathsf{T}}G \\) | \\( 2Tio \\) |
+| Backward: input activations | \\( \partial L/\partial X = GW^{\mathsf{T}} \\) | \\( 2Tio \\) |
+| **Total** | **One forward + two backward matrix multiplications** | \\( 6T N_{\mathrm{layer}} \\) |
 
 **Why differentiate with respect to X?** Its gradient carries the loss signal back to earlier layers so their weights can be trained. We update W; we propagate through X. Backward therefore costs roughly twice forward.
 
@@ -35,11 +35,11 @@ For backpropagation, let **G = ∂L/∂Y**, the gradient arriving from the next 
 
 Sum over the model's dominant weight matrices and all D training tokens:
 
-- **Forward:** approximately 2ND FLOPs.
-- **Backward:** approximately 2 × 2ND = 4ND FLOPs.
-- **Total:** approximately **6ND FLOPs**.
+- **Forward:** approximately \\( 2ND \\) FLOPs.
+- **Backward:** approximately \\( 2\times 2ND = 4ND \\) FLOPs.
+- **Total:** approximately \\( 6ND \\) FLOPs.
 
-For example, **7 billion parameters × 1 trillion tokens × 6 ≈ 4.2 × 10²² FLOPs** across the full run, not per GPU.
+For example, \\( 6\times(7\times10^9)\times10^{12} \approx 4.2\times10^{22} \\) FLOPs across the full run, not per GPU.
 
 **Remember:** the first **2** is multiply + add; the **3** is forward + weight gradient + activation gradient.
 
@@ -65,19 +65,23 @@ For one block with equal-size experts, define:
 
 | Symbol | Meaning |
 |--------|---------|
-| P_base | Always-used matrix weights outside the experts, such as attention projections |
-| P_e | Matrix weights in one expert |
-| Ns | Number of shared experts; all execute |
-| Nr | Number of available routed experts |
-| Kr | Number of routed experts selected for a token |
+| \\( P_{\mathrm{base}} \\) | Always-used matrix weights outside the experts, such as attention projections |
+| \\( P_e \\) | Matrix weights in one expert |
+| \\( N_s \\) | Number of shared experts; all execute |
+| \\( N_r \\) | Number of available routed experts |
+| \\( K_r \\) | Number of routed experts selected for a token |
 
 Excluding router weights and small bias/normalization terms:
 
-**P_total,block = P_base + (Ns + Nr) × P_e**
+{% math() %}
+P_{\mathrm{total,block}} = P_{\mathrm{base}} + (N_s+N_r)P_e
+{% end %}
 
-**P_active,block = P_base + (Ns + Kr) × P_e**
+{% math() %}
+P_{\mathrm{active,block}} = P_{\mathrm{base}} + (N_s+K_r)P_e
+{% end %}
 
-An ordinary two-matrix FFN with model width **d** and intermediate width **h** has **P_e ≈ 2dh** weights: one d × h matrix and one h × d matrix. A three-matrix gated FFN has **P_e ≈ 3dh**. Count the actual matrices in the architecture you are studying.
+An ordinary two-matrix FFN with model width **d** and intermediate width **h** has \\( P_e\approx 2dh \\) weights: one d × h matrix and one h × d matrix. A three-matrix gated FFN has \\( P_e\approx 3dh \\). Count the actual matrices in the architecture you are studying.
 
 For unequal expert sizes, sum their individual weight counts. For a complete model, sum over blocks, including any dense FFNs that remain. Account for the input embedding lookup and vocabulary output projection separately: storing an embedding table does not mean multiplying by every entry for each input token.
 
@@ -85,11 +89,13 @@ For unequal expert sizes, sum their individual weight counts. For a complete mod
 
 The earlier matrix-multiplication argument applies to each executed expert: forward costs roughly two FLOPs per weight per token, and backward contributes roughly four more. For **D** processed training tokens:
 
-**C_block_weights ≈ 6 × D × Σ_blocks P_active,block**
+{% math() %}
+C_{\mathrm{block\ weights}} \approx 6D\sum_{\ell}P_{\mathrm{active},\ell}
+{% end %}
 
 This is the block-weight contribution. Add router computation, attention's token-to-token products, the output head, and other omitted operations for a fuller estimate. If active weight counts vary by token, replace D times a fixed count with the sum over tokens.
 
-**Worked example:** each of twelve identical blocks has **2M** base weights, **1** shared expert, **8** routed experts, and **Kr = 2**. Each expert has **1M** weights.
+**Worked example:** each of twelve identical blocks has **2M** base weights, **1** shared expert, **8** routed experts, and \\( K_r=2 \\). Each expert has **1M** weights.
 
 | Quantity | Calculation | Result |
 |----------|-------------|--------|
@@ -97,19 +103,21 @@ This is the block-weight contribution. Add router computation, attention's token
 | Active block weights per token | 2M + (1 + 2) × 1M | 5M |
 | Stored weights across 12 blocks | 12 × 11M | 132M |
 | Active weights across 12 blocks | 12 × 5M | 60M |
-| Training block matmuls over 1B tokens | 6 × 60M × 1B | 3.6 × 10¹⁷ FLOPs |
+| Training block matmuls over 1B tokens | 6 × 60M × 1B | \\( 3.6\times10^{17} \\) FLOPs |
 
-Using all 132M block weights would give **7.92 × 10¹⁷ FLOPs**, incorrectly treating every routed expert as active on every token. These are block subtotals, not full-model parameter counts or complete training costs.
+Using all 132M block weights would give \\( 7.92\times10^{17} \\) FLOPs, incorrectly treating every routed expert as active on every token. These are block subtotals, not full-model parameter counts or complete training costs.
 
 Stored weights still require memory somewhere, together with gradients and optimizer state during training. Routing, expert dispatch, load imbalance, and communication affect elapsed time; a FLOPs ratio alone does not establish a speedup.
 
 #### Granularity and the Scaling Law
 
-The scaling paper studies **granularity G = h_ff / h_expert** and **expansion E = total expert weights / dense-FFN weights**. Its setup has **E × G** available experts and activates **G** per token. Increasing G shrinks each expert while retaining the active expert-weight budget. This setup does not prescribe DeepSeekMoE's shared-expert split. [Section 4](https://arxiv.org/html/2402.07871v1#S4).
+The scaling paper studies granularity \\( G = h_{\mathrm{ff}}/h_{\mathrm{expert}} \\) and **expansion E = total expert weights / dense-FFN weights**. Its setup has \\( EG \\) available experts and activates **G** per token. Increasing G shrinks each expert while retaining the active expert-weight budget. This setup does not prescribe DeepSeekMoE's shared-expert split. [Section 4](https://arxiv.org/html/2402.07871v1#S4).
 
 The preprint fits loss as:
 
-**L(N, D, G) = c + (a + g/G^γ)/N^α + b/D^β**
+{% math() %}
+\mathcal{L}(N,D,G) = c + \frac{a+g/G^{\gamma}}{N^{\alpha}} + \frac{b}{D^{\beta}}
+{% end %}
 
 Here **N** counts non-embedding model weights, excluding routing in its parameter model; **D** counts training tokens. The remaining symbols are fitted constants. Use the paper's N consistently; substituting active parameters into this fitted law changes its meaning. [Sections 5–6](https://arxiv.org/html/2402.07871v1#S5).
 
