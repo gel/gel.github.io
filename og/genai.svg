@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Gal Goldman generative AI social card</title>
+  <desc id="desc">A branded social share image for the Gal Goldman generative AI section.</desc>
+  <rect width="1200" height="630" fill="#f4f7f2" />
+  <circle cx="998" cy="142" r="148" fill="#0f766e" opacity="0.12" />
+  <circle cx="1042" cy="458" r="208" fill="#0f172a" opacity="0.08" />
+  <text x="82" y="146" fill="#0f766e" font-family="Arial, Helvetica, sans-serif" font-size="28" letter-spacing="5">GENERATIVE AI</text>
+  <text x="82" y="242" fill="#0f172a" font-family="Georgia, serif" font-size="74" font-weight="700">Research summaries</text>
+  <text x="82" y="320" fill="#0f172a" font-family="Georgia, serif" font-size="74" font-weight="700">and implementation notes.</text>
+  <text x="82" y="418" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="31">From agent tooling and prompting to benchmarks, models, datasets, and production tradeoffs.</text>
+  <path d="M846 404 C900 332 982 332 1034 404 C982 476 900 476 846 404 Z" fill="#0f766e" opacity="0.22" />
+  <circle cx="940" cy="404" r="44" fill="#0f172a" />
+  <circle cx="940" cy="404" r="18" fill="#f8fafc" />
+</svg>

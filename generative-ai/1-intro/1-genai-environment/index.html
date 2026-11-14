@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 8px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      color: var(--accent-color);
+    }
+
+    .theme-toggle svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        gap: 0;
+      }
+
+      .profile-icon {
+        display: none;
+      }
+
+      .nav-home-mobile {
+        display: inline !important;
+      }
+
+      /* keep only the most important nav links on mobile */
+      header nav .nav-books,
+      header nav .nav-interviews,
+      header nav .nav-genai {
+        display: none;
+      }
+
+      header nav {
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      header nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      header nav>a {
+        flex: 0 0 auto;
+      }
+
+      header nav>a:not(:last-child) {
+        margin-right: 0.3rem;
+      }
+
+      .theme-toggle {
+        flex: 0 0 auto;
+        padding: 0 2px;
+      }
+    }
+
+    .nav-home-mobile {
+      display: none;
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#0f766e');
+      root.style.setProperty('--accent-color-light', '#7dd3c7');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#0f766e" />
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.fbf841984d4c630f.png" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.fbf841984d4c630f.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.8d764c74b57e78ac.png" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.31c754669e6b1886.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.ab3d415c621250c1.png" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.75f5c17cd0a278cd.png" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.0ae1d7f33188702f.png" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.dbbe1ab6fb9c667c.png" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.b51883fbb0bc49a7.png" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <link rel="canonical" href="https://gel.github.io/generative-ai/1-intro/1-genai-environment/" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Agentic Stack">
+  <meta property="og:description" content="The layers of an agentic development stack: orchestrators, execution harnesses, skills, and MCP connectors.">
+  <meta property="og:url" content="https://gel.github.io/generative-ai/1-intro/1-genai-environment/">
+  <meta property="og:site_name" content="Gal Goldman | Architect &amp; Engineer">
+
+  
+  <meta property="og:image" content="https://gel.github.io/og/site-default.svg">
+  <meta property="og:image:alt" content="Agentic Stack">
+  
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  
+  
+
+  
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  
+  <meta name="twitter:creator" content="@gelings">
+  <meta name="twitter:site" content="@gelings">
+  
+  <meta name="twitter:title" content="Agentic Stack">
+  <meta name="twitter:description" content="The layers of an agentic development stack: orchestrators, execution harnesses, skills, and MCP connectors.">
+  
+  <meta name="twitter:image" content="https://gel.github.io/og/site-default.svg">
+  
+
+  
+  <meta name="description" content="The layers of an agentic development stack: orchestrators, execution harnesses, skills, and MCP connectors." />
+  
+
+  
+  <meta name="author" content="Gal Goldman">
+  
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://gel.github.io/#person",
+          "name": "Gal Goldman",
+          "url": "https://gel.github.io/",
+          "description": "Gal Goldman writes about distributed systems, cloud architecture, GenAI systems, and engineering quality.",
+          "jobTitle": "Senior Software Engineer and Enterprise Solution Architect",
+          "worksFor": { "@id": "https://gel.github.io/#org" },
+          
+          "image": "https://gel.github.io/profileweb.png",
+          
+          "sameAs": [
+            
+            "https://www.linkedin.com/in/gal-goldman/",
+            
+            "https://x.com/gelings"
+            
+          ]
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://gel.github.io/#org",
+          "name": "Gal Goldman",
+          "url": "https://gel.github.io/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://gel.github.io/iconweb.png"
+          }
+          
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://gel.github.io/#website",
+          "url": "https://gel.github.io/",
+          "name": "Gal Goldman | Architect & Engineer",
+          "description": "Gal Goldman writes about distributed systems, cloud architecture, GenAI systems, and engineering quality.",
+          "publisher": { "@id": "https://gel.github.io/#org" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://gel.github.io/generative-ai/1-intro/1-genai-environment/#webpage",
+          "url": "https://gel.github.io/generative-ai/1-intro/1-genai-environment/",
+          "name": "Agentic Stack",
+          "description": "The layers of an agentic development stack: orchestrators, execution harnesses, skills, and MCP connectors.",
+          "isPartOf": { "@id": "https://gel.github.io/#website" },
+          "about": { "@id": "https://gel.github.io/#person" },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://gel.github.io/og/site-default.svg",
+            "width": 1200,
+            "height": 630
+            
+          }
+          
+        }
+      ]
+    }
+  </script>
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.09e74e8b8087cebf.png" />
+
+  <title>
+    
+
+
+
+Gal's 
+     
+    
+        Generative AI
+    
+ Book - Agentic Stack
+
+
+  </title>
+
+  
+  
+
+
+<link rel="stylesheet" href="https://gel.github.io/main.css">
+<link rel="stylesheet" href="https://gel.github.io/book.css">
+
+
+
+  
+
+
+
+
+
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="book-body">
+  
+  <header>
+    <a class="profile-icon" href="/">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.09e74e8b8087cebf.png" alt="profile picture">
+    </a>
+    <nav>
+      <a class="nav-home-mobile" href="/">Home</a>
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        "
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        "
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        "
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        "
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        active-nav"
+      >GenAI</a>
+      
+      
+      <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <svg class="theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="theme-icon-dark" style="display:none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      
+    </nav>
+  </header>
+  
+  <main>
+    
+<!-- Sidebar defaults to class 'menu'. CSS max-width 600px breakpoint handles closing it automatically -->
+<div class="menu">
+  
+  
+  <nav role="navigation">
+    <ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="/generative-ai/1-intro/">
+          <strong>1.</strong>
+          Agentic Development
+        </a>
+        
+        <ul>
+          
+          <li class="active" >
+            <a href="&#x2F;generative-ai&#x2F;1-intro&#x2F;1-genai-environment&#x2F;">
+              <strong>1.1.</strong>
+              Agentic Stack
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;1-intro&#x2F;2-agentic-workspace&#x2F;">
+              <strong>1.2.</strong>
+              Agentic Workspace
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="/generative-ai/2-genai-research/">
+          <strong>2.</strong>
+          GenAI Research
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;1-genai-agents&#x2F;">
+              <strong>2.1.</strong>
+              Agents
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;2-genai-pretraining-finetuning&#x2F;">
+              <strong>2.2.</strong>
+              Training
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;3-genai-optimization&#x2F;">
+              <strong>2.3.</strong>
+              Optimizations
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;4-genai-prompting&#x2F;">
+              <strong>2.4.</strong>
+              Prompting
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;5-genai-benchmarks&#x2F;">
+              <strong>2.5.</strong>
+              Evaluations
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;6-genai-models&#x2F;">
+              <strong>2.6.</strong>
+              Models
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;7-genai-security&#x2F;">
+              <strong>2.7.</strong>
+              Security
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+    </ul>
+  </nav>
+  
+  
+</div>
+
+<!-- Page defaults to class 'page'. CSS max-width 600px breakpoint handles making it full-width automatically -->
+<div class="page">
+
+  <div class="page__content">
+    
+    <div class="search-container">
+      <input id="search" type="search" placeholder="Search..">
+      <div class="search-results">
+        <div class="search-results__header"></div>
+        <ul class="search-results__items"></ul>
+      </div>
+    </div>
+    
+    <button class="sidebar-toggle-inline" id="sidebar-toggle-inline" aria-label="Toggle Chapters">
+      <span class="toggle-icon">☰</span> Chapters
+    </button>
+    <div class="book-content">
+      
+    <h1>Agentic Stack</h1>
+    
+    <nav class="page-toc" aria-label="On this page">
+      <details>
+        <summary>On this page</summary>
+        
+<ul>
+  
+  
+  <li>
+    <a href="#control-knobs-1-agent-orchestrators-multiplexers">🎛️ 1. Agent Orchestrators &amp; Multiplexers</a>
+    
+  </li>
+  
+  
+  
+  <li>
+    <a href="#zap-2-agent-harnesses-execution-engines">⚡ 2. Agent Harnesses (Execution Engines)</a>
+    
+    
+<ul>
+  
+  
+  <li>
+    <a href="#native-harnesses-and-flexible-model-backends">Native Harnesses and Flexible Model Backends</a>
+    
+  </li>
+  
+  
+  
+  <li>
+    <a href="#hosted-and-local-model-runtimes">Hosted and Local Model Runtimes</a>
+    
+  </li>
+  
+  
+</ul>
+
+    
+  </li>
+  
+  
+  
+  <li>
+    <a href="#3-agent-skills-vs-mcp-understanding-the-boundary">🧩 3. Agent Skills vs. MCP: Understanding the Boundary</a>
+    
+    
+<ul>
+  
+  
+  <li>
+    <a href="#the-standard-for-technical-writing-asd-ste100">The Standard for Technical Writing: ASD-STE100</a>
+    
+  </li>
+  
+  
+  
+  <li>
+    <a href="#code-heuristics-ub-mode">Code Heuristics: ub-mode</a>
+    
+  </li>
+  
+  
+</ul>
+
+    
+  </li>
+  
+  
+  
+  <li>
+    <a href="#electric-plug-4-recommended-mcp-model-context-protocol-servers">🔌 4. Recommended MCP (Model Context Protocol) Servers</a>
+    
+  </li>
+  
+  
+  
+  <li>
+    <a href="#putting-the-layers-together">Putting the Layers Together</a>
+    
+  </li>
+  
+  
+</ul>
+
+      </details>
+    </nav>
+    
+    <p><em>Last updated: November 2026</em></p>
+<p>This page maps the tools and responsibilities in an agentic development stack. For my day-to-day configuration and workflow, see <a href="https://gel.github.io/generative-ai/1-intro/2-agentic-workspace/">Agentic Workspace</a>.</p>
+<p>The GenAI development ecosystem has matured from basic &quot;autocomplete in an IDE&quot; into a <strong>modular agent operations stack</strong>. Modern agentic engineering separates the system into four distinct layers: orchestrators &amp; multiplexers, execution harnesses, procedural skills, and protocol connectors.</p>
+<p><strong><a href="https://tailscale.com/">Tailscale</a></strong> — private networking and remote SSH access between development machines.</p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart TD
+    subgraph Layer1[&quot;1. Orchestration &amp; Multiplexing&quot;]
+        Orch[&quot;Native Harness Orchestrators · Herdr · t3code&quot;]
+    end
+
+    subgraph Layer2[&quot;2. Execution Harnesses (Native Pairings)&quot;]
+        H_OpenAI[&quot;Codex App (Sol 5.1)&quot;]
+        H_Anthropic[&quot;Claude Code (Opus 5.5)&quot;]
+        H_Google[&quot;Antigravity (Gemini 4 Argon)&quot;]
+        H_Pi[&quot;Pi (Hosted or Local Models)&quot;]
+    end
+
+    subgraph Layer3[&quot;3. Skills (Procedural Knowledge)&quot;]
+        Skills[&quot;asd-ste100 (Technical Writing) · ub-mode (Code Heuristics)&quot;]
+    end
+
+    subgraph Layer4[&quot;4. MCP &amp; Connectors (Data &#x2F; Tool RPC)&quot;]
+        MCP[&quot;wakeahuman.com&quot;]
+    end
+
+    subgraph Backends[&quot;Model Backends (Hosted &amp; Local Inference)&quot;]
+        Hosted[&quot;OpenRouter · DeepSeek V4&quot;]
+        Local[&quot;Ollama · llama.cpp · Ornith (Liberated &#x2F; Quantized)&quot;]
+    end
+    H_Pi --&gt; Hosted &amp; Local
+
+    subgraph Remote[&quot;Remote Development Hosts&quot;]
+        Tailnet[&quot;Tailscale · private access&quot;]
+        Machines[&quot;OVHcloud · Hetzner · AWS EC2&quot;]
+        Tailnet --&gt; Machines
+    end
+    Orch -.-&gt;|Remote sessions| Tailnet
+
+    Orch --&gt; H_OpenAI &amp; H_Anthropic &amp; H_Google &amp; H_Pi
+    H_OpenAI &amp; H_Anthropic &amp; H_Google &amp; H_Pi --&gt; Skills
+    H_OpenAI &amp; H_Anthropic &amp; H_Google &amp; H_Pi --&gt; MCP
+
+    style Orch fill:#bbdefb,stroke:#1976d2,color:#000
+    style H_OpenAI fill:#c8e6c9,stroke:#388e3c,color:#000
+    style H_Google fill:#c8e6c9,stroke:#388e3c,color:#000
+    style H_Pi fill:#dcedc8,stroke:#689f38,color:#000
+    style H_Anthropic fill:#c8e6c9,stroke:#388e3c,color:#000
+    style Hosted fill:#e0f7fa,stroke:#00838f,color:#000
+    style Local fill:#e0f7fa,stroke:#00838f,color:#000
+    style Skills fill:#ffe0b2,stroke:#f57c00,color:#000
+    style MCP fill:#d1c4e9,stroke:#512da8,color:#000
+</code></pre>
+<hr />
+<h2 id="control-knobs-1-agent-orchestrators-multiplexers">🎛️ 1. Agent Orchestrators &amp; Multiplexers<a class="zola-anchor" href="#control-knobs-1-agent-orchestrators-multiplexers" aria-label="Anchor link for: control-knobs-1-agent-orchestrators-multiplexers">🔗</a></h2>
+<p>As workflows shift from single-turn prompts to running multiple agents across branches and tasks, orchestrators manage concurrent agent sessions, terminal state persistence, and handoffs.</p>
+<table><thead><tr><th>Tool</th><th>Core Philosophy</th><th>Best For</th><th>Link</th></tr></thead><tbody>
+<tr><td><strong>Native Harnesses</strong></td><td>Self-contained multi-agent environments (Codex App, Antigravity)</td><td>Full-workspace tasks, background subagents, and rich artifacts without external tooling</td><td>Integrated in native apps</td></tr>
+<tr><td><strong>Herdr</strong></td><td>Open-source, agent-native terminal runtime and multiplexer</td><td>Persistent agent sessions, live status tracking (<code>Working</code>, <code>Blocked</code>, <code>Done</code>), and programmatic agent steering via <code>hc</code></td><td><a href="https://herdr.dev/">herdr.dev</a> · <a href="https://github.com/herdr/herdr">GitHub</a></td></tr>
+<tr><td><strong>t3code</strong></td><td>High-speed terminal and web UI orchestrator for multi-task coding</td><td>Parallel agent sessions and fast code review</td><td><a href="https://github.com/pingdotgg/t3code">pingdotgg/t3code</a></td></tr>
+</tbody></table>
+<hr />
+<h2 id="zap-2-agent-harnesses-execution-engines">⚡ 2. Agent Harnesses (Execution Engines)<a class="zola-anchor" href="#zap-2-agent-harnesses-execution-engines" aria-label="Anchor link for: zap-2-agent-harnesses-execution-engines">🔗</a></h2>
+<p>The harness is the runtime engine that manages prompt assembly, tool execution loops, git diffing, and token streaming. </p>
+<h3 id="native-harnesses-and-flexible-model-backends">Native Harnesses and Flexible Model Backends<a class="zola-anchor" href="#native-harnesses-and-flexible-model-backends" aria-label="Anchor link for: native-harnesses-and-flexible-model-backends">🔗</a></h3>
+<p>Native harnesses provide an integrated workflow for their model families. Configurable harnesses such as Pi also give me a place to work with hosted or locally served models. The harness runs the agent loop; the model backend supplies inference.</p>
+<table><thead><tr><th>Harness</th><th>Tier / Type</th><th>Primary Model Pairing</th><th>Strengths</th></tr></thead><tbody>
+<tr><td><strong>Codex App</strong></td><td>OpenAI Native</td><td><strong>Sol 5.1</strong></td><td>Polished desktop harness, native worktree isolation, automations, and in-app tools</td></tr>
+<tr><td><strong>Claude Code</strong></td><td>Anthropic Native</td><td><strong>Claude Opus 5.5</strong></td><td>Fast CLI loop, deep git integration, subagent spawning</td></tr>
+<tr><td><strong>Antigravity</strong></td><td>Google DeepMind Native</td><td><strong>Gemini 4 Argon</strong></td><td>Multi-agent collaboration, reactive background tasks, rich interactive artifacts, generous quotas</td></tr>
+<tr><td><strong>Pi</strong></td><td>Open-Source Minimalist CLI</td><td><strong>Hosted or local models</strong></td><td>Minimalist, zero-slop hacker agent. Highly hackable, zero telemetry, fast startup</td></tr>
+</tbody></table>
+<h3 id="hosted-and-local-model-runtimes">Hosted and Local Model Runtimes<a class="zola-anchor" href="#hosted-and-local-model-runtimes" aria-label="Anchor link for: hosted-and-local-model-runtimes">🔗</a></h3>
+<p>I use <strong>OpenRouter for DeepSeek V4</strong>, and <strong>Ollama</strong> or <strong>llama.cpp</strong> to run models locally and reduce API spending. These sit alongside the execution harness: the agent manages the task and calls a model endpoint for inference.</p>
+<table><thead><tr><th>Backend</th><th>Role in the setup</th><th>Link</th></tr></thead><tbody>
+<tr><td><strong>OpenRouter</strong></td><td>Hosted model access; my current choice here is DeepSeek V4</td><td><a href="https://openrouter.ai/">OpenRouter</a></td></tr>
+<tr><td><strong>Ollama</strong></td><td>Download and serve local models for compatible agents and applications</td><td><a href="https://docs.ollama.com/">Ollama documentation</a></td></tr>
+<tr><td><strong>llama.cpp</strong></td><td>Local inference with quantized models, CPU/GPU execution, and an OpenAI-compatible server</td><td><a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a></td></tr>
+</tbody></table>
+<p>For local work, I am currently using <strong>Ornith</strong>, usually with liberated, quantized model variants. Quantization reduces model memory requirements; the useful tradeoff is how much quality and responsiveness I retain on my hardware. Model size, context length, and tool-call reliability all matter when choosing a local model for agentic work.</p>
+<p>My aim is to keep the workspace familiar while changing where inference runs. See <a href="https://gel.github.io/generative-ai/1-intro/2-agentic-workspace/">Agentic Workspace</a> for how this fits into my daily setup.</p>
+<hr />
+<h2 id="3-agent-skills-vs-mcp-understanding-the-boundary">🧩 3. Agent Skills vs. MCP: Understanding the Boundary<a class="zola-anchor" href="#3-agent-skills-vs-mcp-understanding-the-boundary" aria-label="Anchor link for: 3-agent-skills-vs-mcp-understanding-the-boundary">🔗</a></h2>
+<p>Developers frequently confuse <strong>Skills</strong> and <strong>MCP (Model Context Protocol)</strong>. They solve two fundamentally different problems:</p>
+<ul>
+<li><strong>Skills (Procedural Knowledge):</strong> <em>How the agent thinks and writes.</em> Domain rules, writing constraints, and workflow instructions loaded when needed without bloating the base prompt.</li>
+<li><strong>MCP (State &amp; Connectivity):</strong> <em>What external tools and services the agent calls.</em> Client-server RPC protocol connecting agents to external APIs, escalation chains, and device interfaces.</li>
+</ul>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    Agent[&quot;🤖 Autonomous Agent&quot;]
+
+    subgraph Procedural[&quot;Skills (Procedural Knowledge)&quot;]
+        S1[&quot;asd-ste100: Technical Writing&quot;]
+        S2[&quot;ub-mode: Engineering Heuristics&quot;]
+    end
+
+    subgraph Connectivity[&quot;MCP (State &amp; Connectivity)&quot;]
+        M1[&quot;Wake a Human (wakeahuman.com)&quot;]
+    end
+
+    Agent --&gt; S1 &amp; S2
+    Agent --&gt; M1
+
+    style Agent fill:#bbdefb,stroke:#1976d2,color:#000
+    style S1 fill:#ffe0b2,stroke:#f57c00,color:#000
+    style S2 fill:#ffe0b2,stroke:#f57c00,color:#000
+    style M1 fill:#d1c4e9,stroke:#512da8,color:#000
+</code></pre>
+<h3 id="the-standard-for-technical-writing-asd-ste100">The Standard for Technical Writing: ASD-STE100<a class="zola-anchor" href="#the-standard-for-technical-writing-asd-ste100" aria-label="Anchor link for: the-standard-for-technical-writing-asd-ste100">🔗</a></h3>
+<ul>
+<li><strong><a href="https://github.com/danyuchn/asd-ste100-skill">asd-ste100-skill</a>:</strong> Enforces <strong>Simplified Technical English (ASD-STE100)</strong> for clean, unambiguous technical writing.
+<ul>
+<li><strong>Karpathy's Recommendation:</strong> Andrej Karpathy highlighted Simplified Technical English as an ideal framework for prompting LLMs to write technical documentation. By restricting vocabulary to a single meaning per word and eliminating unnecessary filler, it forces the model to generate clear, deterministic, and fluff-free explanations.</li>
+</ul>
+</li>
+</ul>
+<h3 id="code-heuristics-ub-mode">Code Heuristics: ub-mode<a class="zola-anchor" href="#code-heuristics-ub-mode" aria-label="Anchor link for: code-heuristics-ub-mode">🔗</a></h3>
+<ul>
+<li><strong><a href="https://github.com/unclebob/ub-mode">ub-mode</a>:</strong> Uncle Bob's skill for coding agents: reason from first principles, use TDD, fix root causes, and refactor. Companion tools check complexity, duplication, and test effectiveness.</li>
+</ul>
+<hr />
+<h2 id="electric-plug-4-recommended-mcp-model-context-protocol-servers">🔌 4. Recommended MCP (Model Context Protocol) Servers<a class="zola-anchor" href="#electric-plug-4-recommended-mcp-model-context-protocol-servers" aria-label="Anchor link for: electric-plug-4-recommended-mcp-model-context-protocol-servers">🔗</a></h2>
+<p>MCP eliminates vendor lock-in by providing a universal protocol for tool exposure. A single MCP configuration works across Antigravity, Codex, Claude Code, and headless agents.</p>
+<table><thead><tr><th>MCP Server</th><th>Protocol Capability</th><th>Link</th></tr></thead><tbody>
+<tr><td><strong>Wake a Human</strong></td><td>Human-in-the-loop escalation &amp; decision paging—pages you only on high-stakes choices (architecture, auth, prod, billing) while auto-resolving routine decisions based on threshold and timeout policies</td><td><a href="https://wakeahuman.com">wakeahuman.com</a></td></tr>
+</tbody></table>
+<hr />
+<h2 id="putting-the-layers-together">Putting the Layers Together<a class="zola-anchor" href="#putting-the-layers-together" aria-label="Anchor link for: putting-the-layers-together">🔗</a></h2>
+<ol>
+<li><strong>Orchestration</strong> manages sessions, concurrent work, and agent status.</li>
+<li><strong>Execution harnesses</strong> run the agent's tool and reasoning loop.</li>
+<li><strong>Skills</strong> supply reusable procedures and domain guidance.</li>
+<li><strong>MCP connectors</strong> expose external tools and data.</li>
+</ol>
+<p>These layers provide a way to reason about a setup as its tools change. The next step is deciding how to work with them every day: <a href="https://gel.github.io/generative-ai/1-intro/2-agentic-workspace/">Agentic Workspace</a>.</p>
+
+
+    </div>
+  </div>
+
+  <nav class="book-pagination">
+    <div class="prev-link">
+      
+    
+        
+        
+        <a class="previous" href="/generative-ai/1-intro/">&larr; Previous</a>
+    
+
+    </div>
+
+    <div class="next-link">
+      
+    
+        <a class="next" href="/generative-ai/1-intro/2-agentic-workspace/">Next &rarr;</a>
+    
+
+    </div>
+  </nav>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="https://gel.github.io/elasticlunr.min.js"></script>
+<script type="text/javascript" src="https://gel.github.io/search_index.en.js"></script>
+
+<script type="text/javascript" src="https://gel.github.io/book.js"></script>
+<script async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline-block");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline-block");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>
