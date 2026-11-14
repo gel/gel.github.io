@@ -1,7 +1,7 @@
 +++
-title = "GenAI Security"
+title = "Security"
 weight = 7
-description = "Research summary of GenAI Security with practical takeaways for LLMs and production AI systems."
+description = "Research summary of security with practical takeaways for LLMs and production AI systems."
 +++
 
 ### [Data Extraction] Extracting Alignment Data in Open Models

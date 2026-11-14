@@ -1,7 +1,7 @@
 +++
-title = "GenAI Training"
+title = "Training"
 weight = 2
-description = "Research summary of GenAI Training with practical takeaways for LLMs and production AI systems."
+description = "Research summary of training with practical takeaways for LLMs and production AI systems."
 +++
 
 

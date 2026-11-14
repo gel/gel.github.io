@@ -1,7 +1,7 @@
 +++
-title = "GenAI Models"
+title = "Models"
 weight = 6
-description = "Research summary of GenAI Models with practical takeaways for LLMs and production AI systems."
+description = "Research summary of models with practical takeaways for LLMs and production AI systems."
 +++
 
 

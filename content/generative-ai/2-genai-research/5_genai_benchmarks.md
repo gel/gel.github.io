@@ -1,7 +1,7 @@
 +++
-title = "GenAI Evaluations"
+title = "Evaluations"
 weight = 5
-description = "Research summary of GenAI Evaluations with practical takeaways for LLMs and production AI systems."
+description = "Research summary of evaluations with practical takeaways for LLMs and production AI systems."
 +++
 
 ### [JudgeBench] A Benchmark for Evaluating LLM-based Judges

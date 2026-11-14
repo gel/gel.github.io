@@ -17,7 +17,3 @@ Paper notes organized by topic. Open a category, then use **On this page** to ju
 | [Evaluations](@/generative-ai/2-genai-research/5_genai_benchmarks.md) | Benchmarks, factuality, and verification |
 | [Models](@/generative-ai/2-genai-research/6_genai_models.md) | Model architectures and multimodal systems |
 | [Security](@/generative-ai/2-genai-research/7_genai_security.md) | Instruction hierarchy, data extraction, and model safety |
-
-Currently studying: [Calculating Training FLOPs: Why 6ND?](@/generative-ai/2-genai-research/2_genai_pretraining_finetuning.md#chinchilla-scaling-laws-calculating-training-flops-why-6nd).
-
-For development tools and my daily setup, see [Agentic Stack](@/generative-ai/1-intro/1_genai_environment.md) and [Agentic Workspace](@/generative-ai/1-intro/2_agentic_workspace.md).
