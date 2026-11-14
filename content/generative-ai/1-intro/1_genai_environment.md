@@ -10,6 +10,8 @@ This page maps the tools and responsibilities in an agentic development stack. F
 
 The GenAI development ecosystem has matured from basic "autocomplete in an IDE" into a **modular agent operations stack**. Modern agentic engineering separates the system into four distinct layers: orchestrators & multiplexers, execution harnesses, procedural skills, and protocol connectors.
 
+**[Tailscale](https://tailscale.com/)** — private networking and remote SSH access between development machines.
+
 ```mermaid
 flowchart TD
     subgraph Layer1["1. Orchestration & Multiplexing"]
@@ -36,6 +38,13 @@ flowchart TD
         Local["Ollama · llama.cpp · Ornith (Liberated / Quantized)"]
     end
     H_Pi --> Hosted & Local
+
+    subgraph Remote["Remote Development Hosts"]
+        Tailnet["Tailscale · private access"]
+        Machines["OVHcloud · Hetzner · AWS EC2"]
+        Tailnet --> Machines
+    end
+    Orch -.->|Remote sessions| Tailnet
 
     Orch --> H_OpenAI & H_Anthropic & H_Google & H_Pi
     H_OpenAI & H_Anthropic & H_Google & H_Pi --> Skills
