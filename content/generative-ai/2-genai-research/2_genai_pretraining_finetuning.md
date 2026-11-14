@@ -1,5 +1,6 @@
 +++
 title = "Training"
+aliases = ["generative-ai/3-llm-implementation/1-datasets/"]
 weight = 2
 description = "Research summary of training with practical takeaways for LLMs and production AI systems."
 +++

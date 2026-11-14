@@ -1,5 +1,6 @@
 +++
 title = "GenAI Research"
+aliases = ["generative-ai/3-llm-implementation/"]
 weight = 2
 sort_by = "weight"
 description = "Research notes on prompting, optimization, model behavior, evaluation, benchmarks, and AI safety."
