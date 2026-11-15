@@ -13,8 +13,14 @@
     {%- set skip_entry = true %}
     {%- elif sitemap_entry.permalink is starting_with(queued_prefix) %}
     {%- set skip_entry = true %}
-    {%- elif sitemap_entry.extra and (sitemap_entry.extra.noindex or sitemap_entry.extra.sitemap == false) %}
+    {%- elif sitemap_entry.extra %}
+    {%- if sitemap_entry.extra.noindex %}
     {%- set skip_entry = true %}
+    {%- elif sitemap_entry.extra.sitemap is defined %}
+    {%- if sitemap_entry.extra.sitemap == false %}
+    {%- set skip_entry = true %}
+    {%- endif %}
+    {%- endif %}
     {%- endif %}
     {%- if not skip_entry %}
     <url>
