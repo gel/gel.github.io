@@ -64,58 +64,6 @@
       stroke-linejoin: round;
     }
 
-    @media (max-width: 600px) {
-      header {
-        gap: 0;
-      }
-
-      .profile-icon {
-        display: none;
-      }
-
-      .nav-home-mobile {
-        display: inline !important;
-      }
-
-      /* keep only the most important nav links on mobile */
-      header nav .nav-books,
-      header nav .nav-interviews,
-      header nav .nav-genai {
-        display: none;
-      }
-
-      header nav {
-        display: flex;
-        flex-wrap: nowrap;
-        white-space: nowrap;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-      }
-
-      header nav::-webkit-scrollbar {
-        display: none;
-      }
-
-      header nav>a {
-        flex: 0 0 auto;
-      }
-
-      header nav>a:not(:last-child) {
-        margin-right: 0.3rem;
-      }
-
-      .theme-toggle {
-        flex: 0 0 auto;
-        padding: 0 2px;
-      }
-    }
-
-    .nav-home-mobile {
-      display: none;
-    }
-
     .active-nav {
       color: var(--accent-color);
       font-weight: bold;
@@ -384,6 +332,8 @@
   <link rel="stylesheet" href="{{ get_url(path=animations_path) | safe }}">
   {% endblock styles %}
   {% block posthead %}{% endblock posthead %}
+  <link rel="stylesheet" href="{{ get_url(path='site-navigation.css') | safe }}">
+  <script src="{{ get_url(path='site-navigation.js') | safe }}" defer></script>
   {% set anim_js_path = "animations.js" %}
   <script src="{{ get_url(path=anim_js_path) | safe }}" defer></script>
   <script type="module">
@@ -457,25 +407,29 @@
 
 <body class="{% block body_class %}{% endblock body_class %}">
   {% block header %}
-  <header>
-    <a class="profile-icon" href="/">
+  <header class="site-header">
+    <a class="profile-icon" href="/" aria-label="Home">
       <img src="{{ icon.url }}" alt="profile picture">
     </a>
-    <nav>
-      <a class="nav-home-mobile" href="/">Home</a>
+    <a class="nav-home-mobile" href="/">Home</a>
+    <button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+      <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      Menu
+    </button>
+    <nav id="primary-navigation" aria-label="Main navigation">
       {% for link in config.extra.nav %}
       <a href="{{ link.path }}"
         class="nav-{{ link.name | lower | replace(from=' ', to='-') }}
         {% if current_path is defined and current_path is starting_with(link.path) and link.path != '/' %}active-nav{% endif %}"
       >{{ link.name }}</a>
       {% endfor %}
-      {% if config.extra.dark_mode %}
-      <button class="theme-toggle" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+    </nav>
+    {% if config.extra.dark_mode %}
+    <button class="theme-toggle" type="button" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
         <svg class="theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         <svg class="theme-icon-dark" style="display:none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </button>
-      {% endif %}
-    </nav>
+    </button>
+    {% endif %}
   </header>
   {% endblock header %}
   <main>
