@@ -2,7 +2,7 @@
 title = "Agentic Stack"
 weight = 1
 description = "The layers of an agentic development stack: orchestrators, execution harnesses, skills, and MCP connectors."
-updated = 2026-11-13
+updated = 2026-11-15
 +++
 
 *Last updated: November 2026*
@@ -16,7 +16,7 @@ The GenAI development ecosystem has matured from basic "autocomplete in an IDE" 
 ```mermaid
 flowchart TD
     subgraph Layer1["1. Orchestration & Multiplexing"]
-        Orch["Native Harness Orchestrators · Herdr · t3code"]
+        Orch["Herdr App · Native Harness Orchestrators · t3code"]
     end
 
     subgraph Layer2["2. Execution Harnesses (Native Pairings)"]
@@ -71,7 +71,7 @@ As workflows shift from single-turn prompts to running multiple agents across br
 | Tool | Core Philosophy | Best For | Link |
 |------|-----------------|----------|------|
 | **Native Harnesses** | Self-contained multi-agent environments (Codex App, Antigravity) | Full-workspace tasks, background subagents, and rich artifacts without external tooling | Integrated in native apps |
-| **Herdr** | Open-source, agent-native terminal runtime and multiplexer | Persistent agent sessions, live status tracking (`Working`, `Blocked`, `Done`), and programmatic agent steering via `hc` | [herdr.dev](https://herdr.dev/) · [GitHub](https://github.com/herdr/herdr) |
+| **Herdr App** | Desktop workspace for coding agents | My current setup for persistent sessions, agent status, and reviewing changes | [herdr.dev](https://herdr.dev/) · [GitHub](https://github.com/herdr/herdr) |
 | **t3code** | High-speed terminal and web UI orchestrator for multi-task coding | Parallel agent sessions and fast code review | [pingdotgg/t3code](https://github.com/pingdotgg/t3code) |
 
 
