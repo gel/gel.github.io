@@ -20,6 +20,14 @@ My workspace brings coding agents into one keyboard-driven workflow. [Agentic St
 
 Herdr organizes sessions, the harness runs the agent loop, and the model backend provides inference. I keep tasks recognizable, check agents that need input, and review diffs and validation before accepting completed work.
 
+## Pi Packages & Extensions
+
+- **Packages** (`~/.pi/agent/settings.json`): `npm:pi-clear` and [`npm:pi-schedule-prompt`](https://github.com/tintinweb/pi-schedule-prompt).
+- **Global extensions** (`~/.pi/agent/extensions/`): `otel-trace.ts` for tracing; `exit.ts` for a clean `/exit`.
+- **Traces:** `otel-trace.ts` → OTLP/HTTP at `127.0.0.1:4318/v1/traces` → Doris `otel.otel_traces`. Override the endpoint with `PI_OTEL_ENDPOINT`.
+
+Scheduled prompts require Pi to be running on an awake host.
+
 ## Keyboard Basics
 
 These are the Herdr App shortcuts I use to create work, move between sessions, and review changes.
