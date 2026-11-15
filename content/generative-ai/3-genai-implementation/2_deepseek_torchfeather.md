@@ -76,6 +76,8 @@ Thus \\( \sigma_w^2 = 1/d \\) keeps initial logit variance around 1 even without
 
 ### Residual Initialization: Why Scale With Depth?
 
+The goal is stable training: keep activations and backpropagated gradients at useful scales, reducing the risk of exploding or vanishing signals. The variance argument below explains forward activation growth; gradient stability also depends on the architecture, normalization, and optimizer.
+
 Each residual branch adds to the running stream. Assuming negligible covariance and variance **v** per branch, **L** additions give:
 
 {% math() %}
