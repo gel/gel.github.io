@@ -3,6 +3,7 @@ title = "Projects"
 template = "projects-page.html"
 description = "Selected public projects across interactive interview practice, technical publishing, GenAI education, and applied computer vision."
 
+updated = 2026-07-12
 [extra]
 static_thumbnail = "og/projects.svg"
 

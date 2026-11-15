@@ -2,6 +2,7 @@
 title = "Optimizations"
 weight = 3
 description = "Research summary of optimizations with practical takeaways for LLMs and production AI systems."
+updated = 2026-11-14
 +++
 
 ### [Mixture-of-Depths] Dynamically allocating compute in transformer-based LMs

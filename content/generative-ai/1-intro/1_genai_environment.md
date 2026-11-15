@@ -2,6 +2,7 @@
 title = "Agentic Stack"
 weight = 1
 description = "The layers of an agentic development stack: orchestrators, execution harnesses, skills, and MCP connectors."
+updated = 2026-11-13
 +++
 
 *Last updated: November 2026*

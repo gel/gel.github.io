@@ -2,6 +2,7 @@
 title = "Agentic Workspace"
 weight = 2
 description = "My agentic development setup: Omarchy, Herdr App, hosted and local models, and a compact keyboard cheat sheet."
+updated = 2026-11-15
 +++
 
 *Last updated: November 2026*

@@ -1,6 +1,6 @@
 {% macro reading_book_preview(post, path) %}
-<a class="reading-book" href="{{ post.permalink }}" target="_blank" rel="noopener nofollow noreferrer" title="{{ post.title }}">
-   <img src="{{path}}/{{ post.extra.book_image_path }}" alt="{{ post.title }}" />
+<a class="reading-book" href="{{ post.permalink }}" target="_blank" rel="noopener" title="{{ post.title }}">
+   <img src="{{ path }}/{{ post.extra.book_image_path }}" alt="{{ post.title }}" />
    <span class="reading-book-title">{{ post.title }}</span>
 </a>
 {% endmacro input %}
@@ -11,8 +11,8 @@
     <h2 class="fade-in">{{ title }}</h2>
     <div class="books-grid">
       {% for post in subsection.pages %}
-        <a class="reading-book" href="{{ post.permalink }}" target="_blank" rel="noopener nofollow noreferrer" title="{{ post.title }}">
-           <img src="{{slug}}/{{ post.extra.book_image_path }}" alt="{{ post.title }}" />
+        <a class="reading-book" href="{{ post.permalink }}" target="_blank" rel="noopener" title="{{ post.title }}">
+           <img src="/books/{{ slug }}/{{ post.extra.book_image_path }}" alt="{{ post.title }}" />
            <span class="reading-book-title">{{ post.title }}</span>
         </a>
       {% endfor %}

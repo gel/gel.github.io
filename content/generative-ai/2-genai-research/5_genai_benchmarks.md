@@ -2,6 +2,7 @@
 title = "Evaluations"
 weight = 5
 description = "Research summary of evaluations with practical takeaways for LLMs and production AI systems."
+updated = 2026-11-13
 +++
 
 ### [JudgeBench] A Benchmark for Evaluating LLM-based Judges

@@ -2,6 +2,7 @@
 title = "Making a Career Move"
 weight = 1
 description = "Interview preparation notes on Making a Career Move for software engineering career moves and hiring processes."
+updated = 2026-03-10
 +++
 
 Changing jobs brings considerable challenges that many avoid. Common psychological barriers include:

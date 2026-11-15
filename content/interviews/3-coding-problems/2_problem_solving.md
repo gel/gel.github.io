@@ -2,6 +2,7 @@
 title = "Problem Solving"
 weight = 2
 description = "Coding interview notes on Problem Solving, with patterns, examples, and practical solution guidance."
+updated = 2026-03-10
 +++
 
 - [LRU Cache - Medium - LeetCode 146](#lru-cache-medium-leetcode-146)

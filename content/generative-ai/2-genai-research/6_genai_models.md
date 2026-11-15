@@ -3,6 +3,7 @@ title = "Models"
 aliases = ["generative-ai/3-llm-implementation/2-llms/"]
 weight = 6
 description = "Research summary of models with practical takeaways for LLMs and production AI systems."
+updated = 2026-11-14
 +++
 
 

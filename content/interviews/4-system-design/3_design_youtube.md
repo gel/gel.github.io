@@ -2,6 +2,7 @@
 title = "YouTube"
 weight = 3
 description = "System design interview notes on YouTube, including tradeoffs, APIs, and scaling considerations."
+updated = 2026-03-10
 +++
 
 ### On-Site Round - System Design (45 min)

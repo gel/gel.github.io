@@ -2,6 +2,7 @@
 title = "Security"
 weight = 7
 description = "Research summary of security with practical takeaways for LLMs and production AI systems."
+updated = 2026-11-13
 +++
 
 ### [Data Extraction] Extracting Alignment Data in Open Models

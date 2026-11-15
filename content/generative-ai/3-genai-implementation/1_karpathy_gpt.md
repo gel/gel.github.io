@@ -2,6 +2,7 @@
 title = "Karpathy: Building GPT"
 weight = 1
 description = "My GPT learning track: micrograd and backpropagation, tiny Shakespeare, and GPT-2."
+updated = 2026-11-14
 +++
 
 My starting point was Karpathy's tiny Shakespeare example: a small model I could train and use to generate text. This track connects micrograd's explanation of backpropagation to that exercise and the larger GPT-2 implementation.

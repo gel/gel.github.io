@@ -2,6 +2,7 @@
 title = "Resume"
 template = "resume-page.html"
 description = "Resume for Gal Goldman covering senior engineering and architecture leadership across AWS and Intel in agentic AI, distributed systems, and cloud infrastructure."
+updated = 2026-11-08
 [extra]
 static_thumbnail = "og/resume.svg"
 +++

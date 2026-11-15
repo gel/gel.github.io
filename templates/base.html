@@ -143,6 +143,10 @@
   {% set_global meta_title = page.title %}
   {% elif section is defined and section.title %}
   {% set_global meta_title = section.title %}
+  {% elif term is defined and term.name %}
+  {% set_global meta_title = term.name %}
+  {% elif taxonomy is defined and taxonomy.name %}
+  {% set_global meta_title = taxonomy.name | capitalize %}
   {% endif %}
 
   {% set_global meta_description = config.description %}
@@ -150,13 +154,30 @@
   {% set_global meta_description = page.description %}
   {% elif section is defined and section.description %}
   {% set_global meta_description = section.description %}
+  {% elif term is defined and term.name %}
+  {% set_global meta_description = "Articles and reading notes tagged with " ~ term.name ~ "." %}
+  {% elif taxonomy is defined and taxonomy.name %}
+  {% set_global meta_description = "Browse all " ~ taxonomy.name ~ " across articles and reading notes." %}
   {% endif %}
 
-  {% set_global canonical_url = config.base_url %}
+  {% set_global canonical_url = current_url | default(value=config.base_url) %}
   {% if page is defined and page.permalink %}
   {% set_global canonical_url = page.permalink %}
   {% elif section is defined and section.permalink %}
   {% set_global canonical_url = section.permalink %}
+  {% elif term is defined and term.permalink %}
+  {% set_global canonical_url = term.permalink %}
+  {% endif %}
+
+  {% set_global robots_noindex = false %}
+  {% if term is defined or taxonomy is defined %}
+  {% set_global robots_noindex = true %}
+  {% elif page is defined and page.extra.rating is defined and page.extra.rating == "Queued" %}
+  {% set_global robots_noindex = true %}
+  {% elif page is defined and page.extra.noindex %}
+  {% set_global robots_noindex = true %}
+  {% elif section is defined and section.path == "/books/queued/" %}
+  {% set_global robots_noindex = true %}
   {% endif %}
 
   {% set_global site_root = config.base_url | trim_end_matches(pat="/") %}
@@ -183,7 +204,8 @@
   {% elif page is defined and page.extra.podcast_image_path %}
   {% set_global meta_image_url = get_url(path="podcasts/" ~ page.extra.podcast_image_path) %}
   {% elif page is defined and page.extra.book_image_path %}
-  {% set_global meta_image_url = get_url(path=page.path ~ page.extra.book_image_path) %}
+  {% set book_section_path = page.path | split(pat="/") | slice(end=-2) | join(sep="/") %}
+  {% set_global meta_image_url = get_url(path=book_section_path ~ "/" ~ page.extra.book_image_path) %}
   {% elif section is defined and section.extra.static_thumbnail %}
   {% if section.extra.static_thumbnail is matching("^http[s]?://") %}
   {% set_global meta_image_url = section.extra.static_thumbnail %}
@@ -225,6 +247,9 @@
   {% endif %}
 
   <link rel="canonical" href="{{ canonical_url | safe }}" />
+  {% if robots_noindex %}
+  <meta name="robots" content="noindex, follow" />
+  {% endif %}
 
   <meta property="og:type" content="{{ og_type }}">
   <meta property="og:title" content="{{ meta_title }}">
@@ -249,6 +274,8 @@
   <meta property="article:tag" content="{{ tag }}">
   {% endfor %}
   {% endif %}
+  {% elif page is defined and page.updated %}
+  <meta property="article:modified_time" content="{{ page.updated | date(format="%+") }}">
   {% endif %}
 
   <meta name="twitter:card" content="{% if meta_image_url %}summary_large_image{% else %}summary{% endif %}">

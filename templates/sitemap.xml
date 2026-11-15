@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    {#- Exclude redirect-only roots, taxonomy archives, and thin queued-book placeholders. -#}
+    {%- set genai_root = get_section(path="generative-ai/_index.md") %}
+    {%- set interviews_root = get_section(path="interviews/_index.md") %}
+    {%- set tags_prefix = get_url(path="tags/") %}
+    {%- set queued_prefix = get_url(path="books/queued/") %}
+    {%- for sitemap_entry in entries %}
+    {%- set skip_entry = false %}
+    {%- if sitemap_entry.permalink == genai_root.permalink or sitemap_entry.permalink == interviews_root.permalink %}
+    {%- set skip_entry = true %}
+    {%- elif sitemap_entry.permalink is starting_with(tags_prefix) %}
+    {%- set skip_entry = true %}
+    {%- elif sitemap_entry.permalink is starting_with(queued_prefix) %}
+    {%- set skip_entry = true %}
+    {%- elif sitemap_entry.extra and (sitemap_entry.extra.noindex or sitemap_entry.extra.sitemap == false) %}
+    {%- set skip_entry = true %}
+    {%- endif %}
+    {%- if not skip_entry %}
+    <url>
+        <loc>{{ sitemap_entry.permalink | escape_xml | safe }}</loc>
+        {%- if sitemap_entry.updated %}
+        <lastmod>{{ sitemap_entry.updated }}</lastmod>
+        {%- endif %}
+    </url>
+    {%- endif %}
+    {%- endfor %}
+</urlset>

@@ -2,6 +2,7 @@
 title = "DeepSeek: TorchFeather"
 weight = 2
 description = "Code-reading notes from studying DeepSeek's implementation in TorchFeather, starting with output-weight initialization."
+updated = 2026-11-14
 +++
 
 Notes while following Umar Jamil's *Building a distributed training framework from first principles* and working through [TorchFeather](https://github.com/hkproj/torchfeather). I use these notes to explain the implementation to myself as I study it.

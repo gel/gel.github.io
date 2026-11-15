@@ -2,6 +2,7 @@
 title = "TinyURL"
 weight = 2
 description = "System design interview notes on TinyURL, including tradeoffs, APIs, and scaling considerations."
+updated = 2026-03-10
 +++
 
 ### On-Site Round 1 - Coding (45-60 min)

@@ -2,6 +2,7 @@
 title = "Prompting"
 weight = 4
 description = "Research summary of prompting with practical takeaways for LLMs and production AI systems."
+updated = 2026-11-13
 +++
 
 ## LLM Prompting - In-Context-Learning

@@ -19,14 +19,33 @@
 {% block content %}
   {{ section.content | safe }}
 
-  {{ reading_book_macros::book_category_section(title="Currently Reading", section_path="books/currently-reading/_index.md", slug="currently-reading") }}
-  {{ reading_book_macros::book_category_section(title="Personal Development Books", section_path="books/personal-development/_index.md", slug="personal-development") }}
-  {{ reading_book_macros::book_category_section(title="Finance Books", section_path="books/finance/_index.md", slug="finance") }}
-  {{ reading_book_macros::book_category_section(title="Programming Books", section_path="books/programming/_index.md", slug="programming") }}
-  {{ reading_book_macros::book_category_section(title="Health Books", section_path="books/health/_index.md", slug="health") }}
-  {{ reading_book_macros::book_category_section(title="Parenting Books", section_path="books/parenting/_index.md", slug="parenting") }}
-  {{ reading_book_macros::book_category_section(title="History Books", section_path="books/history/_index.md", slug="history") }}
-  {{ reading_book_macros::book_category_section(title="Fiction Books", section_path="books/fiction/_index.md", slug="fiction") }}
-  {{ reading_book_macros::book_category_section(title="Queued (To Read)", section_path="books/queued/_index.md", slug="queued") }}
+  {% if section.relative_path == "books/_index.md" %}
+    {{ reading_book_macros::book_category_section(title="Currently Reading", section_path="books/currently-reading/_index.md", slug="currently-reading") }}
+    {{ reading_book_macros::book_category_section(title="Personal Development Books", section_path="books/personal-development/_index.md", slug="personal-development") }}
+    {{ reading_book_macros::book_category_section(title="Finance Books", section_path="books/finance/_index.md", slug="finance") }}
+    {{ reading_book_macros::book_category_section(title="Programming Books", section_path="books/programming/_index.md", slug="programming") }}
+    {{ reading_book_macros::book_category_section(title="Health Books", section_path="books/health/_index.md", slug="health") }}
+    {{ reading_book_macros::book_category_section(title="Parenting Books", section_path="books/parenting/_index.md", slug="parenting") }}
+    {{ reading_book_macros::book_category_section(title="History Books", section_path="books/history/_index.md", slug="history") }}
+    {{ reading_book_macros::book_category_section(title="Fiction Books", section_path="books/fiction/_index.md", slug="fiction") }}
+    {{ reading_book_macros::book_category_section(title="Queued (To Read)", section_path="books/queued/_index.md", slug="queued") }}
+  {% elif section.relative_path == "podcasts/_index.md" %}
+    <h1 class="fade-in">{{ section.title | default(value="Podcasts") }}</h1>
+    <div class="books-grid">
+      {% for post in section.pages %}
+        {{ reading_book_macros::podcast_preview(post=post) }}
+      {% endfor %}
+    </div>
+  {% else %}
+    <h1 class="fade-in">{{ section.title }}</h1>
+    {% if section.pages | length > 0 %}
+      {% set section_dir = section.path | trim_end_matches(pat="/") %}
+      <div class="books-grid">
+        {% for post in section.pages %}
+          {{ reading_book_macros::reading_book_preview(post=post, path=section_dir) }}
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endif %}
 
 {% endblock content %}
