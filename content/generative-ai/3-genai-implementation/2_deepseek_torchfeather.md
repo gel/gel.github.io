@@ -74,6 +74,28 @@ TorchFeather applies RMSNorm before the output projection. RMSNorm controls the 
 
 Thus \\( \sigma_w^2 = 1/d \\) keeps initial logit variance around 1 even without the centered-input simplification above. The code truncates the normal distribution at \\( \pm 3\sigma \\), so this is approximate scale control at initialization, not an exact variance constraint enforced throughout training.
 
+### Residual Initialization: Why Scale With Depth?
+
+Each residual branch adds to the running stream. Assuming negligible covariance and variance **v** per branch, **L** additions give:
+
+{% math() %}
+\operatorname{Var}(x_L)\approx\operatorname{Var}(x_0)+Lv
+{% end %}
+
+A transformer has **two residual additions per block**: attention and FFN. Across L blocks, the added variance is roughly **2Lv**. Scaling branch outputs by **1/√(2L)** scales their variance by **1/(2L)**, controlling growth with depth. This is a simplifying initialization argument, not a guarantee throughout training.
+
+[TorchFeather](https://github.com/hkproj/torchfeather/blob/main/torchfeather/model/model.py) scales the residual output weights using:
+
+```python
+self.weight_init_std = 0.02 / (2 * (layer_id + 1)) ** 0.5
+```
+
+It uses the **current block's depth**, not total model depth L, so its schedule differs from the constant scale in the argument above. Several internal attention projections keep `std=0.02`.
+
+**Why 0.02?** It is an established base scale: [OpenAI's GPT-2 implementation](https://github.com/openai/gpt-2/blob/master/src/model.py) uses `w_init_stdev=0.02`. That documents precedent, not why TorchFeather chose it. **A plausible intuition** is that it is on the scale of fan-in initialization for widths of a few thousand: **1/√2500 = 0.02**. This numerical comparison does not derive a universal constant or prove the author's rationale.
+
+**Remember:** **0.02 sets the base weight scale; the depth factor reduces residual accumulation.** Variance scaling explains the factor, not the exact base value.
+
 ### Related Research Notes
 
 - [Shared and routed experts](@/generative-ai/2-genai-research/6_genai_models.md#deepseekmoe-shared-and-routed-experts)
