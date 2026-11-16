@@ -16,7 +16,7 @@ The GenAI development ecosystem has matured from basic "autocomplete in an IDE" 
 ```mermaid
 flowchart TD
     subgraph Layer1["1. Orchestration & Multiplexing"]
-        Orch["Herdr App · Native Harness Orchestrators · t3code"]
+        Orch["Herdr App (Desktop + Mobile)<br/>Native Harness Orchestrators · t3code"]
     end
 
     subgraph Layer2["2. Execution Harnesses (Native Pairings)"]
@@ -71,7 +71,7 @@ As workflows shift from single-turn prompts to running multiple agents across br
 | Tool | Core Philosophy | Best For | Link |
 |------|-----------------|----------|------|
 | **Native Harnesses** | Self-contained multi-agent environments (Codex App, Antigravity) | Full-workspace tasks, background subagents, and rich artifacts without external tooling | Integrated in native apps |
-| **Herdr App** | Desktop workspace for coding agents | My current setup for persistent sessions, agent status, and reviewing changes | [herdr.dev](https://herdr.dev/) · [GitHub](https://github.com/herdr/herdr) |
+| **Herdr App** | Desktop and mobile access to coding agents | Persistent sessions, agent status, and answering agents from my phone | [Desktop](https://herdr.dev/) · [Mobile](https://herdr.dev/mobile/) |
 | **t3code** | High-speed terminal and web UI orchestrator for multi-task coding | Parallel agent sessions and fast code review | [pingdotgg/t3code](https://github.com/pingdotgg/t3code) |
 
 

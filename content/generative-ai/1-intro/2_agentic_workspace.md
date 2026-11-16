@@ -15,6 +15,7 @@ My workspace brings coding agents into one keyboard-driven workflow. [Agentic St
 |-------|------------|
 | Desktop | **Omarchy / Hyprland** on Linux |
 | Agent workspace | **Herdr App** (`herdr-app`) for persistent sessions with **Codex CLI, agy, Pi**, and other agents |
+| Mobile access | [**Herdr Mobile**](https://herdr.dev/mobile/) to check agent status and answer agents from my phone over SSH / Tailscale |
 | Native apps | **Codex App** and **Antigravity** |
 | Hosted models | **DeepSeek V4** through **OpenRouter** |
 | Local inference | **Ollama** and **llama.cpp** to reduce API costs; currently **Ornith**, usually liberated, quantized variants |
