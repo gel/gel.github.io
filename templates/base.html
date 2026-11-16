@@ -334,6 +334,8 @@
   {% block posthead %}{% endblock posthead %}
   <link rel="stylesheet" href="{{ get_url(path='site-navigation.css') | safe }}">
   <script src="{{ get_url(path='site-navigation.js') | safe }}" defer></script>
+  <link rel="stylesheet" href="{{ get_url(path='diagram-viewer.css') | safe }}">
+  <script src="{{ get_url(path='diagram-viewer.js') | safe }}" defer></script>
   {% set anim_js_path = "animations.js" %}
   <script src="{{ get_url(path=anim_js_path) | safe }}" defer></script>
   <script type="module">
@@ -395,6 +397,7 @@
       });
 
       await mermaid.run({ nodes: mermaidDivs });
+      window.dispatchEvent(new Event('diagramsRendered'));
     }
 
     document.addEventListener("DOMContentLoaded", initMermaid);

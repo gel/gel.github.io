@@ -13,17 +13,25 @@ The GenAI development ecosystem has matured from basic "autocomplete in an IDE" 
 
 **[Tailscale](https://tailscale.com/)** — private networking and remote SSH access between development machines.
 
+My phone or laptop connects through Tailscale to my desktop or VPS, using Herdr or a native app's remote access. **herdr-core** keeps Herdr's terminals and agent sessions running on the host.
+
 ```mermaid
 flowchart TD
-    subgraph Layer1["1. Orchestration & Multiplexing"]
-        Orch["Herdr App (Desktop + Mobile)<br/>Native Harness Orchestrators · t3code"]
-    end
+    Clients["Remote clients · Phone / Laptop<br/>Herdr Mobile · Native remote access"]
+    Tailnet["Tailscale · private network"]
 
-    subgraph Layer2["2. Execution Harnesses (Native Pairings)"]
-        H_OpenAI["Codex App (Sol 5.1)"]
-        H_Anthropic["Claude Code (Opus 5.5)"]
-        H_Google["Antigravity (Gemini 4 Argon)"]
-        H_Pi["Pi (Hosted or Local Models)"]
+    subgraph Remote["Development Hosts · Desktop / VPS · OVHcloud / Hetzner / AWS EC2"]
+        subgraph Layer1["1. Orchestration & Multiplexing"]
+            Herdr["Herdr App + herdr-core"]
+            Orch["Native Orchestrators<br/>Codex App · t3code"]
+        end
+
+        subgraph Layer2["2. Execution Harnesses (Native Pairings)"]
+            H_OpenAI["Codex Harness (Sol 5.1)"]
+            H_Anthropic["Claude Code (Opus 5.5)"]
+            H_Google["Antigravity (Gemini 4 Argon)"]
+            H_Pi["Pi (Hosted or Local Models)"]
+        end
     end
 
     subgraph Layer3["3. Skills (Procedural Knowledge)"]
@@ -40,18 +48,24 @@ flowchart TD
     end
     H_Pi --> Hosted & Local
 
-    subgraph Remote["Remote Development Hosts"]
-        Tailnet["Tailscale · private access"]
-        Machines["OVHcloud · Hetzner · AWS EC2"]
-        Tailnet --> Machines
-    end
-    Orch -.->|Remote sessions| Tailnet
+    Clients <--> Tailnet
+    Tailnet <-->|Herdr sessions| Herdr
+    Tailnet <-->|Native remote access| Orch
 
-    Orch --> H_OpenAI & H_Anthropic & H_Google & H_Pi
-    H_OpenAI & H_Anthropic & H_Google & H_Pi --> Skills
-    H_OpenAI & H_Anthropic & H_Google & H_Pi --> MCP
+    Herdr --> Layer2
+    Orch --> Layer2
+    Layer2 --> Skills & MCP
 
+    style Layer1 fill:transparent,stroke:#b7c9c6
+    style Layer2 fill:transparent,stroke:#b7c9c6
+    style Layer3 fill:transparent,stroke:#b7c9c6
+    style Layer4 fill:transparent,stroke:#b7c9c6
+    style Backends fill:transparent,stroke:#b7c9c6
+    style Remote fill:transparent,stroke:#b7c9c6
     style Orch fill:#bbdefb,stroke:#1976d2,color:#000
+    style Herdr fill:#bbdefb,stroke:#1976d2,color:#000
+    style Clients fill:#e0f2f1,stroke:#5b9b91,color:#000
+    style Tailnet fill:#ede9fe,stroke:#a78bfa,color:#000
     style H_OpenAI fill:#c8e6c9,stroke:#388e3c,color:#000
     style H_Google fill:#c8e6c9,stroke:#388e3c,color:#000
     style H_Pi fill:#dcedc8,stroke:#689f38,color:#000
@@ -70,7 +84,7 @@ As workflows shift from single-turn prompts to running multiple agents across br
 
 | Tool | Core Philosophy | Best For | Link |
 |------|-----------------|----------|------|
-| **Native Harnesses** | Self-contained multi-agent environments (Codex App, Antigravity) | Full-workspace tasks, background subagents, and rich artifacts without external tooling | Integrated in native apps |
+| **Native Apps** | Orchestration interfaces (Codex App, Antigravity) | Full-workspace tasks, background subagents, and rich artifacts without external tooling | Integrated in native apps |
 | **Herdr App** | Desktop and mobile access to coding agents | Persistent sessions, agent status, and answering agents from my phone | [Desktop](https://herdr.dev/) · [Mobile](https://herdr.dev/mobile/) |
 | **t3code** | High-speed terminal and web UI orchestrator for multi-task coding | Parallel agent sessions and fast code review | [pingdotgg/t3code](https://github.com/pingdotgg/t3code) |
 
@@ -87,7 +101,7 @@ Native harnesses provide an integrated workflow for their model families. Config
 
 | Harness | Tier / Type | Primary Model Pairing | Strengths |
 |---------|-------------|-----------------------|-----------|
-| **Codex App** | OpenAI Native | **Sol 5.1** | Polished desktop harness, native worktree isolation, automations, and in-app tools |
+| **Codex Harness** | OpenAI Native | **Sol 5.1** | Agent execution, tool calls, approvals, and CLI sessions; [app-server](https://developers.openai.com/codex/app-server/) supports rich clients |
 | **Claude Code** | Anthropic Native | **Claude Opus 5.5** | Fast CLI loop, deep git integration, subagent spawning |
 | **Antigravity** | Google DeepMind Native | **Gemini 4 Argon** | Multi-agent collaboration, reactive background tasks, rich interactive artifacts, generous quotas |
 | **Pi** | Open-Source Minimalist CLI | **Hosted or local models** | Minimalist, zero-slop hacker agent. Highly hackable, zero telemetry, fast startup |
