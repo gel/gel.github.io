@@ -46,9 +46,10 @@ These are the Herdr App shortcuts I use to create work, move between sessions, a
 | Toggle changes review | `Ctrl + Shift + R` |
 | Expand / restore pane | `Ctrl + Shift + Enter` |
 | Swap pane left / down / up / right | `Alt + Shift + h / j / k / l` |
-| Close pane | `Ctrl + Shift + X` |
+| Close focused pane | `Ctrl + Shift + X` |
+| Close current tab | `Ctrl + Shift + W` |
+| Close current workspace | `Alt + Shift + W` |
 | Exit shell (empty input line) | `Ctrl + D` — pane may close when the shell exits |
-| Close tab | `Ctrl + Shift + W` |
 | Command palette | `Ctrl + Shift + P` |
 | Workspace / tab picker | `Ctrl + Shift + K` |
 | Rename tab / agent | `F2` |
