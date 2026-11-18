@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Gal Goldman projects social card</title>
+  <desc id="desc">A branded social share image for Gal Goldman projects.</desc>
+  <rect width="1200" height="630" fill="#eef6f4" />
+  <rect x="0" y="0" width="356" height="630" fill="#0f172a" />
+  <rect x="76" y="92" width="204" height="120" rx="24" fill="#0f766e" />
+  <text x="102" y="165" fill="#f8fafc" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700">PROJECTS</text>
+  <text x="430" y="176" fill="#0f172a" font-family="Georgia, serif" font-size="76" font-weight="700">Interactive tools,</text>
+  <text x="430" y="256" fill="#0f172a" font-family="Georgia, serif" font-size="76" font-weight="700">public work, and systems.</text>
+  <text x="430" y="356" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="31">Interview playgrounds, technical publishing, workshops, and applied product work.</text>
+  <text x="82" y="456" fill="#dbeafe" font-family="Arial, Helvetica, sans-serif" font-size="30">Browser-based products</text>
+  <text x="82" y="504" fill="#dbeafe" font-family="Arial, Helvetica, sans-serif" font-size="30">Technical education</text>
+  <text x="82" y="552" fill="#dbeafe" font-family="Arial, Helvetica, sans-serif" font-size="30">Computer vision integrations</text>
+</svg>
