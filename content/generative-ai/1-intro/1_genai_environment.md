@@ -1,19 +1,19 @@
 +++
 title = "Agentic Stack"
 weight = 1
-description = "The layers of an agentic development stack: orchestrators, execution harnesses, skills, and MCP connectors."
-updated = 2026-11-15
+description = "The layers of an agentic development stack: orchestrators, cross-project coordinators, execution harnesses, skills, and MCP connectors."
+updated = 2026-11-18
 +++
 
 *Last updated: November 2026*
 
 This page maps the tools and responsibilities in an agentic development stack. For my day-to-day configuration and workflow, see [Agentic Workspace](@/generative-ai/1-intro/2_agentic_workspace.md).
 
-The GenAI development ecosystem has matured from basic "autocomplete in an IDE" into a **modular agent operations stack**. Modern agentic engineering separates the system into four distinct layers: orchestrators & multiplexers, execution harnesses, procedural skills, and protocol connectors.
+The GenAI development ecosystem has matured from basic "autocomplete in an IDE" into a **modular agent operations stack**. Modern agentic engineering separates the system into four distinct layers: orchestrators & cross-project coordinators, execution harnesses, procedural skills, and protocol connectors.
 
 **[Tailscale](https://tailscale.com/)** — private networking and remote SSH access between development machines.
 
-My phone or laptop connects through Tailscale to my desktop or VPS, using Herdr or a native app's remote access. **herdr-core** keeps Herdr's terminals and agent sessions running on the host.
+My phone or laptop connects through Tailscale to my desktop or VPS, using Herdr or a native app's remote access. **herdr-core** (`hc`) keeps Herdr's terminals and agent sessions running on the host, while **OpenClaw** runs as a persistent cross-project coordinator inside Herdr to inspect project boards, review worker terminals through `hc`, and run scheduled briefings.
 
 ```mermaid
 flowchart TD
@@ -21,13 +21,14 @@ flowchart TD
     Tailnet["Tailscale · private network"]
 
     subgraph Remote["Development Hosts · Desktop / VPS · OVHcloud / Hetzner / AWS EC2"]
-        subgraph Layer1["1. Orchestration & Multiplexing"]
-            Herdr["Herdr App + herdr-core"]
+        subgraph Layer1["1. Orchestration, Coordination & Multiplexing"]
+            Herdr["Herdr App + herdr-core (hc)<br/>Live GPUI Mods & Persistent Terminals"]
+            OpenClaw["OpenClaw Coordinator<br/>Local Gateway · TUI · Cron Automations · Memory"]
             Orch["Native Orchestrators<br/>Codex App · t3code"]
         end
 
-        subgraph Layer2["2. Execution Harnesses (Native Pairings)"]
-            H_OpenAI["Codex Harness (Sol 5.1)"]
+        subgraph Layer2["2. Execution Harnesses (Project Workers)"]
+            H_OpenAI["Codex Harness (Sol 6.1)"]
             H_Anthropic["Claude Code (Opus 5.5)"]
             H_Google["Antigravity (Gemini 4 Argon)"]
             H_Pi["Pi (Hosted or Local Models)"]
@@ -39,7 +40,7 @@ flowchart TD
     end
 
     subgraph Layer4["4. MCP & Connectors (Data / Tool RPC)"]
-        MCP["wakeahuman.com"]
+        MCP["wakeahuman.com · GitHub Projects & CI (gh)"]
     end
 
     subgraph Backends["Model Backends (Hosted & Local Inference)"]
@@ -52,6 +53,9 @@ flowchart TD
     Tailnet <-->|Herdr sessions| Herdr
     Tailnet <-->|Native remote access| Orch
 
+    Herdr <-->|hc CLI & GPUI Inspector Mod| OpenClaw
+    OpenClaw -->|Dispatches & verifies via hc| Layer2
+    OpenClaw --> MCP
     Herdr --> Layer2
     Orch --> Layer2
     Layer2 --> Skills & MCP
@@ -64,6 +68,7 @@ flowchart TD
     style Remote fill:transparent,stroke:#b7c9c6
     style Orch fill:#bbdefb,stroke:#1976d2,color:#000
     style Herdr fill:#bbdefb,stroke:#1976d2,color:#000
+    style OpenClaw fill:#fff9c4,stroke:#f9a825,color:#000
     style Clients fill:#e0f2f1,stroke:#5b9b91,color:#000
     style Tailnet fill:#ede9fe,stroke:#a78bfa,color:#000
     style H_OpenAI fill:#c8e6c9,stroke:#388e3c,color:#000
@@ -78,14 +83,15 @@ flowchart TD
 
 ---
 
-## 🎛️ 1. Agent Orchestrators & Multiplexers
+## 🎛️ 1. Agent Orchestrators, Coordinators & Multiplexers
 
-As workflows shift from single-turn prompts to running multiple agents across branches and tasks, orchestrators manage concurrent agent sessions, terminal state persistence, and handoffs.
+As workflows shift from single-turn prompts to running multiple agents across repositories, branches, and tasks, orchestration splits into **workspace multiplexing** (Herdr) and **cross-project coordination** (OpenClaw).
 
 | Tool | Core Philosophy | Best For | Link |
 |------|-----------------|----------|------|
+| **Herdr App + `hc`** | Native GPU desktop/mobile multiplexer (`herdr-app`) backed by a persistent terminal daemon (`herdr-core`) and live-reloading GPUI mods | Persistent `t<ID>` agent terminals, live status tracking, custom native UI panels, and answering agents from my phone | [Desktop](https://herdr.dev/) · [Mobile](https://herdr.dev/mobile/) |
+| **OpenClaw** | Personal assistant and cross-project coordinator with a loopback Gateway, TUI, cron automations, and durable FTS memory | Reviewing all project boards & CI, verifying worker results via `hc`, running zero-noise hourly progress checks, and maintaining cross-project institutional memory | [docs.openclaw.ai](https://docs.openclaw.ai/) |
 | **Native Apps** | Orchestration interfaces (Codex App, Antigravity) | Full-workspace tasks, background subagents, and rich artifacts without external tooling | Integrated in native apps |
-| **Herdr App** | Desktop and mobile access to coding agents | Persistent sessions, agent status, and answering agents from my phone | [Desktop](https://herdr.dev/) · [Mobile](https://herdr.dev/mobile/) |
 | **t3code** | High-speed terminal and web UI orchestrator for multi-task coding | Parallel agent sessions and fast code review | [pingdotgg/t3code](https://github.com/pingdotgg/t3code) |
 
 
