@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 8px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      color: var(--accent-color);
+    }
+
+    .theme-toggle svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#0f766e');
+      root.style.setProperty('--accent-color-light', '#7dd3c7');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#0f766e" />
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.fbf841984d4c630f.png" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.fbf841984d4c630f.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.8d764c74b57e78ac.png" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.31c754669e6b1886.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.ab3d415c621250c1.png" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.75f5c17cd0a278cd.png" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.0ae1d7f33188702f.png" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.dbbe1ab6fb9c667c.png" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.b51883fbb0bc49a7.png" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <link rel="canonical" href="https://gel.github.io/generative-ai/3-genai-implementation/2-deepseek-torchfeather/" />
+  
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="DeepSeek: TorchFeather">
+  <meta property="og:description" content="Code-reading notes from studying DeepSeek&#x27;s implementation in TorchFeather, covering initialization and MLA attention.">
+  <meta property="og:url" content="https://gel.github.io/generative-ai/3-genai-implementation/2-deepseek-torchfeather/">
+  <meta property="og:site_name" content="Gal Goldman | Architect &amp; Engineer">
+
+  
+  <meta property="og:image" content="https://gel.github.io/og/site-default.svg">
+  <meta property="og:image:alt" content="DeepSeek: TorchFeather">
+  
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  
+  
+
+  
+  <meta property="article:modified_time" content="2026-11-25T00:00:00+00:00">
+  
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  
+  <meta name="twitter:creator" content="@gelings">
+  <meta name="twitter:site" content="@gelings">
+  
+  <meta name="twitter:title" content="DeepSeek: TorchFeather">
+  <meta name="twitter:description" content="Code-reading notes from studying DeepSeek&#x27;s implementation in TorchFeather, covering initialization and MLA attention.">
+  
+  <meta name="twitter:image" content="https://gel.github.io/og/site-default.svg">
+  
+
+  
+  <meta name="description" content="Code-reading notes from studying DeepSeek&#x27;s implementation in TorchFeather, covering initialization and MLA attention." />
+  
+
+  
+  <meta name="author" content="Gal Goldman">
+  
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://gel.github.io/#person",
+          "name": "Gal Goldman",
+          "url": "https://gel.github.io/",
+          "description": "Gal Goldman writes about distributed systems, cloud architecture, GenAI systems, and engineering quality.",
+          "jobTitle": "Senior Software Engineer and Enterprise Solution Architect",
+          "worksFor": { "@id": "https://gel.github.io/#org" },
+          
+          "image": "https://gel.github.io/profileweb.png",
+          
+          "sameAs": [
+            
+            "https://www.linkedin.com/in/gal-goldman/",
+            
+            "https://x.com/gelings"
+            
+          ]
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://gel.github.io/#org",
+          "name": "Gal Goldman",
+          "url": "https://gel.github.io/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://gel.github.io/iconweb.png"
+          }
+          
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://gel.github.io/#website",
+          "url": "https://gel.github.io/",
+          "name": "Gal Goldman | Architect & Engineer",
+          "description": "Gal Goldman writes about distributed systems, cloud architecture, GenAI systems, and engineering quality.",
+          "publisher": { "@id": "https://gel.github.io/#org" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://gel.github.io/generative-ai/3-genai-implementation/2-deepseek-torchfeather/#webpage",
+          "url": "https://gel.github.io/generative-ai/3-genai-implementation/2-deepseek-torchfeather/",
+          "name": "DeepSeek: TorchFeather",
+          "description": "Code-reading notes from studying DeepSeek's implementation in TorchFeather, covering initialization and MLA attention.",
+          "isPartOf": { "@id": "https://gel.github.io/#website" },
+          "about": { "@id": "https://gel.github.io/#person" },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://gel.github.io/og/site-default.svg",
+            "width": 1200,
+            "height": 630
+            
+          }
+          
+        }
+      ]
+    }
+  </script>
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.09e74e8b8087cebf.png" />
+
+  <title>
+    
+
+
+
+Gal's 
+     
+    
+        Generative AI
+    
+ Book - DeepSeek: TorchFeather
+
+
+  </title>
+
+  
+  
+
+
+<link rel="stylesheet" href="https://gel.github.io/main.css">
+<link rel="stylesheet" href="https://gel.github.io/book.css">
+
+
+
+  
+
+
+
+
+
+  <link rel="stylesheet" href="https://gel.github.io/site-navigation.css">
+  <script src="https://gel.github.io/site-navigation.js" defer></script>
+  <link rel="stylesheet" href="https://gel.github.io/diagram-viewer.css">
+  <script src="https://gel.github.io/diagram-viewer.js" defer></script>
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+      window.dispatchEvent(new Event('diagramsRendered'));
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="book-body">
+  
+  <header class="site-header">
+    <a class="profile-icon" href="/" aria-label="Home">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.09e74e8b8087cebf.png" alt="profile picture">
+    </a>
+    <a class="nav-home-mobile" href="/">Home</a>
+    <button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+      <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      Menu
+    </button>
+    <nav id="primary-navigation" aria-label="Main navigation">
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        "
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        "
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        "
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        "
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        active-nav"
+      >GenAI</a>
+      
+    </nav>
+    
+    <button class="theme-toggle" type="button" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <svg class="theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="theme-icon-dark" style="display:none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    
+  </header>
+  
+  <main>
+    
+<!-- Sidebar defaults to class 'menu'. CSS max-width 600px breakpoint handles closing it automatically -->
+<div class="menu">
+  
+  
+  <nav role="navigation">
+    <ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="/generative-ai/1-intro/">
+          <strong>1.</strong>
+          Agentic Development
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;1-intro&#x2F;1-genai-environment&#x2F;">
+              <strong>1.1.</strong>
+              Agentic Stack
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;1-intro&#x2F;2-agentic-workspace&#x2F;">
+              <strong>1.2.</strong>
+              Agentic Workspace
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="/generative-ai/2-genai-research/">
+          <strong>2.</strong>
+          GenAI Research
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;1-genai-agents&#x2F;">
+              <strong>2.1.</strong>
+              Agents
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;2-genai-pretraining-finetuning&#x2F;">
+              <strong>2.2.</strong>
+              Training
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;3-genai-optimization&#x2F;">
+              <strong>2.3.</strong>
+              Optimizations
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;4-genai-prompting&#x2F;">
+              <strong>2.4.</strong>
+              Prompting
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;5-genai-benchmarks&#x2F;">
+              <strong>2.5.</strong>
+              Evaluations
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;6-genai-models&#x2F;">
+              <strong>2.6.</strong>
+              Models
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;7-genai-security&#x2F;">
+              <strong>2.7.</strong>
+              Security
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="/generative-ai/3-genai-implementation/">
+          <strong>3.</strong>
+          GenAI Implementation
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;3-genai-implementation&#x2F;1-karpathy-gpt&#x2F;">
+              <strong>3.1.</strong>
+              Karpathy: Building GPT
+            </a>
+          </li>
+          
+          <li class="active" >
+            <a href="&#x2F;generative-ai&#x2F;3-genai-implementation&#x2F;2-deepseek-torchfeather&#x2F;">
+              <strong>3.2.</strong>
+              DeepSeek: TorchFeather
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+    </ul>
+  </nav>
+  
+  
+</div>
+
+<!-- Page defaults to class 'page'. CSS max-width 600px breakpoint handles making it full-width automatically -->
+<div class="page">
+
+  <div class="page__content">
+    
+    <div class="search-container">
+      <input id="search" type="search" placeholder="Search..">
+      <div class="search-results">
+        <div class="search-results__header"></div>
+        <ul class="search-results__items"></ul>
+      </div>
+    </div>
+    
+    <button class="sidebar-toggle-inline" id="sidebar-toggle-inline" aria-label="Toggle Chapters">
+      <span class="toggle-icon">☰</span> Chapters
+    </button>
+    <div class="book-content">
+      
+    <h1>DeepSeek: TorchFeather</h1>
+    
+    <nav class="page-toc" aria-label="On this page">
+      <details>
+        <summary>On this page</summary>
+        
+<ul>
+  
+  
+  <li>
+    <a href="#output-initialization-why-1-dim">Output Initialization: Why 1&#x2F;√dim?</a>
+    
+  </li>
+  
+  
+  
+  <li>
+    <a href="#residual-initialization-why-scale-with-depth">Residual Initialization: Why Scale With Depth?</a>
+    
+  </li>
+  
+  
+  
+  <li>
+    <a href="#mla-attention-why-split-q-and-k-into-nope-and-rope">MLA Attention: Why Split Q and K into nope and rope?</a>
+    
+  </li>
+  
+  
+  
+  <li>
+    <a href="#autograd-basics-chain-copy-and-add-rules">Autograd Basics: Chain, Copy, and Add Rules</a>
+    
+  </li>
+  
+  
+  
+  <li>
+    <a href="#related-research-notes">Related Research Notes</a>
+    
+  </li>
+  
+  
+</ul>
+
+      </details>
+    </nav>
+    
+    <p>Notes while following Umar Jamil's <em>Building a distributed training framework from first principles</em> and working through <a href="https://github.com/hkproj/torchfeather">TorchFeather</a>. I use these notes to explain the implementation to myself as I study it.</p>
+<h3 id="output-initialization-why-1-dim">Output Initialization: Why 1/√dim?<a class="zola-anchor" href="#output-initialization-why-1-dim" aria-label="Anchor link for: output-initialization-why-1-dim">🔗</a></h3>
+<p>In <a href="https://github.com/hkproj/torchfeather/blob/main/torchfeather/model/model.py#L387"><code>DeepSeekV3Model.init_weights</code></a>:</p>
+<pre data-lang="python" class="language-python "><code class="language-python" data-lang="python">final_out_std = self.model_args.dim**-0.5
+</code></pre>
+<p>This sets the <strong>initial standard deviation of the output layer's weights</strong>. The output layer maps \( d = \texttt{dim} \) hidden features to vocabulary logits; <code>final_out_std</code> is not the measured standard deviation of those logits.</p>
+<h4 id="goal-preserve-the-input-variance">Goal: Preserve the Input Variance<a class="zola-anchor" href="#goal-preserve-the-input-variance" aria-label="Anchor link for: goal-preserve-the-input-variance">🔗</a></h4>
+<p>For one output logit, write \( y = \sum_{j=1}^{d} w_j x_j \), summing over \( d \) input features. We choose the weight scale so \( \operatorname{Var}(y) \approx \operatorname{Var}(x_j) \): one output should have roughly the variance of one input feature. This is the forward variance-preservation argument behind fan-in initialization; see <a href="https://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf">Glorot and Bengio, Section 4.2</a>.</p>
+<h4 id="which-variables-are-independent">Which Variables Are Independent?<a class="zola-anchor" href="#which-variables-are-independent" aria-label="Anchor link for: which-variables-are-independent">🔗</a></h4>
+<p>For the simple derivation, assume each input feature is centered with variance \( v \), and the initialized weights are independent of the input and of each other, with mean zero and variance \( \sigma_w^2 \).</p>
+<p><strong>x and y are dependent</strong>: y is computed from x. Independence here refers to the randomly initialized weights and the input, not to the input and output.</p>
+<p>For one product, independence lets us factor its second moment, while zero means remove the mean term:</p>
+<div class="math-display">
+\[
+\operatorname{Var}(w_j x_j) = \mathbb{E}[w_j^2]\,\mathbb{E}[x_j^2] = \sigma_w^2 v
+\]
+</div>
+<p>For a sum, variance generally includes covariance terms:</p>
+<div class="math-display">
+\[
+\begin{aligned}
+\operatorname{Var}(y) &amp;= \sum_{j=1}^{d} \operatorname{Var}(w_j x_j) \\
+&amp;\quad + 2\sum_{j&lt;k} \operatorname{Cov}(w_j x_j,\, w_k x_k)
+\end{aligned}
+\]
+</div>
+<p>The independent, zero-mean weights make those cross-covariances zero at initialization. The input features themselves need not be independent for this cancellation.</p>
+<h4 id="solve-for-the-weight-standard-deviation">Solve for the Weight Standard Deviation<a class="zola-anchor" href="#solve-for-the-weight-standard-deviation" aria-label="Anchor link for: solve-for-the-weight-standard-deviation">🔗</a></h4>
+<p>There are \( d \) products, so:</p>
+<div class="math-display">
+\[
+\operatorname{Var}(y) = d\,\sigma_w^2 v
+\]
+</div>
+<p>To preserve a nonzero input variance \( v \):</p>
+<div class="math-display">
+\[
+\begin{aligned}
+d\,\sigma_w^2 v &amp;= v \\
+\sigma_w^2 &amp;= \frac{1}{d} \\
+\sigma_w &amp;= \frac{1}{\sqrt{d}}
+\end{aligned}
+\]
+</div>
+<p>The variance is \( 1/d \); the standard deviation passed to the initializer is its <strong>square root</strong>. For \( d = 4096 \), this gives \( \frac{1}{64} = 0.015625 \). Here \( d \) is the hidden width, not the vocabulary size.</p>
+<h4 id="connect-the-derivation-to-rmsnorm">Connect the Derivation to RMSNorm<a class="zola-anchor" href="#connect-the-derivation-to-rmsnorm" aria-label="Anchor link for: connect-the-derivation-to-rmsnorm">🔗</a></h4>
+<p>TorchFeather applies RMSNorm before the output projection. RMSNorm controls the <strong>mean square</strong>, without forcing the input mean to zero. Holding that hidden vector \( x \) fixed and varying the initial weights gives:</p>
+<div class="math-display">
+\[
+\operatorname{Var}_{W}(y\mid x) = \sigma_w^2\sum_{j=1}^{d} x_j^2 \approx \sigma_w^2 d
+\]
+</div>
+<p>Thus \( \sigma_w^2 = 1/d \) keeps initial logit variance around 1 even without the centered-input simplification above. The code truncates the normal distribution at \( \pm 3\sigma \), so this is approximate scale control at initialization, not an exact variance constraint enforced throughout training.</p>
+<h3 id="residual-initialization-why-scale-with-depth">Residual Initialization: Why Scale With Depth?<a class="zola-anchor" href="#residual-initialization-why-scale-with-depth" aria-label="Anchor link for: residual-initialization-why-scale-with-depth">🔗</a></h3>
+<p>The goal is stable training: keep activations and backpropagated gradients at useful scales, reducing the risk of exploding or vanishing signals. The variance argument below explains forward activation growth; gradient stability also depends on the architecture, normalization, and optimizer.</p>
+<p>Each residual branch adds to the running stream. Assuming negligible covariance and variance <strong>v</strong> per branch, <strong>L</strong> additions give:</p>
+<div class="math-display">
+\[
+\operatorname{Var}(x_L)\approx\operatorname{Var}(x_0)+Lv
+\]
+</div>
+<p>A transformer has <strong>two residual additions per block</strong>: attention and FFN. Across L blocks, the added variance is roughly <strong>2Lv</strong>. Scaling branch outputs by <strong>1/√(2L)</strong> scales their variance by <strong>1/(2L)</strong>, controlling growth with depth. This is a simplifying initialization argument, not a guarantee throughout training.</p>
+<p><a href="https://github.com/hkproj/torchfeather/blob/main/torchfeather/model/model.py">TorchFeather</a> scales the residual output weights using:</p>
+<pre data-lang="python" class="language-python "><code class="language-python" data-lang="python">self.weight_init_std = 0.02 &#x2F; (2 * (layer_id + 1)) ** 0.5
+</code></pre>
+<p>It uses the <strong>current block's depth</strong>, not total model depth L, so its schedule differs from the constant scale in the argument above. Several internal attention projections keep <code>std=0.02</code>.</p>
+<p><strong>Why 0.02?</strong> It is an established base scale: <a href="https://github.com/openai/gpt-2/blob/master/src/model.py">OpenAI's GPT-2 implementation</a> uses <code>w_init_stdev=0.02</code>. That documents precedent, not why TorchFeather chose it. <strong>A plausible intuition</strong> is that it is on the scale of fan-in initialization for widths of a few thousand: <strong>1/√2500 = 0.02</strong>. This numerical comparison does not derive a universal constant or prove the author's rationale.</p>
+<p><strong>Remember:</strong> <strong>0.02 sets the base weight scale; the depth factor reduces residual accumulation.</strong> Variance scaling explains the factor, not the exact base value.</p>
+<h3 id="mla-attention-why-split-q-and-k-into-nope-and-rope">MLA Attention: Why Split Q and K into <code>nope</code> and <code>rope</code>?<a class="zola-anchor" href="#mla-attention-why-split-q-and-k-into-nope-and-rope" aria-label="Anchor link for: mla-attention-why-split-q-and-k-into-nope-and-rope">🔗</a></h3>
+<p>Multi-Head Latent Attention (MLA) shrinks the KV cache by compressing each token into a small latent \( c_t^{KV} \) and reconstructing keys via \( k_s = W^{UK} c_s^{KV} \).</p>
+<p>Without <a href="https://gel.github.io/generative-ai/2-genai-research/3-genai-optimization/#rope-roformer-enhanced-transformer-with-rotary-position-embedding">RoPE</a>, \( W^{UK} \) can be <strong>absorbed</strong> into the query side at inference time—\( q_t^{\mathsf{T}}(W^{UK} c_s^{KV}) = ((W^{UK})^{\mathsf{T}} q_t)^{\mathsf{T}} c_s^{KV} \)—so attention dots directly against the cached latent \( c_s^{KV} \) without decompressing past keys <em>(and similarly \( W^{UV} \) absorbs into \( W^O \))</em>. With RoPE, the position-dependent rotation \( R_{s-t} \) sits between \( q_t \) and \( W^{UK} \) (\( q_t^{\mathsf{T}} R_{s-t} W^{UK} c_s^{KV} \)) and does not commute with \( W^{UK} \), blocking absorption.</p>
+<p>DeepSeek therefore splits each query and key into two concatenated slices:</p>
+<ul>
+<li><strong>Content / <code>nope</code> (\( q_t^C, k_t^C \)):</strong> no RoPE applied; \( W^{UK} \) can be absorbed, so only \( c_t^{KV} \) is cached.</li>
+<li><strong>Rotary / <code>rope</code> (\( q_t^R, k_t^R \)):</strong> RoPE applied; cannot be absorbed, so \( k_t^R \) is kept small, shared across heads (like MQA), and cached alongside \( c_t^{KV} \) (while \( q_t^R \) stays per-head).</li>
+</ul>
+<div class="math-display">
+\[
+\bigl[q_t^C;\, q_t^R\bigr]^{\mathsf{T}}\bigl[k_s^C;\, k_s^R\bigr] = \underbrace{(q_t^C)^{\mathsf{T}} k_s^C}_{\text{nope (absorbed)}} + \underbrace{(q_t^R)^{\mathsf{T}} k_s^R}_{\text{rope (cached)}}
+\]
+</div>
+<p>Here &quot;content&quot; (\( C \)) simply means the no-RoPE slice. During training, implementations typically compute the unabsorbed form; matrix absorption is an inference-time optimization.</p>
+<h3 id="autograd-basics-chain-copy-and-add-rules">Autograd Basics: Chain, Copy, and Add Rules<a class="zola-anchor" href="#autograd-basics-chain-copy-and-add-rules" aria-label="Anchor link for: autograd-basics-chain-copy-and-add-rules">🔗</a></h3>
+<ul>
+<li><strong>Chain rule (composition):</strong> multiply the upstream gradient by the local derivative along a path (\( \frac{\partial L}{\partial x} = \frac{\partial L}{\partial y}\frac{\partial y}{\partial x} \)).</li>
+<li><strong>Copy rule (fan-out in forward):</strong> when one tensor is copied into multiple branches, its backward gradient is the <strong>sum</strong> of the incoming gradients from each branch.</li>
+<li><strong>Add rule (addition in forward):</strong> when branches are added together (\( z = a + b \)), the upstream gradient is <strong>copied</strong> unchanged to each input branch.</li>
+</ul>
+<h3 id="related-research-notes">Related Research Notes<a class="zola-anchor" href="#related-research-notes" aria-label="Anchor link for: related-research-notes">🔗</a></h3>
+<ul>
+<li><a href="https://gel.github.io/generative-ai/2-genai-research/6-genai-models/#deepseekmoe-shared-and-routed-experts">Shared and routed experts</a></li>
+<li><a href="https://gel.github.io/generative-ai/2-genai-research/2-genai-pretraining-finetuning/#moe-scaling-active-parameters-granularity-and-training-flops">Active parameters and training FLOPs</a></li>
+<li><a href="https://gel.github.io/generative-ai/2-genai-research/3-genai-optimization/#rope-roformer-enhanced-transformer-with-rotary-position-embedding">RoPE, Position Interpolation, and YaRN</a></li>
+</ul>
+
+
+    </div>
+  </div>
+
+  <nav class="book-pagination">
+    <div class="prev-link">
+      
+    
+        
+        
+        <a class="previous" href="/generative-ai/3-genai-implementation/">&larr; Previous</a>
+    
+
+    </div>
+
+    <div class="next-link">
+      
+    
+        
+        
+        
+        
+        
+        
+            
+            
+            
+                
+            
+                
+            
+        
+            
+            
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+            
+            
+            
+                
+            
+                
+                    
+                
+            
+        
+    
+
+    </div>
+  </nav>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="https://gel.github.io/elasticlunr.min.js"></script>
+<script type="text/javascript" src="https://gel.github.io/search_index.en.js"></script>
+
+<script type="text/javascript" src="https://gel.github.io/book.js"></script>
+<script async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline-block");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline-block");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>

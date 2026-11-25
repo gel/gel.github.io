@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <style>
+    :root {
+      --accent-overlay-color: #fff;
+      --body-bg: #fff;
+      --body-color: #000;
+      --heading-color: #000;
+      --table-bg-even: #f3f3f3;
+      --table-border-bottom: #dddddd;
+      --code-bg: #f1f1f1;
+      --code-color: #6e6b5e;
+    }
+
+    [data-theme="dark"] {
+      --accent-overlay-color: #dee2e6;
+      --body-bg: #212529;
+      --body-color: #abb2bf;
+      --heading-color: #dee2e6;
+      --table-bg-even: #2d3237;
+      --table-border-bottom: #697077;
+      --code-bg: #2d3237;
+      --code-color: #abb2bf;
+    }
+
+    [data-theme="dark"] table thead tr {
+      background-color: var(--table-bg-even);
+      color: var(--heading-color);
+    }
+
+    [data-theme="dark"] table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--table-border-bottom);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 0 8px;
+      background: none;
+      border: none;
+      color: var(--body-color);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      color: var(--accent-color);
+    }
+
+    .theme-toggle svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .active-nav {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const localTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const theme = localTheme || systemTheme;
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Inject CSS variables from Zola config to prevent formatter issues
+      const root = document.documentElement;
+      root.style.setProperty('--accent-color', '#0f766e');
+      root.style.setProperty('--accent-color-light', '#7dd3c7');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#0f766e" />
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  <link rel="icon" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.fbf841984d4c630f.png" />
+  <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.fbf841984d4c630f.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.8d764c74b57e78ac.png" />
+  <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.31c754669e6b1886.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.ab3d415c621250c1.png" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.75f5c17cd0a278cd.png" />
+  <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.0ae1d7f33188702f.png" />
+  <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.dbbe1ab6fb9c667c.png" />
+  <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.b51883fbb0bc49a7.png" />
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD979V1BWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-JD979V1BWS");
+  </script>
+  
+
+  <link rel="canonical" href="https://gel.github.io/generative-ai/1-intro/2-agentic-workspace/" />
+  
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Agentic Workspace">
+  <meta property="og:description" content="My agentic development setup: Omarchy, Herdr App, OpenClaw cross-project coordinator, custom GPUI mods, hosted and local models, and a compact keyboard cheat sheet.">
+  <meta property="og:url" content="https://gel.github.io/generative-ai/1-intro/2-agentic-workspace/">
+  <meta property="og:site_name" content="Gal Goldman | Architect &amp; Engineer">
+
+  
+  <meta property="og:image" content="https://gel.github.io/og/site-default.svg">
+  <meta property="og:image:alt" content="Agentic Workspace">
+  
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  
+  
+
+  
+  <meta property="article:modified_time" content="2026-11-18T00:00:00+00:00">
+  
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  
+  <meta name="twitter:creator" content="@gelings">
+  <meta name="twitter:site" content="@gelings">
+  
+  <meta name="twitter:title" content="Agentic Workspace">
+  <meta name="twitter:description" content="My agentic development setup: Omarchy, Herdr App, OpenClaw cross-project coordinator, custom GPUI mods, hosted and local models, and a compact keyboard cheat sheet.">
+  
+  <meta name="twitter:image" content="https://gel.github.io/og/site-default.svg">
+  
+
+  
+  <meta name="description" content="My agentic development setup: Omarchy, Herdr App, OpenClaw cross-project coordinator, custom GPUI mods, hosted and local models, and a compact keyboard cheat sheet." />
+  
+
+  
+  <meta name="author" content="Gal Goldman">
+  
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://gel.github.io/#person",
+          "name": "Gal Goldman",
+          "url": "https://gel.github.io/",
+          "description": "Gal Goldman writes about distributed systems, cloud architecture, GenAI systems, and engineering quality.",
+          "jobTitle": "Senior Software Engineer and Enterprise Solution Architect",
+          "worksFor": { "@id": "https://gel.github.io/#org" },
+          
+          "image": "https://gel.github.io/profileweb.png",
+          
+          "sameAs": [
+            
+            "https://www.linkedin.com/in/gal-goldman/",
+            
+            "https://x.com/gelings"
+            
+          ]
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://gel.github.io/#org",
+          "name": "Gal Goldman",
+          "url": "https://gel.github.io/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://gel.github.io/iconweb.png"
+          }
+          
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://gel.github.io/#website",
+          "url": "https://gel.github.io/",
+          "name": "Gal Goldman | Architect & Engineer",
+          "description": "Gal Goldman writes about distributed systems, cloud architecture, GenAI systems, and engineering quality.",
+          "publisher": { "@id": "https://gel.github.io/#org" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://gel.github.io/generative-ai/1-intro/2-agentic-workspace/#webpage",
+          "url": "https://gel.github.io/generative-ai/1-intro/2-agentic-workspace/",
+          "name": "Agentic Workspace",
+          "description": "My agentic development setup: Omarchy, Herdr App, OpenClaw cross-project coordinator, custom GPUI mods, hosted and local models, and a compact keyboard cheat sheet.",
+          "isPartOf": { "@id": "https://gel.github.io/#website" },
+          "about": { "@id": "https://gel.github.io/#person" },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://gel.github.io/og/site-default.svg",
+            "width": 1200,
+            "height": 630
+            
+          }
+          
+        }
+      ]
+    }
+  </script>
+
+  
+  <link rel="prerender" href="&#x2F;resume&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;blog&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;projects&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;books&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;interviews&#x2F;" />
+  
+  <link rel="prerender" href="&#x2F;generative-ai&#x2F;" />
+  
+
+  <link rel="prefetch" href="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.09e74e8b8087cebf.png" />
+
+  <title>
+    
+
+
+
+Gal's 
+     
+    
+        Generative AI
+    
+ Book - Agentic Workspace
+
+
+  </title>
+
+  
+  
+
+
+<link rel="stylesheet" href="https://gel.github.io/main.css">
+<link rel="stylesheet" href="https://gel.github.io/book.css">
+
+
+
+  
+
+
+
+
+
+  <link rel="stylesheet" href="https://gel.github.io/site-navigation.css">
+  <script src="https://gel.github.io/site-navigation.js" defer></script>
+  <link rel="stylesheet" href="https://gel.github.io/diagram-viewer.css">
+  <script src="https://gel.github.io/diagram-viewer.js" defer></script>
+  
+  <script src="https://gel.github.io/animations.js" defer></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+    function getTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "default";
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: getTheme(),
+      securityLevel: "loose",
+      fontFamily: "inherit"
+    });
+
+    async function initMermaid() {
+      const codeBlocks = document.querySelectorAll("pre code.language-mermaid, pre code[data-lang='mermaid']");
+      for (const block of codeBlocks) {
+        const pre = block.parentElement;
+        const code = block.textContent;
+        const div = document.createElement("div");
+        div.className = "mermaid";
+        div.setAttribute("data-original-code", code);
+        div.textContent = code;
+        pre.replaceWith(div);
+      }
+      await renderMermaid();
+    }
+
+    async function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll("div.mermaid");
+      if (mermaidDivs.length === 0) return;
+
+      const currentTheme = getTheme();
+      const themeVars = currentTheme === 'dark' ? {
+        'primaryColor': '#2d3237',
+        'primaryTextColor': '#abb2bf',
+        'primaryBorderColor': '#697077',
+        'lineColor': '#abb2bf',
+        'secondaryColor': '#212529',
+        'tertiaryColor': '#2d3237',
+        'mainBkg': '#2d3237',
+        'nodeBorder': '#697077'
+      } : {};
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: currentTheme === 'dark' ? 'base' : 'default',
+        themeVariables: themeVars
+      });
+
+      mermaidDivs.forEach(div => {
+        const originalCode = div.getAttribute("data-original-code");
+        if (originalCode) {
+          div.textContent = originalCode;
+          div.removeAttribute("data-processed");
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidDivs });
+      window.dispatchEvent(new Event('diagramsRendered'));
+    }
+
+    document.addEventListener("DOMContentLoaded", initMermaid);
+
+    window.addEventListener("themeChanged", async () => {
+      await renderMermaid();
+    });
+  </script>
+</head>
+
+<body class="book-body">
+  
+  <header class="site-header">
+    <a class="profile-icon" href="/" aria-label="Home">
+      <img src="https:&#x2F;&#x2F;gel.github.io&#x2F;processed_images&#x2F;profileweb.09e74e8b8087cebf.png" alt="profile picture">
+    </a>
+    <a class="nav-home-mobile" href="/">Home</a>
+    <button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+      <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      Menu
+    </button>
+    <nav id="primary-navigation" aria-label="Main navigation">
+      
+      <a href="&#x2F;resume&#x2F;"
+        class="nav-resume
+        "
+      >Resume</a>
+      
+      <a href="&#x2F;blog&#x2F;"
+        class="nav-blog
+        "
+      >Blog</a>
+      
+      <a href="&#x2F;projects&#x2F;"
+        class="nav-projects
+        "
+      >Projects</a>
+      
+      <a href="&#x2F;books&#x2F;"
+        class="nav-books
+        "
+      >Books</a>
+      
+      <a href="&#x2F;interviews&#x2F;"
+        class="nav-interviews
+        "
+      >Interviews</a>
+      
+      <a href="&#x2F;generative-ai&#x2F;"
+        class="nav-genai
+        active-nav"
+      >GenAI</a>
+      
+    </nav>
+    
+    <button class="theme-toggle" type="button" aria-label="Toggle Dark Mode" onclick="toggleTheme()">
+        <svg class="theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="theme-icon-dark" style="display:none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    
+  </header>
+  
+  <main>
+    
+<!-- Sidebar defaults to class 'menu'. CSS max-width 600px breakpoint handles closing it automatically -->
+<div class="menu">
+  
+  
+  <nav role="navigation">
+    <ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="/generative-ai/1-intro/">
+          <strong>1.</strong>
+          Agentic Development
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;1-intro&#x2F;1-genai-environment&#x2F;">
+              <strong>1.1.</strong>
+              Agentic Stack
+            </a>
+          </li>
+          
+          <li class="active" >
+            <a href="&#x2F;generative-ai&#x2F;1-intro&#x2F;2-agentic-workspace&#x2F;">
+              <strong>1.2.</strong>
+              Agentic Workspace
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="/generative-ai/2-genai-research/">
+          <strong>2.</strong>
+          GenAI Research
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;1-genai-agents&#x2F;">
+              <strong>2.1.</strong>
+              Agents
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;2-genai-pretraining-finetuning&#x2F;">
+              <strong>2.2.</strong>
+              Training
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;3-genai-optimization&#x2F;">
+              <strong>2.3.</strong>
+              Optimizations
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;4-genai-prompting&#x2F;">
+              <strong>2.4.</strong>
+              Prompting
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;5-genai-benchmarks&#x2F;">
+              <strong>2.5.</strong>
+              Evaluations
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;6-genai-models&#x2F;">
+              <strong>2.6.</strong>
+              Models
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;2-genai-research&#x2F;7-genai-security&#x2F;">
+              <strong>2.7.</strong>
+              Security
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+      
+      
+      
+      <li >
+        <a href="/generative-ai/3-genai-implementation/">
+          <strong>3.</strong>
+          GenAI Implementation
+        </a>
+        
+        <ul>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;3-genai-implementation&#x2F;1-karpathy-gpt&#x2F;">
+              <strong>3.1.</strong>
+              Karpathy: Building GPT
+            </a>
+          </li>
+          
+          <li >
+            <a href="&#x2F;generative-ai&#x2F;3-genai-implementation&#x2F;2-deepseek-torchfeather&#x2F;">
+              <strong>3.2.</strong>
+              DeepSeek: TorchFeather
+            </a>
+          </li>
+          
+        </ul>
+        
+      </li>
+      
+      
+      
+    </ul>
+  </nav>
+  
+  
+</div>
+
+<!-- Page defaults to class 'page'. CSS max-width 600px breakpoint handles making it full-width automatically -->
+<div class="page">
+
+  <div class="page__content">
+    
+    <div class="search-container">
+      <input id="search" type="search" placeholder="Search..">
+      <div class="search-results">
+        <div class="search-results__header"></div>
+        <ul class="search-results__items"></ul>
+      </div>
+    </div>
+    
+    <button class="sidebar-toggle-inline" id="sidebar-toggle-inline" aria-label="Toggle Chapters">
+      <span class="toggle-icon">☰</span> Chapters
+    </button>
+    <div class="book-content">
+      
+    <h1>Agentic Workspace</h1>
+    
+    <nav class="page-toc" aria-label="On this page">
+      <details>
+        <summary>On this page</summary>
+        
+<ul>
+  
+  
+  <li>
+    <a href="#my-setup">My Setup</a>
+    
+  </li>
+  
+  
+  
+  <li>
+    <a href="#two-tier-orchestration-openclaw-coordinator-herdr-workers">Two-Tier Orchestration: OpenClaw Coordinator + Herdr Workers</a>
+    
+  </li>
+  
+  
+  
+  <li>
+    <a href="#pi-packages-extensions">Pi Packages &amp; Extensions</a>
+    
+  </li>
+  
+  
+  
+  <li>
+    <a href="#keyboard-basics">Keyboard Basics</a>
+    
+  </li>
+  
+  
+</ul>
+
+      </details>
+    </nav>
+    
+    <p><em>Last updated: November 2026</em></p>
+<p>My workspace brings coding agents into one keyboard-driven workflow. <a href="https://gel.github.io/generative-ai/1-intro/1-genai-environment/">Agentic Stack</a> covers the tools; this page covers my setup.</p>
+<h2 id="my-setup">My Setup<a class="zola-anchor" href="#my-setup" aria-label="Anchor link for: my-setup">🔗</a></h2>
+<table><thead><tr><th>Layer</th><th>What I use</th></tr></thead><tbody>
+<tr><td>Desktop</td><td><strong>Omarchy / Hyprland</strong> on Linux</td></tr>
+<tr><td>Agent workspace</td><td><strong>Herdr App</strong> (<code>herdr-app</code> + <code>herdr-core</code> / <code>hc</code>) for persistent <code>t&lt;ID&gt;</code> sessions with <strong>Codex CLI, Antigravity (<code>agy</code>), Pi</strong>, and remote VPS terminals</td></tr>
+<tr><td>Cross-project coordinator</td><td><strong>OpenClaw</strong> (<code>gel-assistant</code>) driven via its TUI inside Herdr, backed by a localhost-only systemd Gateway (<code>127.0.0.1:18789</code>), scheduled automations, and durable FTS memory</td></tr>
+<tr><td>Custom Herdr GPUI mods</td><td><strong><code>assistant-memory</code> (<code>OpenClaw Inspector</code>)</strong> split beside the coordinator TUI for live-reloading <code>MEMORY.md</code> / daily logs (<code>watchFolder</code>) and real-time Gateway health, cron countdowns, and token telemetry; <strong><code>neat-spaces</code></strong> and <strong><code>review-shortcut</code></strong> (<code>Ctrl+Shift+R</code>)</td></tr>
+<tr><td>Mobile access</td><td><a href="https://herdr.dev/mobile/"><strong>Herdr Mobile</strong></a> to check agent status and answer agents from my phone over SSH / Tailscale</td></tr>
+<tr><td>Native apps</td><td><strong>Codex App</strong> and <strong>Antigravity</strong></td></tr>
+<tr><td>Hosted models</td><td><strong>Sol 6.1</strong> (Codex / OpenClaw coordinator), <strong>Gemini 4 Argon</strong> (Antigravity), and <strong>DeepSeek V4</strong> through <strong>OpenRouter</strong></td></tr>
+<tr><td>Local inference</td><td><strong>Ollama</strong> and <strong>llama.cpp</strong> to reduce API costs; currently <strong>Ornith</strong>, usually liberated, quantized variants</td></tr>
+</tbody></table>
+<p>Herdr organizes sessions, OpenClaw coordinates across projects, the execution harness runs each repo's agent loop, and the model backend provides inference.</p>
+<h2 id="two-tier-orchestration-openclaw-coordinator-herdr-workers">Two-Tier Orchestration: OpenClaw Coordinator + Herdr Workers<a class="zola-anchor" href="#two-tier-orchestration-openclaw-coordinator-herdr-workers" aria-label="Anchor link for: two-tier-orchestration-openclaw-coordinator-herdr-workers">🔗</a></h2>
+<p>Instead of having one overloaded agent touch every repository—or manually tabbing across a dozen terminals to check if tests and deploys passed—my Herdr workspace uses a <strong>two-tier Staff Engineer + Worker pattern</strong>:</p>
+<pre data-lang="mermaid" class="language-mermaid "><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    subgraph Space[&quot;Herdr Space: gel-assistant&quot;]
+        TUI[&quot;Left Pane: OpenClaw TUI (t2j)&lt;br&#x2F;&gt;session: agent:main:coordinator&quot;]
+        Inspector[&quot;Right Split: OpenClaw Inspector (GPUI Mod)&lt;br&#x2F;&gt;Live Status &amp; Runs · MEMORY.md · Daily Logs&quot;]
+    end
+
+    GW[&quot;OpenClaw Gateway (systemd user)&lt;br&#x2F;&gt;127.0.0.1:18789 · Cron Engine · SQLite FTS&quot;]
+    Boards[&quot;GitHub ProjectV2 Boards &amp; Actions CI&lt;br&#x2F;&gt;gh project &#x2F; gh run&quot;]
+
+    subgraph Workers[&quot;Herdr Project Spaces &amp; Persistent Terminals (hc)&quot;]
+        W1[&quot;t12 · WakeAHuman&quot;]
+        W2[&quot;t1n · MyTrips&quot;]
+        W3[&quot;t1q · DeepStox&quot;]
+        W4[&quot;t1r &#x2F; t27 · BirthdayBuddyAI&quot;]
+        W5[&quot;t2q · ShapeBlocks&quot;]
+        VPS[&quot;vps-9de469bf &#x2F; vps-4ec2671d&quot;]
+    end
+
+    TUI &lt;--&gt;|WebSocket RPC| GW
+    GW --&gt;|Writes MEMORY.md &amp; memory&#x2F;YYYY-MM-DD.md| Inspector
+    Inspector --&gt;|Polls health &amp; cron runs| GW
+    GW --&gt;|Queries boards &amp; exact-SHA CI| Boards
+    GW --&gt;|hc ls &#x2F; hc get &#x2F; hc read &#x2F; hc send| Workers
+
+    style TUI fill:#fff9c4,stroke:#f9a825,color:#000
+    style Inspector fill:#bbdefb,stroke:#1976d2,color:#000
+    style GW fill:#fff9c4,stroke:#f9a825,color:#000
+    style Boards fill:#d1c4e9,stroke:#512da8,color:#000
+    style W1 fill:#c8e6c9,stroke:#388e3c,color:#000
+    style W2 fill:#c8e6c9,stroke:#388e3c,color:#000
+    style W3 fill:#c8e6c9,stroke:#388e3c,color:#000
+    style W4 fill:#c8e6c9,stroke:#388e3c,color:#000
+    style W5 fill:#c8e6c9,stroke:#388e3c,color:#000
+    style VPS fill:#e0f2f1,stroke:#5b9b91,color:#000
+</code></pre>
+<ol>
+<li><strong>Isolated Project Workers (<code>t&lt;ID&gt;</code> terminals in <code>herdr-core</code>):</strong>
+<ul>
+<li>Each repository lives in its own Herdr space with persistent Codex or Antigravity workers (<code>t12</code>, <code>t1n</code>, <code>t1q</code>, <code>t27</code>, <code>t2q</code>, plus remote VPS shells).</li>
+<li>Every terminal keeps a permanent <code>t&lt;ID&gt;</code> address in <code>herdr-core</code> (<code>hc</code>), even if tabs or spaces are renamed or rearranged, and can be peeked inline from any terminal with <code>Ctrl + Click</code>.</li>
+</ul>
+</li>
+<li><strong>The OpenClaw Coordinator (<code>gel-assistant</code> space):</strong>
+<ul>
+<li>Runs in a dedicated <code>gel-assistant</code> workspace connected to a hardened, loopback-only background Gateway (<code>127.0.0.1:18789</code>, token auth, admin UI/HTTP/mDNS/Tailscale Funnel disabled, <code>0/75</code> bundled skills loaded).</li>
+<li><strong>Cross-Project Institutional Memory:</strong> Maintains <code>MEMORY.md</code>, <code>BRIEFING.md</code>, <code>projects.json</code>, and dated <code>memory/YYYY-MM-DD.md</code> logs indexed with built-in SQLite FTS (<code>memory_search</code> / <code>memory_get</code>). It remembers architectural constraints, accepted artifacts, and shared VPS dependencies across all projects.</li>
+<li><strong>Zero-Noise Scheduled Automations:</strong>
+<ul>
+<li><strong>09:00 Weekday Morning Briefing:</strong> Refreshes every item across all five GitHub ProjectV2 boards (including drafts) and live <code>hc</code> worker states, then proposes up to three evidence-backed next actions in the TUI.</li>
+<li><strong>10:00–18:00 Hourly Progress Checks:</strong> Compares live <code>hc get</code> foreground directories, terminal screens (<code>hc read --lines 0</code>), and GitHub Actions runs against the last dated observation. If nothing materially changed, it returns <code>NO_REPLY</code> and stays completely silent; if a blocker, failure, or review-ready result appears, it surfaces it directly in the coordinator TUI.</li>
+</ul>
+</li>
+<li><strong>Trust-but-Verify Delegation:</strong> When I authorize a task interactively in the TUI, the coordinator dispatches or reviews the repo worker via <code>hc</code>, inspects the actual diff and exact-SHA CI/deploy logs independently, catches regressions before accepting a worker's <code>&quot;done&quot;</code> status, and updates the GitHub Project board.</li>
+</ul>
+</li>
+<li><strong>Live Native GPUI Split Pane (<code>OpenClaw Inspector</code> mod):</strong>
+<ul>
+<li>Because <code>herdr-app</code> renders native GPU panels (<code>mods</code>) right alongside terminal panes (<code>pane.split</code>), the <code>OpenClaw coordinator</code> tab is split with a custom <code>assistant-memory</code> mod on the right.</li>
+<li>Using <code>watchFolder</code>, the right pane auto-refreshes <code>MEMORY.md</code> and daily <code>memory/YYYY-MM-DD.md</code> logs the instant OpenClaw writes to disk, and provides a live <strong>Runtime Status &amp; Runs</strong> view showing Gateway RPC health, event-loop utilization, next cron countdowns, per-run token usage (<code>in</code>/<code>out</code>/<code>cache</code>), and systemd journal entries.</li>
+</ul>
+</li>
+</ol>
+<h2 id="pi-packages-extensions">Pi Packages &amp; Extensions<a class="zola-anchor" href="#pi-packages-extensions" aria-label="Anchor link for: pi-packages-extensions">🔗</a></h2>
+<ul>
+<li><strong>Packages</strong> (<code>~/.pi/agent/settings.json</code>): <code>npm:pi-clear</code> and <a href="https://github.com/tintinweb/pi-schedule-prompt"><code>npm:pi-schedule-prompt</code></a>.</li>
+<li><strong>Global extensions</strong> (<code>~/.pi/agent/extensions/</code>): <code>otel-trace.ts</code> for tracing; <code>exit.ts</code> for a clean <code>/exit</code>.</li>
+<li><strong>Traces:</strong> <code>otel-trace.ts</code> → OTLP/HTTP at <code>127.0.0.1:4318/v1/traces</code> → Doris <code>otel.otel_traces</code>. Override the endpoint with <code>PI_OTEL_ENDPOINT</code>.</li>
+</ul>
+<p>Scheduled prompts require Pi to be running on an awake host.</p>
+<h2 id="keyboard-basics">Keyboard Basics<a class="zola-anchor" href="#keyboard-basics" aria-label="Anchor link for: keyboard-basics">🔗</a></h2>
+<p>These are the Herdr App shortcuts I use to create work, move between sessions, and review changes.</p>
+<table><thead><tr><th>Action</th><th>Shortcut</th></tr></thead><tbody>
+<tr><td>New workspace</td><td><code>Ctrl + Shift + N</code></td></tr>
+<tr><td>New tab</td><td><code>Ctrl + Shift + T</code></td></tr>
+<tr><td>Previous / next tab</td><td><code>Alt + [</code> / <code>Alt + ]</code></td></tr>
+<tr><td>Previous / next agent</td><td><code>Alt + ↑</code> / <code>Alt + ↓</code></td></tr>
+<tr><td>Previous / next workspace</td><td><code>Alt + Shift + [</code> / <code>Alt + Shift + ]</code></td></tr>
+<tr><td>Focus pane: left / down / up / right</td><td><code>Alt + h / j / k / l</code></td></tr>
+<tr><td>Split pane down / right</td><td><code>Ctrl + Shift + E</code> / <code>Ctrl + Shift + O</code></td></tr>
+<tr><td>Toggle changes review</td><td><code>Ctrl + Shift + R</code></td></tr>
+<tr><td>Expand / restore pane</td><td><code>Ctrl + Shift + Enter</code></td></tr>
+<tr><td>Swap pane left / down / up / right</td><td><code>Alt + Shift + h / j / k / l</code></td></tr>
+<tr><td>Close focused pane</td><td><code>Ctrl + Shift + X</code></td></tr>
+<tr><td>Close current tab</td><td><code>Ctrl + Shift + W</code></td></tr>
+<tr><td>Close current workspace</td><td><code>Alt + Shift + W</code></td></tr>
+<tr><td>Exit shell (empty input line)</td><td><code>Ctrl + D</code> — pane may close when the shell exits</td></tr>
+<tr><td>Command palette</td><td><code>Ctrl + Shift + P</code></td></tr>
+<tr><td>Workspace / tab picker</td><td><code>Ctrl + Shift + K</code></td></tr>
+<tr><td>Rename tab / agent</td><td><code>F2</code></td></tr>
+<tr><td>Rename workspace</td><td><code>Shift + F2</code></td></tr>
+</tbody></table>
+<p><strong>How to remember:</strong></p>
+<ul>
+<li><strong>E</strong> looks like three horizontal bars: split down, stacking panes.</li>
+<li><strong>O</strong> sits on the right side of the keyboard: split right.</li>
+<li><strong>D</strong> = “destroy” as a memory aid: <code>Ctrl + D</code> sends end-of-input, usually exiting a shell at an empty prompt.</li>
+<li><strong>Alt</strong> navigates tabs, agents, and panes. Add <strong>Shift</strong> to <code>[</code> / <code>]</code> to move up a level to workspaces.</li>
+</ul>
+
+
+    </div>
+  </div>
+
+  <nav class="book-pagination">
+    <div class="prev-link">
+      
+    
+        
+        
+        <a class="previous" href="/generative-ai/1-intro/">&larr; Previous</a>
+    
+
+    </div>
+
+    <div class="next-link">
+      
+    
+        
+        
+        
+        
+        
+        
+            
+            
+            
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                <a class="next" href="/generative-ai/2-genai-research/">Next &rarr;</a>
+                
+                
+            
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+            
+            
+            
+                
+            
+                
+            
+        
+    
+
+    </div>
+  </nav>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="https://gel.github.io/elasticlunr.min.js"></script>
+<script type="text/javascript" src="https://gel.github.io/search_index.en.js"></script>
+
+<script type="text/javascript" src="https://gel.github.io/book.js"></script>
+<script async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </main>
+  <footer class="footer-page">
+    
+    
+    
+  </footer>
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateIcons(newTheme);
+
+      // Notify other scripts about the theme change
+      window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: newTheme } }));
+    }
+
+    function updateIcons(theme) {
+      const lightIcons = document.querySelectorAll(".theme-icon-light");
+      const darkIcons = document.querySelectorAll(".theme-icon-dark");
+
+      if (theme === "dark") {
+        lightIcons.forEach(icon => icon.style.display = "none");
+        darkIcons.forEach(icon => icon.style.display = "inline-block");
+      } else {
+        lightIcons.forEach(icon => icon.style.display = "inline-block");
+        darkIcons.forEach(icon => icon.style.display = "none");
+      }
+    }
+
+    // Initial icon setup
+    document.addEventListener("DOMContentLoaded", () => {
+      updateIcons(document.documentElement.getAttribute("data-theme"));
+    });
+  </script>
+</body>
+
+</html>
