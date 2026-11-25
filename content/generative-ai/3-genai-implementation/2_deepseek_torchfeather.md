@@ -1,8 +1,8 @@
 +++
 title = "DeepSeek: TorchFeather"
 weight = 2
-description = "Code-reading notes from studying DeepSeek's implementation in TorchFeather, starting with output-weight initialization."
-updated = 2026-11-14
+description = "Code-reading notes from studying DeepSeek's implementation in TorchFeather, covering initialization and MLA attention."
+updated = 2026-11-25
 +++
 
 Notes while following Umar Jamil's *Building a distributed training framework from first principles* and working through [TorchFeather](https://github.com/hkproj/torchfeather). I use these notes to explain the implementation to myself as I study it.
@@ -97,6 +97,23 @@ It uses the **current block's depth**, not total model depth L, so its schedule 
 **Why 0.02?** It is an established base scale: [OpenAI's GPT-2 implementation](https://github.com/openai/gpt-2/blob/master/src/model.py) uses `w_init_stdev=0.02`. That documents precedent, not why TorchFeather chose it. **A plausible intuition** is that it is on the scale of fan-in initialization for widths of a few thousand: **1/√2500 = 0.02**. This numerical comparison does not derive a universal constant or prove the author's rationale.
 
 **Remember:** **0.02 sets the base weight scale; the depth factor reduces residual accumulation.** Variance scaling explains the factor, not the exact base value.
+
+### MLA Attention: Why Split Q and K into `nope` and `rope`?
+
+Multi-Head Latent Attention (MLA) shrinks the KV cache by compressing each token into a small latent \\( c_t^{KV} \\) and reconstructing keys via \\( k_s = W^{UK} c_s^{KV} \\).
+
+Without [RoPE](@/generative-ai/2-genai-research/3_genai_optimization.md#rope-roformer-enhanced-transformer-with-rotary-position-embedding), \\( W^{UK} \\) can be **absorbed** into the query side at inference time—\\( q_t^{\mathsf{T}}(W^{UK} c_s^{KV}) = ((W^{UK})^{\mathsf{T}} q_t)^{\mathsf{T}} c_s^{KV} \\)—so attention dots directly against the cached latent \\( c_s^{KV} \\) without decompressing past keys *(and similarly \\( W^{UV} \\) absorbs into \\( W^O \\))*. With RoPE, the position-dependent rotation \\( R_{s-t} \\) sits between \\( q_t \\) and \\( W^{UK} \\) (\\( q_t^{\mathsf{T}} R_{s-t} W^{UK} c_s^{KV} \\)) and does not commute with \\( W^{UK} \\), blocking absorption.
+
+DeepSeek therefore splits each query and key into two concatenated slices:
+
+- **Content / `nope` (\\( q_t^C, k_t^C \\)):** no RoPE applied; \\( W^{UK} \\) can be absorbed, so only \\( c_t^{KV} \\) is cached.
+- **Rotary / `rope` (\\( q_t^R, k_t^R \\)):** RoPE applied; cannot be absorbed, so \\( k_t^R \\) is kept small, shared across heads (like MQA), and cached alongside \\( c_t^{KV} \\) (while \\( q_t^R \\) stays per-head).
+
+{% math() %}
+\bigl[q_t^C;\, q_t^R\bigr]^{\mathsf{T}}\bigl[k_s^C;\, k_s^R\bigr] = \underbrace{(q_t^C)^{\mathsf{T}} k_s^C}_{\text{nope (absorbed)}} + \underbrace{(q_t^R)^{\mathsf{T}} k_s^R}_{\text{rope (cached)}}
+{% end %}
+
+Here "content" (\\( C \\)) simply means the no-RoPE slice. During training, implementations typically compute the unabsorbed form; matrix absorption is an inference-time optimization.
 
 ### Related Research Notes
 
