@@ -115,6 +115,12 @@ DeepSeek therefore splits each query and key into two concatenated slices:
 
 Here "content" (\\( C \\)) simply means the no-RoPE slice. During training, implementations typically compute the unabsorbed form; matrix absorption is an inference-time optimization.
 
+### Autograd Basics: Chain, Copy, and Add Rules
+
+- **Chain rule (composition):** multiply the upstream gradient by the local derivative along a path (\\( \frac{\partial L}{\partial x} = \frac{\partial L}{\partial y}\frac{\partial y}{\partial x} \\)).
+- **Copy rule (fan-out in forward):** when one tensor is copied into multiple branches, its backward gradient is the **sum** of the incoming gradients from each branch.
+- **Add rule (addition in forward):** when branches are added together (\\( z = a + b \\)), the upstream gradient is **copied** unchanged to each input branch.
+
 ### Related Research Notes
 
 - [Shared and routed experts](@/generative-ai/2-genai-research/6_genai_models.md#deepseekmoe-shared-and-routed-experts)
